@@ -1,0 +1,9 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>
+            SignUp
+        </h1>
+    </body>
+</html>

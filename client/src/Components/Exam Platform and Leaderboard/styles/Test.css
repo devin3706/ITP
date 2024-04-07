@@ -1,0 +1,58 @@
+.editable-result-view {
+    padding: 20px;
+}
+
+.editable-result-view h2 {
+    margin-left: 650px;
+    margin-bottom: 20px;
+    color: yellow;
+    font-size: 24px;
+}
+
+.editable-result-view ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.editable-result-view li {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.editable-result-view li strong {
+    margin-right: 10px;
+}
+
+.editable-result-view input {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+}
+
+.editable-result-view button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.editable-result-view button:hover {
+    background-color: #0056b3;
+}
+
+.editable-result-view button1 {
+    background-color: #d00621;
+    color: #fff;
+    border: none;
+    padding: 2.5px 10px;
+    position: absolute;
+    cursor: pointer;
+    margin-top: 0.9px;
+    margin-left: 15px;
+}
+
+.editable-result-view button1:hover {
+    background-color: #770204;
+}
