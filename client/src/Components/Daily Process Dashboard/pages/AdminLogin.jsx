@@ -9,6 +9,8 @@ import { Button } from "@mui/material";
 //api functions
 import { login } from "../api/admin";
 
+import AdminHeader from '../components/AdminHeader'
+
 const AdminLogin = () => {
     const navigate = useNavigate();
     const { setAdmin } = useContext(AdminContext)
@@ -29,7 +31,6 @@ const AdminLogin = () => {
                 setAdmin(res.username);
                 
                 navigate("/adminHome");
-                //window.location.href = "/";
             }
 
         }catch(err){
@@ -39,65 +40,68 @@ const AdminLogin = () => {
     }
 
     return(
-        <div className="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
-            <div className="text-center mb-5 alert alert-dark">
-                <label htmlFor="" className="h2">Admin Login</label>
-            </div>
+        <div>
+        <AdminHeader />
+            <div className="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
+                <div className="text-center mb-5 alert alert-dark">
+                    <label htmlFor="" className="h2">Admin Login</label>
+                </div>
 
-            <div className="alert alert-primary">
-                <div className="form-group">
-                    <div className="mb-3">
-                        <label for="email" className="form-label">Email</label>
+                <div className="alert alert-primary">
+                    <div className="form-group">
+                        <div className="mb-3">
+                            <label for="email" className="form-label">Email</label>
+                            <input 
+                                type="email" 
+                                className="form-control" 
+                                id="email" 
+                                placeholder="name@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <div className="mb-3">
+                            <label for="username" className="form-label">Username</label>
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="username" 
+                                placeholder="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label for="password" className="form-label">Password</label>
                         <input 
-                            type="email" 
+                            type="password" 
+                            id="password" 
                             className="form-control" 
-                            id="email" 
-                            placeholder="name@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            aria-describedby="passwordHelpBlock"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
+                        
+                    </div>
+
+                    <div className="text-center mt-4">
+                        <Button 
+                            variant="contained" 
+                            disabled={!email || !username || !password}
+                            onClick={handleAdminLogin}                    
+                        >
+                            Login
+                        </Button>
+
                     </div>
                 </div>
 
-                <div className="form-group">
-                    <div className="mb-3">
-                        <label for="username" className="form-label">Username</label>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="username" 
-                            placeholder="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
-                </div>
-
-                <div className="form-group">
-                    <label for="password" className="form-label">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        className="form-control" 
-                        aria-describedby="passwordHelpBlock"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    
-                </div>
-
-                <div className="text-center mt-4">
-                    <Button 
-                        variant="contained" 
-                        disabled={!email || !username || !password}
-                        onClick={handleAdminLogin}                    
-                    >
-                        Login
-                    </Button>
-
-                </div>
             </div>
-
         </div>
     ); 
 };
