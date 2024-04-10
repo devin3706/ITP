@@ -56,3 +56,49 @@ export async function deleteServerData(url, _id) {
         throw error;
     }
 }
+
+//post questions and answers
+export const handleChangeQuestion = (questions, setQuestions, index, value) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[index].question = value;
+    setQuestions(updatedQuestions);
+  };
+  
+  export const handleChangeOption = (questions, setQuestions, questionIndex, optionIndex, value) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[questionIndex].options[optionIndex] = value;
+    setQuestions(updatedQuestions);
+  };
+  
+  export const handleChangeAnswer = (answers, setAnswers, index, value) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = value;
+    setAnswers(updatedAnswers);
+  };
+
+  export const handleAddQuestion = async (questions, answers, setQuestions, setAnswers) => {
+    try {
+      // Check if all questions and answers are provided
+      if (questions.some(question => !question.question || question.options.some(option => !option)) || answers.some(answer => answer === null)) {
+        throw new Error('Please provide all questions, options, and answers');
+      }
+  
+      const data = { questions, answers };
+  
+      // Send POST request to backend
+      const response = await axios.post('http://localhost:8081/api/questions', data);
+  
+      // Optionally, display a success message to the user
+      alert('Questions added successfully!');
+      
+      // Clear input fields after successful addition
+      setQuestions(questions.map(question => ({ ...question, question: '', options: ['', '', ''] })));
+      setAnswers(answers.map(() => null));
+    } catch (error) {
+      console.error('Error adding questions:', error.message);
+      // Optionally, display an error message to the user
+      alert('Failed to add questions. Please try again.');
+    }
+  };
+
+
