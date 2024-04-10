@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import '../styles/TCreate.css';
+import Header from '../../Exam Platform and Leaderboard/components/Header';
 import {
     MDBBtn,
     MDBContainer,
@@ -26,8 +27,11 @@ const TUpdate = () => {
         tInfo: "",
         tAddress: "",
         tPhone: "",
-        tEmail: ""
+        tEmail: "",
+        password: "",
+        confirmPassword: ""
     });
+    const [errors, setErrors] = useState({}); // Define the errors state
 
     useEffect(() => {
         const fetchTeacherData = async () => {
@@ -44,7 +48,8 @@ const TUpdate = () => {
                     tInfo: teacherData.additionalInfo,
                     tAddress: teacherData.address,
                     tPhone: teacherData.phoneNumber,
-                    tEmail: teacherData.email
+                    tEmail: teacherData.email,
+                    password: teacherData.password
                 });
             } catch (error) {
                 console.error("Error fetching teacher data:", error);
@@ -61,16 +66,52 @@ const TUpdate = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await axios.put(`http://localhost:8081/teacher/update/${id}`, formData);
-            alert("Teacher updated successfully");
-        } catch (error) {
-            console.error("Error updating teacher:", error);
-            alert("An error occurred while updating the teacher");
+        if (validateForm()) {
+            try {
+                // Remove confirmPassword field before sending data to the server
+                const { confirmPassword, ...dataToSend } = formData;
+                await axios.put(`http://localhost:8081/teacher/update/${id}`, dataToSend);
+                alert("Teacher updated successfully");
+            } catch (error) {
+                console.error("Error updating teacher:", error);
+                alert("An error occurred while updating the teacher");
+            }
+        } else {
+            alert("Please fill in all required fields");
         }
     };
 
+    const validateForm = () => {
+        let isValid = true;
+        const newErrors = {};
+
+        // Check if any field is empty
+        for (const key in formData) {
+            if (!formData[key]) {
+                newErrors[key] = "This field is required";
+                isValid = false;
+            }
+        }
+
+        // Check if passwords match
+        if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPassword = "Passwords do not match";
+            isValid = false;
+        }
+
+        // Check password length
+        if (formData.password.length < 6) {
+            newErrors.password = "Password must be at least 6 characters long";
+            isValid = false;
+        }
+
+        // Set errors state
+        setErrors(newErrors);
+        return isValid;
+    };
+
     return (
+        <div><Header />
         <MDBContainer fluid className='h-custom'>
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                 <MDBCol col='12' className='m-5'>
@@ -103,6 +144,8 @@ const TUpdate = () => {
                                         <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Address' size='medium' name='tAddress' id='tAddress' type='text' value={formData.tAddress} onChange={handleChange} />
                                         <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Phone Number' size='medium' name='tPhone' id='tPhone' type='text' value={formData.tPhone} onChange={handleChange} />
                                         <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Your Email' size='medium' name='tEmail' id='tEmail' type='email' value={formData.tEmail} onChange={handleChange} />
+                                        <MDBInput wrapperClass='mb-4' label='Password' size='medium' name='password' id='password' type='password' value={formData.password} onChange={handleChange} error={errors.password} />
+                                        <MDBInput wrapperClass='mb-4' label='Confirm Password' size='medium' name='confirmPassword' id='confirmPassword' type='password' value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
                                         <MDBBtn type="submit" color='light' size='medium'>Save</MDBBtn>
                                     </MDBCol>
                                 </MDBRow>
@@ -112,6 +155,7 @@ const TUpdate = () => {
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
+        </div>
     );
 };
 

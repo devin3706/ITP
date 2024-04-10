@@ -3,29 +3,34 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-}
-
-body, html {
+  }
+  
+  body, html {
     margin: 0;
-}
-
-.container {
-    margin-left: 0 !important;
+    padding: 0;
+  }
+  
+  .container {
     display: flex;
-}
-
-main {
+  }
+  
+  main {
     width: 100%;
     padding: 20px;
-}
-
-.sidebar {
+  }
+  
+  .sidebar {
     background: #000;
     color: #fff;
     height: 100vh;
-    width: 200px;
+    width: 15%;
+    position: fixed;
+    left: 0;
     transition: all 0.5s;
-}
+  }
+  
+  /* Other styles remain unchanged... */
+  
 
 .top_section {
     display: flex;
@@ -34,7 +39,7 @@ main {
 }
 
 .logo {
-    font-size: 30px;
+    font-size: 150%;
 }
 
 .bars {
@@ -63,5 +68,5 @@ main {
 }
 
 .icon, .link_text {
-    font-size: 20px;
+    font-size: 20px;
 }
