@@ -1,6 +1,5 @@
 import Questions from "../../models/exam/questionSchema.js"
 import Results from "../../models/exam/resultSchema.js";
-import questions, { answers } from '../../database/exam/data.js'
 
 
 //get all questions
@@ -16,12 +15,21 @@ export async function getQuestions(req, res){
 //insert all questions
 export async function insertQuestions(req, res) {
     try {
-        const insertedQuestions = await Questions.insertMany({ questions, answers });
+        const { questions, answers } = req.body; // Extract questions and answers from request body
+
+        if (!questions || !answers || questions.length !== answers.length) {
+            throw new Error('Invalid data provided');
+        }
+
+        const insertedQuestions = await Questions.create({ questions, answers }); // Create a new document using Mongoose model
         res.json({ msg: "Data Saved Successfully...!", data: insertedQuestions });
+
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: "Failed to insert questions" });
     }
 }
+
 
 //delete all questions
 export async function dropQuestions(req, res){

@@ -23,6 +23,7 @@ import THeader from './Components/Teacher Management/component/THeader';
 import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
 import TUpdate from './Components/Teacher Management/pages/TUpdate';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
+import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion.js';
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="/editQuestion" element={<EditQuestion />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/header" element={<Header />} />
+          <Route path="/createQuestion" element={<CreateQuestion />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />
