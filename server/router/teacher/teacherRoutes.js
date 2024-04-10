@@ -1,17 +1,20 @@
-import express from 'express';
+import express from "express";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import bodyParser from "body-parser";
+import multer from 'multer';
 import Teacher from "../../models/teacher/Teacher.js";
 
 const router = express.Router();
 
+// Define storage for the uploaded photos
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 // Middleware to parse JSON request body
 router.use(express.json());
-router.use(bodyParser.json());
 
-// Add a new teacher
-router.post("/add", (req, res) => {
+// Add a new teacher with photo
+router.post("/add", upload.single('teacherPhoto'), async (req, res) => {
     console.log(req.body); // Log the request body to see what data is being received
 
     const {
@@ -29,8 +32,7 @@ router.post("/add", (req, res) => {
         confirmPassword
     } = req.body;
 
-    // Create a new instance of the Teacher model with the data from req.body
-    const newTeacher = new Teacher({
+    const teacherData = {
         firstName: tfirstName,
         lastName: tlastName,
         nicNumber: tnicNumber,
@@ -43,19 +45,37 @@ router.post("/add", (req, res) => {
         email: tEmail,
         password: password,
         confirmPassword: confirmPassword
-    });
+    };
 
-    // Save the new teacher to the database
-    newTeacher.save()
-        .then(() => res.status(201).json({ message: "New Teacher Added" }))
-        .catch(err => res.status(500).json({ error: err.message }));
+    if (req.file) {
+        // If a photo is uploaded, include its data in the teacherData
+        teacherData.photo = {
+            data: req.file.buffer,
+            contentType: req.file.mimetype
+        };
+    }
+
+    try {
+        // Create a new instance of the Teacher model with the data from req.body
+        const newTeacher = new Teacher(teacherData);
+
+        // Save the new teacher to the database
+        await newTeacher.save();
+
+        res.status(201).json({ message: "New Teacher Added" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // View all teachers
-router.get("/", (req, res) => {
-    Teacher.find()
-        .then(teachers => res.json(teachers))
-        .catch(err => res.status(500).json({ error: err.message }));
+router.get("/", async (req, res) => {
+    try {
+        const teachers = await Teacher.find();
+        res.json(teachers);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 // Update a teacher

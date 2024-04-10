@@ -48,6 +48,11 @@ const teacherSchema = new Schema({
     type: String,
     required: true,
     minlength: 6 // Example: Minimum password length of 6 characters
+  },
+  // Adding a field for photo, which will store the binary data of the photo
+  photo: {
+    data: Buffer, // Binary data of the photo
+    contentType: String // Mime type of the photo
   }
 });
 

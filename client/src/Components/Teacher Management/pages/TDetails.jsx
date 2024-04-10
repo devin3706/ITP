@@ -23,8 +23,6 @@ const TDetails = () => {
     const handleEdit = (id) => {
         navigate(`/tUpdate/${id}`);
     };
-    
-    
 
     const handleDelete = async (id) => {
         try {
@@ -36,51 +34,67 @@ const TDetails = () => {
         }
     };
 
+   /*  const displayImage = (photoData) => {
+        if (photoData && photoData.data && photoData.contentType) {
+            const arrayBufferView = new Uint8Array(photoData.data.data);
+            const blob = new Blob([arrayBufferView], { type: photoData.contentType });
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+                return reader.result;
+            };
+        }
+        return ""; // Return an empty string if photoData is missing or incomplete
+    }; */
+
     return (
         <div className="container mt-5">
-            <h1 className="text-center mt-3">Teacher Details</h1>
-            <div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>NIC Number</th>
-                        <th>Subject</th>
-                        <th>District</th>
-                        <th>Education Qualification</th>
-                        <th>Additional Information</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
-                        <th>Actions</th> {/* Add Actions column for Edit and Delete buttons */}
-                    </tr>
-                </thead>
-                <tbody>
-                    {teachers.map((teacher, index) => (
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td>{teacher.firstName}</td>
-                            <td>{teacher.lastName}</td>
-                            <td>{teacher.nicNumber}</td>
-                            <td>{teacher.subject}</td>
-                            <td>{teacher.district}</td>
-                            <td>{teacher.eduQualification}</td>
-                            <td>{teacher.additionalInfo}</td>
-                            <td>{teacher.address}</td>
-                            <td>{teacher.phoneNumber}</td>
-                            <td>{teacher.email}</td>
-                            <td>
-                                {/* Edit button */}
-                                <Button className='btn-sm' color="primary" onClick={() => handleEdit(teacher._id)}>Edit</Button>
-                                {/* Delete button */}
-                                <Button className='btn-sm' color="danger" onClick={() => handleDelete(teacher._id)}>Delete</Button>
-                            </td>
+            <div className="d-flex justify-content-center">
+                <Table striped bordered size="sm" style={{ backgroundColor: '#E0E6F0' }}>
+                    <thead style={{ backgroundColor: '#7DDEE2' }}>
+                        <tr>
+                            <th>#</th>
+                           {/*  <th>Photo</th> */}
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                           {/*  <th>NIC Number</th> */}
+                            <th>Subject</th>
+                            <th>District</th>
+                            <th>Education Qualification</th>
+                            {/* <th>Additional Information</th> */}
+                            {/* <th>Address</th> */}
+                            <th>Phone Number</th>
+                            <th>Email</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        {teachers.map((teacher, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                               {/*  <td>
+                                    {teacher.photo && (
+                                        <img src={displayImage(teacher.photo)} alt="Teacher" width="50" height="50" />
+                                    )}
+                                </td> */}
+                                <td>{teacher.firstName}</td>
+                                <td>{teacher.lastName}</td>
+                                {/* <td>{teacher.nicNumber}</td> */}
+                                <td>{teacher.subject}</td>
+                                <td>{teacher.district}</td>
+                                <td>{teacher.eduQualification}</td>
+                               {/*  <td>{teacher.additionalInfo}</td> */}
+                                {/* <td>{teacher.address}</td> */}
+                                <td>{teacher.phoneNumber}</td>
+                                <td>{teacher.email}</td>
+                                <td>
+                                    <Button className='btn-sm' color="primary" onClick={() => handleEdit(teacher._id)}>Edit</Button>
+                                    <Button className='btn-sm' color="danger" onClick={() => handleDelete(teacher._id)}>Delete</Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
             </div>
         </div>
     );
