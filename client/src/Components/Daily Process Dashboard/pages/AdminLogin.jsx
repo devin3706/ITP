@@ -42,12 +42,12 @@ const AdminLogin = () => {
     return(
         <div>
         <AdminHeader />
-            <div className="container mt-5 mb-5 col-10 col-sm-8 col-md-6 col-lg-5">
-                <div className="text-center mb-5 alert alert-dark">
+            <div className="justify-content-md-center">
+                <div className="text-center mt-5 alert alert-dark col-5" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Admin Login</label>
                 </div>
 
-                <div className="alert alert-primary">
+                <div className="alert alert-primary col-5" style={{marginLeft: '30%'}}>
                     <div className="form-group">
                         <div className="mb-3">
                             <label for="email" className="form-label">Email</label>

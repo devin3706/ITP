@@ -51,14 +51,14 @@ export default function Quiz(){
     }
 
     return(
-        <div className="container"> 
-            <h1 className='title text-light'>A/L Accounting Mock Test 01</h1>
+        <div className=""> 
+            <h1 className='title text-dark text-center mt-5'>A/L Accounting Mock Test 01</h1>
 
            <Questions onChecked={onChecked}> </Questions>
 
             <div className='grid'>
-                {trace > 0 ? <button className='btn prev' onClick={onPrev}> Previous </button> : <div></div>}
-                <button className='btn next' onClick={onNext}> Next </button>
+                {trace > 0 ? <button className='btn prev ml-4' onClick={onPrev}> Previous </button> : <div></div>}
+                <button className='btn next ml-4' onClick={onNext}> Next </button>
             </div>
         
          </div>
