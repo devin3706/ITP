@@ -170,18 +170,18 @@ const AdminDetails = () => {
     return (
         <div>
         <AdminHeader />
-        <div className="container mt-5 text-center">
-            <h1 className="text-center mb-4">Admin Details</h1>
+        <div>
+            <h1 className="text-center mt-3 mb-4 fw-medium" style={{fontSize: '300%'}}>Admin Details</h1>
             <table className="table table-striped table-bordered table-success">
                 <thead>
                     <tr className="table-primary">
-                        <th>#</th>
-                        <th className="col">First Name</th>
-                        <th className="col">Last Name</th>
-                        <th className="col">Username</th>
-                        <th className="col">Email</th>
-                        <th className="col">Contact</th>
-                        <th>Action</th>
+                        <th className="fw-medium">#</th>
+                        <th className="col-1 fw-medium">First Name</th>
+                        <th className="col-1 fw-medium">Last Name</th>
+                        <th className="col-2 fw-medium">Username</th>
+                        <th className="col-2 fw-medium">Email</th>
+                        <th className="col-3 fw-medium">Contact</th>
+                        <th className="col-3 fw-medium">Action</th>
                     </tr>
                 </thead>
                 <tbody>
