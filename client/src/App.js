@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminContext } from "./AdminContext";
 
 // Exam components
@@ -35,6 +38,27 @@ import AdminHeader from './Components/Daily Process Dashboard/components/AdminHe
 
 // Admin API functions
 import { getLoggedInAdmin } from './Components/Daily Process Dashboard/api/admin.js';
+
+// Study Material components
+import PdfApp from './Components/Study Material and Past Paper Management/PdfApp.js';
+import PdfComp from './Components/Study Material and Past Paper Management/PdfComp.js';
+import PdfViewer from './Components/Study Material and Past Paper Management/PdfViewer.jsx';
+
+// Student Support System
+import Users from './Components/Student Support/components/Users.jsx';
+import CreateUser from './Components/Student Support/components/CreateUser.jsx';
+import UpdateUser from './Components/Student Support/components/UpdateUser.jsx';
+import Questions from './Components/Student Support/components/Questions.jsx';
+import Questions1 from './Components/Student Support/components/Questions1.jsx';
+import Questions2 from './Components/Student Support/components/Questions2.jsx';
+import QuectionTeacher from './Components/Student Support/components/QuectionTeacher.jsx';
+import UpdateQuestions from './Components/Student Support/components/UpdateQuestions';
+
+//Student Management
+import Dashboard from './Components/Student Management/components/dashboard.jsx';
+import Students from './Components/Student Management/components/Students.jsx';
+import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
+import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
@@ -79,6 +103,28 @@ const App = () => {
           <Route path="/adminDetails" element={<AdminDetails />} />
           <Route path="/adminEdit/:adminID" element={<AdminEdit />} />
           <Route path="/adminHeader" element={<AdminHeader />} />
+
+          {/* Study Material Routes */}
+          <Route path="/pdfApp" element={<PdfApp />} />
+          <Route path="/pdfComp" element={<PdfComp />} />
+          <Route path="/pdfViewer" element={<PdfViewer />} />
+
+          {/* Student Support routes */}
+          <Route path='/users' element={<Users />}></Route>
+          <Route path='/create' element={<CreateUser />}></Route>
+          <Route path='/update/:id' element={<UpdateUser />}></Route>
+          <Route path='/question' element={<Questions />}></Route>
+          <Route path='/question1' element={<Questions1 />}></Route>
+          <Route path='/question2' element={<Questions2 />}></Route>
+          <Route path='/questionTeacher' element={<QuectionTeacher />}></Route>
+          <Route path='/updateQuestions' element={<UpdateQuestions />}></Route>
+
+          {/* Student Management Routes */}
+          <Route path = '/students' element = {<Students />}> </Route>
+          <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
+          <Route path = '/createStudent' element = {<CreateStudent/>}> </Route>
+          <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
+
         </Routes>
       </AdminContext.Provider>
     </Router>

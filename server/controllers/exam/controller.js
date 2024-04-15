@@ -32,14 +32,24 @@ export async function insertQuestions(req, res) {
 
 
 //delete all questions
-export async function dropQuestions(req, res){
-    try{
-        await Questions.deleteMany();
-        res.json({ msg: "Questions deleted successfully"})
+export async function dropQuestions(req, res) {
+    const questionId = req.body.questionId; // Get the question id from the request body
+
+    try {
+        // Find the question by id and delete it
+        const deletedQuestion = await Questions.findByIdAndDelete(questionId);
+
+        if (!deletedQuestion) {
+            return res.status(404).json({ error: "Question not found" });
+        }
+
+        res.json({ msg: "Question deleted successfully", deletedQuestion });
     } catch (error) {
-        res.json({error})
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
+
 //get all result
 export async function getResult(req,res){
     try {
