@@ -9,6 +9,10 @@ import { json, urlencoded } from 'express';
 import cookieParser from 'cookie-parser';
 import expressValidator from 'express-validator';
 import adminRoutes from './router/admin/admin.js';
+import studyMaterialRoutes from './router/study materials/routes.js';
+import userRoutes from './router/student support/routes.js';
+import { upload } from './middleware/study materials/multer.js';
+import studentRoutes from './router/student management/routes.js';
 
 // Import connection file
 import connect from './database/exam/conn.js';
@@ -36,20 +40,25 @@ function startServer() {
   const app = express();
 
   // App middleware
-  app.use(morgan('tiny'));
+  app.use(morgan('dev'));
   app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: true,
     credentials: true
 }));
   app.use(express.json());
   app.use(bodyParser.json());
   config();
+  app.use("/files", express.static("files"));
 
   // Devin Middleware
   app.use(json());
   app.use(urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use(expressValidator());
+
+  //Tharushi Middleware
+  app.use("/files", express.static("files"));
+  app.use(router);
 
   // Application port
   const port = process.env.PORT || 8080;
@@ -70,6 +79,15 @@ function startServer() {
 
   // Devin Routes
   app.use("/", adminRoutes);
+
+  // Tharushi Routes
+  app.use('/studyMaterial', studyMaterialRoutes);
+
+  // Sansala Routes
+  app.use('/users', userRoutes);
+
+  // Minesi Routes
+  app.use('/student', studentRoutes);
 
   // Start server only when valid connection
   connect().then(() => {

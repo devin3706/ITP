@@ -1,9 +1,0 @@
-<html>
-    <head>
-    </head>
-    <body>
-        <h1>
-            Attendance
-        </h1>
-    </body>
-</html>

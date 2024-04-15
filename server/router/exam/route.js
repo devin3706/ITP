@@ -9,7 +9,7 @@ import * as controller from '../../controllers/exam/controller.js';
 router.route('/questions')
     .get(controller.getQuestions) //get request
     .post(controller.insertQuestions) //post request
-    .delete(controller.dropQuestions) // delete request
+    .delete(controller.dropQuestions) //delete request
 
 router.route('/result')
     .get(controller.getResult)
