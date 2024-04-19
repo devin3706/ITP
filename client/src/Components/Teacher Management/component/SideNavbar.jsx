@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     FaTh,
     FaBars,
+    FaSignOutAlt ,
     FaUserAlt,
     FaRegChartBar,
     FaCommentAlt,
@@ -22,6 +23,11 @@ const SideNavbar = ({ children }) => {
             icon: <FaTh />
         },
         {
+            path: "/tLogin",
+            name: "Logout",
+            icon: <FaSignOutAlt />
+        }
+        /* {
             path: "/tCreate",
             name: "Add ",
             icon: <FaUserAlt />
@@ -40,15 +46,15 @@ const SideNavbar = ({ children }) => {
             path: "/tpagetest",
             name: "test",
             icon: <FaShoppingBag />
-        },
+        }, */
         
     ]
     return (
         <div className="container">
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
-                   <h1 style={{display: isOpen ? "block" : "none"}} className="logo">Logo</h1>
-                   <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
+                   <h1 style={{display: isOpen ? "block" : "none"}} className="bars">-------------</h1>
+                   <div style={{marginLeft: isOpen ? "0px" : "0px"}} className="bars">
                        <FaBars onClick={toggle}/>
                    </div>
                </div>

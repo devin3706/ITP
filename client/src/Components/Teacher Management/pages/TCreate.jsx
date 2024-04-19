@@ -87,14 +87,14 @@ const TCreate = () => {
         // NIC Number Validation
         const nicRegex = /^(([0-9]{9}[vVxX])|([12]\d{11}))$/;
         if (!nicRegex.test(formData.tnicNumber)) {
-            newErrors.tnicNumber = "Invalid NIC number";
+            newErrors.tnicNumber = "Enter Correct NIC number";
             isValid = false;
         }
 
 
         // District Validation
         if (!formData.tDistrict || !districts.includes(formData.tDistrict)) {
-            newErrors.tDistrict = "Please select a valid district";
+            newErrors.tDistrict = "Please select a district";
             isValid = false;
         }
 
@@ -134,7 +134,7 @@ const TCreate = () => {
 
     return (
         <div>
-        <SideNavbar />
+        
         <div> 
             <Header />
            
@@ -213,7 +213,7 @@ const TCreate = () => {
                                             <label htmlFor="teacherPhoto" className="form-label text-white">Upload Photo</label>
                                             <input className="form-control" type="file" id="teacherPhoto" accept="image/*" onChange={handlePhotoChange} />
                                         </div>
-                                        <MDBBtn type="submit" color='light' size='medium'>Add Teacher</MDBBtn>
+                                        <button type="submit" className="btn btn-light btn-md">Add Teacher</button>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>

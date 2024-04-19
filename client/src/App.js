@@ -6,6 +6,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminContext } from "./AdminContext";
 
+
 // Exam components
 import Main from './Components/Exam Platform and Leaderboard/components/Main';
 import Quiz from './Components/Exam Platform and Leaderboard/components/Quiz';
@@ -27,6 +28,8 @@ import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
 import TUpdate from './Components/Teacher Management/pages/TUpdate';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
 import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion.js';
+import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
+import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -59,6 +62,8 @@ import Dashboard from './Components/Student Management/components/dashboard.jsx'
 import Students from './Components/Student Management/components/Students.jsx';
 import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
 import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
+
+
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
@@ -95,6 +100,8 @@ const App = () => {
           <Route path="/tUpdate/:id" element={<TUpdate />} />
           <Route path="/tHeader" element={<THeader />} />
           <Route path="/sideNavbar" element={<SideNavbar />} />
+          <Route path="/tProfile" element={<TProfile />} />
+          <Route path="/mainLogin" element= {<MainLogin/>} />
 
           {/* Admin routes */}
           <Route path="/adminHome" element={<AdminHome />} />

@@ -7,10 +7,10 @@ import axios from 'axios'
 
 
 
-const Tpagetest = () => {
+const TProfile = () => {
     return (
         <div><h1>Hello World</h1></div>
       );
 };
 
-export default Tpagetest;
+export default TProfile;
