@@ -13,9 +13,13 @@ import studyMaterialRoutes from './router/study materials/routes.js';
 import userRoutes from './router/student support/routes.js';
 import { upload } from './middleware/study materials/multer.js';
 import studentRoutes from './router/student management/routes.js';
+import payerRoutes from './router/payment management/payers.js';
+import workoutRoutes from './router/payment management/workouts.js';
+import announcementRoutes from './router/announcement handling/announcement.js';
+import classRoutes from './router/class scheduling/class.js';
 
 // Import connection file
-import connect from './database/exam/conn.js';
+import connect from './database/conn.js';
 
 // Conditional imports based on environment
 let http;
@@ -88,6 +92,14 @@ function startServer() {
 
   // Minesi Routes
   app.use('/student', studentRoutes);
+
+  //Nuradha Routes
+  app.use('/payers', payerRoutes);
+  app.use('/workouts', workoutRoutes);
+
+  //Jimutha Routes
+  app.use('/announcements', announcementRoutes);
+  app.use('/class', classRoutes);
 
   // Start server only when valid connection
   connect().then(() => {
