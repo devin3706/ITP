@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminContext } from "./AdminContext";
+import Homepage from "./Homepage.js";
 
 // Exam components
 import Main from './Components/Exam Platform and Leaderboard/components/Main';
@@ -16,6 +17,7 @@ import Test from './Components/Exam Platform and Leaderboard/components/Test';
 import EditQuestion from './Components/Exam Platform and Leaderboard/components/EditQuestion';
 import Footer from './Components/Exam Platform and Leaderboard/components/Footer';
 import Header from './Components/Exam Platform and Leaderboard/components/Header';
+import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard.js';
 
 // Teacher components
 import THome from "./Components/Teacher Management/pages/THome";
@@ -60,6 +62,19 @@ import Students from './Components/Student Management/components/Students.jsx';
 import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
 import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
 
+//Payment Management
+import Payment from "./Components/Payment Management/Add Payment/Payment.js";
+import PayOnline from "./Components/Payment Management/PayOnline/PayOnline.js";
+import Payments from "./Components/Payment Management/Payment Details/Payments.js";
+import PayDetails from "./Components/Payment Management/PayerDetails/payDetails.js";
+import EditPayments from "./Components/Payment Management/EditPayment/EditPayments.js";
+
+//Announcement Handling
+import Announcement from "./Components/Announcement Handling/Home/Home.jsx";
+
+//Class Scheduling
+import Class from "./Components/Class Scheduling/Home/Class.jsx";
+
 const App = () => {
   const [admin, setAdmin] = useState(null);
 
@@ -76,7 +91,12 @@ const App = () => {
     <Router>
       <AdminContext.Provider value={{ admin, setAdmin }}>
         <Routes>
-          <Route path="/" element={<Main />} />
+
+          {/* Public Routes */}
+          <Route exact path="/" element={<Homepage />} />
+
+          {/* Exam routes */}
+          <Route path="/exam" element={<Main />} />
           <Route path="/quiz" element={<CheckUserExist><Quiz /></CheckUserExist>} />
           <Route path="/result" element={<CheckUserExist><Result /></CheckUserExist>} />
           <Route path="/resultView" element={<ResultView />} />
@@ -85,6 +105,7 @@ const App = () => {
           <Route path="/footer" element={<Footer />} />
           <Route path="/header" element={<Header />} />
           <Route path="/createQuestion" element={<CreateQuestion />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />
@@ -124,6 +145,19 @@ const App = () => {
           <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
           <Route path = '/createStudent' element = {<CreateStudent/>}> </Route>
           <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
+
+          {/* Payment Management Routes */}
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/paymentdetails" element={<Payments />} />
+          <Route path="/onlinePay" element={<PayOnline />} />
+          <Route path="/payerDetails" element={<PayDetails />} />
+          <Route path="/editpayments/:Workoutid" element={<EditPayments />} />
+
+          {/* Announcement Handling Routes */}
+          <Route path="/announcement" element={<Announcement />} />
+
+          {/* Class Scheduling Routes */}
+          <Route path="/class" element={<Class />} />
 
         </Routes>
       </AdminContext.Provider>

@@ -16,11 +16,10 @@ export default function Main(){
     }
 
     return (
-        <div>
-            <h1 className="title text-dark text-center mt-5">A/L Accounting Mock Test 01</h1>
+        <div className='container'>
+            <h1 className="title text-light">A/L Accounting Mock Test 01</h1>
 
-        <div className="position-absolute top-50 start-50 translate-middle">
-            <ol className='text-justify'>
+            <ol>
             <li>Ensure a stable internet connection throughout the exam to avoid any disruptions. </li>
             <li>Have your student ID and any required materials ready before starting. </li>
             <li>Read each question carefully and review your answers before submission. </li>
@@ -32,12 +31,12 @@ export default function Main(){
                 <input ref={inputRef} type="text" className="userid" placeholder='Username*'></input>
             </form>
 
-            <div className='mt-5' style={{marginLeft: '38%'}}>
-                <Link className='' to={'quiz'} onClick={startQuiz}>Start Exam</Link>
-                <span className='p-3'></span>
-                <Link className='' to={'tHome'} onClick={startQuiz}>Test</Link>
-            </div>
+        <div>
+            <Link className='btn1' to={'quiz'} onClick={startQuiz}>Start Exam</Link>
+        </div>
 
+        <div>
+            <Link className='btn1' to={'tHome'} onClick={startQuiz}>Test</Link>
         </div>
     </div>
     )
