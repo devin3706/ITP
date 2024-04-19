@@ -61,7 +61,7 @@ const THome = () => {
                                     <Card className={styles.customCard}> 
                                         <Card.Body className="text-center">
                                             <Card.Title>Exam</Card.Title>
-                                            <Link to="/" className="stretched-link"></Link>
+                                            <Link to="/exam" className="stretched-link"></Link>
                                         </Card.Body>
                                     </Card>
                                 </Col>

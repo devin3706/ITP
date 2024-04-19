@@ -18,6 +18,7 @@ import Test from './Components/Exam Platform and Leaderboard/components/Test';
 import EditQuestion from './Components/Exam Platform and Leaderboard/components/EditQuestion';
 import Footer from './Components/Exam Platform and Leaderboard/components/Footer';
 import Header from './Components/Exam Platform and Leaderboard/components/Header';
+import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion.js';
 import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard.js';
 
 // Teacher components
@@ -29,7 +30,6 @@ import THeader from './Components/Teacher Management/component/THeader';
 import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
 import TUpdate from './Components/Teacher Management/pages/TUpdate';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
-import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion.js';
 import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
 import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
 
