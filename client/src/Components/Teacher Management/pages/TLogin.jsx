@@ -12,7 +12,7 @@ import {
     MDBCheckbox  
 } from 'mdb-react-ui-kit';
 
-const TLogin = () => {
+const TLogin = ({ onLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate(); // Initialize useNavigate
@@ -41,6 +41,7 @@ const TLogin = () => {
             // Handle successful authentication (e.g., redirect to dashboard)
             console.log("User authenticated:", response.data);
             alert("Login Success.");
+            onLogin(); // Call the onLogin function passed from the parent component
             navigate('/tHome'); // Redirect to the dashboard page
         } catch (error) {
             // Handle authentication error (e.g., display error message)
@@ -61,7 +62,7 @@ const TLogin = () => {
                         <MDBInput wrapperClass='mb-4' label='Email address' id='logName' type='email' value={email} onChange={handleChangeEmail} />
                         <MDBInput wrapperClass='mb-4' label='Password' id='logPassword' type='password' value={password} onChange={handleChangePassword} />
                         <div className="d-flex justify-content-between mx-4 mb-4">
-                            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
+                            
                             <a href="">Forgot password?</a>
                         </div>
                         <div class="col-12">

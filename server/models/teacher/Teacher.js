@@ -14,7 +14,8 @@ const teacherSchema = new Schema({
   },
   nicNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true // Ensuring NIC number is unique
   },
   subject: {
     type: String,
@@ -38,16 +39,19 @@ const teacherSchema = new Schema({
   },
   phoneNumber: {
     type: String,
-    required: true
+    required: true,
+    match: /^[0-9]{10}$/ // Ensuring phone number is in the format of 10 digits
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true, // Ensuring email is unique
+    match: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/ // Basic email format validation
   },
   password: {
     type: String,
     required: true,
-    minlength: 6 // Example: Minimum password length of 6 characters
+    minlength: 6 // Minimum password length of 6 characters
   },
   // Adding a field for photo, which will store the binary data of the photo
   photo: {
