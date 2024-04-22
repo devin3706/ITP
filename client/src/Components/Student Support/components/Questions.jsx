@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; 
 import axios from "axios";
@@ -14,7 +13,7 @@ function Questions() {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:8081/')
+        axios.get('http://localhost:8081/users')
             .then(result => setQuestions(result.data))
             .catch(err => console.log(err))
     }, []);
@@ -37,7 +36,7 @@ function Questions() {
         formDataWithPhoto.append('question', formData.question);
         formDataWithPhoto.append('photo', formData.photo); // Append photo to FormData
     
-        axios.post('http://localhost:8081/addQuestion', formDataWithPhoto)
+        axios.post('http://localhost:8081/users/addQuestion', formDataWithPhoto)
             .then(res => {
                 console.log(res.data);
                 setQuestions([...questions, res.data]); // Update state with the new question
@@ -46,7 +45,7 @@ function Questions() {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8081/deleteQuestion/${id}`)
+        axios.delete(`http://localhost:3001/users/deleteQuestion/${id}`)
             .then(res => {
                 console.log(res);
                 window.location.reload();

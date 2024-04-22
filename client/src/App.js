@@ -13,13 +13,13 @@ import Main from './Components/Exam Platform and Leaderboard/components/Main';
 import Quiz from './Components/Exam Platform and Leaderboard/components/Quiz';
 import Result from './Components/Exam Platform and Leaderboard/components/Result';
 import ResultView from './Components/Exam Platform and Leaderboard/components/ResultView';
-import { CheckUserExist } from './Components/Exam Platform and Leaderboard/helper/helper.js';
+import { CheckUserExist } from './Components/Exam Platform and Leaderboard/helper/helper';
 import Test from './Components/Exam Platform and Leaderboard/components/Test';
 import EditQuestion from './Components/Exam Platform and Leaderboard/components/EditQuestion';
 import Footer from './Components/Exam Platform and Leaderboard/components/Footer';
 import Header from './Components/Exam Platform and Leaderboard/components/Header';
-import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion.js';
-import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard.js';
+import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion';
+import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard';
 
 // Teacher components
 import THome from "./Components/Teacher Management/pages/THome";
@@ -28,7 +28,7 @@ import TLogin from './Components/Teacher Management/pages/TLogin';
 import TDetails from './Components/Teacher Management/pages/TDetails';
 import THeader from './Components/Teacher Management/component/THeader';
 import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
-import TUpdate from './Components/Teacher Management/pages/TUpdate';
+import TUpdate from './Components/Teacher Management/pages/TUpdate.jsx';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
 import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
 import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';

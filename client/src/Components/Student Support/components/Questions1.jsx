@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; 
 import axios from "axios";
@@ -14,7 +13,7 @@ function Questions1() {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:8081/')
+        axios.get('http://localhost:8081/users')
             .then(result => setQuestions1(result.data))
             .catch(err => console.log(err))
     }, []);
@@ -35,7 +34,7 @@ function Questions1() {
         formDataWithPhoto.append('classSelect', formData.classSelect);
         formDataWithPhoto.append('question', formData.question);
         formDataWithPhoto.append('photo', formData.photo); // Append photo to FormData
-        axios.post('http://localhost:8081/addQuestion', formDataWithPhoto)
+        axios.post('http://localhost:8081/users/addQuestion', formDataWithPhoto)
             .then(res => {
                 console.log(res);
                 setQuestions1([...questions1, formData]);
@@ -44,7 +43,7 @@ function Questions1() {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8081/deleteQuestion/${id}`)
+        axios.delete(`http://localhost:8081/users/deleteQuestion/${id}`)
             .then(res => {
                 console.log(res);
                 window.location.reload();
@@ -55,7 +54,7 @@ function Questions1() {
     return (
         <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
             <div className="w-50 mbg-white rounded p-3">
-                <h2>Mr.Prabath's Quection page</h2>
+                <h2>Mr.Prabath's Question page</h2>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="studentName">Student Name:</label><br />
                     <input type="text" id="studentName" name="studentName" value={formData.studentName} onChange={handleChange} required /><br />

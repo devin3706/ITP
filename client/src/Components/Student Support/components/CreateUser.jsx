@@ -1,12 +1,10 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function CreateUser (){
     const [Name, setName] = useState("");
-    const [StudentId, setStudentId] = useState("");
+    const [Email, setEmail] = useState("");
     const [Teacher, setTeacher] = useState("");
     const [Feedback, setFeedback] = useState("");
     const [Rating, setRating] = useState(0); // New state for rating
@@ -14,7 +12,7 @@ function CreateUser (){
 
     const Submit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8081/users/CreateUser", { Name, StudentId, Teacher, Feedback, Rating })
+        axios.post("http://localhost:8081/users/CreateUser", { Name, Email, Teacher, Feedback, Rating })
         .then(result => {
             console.log(result)
             navigate('/users');
@@ -59,12 +57,12 @@ function CreateUser (){
                         />
                     </div>
                     <div className='mb-2'>
-                        <label htmlFor="StuId">StudentId : </label>
+                        <label htmlFor="Email">Email : </label>
                         <input
                             type="text"
-                            placeholder='Enter Student Id'
+                            placeholder='Enter Email'
                             className='form-control'
-                            onChange={(e) => setStudentId(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className='mb-2'>

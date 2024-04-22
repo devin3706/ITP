@@ -1,13 +1,15 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose from 'mongoose';
 
-const QuestionSchema = new mongoose.Schema({
+const { Schema, model } = mongoose;
+
+const QuestionSchema = new Schema({
     studentName: String,
     studentId: String,
     classSelect: String,
     question: String,
-    photo: null
+    photo: String
 });
 
-//const QuestionModel = mongoose.model("feedback",QuestionSchema)
-module.exports =  mongoose.model("questions2",QuestionSchema)
+const QuestionModel = model("questions2", QuestionSchema);
+
+export default QuestionModel;
