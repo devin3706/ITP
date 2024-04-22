@@ -32,6 +32,9 @@ import TUpdate from './Components/Teacher Management/pages/TUpdate';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
 import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
 import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
+import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
+import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
+import ParentComponent from './Components/Teacher Management/pages/ParentComponent.jsx';
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -122,6 +125,11 @@ const App = () => {
           <Route path="/sideNavbar" element={<SideNavbar />} />
           <Route path="/tProfile" element={<TProfile />} />
           <Route path="/mainLogin" element= {<MainLogin/>} />
+          <Route path="/tEnterEmail" element={<TEnterEmail />} />
+          <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
+          <Route path="/parentComponent" element= {<ParentComponent/>} />
+        
+
 
           {/* Admin routes */}
           <Route path="/adminHome" element={<AdminHome />} />
