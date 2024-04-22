@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -35,9 +34,16 @@ function Users() {
 
   const renderStars = (rating) => {
     const stars = [];
+    const filledStars = Math.floor(rating); // Determine the number of filled stars
+    
     for (let i = 1; i <= 5; i++) {
-      stars.push(<span key={i}>&#9733;</span>); // Always render full stars
+      if (i <= filledStars) {
+        stars.push(<span key={i}>&#9733;</span>); // Render a filled star
+      } else {
+        stars.push(<span key={i}>&#9734;</span>); // Render an empty star
+      }
     }
+    
     return stars;
   }
 
@@ -52,7 +58,7 @@ function Users() {
           <thead>
             <tr>
               <th>Name</th>
-              <th>StudentId</th>
+              <th>Email</th>
               <th>Teacher</th>
               <th>Feedback</th>
               <th>Rating</th>
@@ -63,7 +69,7 @@ function Users() {
             {users.map((user) => (
               <tr key={user._id}>
                 <td>{user.Name}</td>
-                <td>{user.StudentId}</td>
+                <td>{user.Email}</td>
                 <td>{user.Teacher}</td>
                 <td>{user.Feedback}</td>
                 <td>{renderStars(user.Rating)}</td>

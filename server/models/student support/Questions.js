@@ -1,7 +1,8 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose from 'mongoose';
 
-const questionSchema = new mongoose.Schema({
+const { Schema, model } = mongoose;
+
+const questionSchema = new Schema({
     studentName: {
         type: String,
         required: true
@@ -23,6 +24,6 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-const QuestionModel = mongoose.model('inquary', questionSchema);
+const QuestionModel = model('inquary', questionSchema);
 
-module.exports = QuestionModel;
+export default QuestionModel;

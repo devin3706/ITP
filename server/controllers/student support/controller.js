@@ -1,34 +1,81 @@
+import express from 'express';
+import mongoose from 'mongoose';
 import UserModel from '../../models/student support/Users.js';
 
-const UserController = {
-    getAllUsers: (req, res) => {
-        UserModel.find({})
-        .then(users => res.json(users))
-        .catch(err => res.json(err));
+const mainController = {
+    getAllUsers: async (req, res) => {
+        try {
+            const feedbacks = await UserModel.find({});
+            res.json(feedbacks);
+        } catch (err) {
+            res.json(err);
+        }
     },
-    getUserById: (req, res) => {
+
+    getUserById: async (req, res) => {
         const id = req.params.id;
-        UserModel.findById(id)
-        .then(user => res.json(user))
-        .catch(err => res.json(err));
+        try {
+            const feedback = await UserModel.findById(id);
+            res.json(feedback);
+        } catch (err) {
+            res.json(err);
+        }
     },
-    updateUser: (req, res) => {
+
+    updateUserById: async (req, res) => {
         const id = req.params.id;
-        UserModel.findByIdAndUpdate(id, req.body, { new: true })
-        .then(user => res.json(user))
-        .catch(err => res.json(err));
+        try {
+            const feedback = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
+            res.json(feedback);
+        } catch (err) {
+            res.json(err);
+        }
     },
-    deleteUser: (req, res) => {
+
+    deleteUserById: async (req, res) => {
         const id = req.params.id;
-        UserModel.findByIdAndDelete(id)
-        .then(result => res.json(result))
-        .catch(err => res.json(err));
+        try {
+            const result = await UserModel.findByIdAndDelete(id);
+            res.json(result);
+        } catch (err) {
+            res.json(err);
+        }
     },
-    createUser: (req, res) => {
-        UserModel.create(req.body)
-        .then(user => res.json(user))
-        .catch(err => res.json(err));
+
+    createUser: async (req, res) => {
+        try {
+            const feedback = await UserModel.create(req.body);
+            res.json(feedback);
+        } catch (err) {
+            res.json(err);
+        }
+    },
+
+    postQuestion: async (req, res) => {
+        const { Name, Email, Teacher, Question } = req.body;
+        try {
+            const question = await UserModel.create({
+                Name,
+                Email,
+                Teacher,
+                Feedback: Question,
+                Rating: 0
+            });
+            res.json({ message: "Question posted successfully", question });
+        } catch (err) {
+            res.status(500).json({ error: "Failed to post question", err });
+        }
+    },
+
+    getQuestionsForTeacher: async (req, res) => {
+        const teacherName = req.params.teacherName;
+        try {
+            const questions = await UserModel.find({ Teacher: teacherName });
+            res.json(questions);
+        } catch (err) {
+            res.status(500).json({ error: "Failed to retrieve questions for teacher", err });
+        }
     }
 };
 
-export default UserController;
+export default mainController;

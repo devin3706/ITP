@@ -1,11 +1,14 @@
 import express from 'express';
-const router = express.Router();
-import UserController from '../../controllers/student support/controller.js';
+import mainController from '../../controllers/student support/controller.js';
 
-router.get('/', UserController.getAllUsers);
-router.get('/getUser/:id', UserController.getUserById);
-router.put('/updateUser/:id', UserController.updateUser);
-router.delete('/deleteUser/:id', UserController.deleteUser);
-router.post('/createUser', UserController.createUser);
+const router = express.Router();
+
+router.get('/', mainController.getAllUsers);
+router.get('/getUser/:id', mainController.getUserById);
+router.put('/updateUser/:id', mainController.updateUserById);
+router.delete('/deleteUser/:id', mainController.deleteUserById);
+router.post('/CreateUser', mainController.createUser);
+router.post('/Questions', mainController.postQuestion);
+router.get('/getQuestionsForTeacher/:teacherName', mainController.getQuestionsForTeacher);
 
 export default router;
