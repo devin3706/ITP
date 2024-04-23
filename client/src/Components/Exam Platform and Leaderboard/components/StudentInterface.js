@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'; // Import useDispatch
 import { getServerData } from '../helper/helper.js';
 import { setExamId } from '../actions/id_actions.js'; // Import setExamId action creator
-import '../styles/Interface.css';
 import { Link } from 'react-router-dom';
 
 const QuestionPage = () => {

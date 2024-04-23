@@ -109,18 +109,12 @@ const Quiz = () => {
     }
 
     return (
-<<<<<<< Updated upstream
-        <div style={{backgroundColor: '#ECF0F5'}}>
+    <div style={{backgroundColor: '#ECF0F5'}}>
             <Header/>
-            <div className="container">
-                <h1 className="alert alert-primary p-3 mt-5 text-center  border border-primary">A/L Accounting Mock Test 01</h1>
-
-                <div className="d-inline text-info-emphasis bg-info-subtle rounded-3 p-2">Timer: {timer} seconds</div>
-=======
         <div className="container">
+            <h1 className="alert alert-primary p-3 mt-5 text-center  border border-primary">Exam in Progress</h1>
 
-            <div className="timer">Timer: {formattedTime} </div>
->>>>>>> Stashed changes
+            <div className="d-inline text-info-emphasis bg-info-subtle rounded-3 p-2">Timer: {formattedTime} </div>
 
                 <Questions onChecked={onChecked} />
 
