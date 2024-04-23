@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import styles from '../styles/TCreate.css';
 import Header from '../../Exam Platform and Leaderboard/components/Header';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import SideNavbar from '../component/SideNavbar';
@@ -87,14 +86,14 @@ const TCreate = () => {
         // NIC Number Validation
         const nicRegex = /^(([0-9]{9}[vVxX])|([12]\d{11}))$/;
         if (!nicRegex.test(formData.tnicNumber)) {
-            newErrors.tnicNumber = "Invalid NIC number";
+            newErrors.tnicNumber = "Enter Correct NIC number";
             isValid = false;
         }
 
 
         // District Validation
         if (!formData.tDistrict || !districts.includes(formData.tDistrict)) {
-            newErrors.tDistrict = "Please select a valid district";
+            newErrors.tDistrict = "Please select a district";
             isValid = false;
         }
 
@@ -133,29 +132,24 @@ const TCreate = () => {
     };
 
     return (
+        <div style={{ backgroundColor: '#ECF0F5' }}>
         <div>
-        <SideNavbar />
-        <div> 
-            <Header />
-           
+        <Header />
 
-            
-
-        
         <MDBContainer fluid className='h-custom'>
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                 <MDBCol col='12' className='m-5'>
-                    <MDBCard className='card-registration card-registration-2' style={{ borderRadius: '15px' }}>
+                    <MDBCard className='card-registration card-registration-2' style={{ borderRadius: '15px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', backgroundColor: '#ffffff' }}>
                         <form onSubmit={handleSubmit}>
                             <MDBCardBody className='p-0'>
                                 <MDBRow>
-                                    <MDBCol md='6' className='p-5 bg-white'> {/* Corrected className here */}
+                                    <MDBCol md='6' className='p-5'>
                                         <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>General Information</h3>
                                         <MDBInput wrapperClass='mb-4' label='First Name' size='medium' name='tfirstName' id='tfirstName' type='text' value={formData.tfirstName} onChange={handleChange} error={errors.tfirstName} />
                                         <MDBInput wrapperClass='mb-4' label='Last Name' size='medium' name='tlastName' id='tlastName' type='text' value={formData.tlastName} onChange={handleChange} error={errors.tlastName} />
                                         {errors.tnicNumber && <div className="text-danger">{errors.tnicNumber}</div>}
                                         <MDBInput wrapperClass='mb-4' label='NIC - Number' size='medium' name='tnicNumber' id='tnicNumber' type='text' value={formData.tnicNumber} onChange={handleChange} error={errors.tnicNumber} />
-                                        
+
                                         <div className="mb-4 mt-2">
                                             <select className="form-select" name='tSubject' id="tSubject" aria-label="Subject" value={formData.tSubject} onChange={handleChange} error={errors.tSubject}>
                                                 <option value="">Select the Subject</option>
@@ -168,17 +162,17 @@ const TCreate = () => {
                                             <label htmlFor="tSubject" className="form-label">Subject</label>
                                         </div>
                                         <div className="mb-4 mt-2">
-                                        {errors.tDistrict && <div className="text-danger">{errors.tDistrict}</div>}
+                                            {errors.tDistrict && <div className="text-danger">{errors.tDistrict}</div>}
                                             <select className="form-select" name='tDistrict' id="tDistrict" aria-label="District" value={formData.tDistrict} onChange={handleChange} error={errors.tDistrict}>
                                                 <option value="">Select the District</option>
                                                 {districts.map((district, index) => (
                                                     <option key={index} value={district}>{district}</option>
                                                 ))}
                                             </select>
-                                           
+
                                             <label htmlFor="tDistrict" className="form-label">District</label>
                                         </div>
-                                      
+
                                         {errors.tEdu && <div className="text-danger">{errors.tEdu}</div>}
                                         <div className="mb-4 mt-2">
                                             <label htmlFor="tEdu" className="form-label">Education Qualification</label>
@@ -191,29 +185,27 @@ const TCreate = () => {
                                                 <option value="Certificate">Certificate</option>
                                             </select>
                                         </div>
-                                        
-                                        <MDBInput wrapperClass='mb-4' label='Additional Information' size='medium' name='tInfo' id='tInfo' type='text' value={formData.tInfo} onChange={handleChange} error={errors.tInfo} />
+
+                                    <MDBInput wrapperClass='mb-4' label='Additional Information' size='medium' name='tInfo' id='tInfo' type='text' value={formData.tInfo} onChange={handleChange} error={errors.tInfo} />
                                     </MDBCol>
-                                    <MDBCol md='6' className='bg-blue p-5'>
-                                        <h3 className="fw-normal mb-5 text-white" style={{ color: '#4835d4' }}>Contact Details</h3>
-                                        <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Address' size='medium' name='tAddress' id='tAddress' type='text' value={formData.tAddress} onChange={handleChange} error={errors.tAddress} />
-                                       
+                                    <MDBCol md='6' className='p-5 bg-info border border-primary rounded-end-custom'>
+                                        <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>Contact Details</h3>
+                                        <MDBInput wrapperClass='mb-4' label='Address' size='medium' name='tAddress' id='tAddress' type='text' value={formData.tAddress} onChange={handleChange} error={errors.tAddress} />
                                         {errors.tPhone && <div className="text-danger">{errors.tPhone}</div>}
-                                        <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Phone Number' size='medium' name='tPhone' id='tPhone' type='text' value={formData.tPhone} onChange={handleChange} error={errors.tPhone} />
-                                        
+                                        <MDBInput wrapperClass='mb-4' label='Phone Number' size='medium' name='tPhone' id='tPhone' type='text' value={formData.tPhone} onChange={handleChange} error={errors.tPhone} />
                                         {errors.tEmail && <div className="text-danger">{errors.tEmail}</div>}
-                                        <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Your Email' size='medium' name='tEmail' id='tEmail' type='email' value={formData.tEmail} onChange={handleChange} error={errors.tEmail} />
-                                        
+                                        <MDBInput wrapperClass='mb-4' label='Your Email' size='medium' name='tEmail' id='tEmail' type='email' value={formData.tEmail} onChange={handleChange} error={errors.tEmail} />
                                         {errors.password && <div className="text-danger">{errors.password}</div>}
-                                        <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Password' size='medium' name='password' id='password' type='password' value={formData.password} onChange={handleChange} error={errors.password} />
-                                       
-                                        {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}        
-                                        <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Confirm Password' size='medium' name='confirmPassword' id='confirmPassword' type='password' value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
+                                        <MDBInput wrapperClass='mb-4' label='Password' size='medium' name='password' id='password' type='password' value={formData.password} onChange={handleChange} error={errors.password} />
+                                        {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}
+                                        <MDBInput wrapperClass='mb-4' label='Confirm Password' size='medium' name='confirmPassword' id='confirmPassword' type='password' value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
                                         <div className="mb-4">
-                                            <label htmlFor="teacherPhoto" className="form-label text-white">Upload Photo</label>
+                                            <label htmlFor="teacherPhoto" className="form-label">Upload Photo</label>
                                             <input className="form-control" type="file" id="teacherPhoto" accept="image/*" onChange={handlePhotoChange} />
                                         </div>
-                                        <MDBBtn type="submit" color='light' size='medium'>Add Teacher</MDBBtn>
+                                        <div className="d-flex justify-content-center">
+                                            <button type="submit" className="btn btn-primary mt-5">Add Teacher</button>
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>
@@ -222,9 +214,10 @@ const TCreate = () => {
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
-        </div>
-        </div>
 
+        </div>
+        <Footer />
+        </div>
     );
 };
 

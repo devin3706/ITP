@@ -1,7 +1,8 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -35,15 +36,24 @@ function Users() {
 
   const renderStars = (rating) => {
     const stars = [];
+    const filledStars = Math.floor(rating); // Determine the number of filled stars
+    
     for (let i = 1; i <= 5; i++) {
-      stars.push(<span key={i}>&#9733;</span>); // Always render full stars
+      if (i <= filledStars) {
+        stars.push(<span key={i}>&#9733;</span>); // Render a filled star
+      } else {
+        stars.push(<span key={i}>&#9734;</span>); // Render an empty star
+      }
     }
+    
     return stars;
   }
 
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
+    <div className="vh-100" style={{backgroundColor: '#ECF0F5'}}>
+    <Header/>
+    <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
+      <div className="w-75 bg-white rounded p-3 shadow">
         <div className="mb-3">
           <Link to="/create" className="btn btn-success">Add +</Link>
           <Link to="/questionTeacher" className="btn btn-success ms-2">Questions</Link>
@@ -52,7 +62,7 @@ function Users() {
           <thead>
             <tr>
               <th>Name</th>
-              <th>StudentId</th>
+              <th>Email</th>
               <th>Teacher</th>
               <th>Feedback</th>
               <th>Rating</th>
@@ -63,7 +73,7 @@ function Users() {
             {users.map((user) => (
               <tr key={user._id}>
                 <td>{user.Name}</td>
-                <td>{user.StudentId}</td>
+                <td>{user.Email}</td>
                 <td>{user.Teacher}</td>
                 <td>{user.Feedback}</td>
                 <td>{renderStars(user.Rating)}</td>
@@ -76,6 +86,8 @@ function Users() {
           </tbody>
         </table>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

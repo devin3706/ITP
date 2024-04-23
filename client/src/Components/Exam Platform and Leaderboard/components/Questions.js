@@ -29,8 +29,8 @@ export default function Questions({ onChecked }){
     if(serverError) return <h3 className='title text-dark text-center mt-5'>{serverError.message || "Unknown Error"}</h3>
 
     return(
-        <div className='questions'>
-            <h2 className='text-light'>{questions?.question}</h2>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <h2 className='text-dark mb-3 mt-5'>{questions?.question}</h2>
 
             <ul key={questions?.id}>
                 {

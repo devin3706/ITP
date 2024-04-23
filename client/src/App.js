@@ -7,17 +7,21 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminContext } from "./AdminContext";
 import Homepage from "./Homepage.js";
 
+
 // Exam components
 import Main from './Components/Exam Platform and Leaderboard/components/Main';
 import Quiz from './Components/Exam Platform and Leaderboard/components/Quiz';
 import Result from './Components/Exam Platform and Leaderboard/components/Result';
 import ResultView from './Components/Exam Platform and Leaderboard/components/ResultView';
-import { CheckUserExist } from './Components/Exam Platform and Leaderboard/helper/helper.js';
+import { CheckUserExist } from './Components/Exam Platform and Leaderboard/helper/helper';
 import Test from './Components/Exam Platform and Leaderboard/components/Test';
 import EditQuestion from './Components/Exam Platform and Leaderboard/components/EditQuestion';
 import Footer from './Components/Exam Platform and Leaderboard/components/Footer';
 import Header from './Components/Exam Platform and Leaderboard/components/Header';
-import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard.js';
+import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion';
+import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard';
+import StudentInterface from './Components/Exam Platform and Leaderboard/components/StudentInterface.js';
+import TeacherInterface from './Components/Exam Platform and Leaderboard/components/TeacherInterface.js';
 
 // Teacher components
 import THome from "./Components/Teacher Management/pages/THome";
@@ -26,16 +30,19 @@ import TLogin from './Components/Teacher Management/pages/TLogin';
 import TDetails from './Components/Teacher Management/pages/TDetails';
 import THeader from './Components/Teacher Management/component/THeader';
 import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
-import TUpdate from './Components/Teacher Management/pages/TUpdate';
+import TUpdate from './Components/Teacher Management/pages/TUpdate.jsx';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
-import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion.js';
+import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
+import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
+import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
+import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
+import ParentComponent from './Components/Teacher Management/pages/ParentComponent.jsx';
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
 import AdminCreate from './Components/Daily Process Dashboard/pages/AdminCreate';
 import AdminLogin from './Components/Daily Process Dashboard/pages/AdminLogin';
 import AdminDetails from './Components/Daily Process Dashboard/pages/AdminDetails';
-import AdminEdit from './Components/Daily Process Dashboard/pages/AdminEdit';
 import AdminHeader from './Components/Daily Process Dashboard/components/AdminHeader.jsx';
 
 // Admin API functions
@@ -62,6 +69,7 @@ import Students from './Components/Student Management/components/Students.jsx';
 import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
 import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
 
+
 //Payment Management
 import Payment from "./Components/Payment Management/Add Payment/Payment.js";
 import PayOnline from "./Components/Payment Management/PayOnline/PayOnline.js";
@@ -80,9 +88,10 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = getLoggedInAdmin().then((res) => {
-      if (res.error) alert(res.error);
-      else setAdmin(res.username);
-    }).catch((err) => alert(err));
+      // Leave empty without any action
+    }).catch((err) => {
+      // Leave empty without any action
+    });
 
     return () => unsubscribe;
   }, []);
@@ -106,6 +115,8 @@ const App = () => {
           <Route path="/header" element={<Header />} />
           <Route path="/createQuestion" element={<CreateQuestion />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/studentInterface" element={<StudentInterface />} />
+          <Route path="/teacherInterface" element={<TeacherInterface />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />
@@ -116,13 +127,19 @@ const App = () => {
           <Route path="/tUpdate/:id" element={<TUpdate />} />
           <Route path="/tHeader" element={<THeader />} />
           <Route path="/sideNavbar" element={<SideNavbar />} />
+          <Route path="/tProfile" element={<TProfile />} />
+          <Route path="/mainLogin" element= {<MainLogin/>} />
+          <Route path="/tEnterEmail" element={<TEnterEmail />} />
+          <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
+          <Route path="/parentComponent" element= {<ParentComponent/>} />
+        
+
 
           {/* Admin routes */}
           <Route path="/adminHome" element={<AdminHome />} />
           <Route path="/adminCreate" element={<AdminCreate />} />
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminDetails" element={<AdminDetails />} />
-          <Route path="/adminEdit/:adminID" element={<AdminEdit />} />
           <Route path="/adminHeader" element={<AdminHeader />} />
 
           {/* Study Material Routes */}

@@ -1,7 +1,8 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; 
 import axios from "axios";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Questions2() {
     const [questions2, setQuestions2] = useState([]);
@@ -14,7 +15,7 @@ function Questions2() {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:8081/')
+        axios.get('http://localhost:8081/users')
             .then(result => setQuestions2(result.data))
             .catch(err => console.log(err))
     }, []);
@@ -35,7 +36,7 @@ function Questions2() {
         formDataWithPhoto.append('classSelect', formData.classSelect);
         formDataWithPhoto.append('question', formData.question);
         formDataWithPhoto.append('photo', formData.photo); // Append photo to FormData
-        axios.post('http://localhost:8081/addQuestion', formDataWithPhoto)
+        axios.post('http://localhost:8081/users/addQuestion', formDataWithPhoto)
             .then(res => {
                 console.log(res);
                 setQuestions2([...questions2, formData]);
@@ -44,7 +45,7 @@ function Questions2() {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8081/deleteQuestion/${id}`)
+        axios.delete(`http://localhost:8081/users/deleteQuestion/${id}`)
             .then(res => {
                 console.log(res);
                 window.location.reload();
@@ -53,18 +54,20 @@ function Questions2() {
     }
 
     return (
-        <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-            <div className="w-50 mbg-white rounded p-3">
-                <h2>Mr.Sandeesh Quection page</h2>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+        <Header/>
+        <div className="d-flex vh-100 justify-content-center align-items-center">
+            <div className="w-50 mbg-white rounded p-3 shadow">
+                <h2 className="text-center">Mr.Sandeesh Quection page</h2>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="studentName">Student Name:</label><br />
-                    <input type="text" id="studentName" name="studentName" value={formData.studentName} onChange={handleChange} required /><br />
+                    <input className="form-control" type="text" id="studentName" name="studentName" value={formData.studentName} onChange={handleChange} required /><br />
 
                     <label htmlFor="studentID">Student ID:</label><br />
-                    <input type="text" id="studentID" name="studentID" value={formData.studentID} onChange={handleChange} required /><br />
+                    <input className="form-control" type="text" id="studentID" name="studentID" value={formData.studentID} onChange={handleChange} required /><br />
 
                     <label htmlFor="classSelect">Select Class:</label><br />
-                    <select id="classSelect" name="classSelect" value={formData.classSelect} onChange={handleChange} required>
+                    <select className="form-control" id="classSelect" name="classSelect" value={formData.classSelect} onChange={handleChange} required>
                         <option value="">Select Class</option>
                         <option value="class1">2024 A/L Theory</option>
                         <option value="class2">2025 A/L Theory</option>
@@ -74,14 +77,16 @@ function Questions2() {
 
                     <label htmlFor="question">Question:</label><br />
                     <div style={{ position: 'relative' }}>
-                        <textarea id="question" name="question" rows="4" cols="50" value={formData.question} onChange={handleChange} required></textarea>
-                        <input type="file" id="photo" name="photo" accept="image/*" style={{ position: 'absolute', bottom: 5, right: 5 }} onChange={handleChange} />
+                        <textarea className="form-control" id="question" name="question" rows="4" cols="50" value={formData.question} onChange={handleChange} required></textarea>
+                        <input className="form-control" type="file" id="photo" name="photo" accept="image/*" style={{ position: 'absolute', bottom: 0, left: 0, width: '98%' }} onChange={handleChange} />
                     </div>
                     <br />
 
-                    <input type="submit" value="Submit Question" />
+                    <input type="submit" className= 'btn btn-success' value="Submit Question" />
                 </form>
             </div>
+        </div>
+        <Footer/>
         </div>
     )
 }

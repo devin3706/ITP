@@ -5,7 +5,7 @@ import AdminHeader from '../components/AdminHeader'
 
 const AdminHome = () => {
     return(
-        <div>
+        <div style={{backgroundColor: '#ECF0F5'}}>
         <AdminHeader />
             <div className="text-center mt-5">
                 <h1>Daily Process Dashboard</h1>

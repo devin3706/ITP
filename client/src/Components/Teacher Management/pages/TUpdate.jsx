@@ -3,8 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-import '../styles/TCreate.css';
 import Header from '../../Exam Platform and Leaderboard/components/Header';
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import {
     MDBBtn,
     MDBContainer,
@@ -111,8 +111,9 @@ const TUpdate = () => {
     };
 
     return (
-        <div><Header />
-        <MDBContainer fluid className='h-custom'>
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+        <Header />
+        <MDBContainer fluid className='h-custom mt-5 mb-5'>
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                 <MDBCol col='12' className='m-5'>
                     <MDBCard className='card-registration card-registration-2' style={{ borderRadius: '15px' }}>
@@ -139,14 +140,16 @@ const TUpdate = () => {
                                         <MDBInput wrapperClass='mb-4' label='Education Qualification' size='medium' name='tEdu' id='tEdu' type='text' value={formData.tEdu} onChange={handleChange} />
                                         <MDBInput wrapperClass='mb-4' label='Additional Information' size='medium' name='tInfo' id='tInfo' type='text' value={formData.tInfo} onChange={handleChange} />
                                     </MDBCol>
-                                    <MDBCol md='6' className='bg-blue p-5'>
+                                    <MDBCol md='6' className='p-5 bg-info border border-primary rounded-end-custom'>
                                         <h3 className="fw-normal mb-5 text-white" style={{ color: '#4835d4' }}>Contact Details</h3>
                                         <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Address' size='medium' name='tAddress' id='tAddress' type='text' value={formData.tAddress} onChange={handleChange} />
                                         <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Phone Number' size='medium' name='tPhone' id='tPhone' type='text' value={formData.tPhone} onChange={handleChange} />
                                         <MDBInput wrapperClass='mb-4' labelClass='text-white' label='Your Email' size='medium' name='tEmail' id='tEmail' type='email' value={formData.tEmail} onChange={handleChange} />
                                         <MDBInput wrapperClass='mb-4' label='Password' size='medium' name='password' id='password' type='password' value={formData.password} onChange={handleChange} error={errors.password} />
                                         <MDBInput wrapperClass='mb-4' label='Confirm Password' size='medium' name='confirmPassword' id='confirmPassword' type='password' value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
-                                        <MDBBtn type="submit" color='light' size='medium'>Save</MDBBtn>
+                                        <div className="d-flex justify-content-center">
+                                            <button type="submit" className="btn btn-primary mt-5">Save</button>
+                                        </div>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCardBody>
@@ -155,6 +158,7 @@ const TUpdate = () => {
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
+        <Footer/>
         </div>
     );
 };

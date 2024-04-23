@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleChangeQuestion, handleChangeOption, handleChangeAnswer, handleAddQuestion} from '../helper/helper';
-import '../styles/CreateQuestion.css'; 
+import Header from './Header';
+import Footer from './Footer';
 
 const AddQuestionPage = () => {
+  const [examName, setExamName] = useState('');
   const [questions, setQuestions] = useState([
     { id: 1, question: '', options: ['', '', ''] },
     { id: 2, question: '', options: ['', '', ''] },
@@ -15,11 +17,35 @@ const AddQuestionPage = () => {
   const [answers, setAnswers] = useState([null, null]);
   const dispatch = useDispatch();
 
-  const handleAddQuestionClick = () => handleAddQuestion(questions, answers, setQuestions, setAnswers);
-
+  const handleAddQuestionClick = () => {
+    handleAddQuestion(examName, questions, answers, setQuestions, setAnswers);
+    // Clear input fields after successful addition
+    setExamName('');
+    setQuestions(questions.map(question => ({ ...question, question: '', options: ['', '', ''] })));
+    setAnswers(answers.map(() => null));
+  }
+  
   return (
+<<<<<<< Updated upstream
+    <div style={{backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className='container text-center col-8'>
+        <h2 className="alert alert-info border border-primary mt-4">Add Questions</h2>
+        {questions.map((question, questionIndex) => (
+          <div key={question.id} className="form-group text-center">
+            <div className="input-group mt-5">
+              <label className="input-group-text text-bg-secondary border border-dark w-15">Question {questionIndex + 1}:</label>
+=======
     <div className="add-question-container">
       <h2 className="add-question-header">Add Questions</h2>
+      <div className="exam-name-input">
+        <label className="exam-name-label">Exam Name:</label>
+        <input 
+          type="text" 
+          value={examName} 
+          onChange={(e) => setExamName(e.target.value)} 
+        />
+      </div>
       {questions.map((question, questionIndex) => (
         <div key={question.id} className="question-container">
           <div className="question-input">
@@ -33,25 +59,40 @@ const AddQuestionPage = () => {
           <div className="options-input">
             <label className="options-label">Options:</label>
             {question.options.map((option, optionIndex) => (
+>>>>>>> Stashed changes
               <input 
-                key={optionIndex}
-                type="text" 
-                value={option} 
-                onChange={(e) => handleChangeOption(questions, setQuestions, questionIndex, optionIndex, e.target.value)} 
+                type="text"
+                className='form-control border border-dark'
+                value={question.question} 
+                onChange={(e) => handleChangeQuestion(questions, setQuestions, questionIndex, e.target.value)} 
               />
-            ))}
+            </div>
+            <div className="input-group align-items-center mt-3">
+              <label className="input-group-text text-bg-secondary border border-dark w-15">Options:</label>
+              {question.options.map((option, optionIndex) => (
+                <input 
+                  key={optionIndex}
+                  type="text"
+                  className='form-control border border-dark'
+                  value={option} 
+                  onChange={(e) => handleChangeOption(questions, setQuestions, questionIndex, optionIndex, e.target.value)} 
+                />
+              ))}
+            </div>
+            <div className="input-group mt-3">
+              <label className="input-group-text text-bg-secondary border border-dark w-15">Correct Answer:</label>
+              <input 
+                type="number"
+                className='form-control border border-dark'
+                value={answers[questionIndex] !== null ? answers[questionIndex] : ''} 
+                onChange={(e) => handleChangeAnswer(answers, setAnswers, questionIndex, parseInt(e.target.value))} 
+              />
+            </div>
           </div>
-          <div className="correct-answer-input">
-            <label className="correct-answer-label">Correct Answer:</label>
-            <input 
-              type="number" 
-              value={answers[questionIndex] !== null ? answers[questionIndex] : ''} 
-              onChange={(e) => handleChangeAnswer(answers, setAnswers, questionIndex, parseInt(e.target.value))} 
-            />
-          </div>
-        </div>
-      ))}
-      <button className="add-question-button" onClick={handleAddQuestionClick}>Add Questions</button>
+        ))}
+        <button className="btn btn-primary mt-3 mb-5" onClick={handleAddQuestionClick}>Add Questions</button>
+      </div>
+      <Footer/>
     </div>
   );
 }

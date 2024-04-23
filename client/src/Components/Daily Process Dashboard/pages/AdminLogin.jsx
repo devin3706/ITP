@@ -40,20 +40,20 @@ const AdminLogin = () => {
     }
 
     return(
-        <div>
+        <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <AdminHeader />
             <div className="justify-content-md-center">
-                <div className="text-center mt-5 alert alert-dark col-5" style={{marginLeft: '30%'}}>
+                <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Admin Login</label>
                 </div>
 
-                <div className="alert alert-primary col-5" style={{marginLeft: '30%'}}>
+                <div className="alert alert-primary col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <div className="form-group">
                         <div className="mb-3">
                             <label for="email" className="form-label">Email</label>
                             <input 
                                 type="email" 
-                                className="form-control" 
+                                className="form-control border border-dark" 
                                 id="email" 
                                 placeholder="name@example.com"
                                 value={email}
@@ -67,7 +67,7 @@ const AdminLogin = () => {
                             <label for="username" className="form-label">Username</label>
                             <input 
                                 type="text" 
-                                className="form-control" 
+                                className="form-control border border-dark" 
                                 id="username" 
                                 placeholder="username"
                                 value={username}
@@ -81,7 +81,7 @@ const AdminLogin = () => {
                         <input 
                             type="password" 
                             id="password" 
-                            className="form-control" 
+                            className="form-control border border-dark" 
                             aria-describedby="passwordHelpBlock"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

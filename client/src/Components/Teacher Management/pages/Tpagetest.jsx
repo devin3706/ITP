@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const Tpagetest = () => {
     return (
-        <div><h1>God oF Devin</h1></div>
+        <div><h1>Hello World</h1></div>
       );
 };
 

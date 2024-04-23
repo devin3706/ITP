@@ -76,24 +76,21 @@ export const handleChangeQuestion = (questions, setQuestions, index, value) => {
     setAnswers(updatedAnswers);
   };
 
-  export const handleAddQuestion = async (questions, answers, setQuestions, setAnswers) => {
+  export const handleAddQuestion = async (examName, questions, answers) => {
     try {
       // Check if all questions and answers are provided
       if (questions.some(question => !question.question || question.options.some(option => !option)) || answers.some(answer => answer === null)) {
         throw new Error('Please provide all questions, options, and answers');
       }
   
-      const data = { questions, answers };
+      const data = { examName, questions, answers };
   
       // Send POST request to backend
       const response = await axios.post('http://localhost:8081/api/questions', data);
   
       // Optionally, display a success message to the user
       alert('Questions added successfully!');
-      
-      // Clear input fields after successful addition
-      setQuestions(questions.map(question => ({ ...question, question: '', options: ['', '', ''] })));
-      setAnswers(answers.map(() => null));
+
     } catch (error) {
       console.error('Error adding questions:', error.message);
       // Optionally, display an error message to the user
@@ -101,4 +98,17 @@ export const handleChangeQuestion = (questions, setQuestions, index, value) => {
     }
   };
 
+  //delete exam
+  export async function dropQuestion(questionId) {
+    try {
+        // Send a DELETE request to the backend endpoint with the questionId
+        const response = await axios.delete('http://localhost:8081/api/questions', { data: { questionId } });
 
+        // If the request is successful, return the response data
+        return response.data;
+    } catch (error) {
+        // If there's an error, log it and return null
+        console.error('Error dropping question:', error);
+        return null;
+    }
+}

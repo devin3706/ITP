@@ -5,6 +5,8 @@ import Questions from './Questions';
 import { MoveNextQuestion, MovePrevQuestion } from '../hooks/FetchQuestion';
 import { PushAnswer } from '../hooks/setResult';
 import { updateResultAction } from '../redux/result_reducer';
+import Header from './Header';
+import Footer from './Footer';
 
 const QUIZ_DURATION_SECONDS = 60;
 
@@ -18,21 +20,26 @@ const Quiz = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const countdownInterval = setInterval(() => {
-            setTimer(prevTimer => {
-                if (prevTimer > 0) {
-                    return prevTimer - 1;
-                } else {
-                    clearInterval(countdownInterval);
-                    setTimerActive(false);
-                    handleTimerExpire();
-                    return 0;
-                }
-            });
-        }, 1000);
-
-        return () => clearInterval(countdownInterval);
-    }, []);
+        if (queue.length > 0) {
+            const quizDuration = queue.length * 10; // Multiply number of questions by 60 seconds
+            setTimer(quizDuration); 
+    
+            const countdownInterval = setInterval(() => {
+                setTimer(prevTimer => {
+                    if (prevTimer > 0) {
+                        return prevTimer - 1;
+                    } else {
+                        clearInterval(countdownInterval);
+                        setTimerActive(false);
+                        handleTimerExpire();
+                        return 0;
+                    }
+                });
+            }, 1000);
+    
+            return () => clearInterval(countdownInterval);
+        }
+    }, [queue.length]);
 
     const onNext = () => {
         if (trace < queue.length) {
@@ -56,7 +63,15 @@ const Quiz = () => {
             // If it's the last question, don't auto-submit
             return;
         }
-        dispatch(PushAnswer(check));
+        // Check if the question has already been answered
+        else if (typeof result[trace] === 'undefined') {
+            // If not, add the answer to the result array
+            dispatch(PushAnswer(check));
+        }
+        else{
+         // If yes, update the existing answer in the result array
+            dispatch(updateResultAction({ trace, checked: check }));
+        }
     };
 
     const handleTimerExpire = () => {
@@ -65,6 +80,17 @@ const Quiz = () => {
         // Update Redux store with submitted answers
         dispatch(updateResultAction({ result }));
     };
+
+     // Calculate minutes and seconds
+     const minutes = Math.floor(timer / 60);
+     const seconds = timer % 60;
+ 
+     // Format minutes and seconds with leading zero if less than 10
+     const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+     const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+ 
+     // Display formatted time
+     const formattedTime = `${formattedMinutes}:${formattedSeconds}`;
 
     // Determine button text based on whether it's the last question or not
     const buttonText = trace === queue.length - 1 ? 'Submit' : 'Next';
@@ -83,25 +109,35 @@ const Quiz = () => {
     }
 
     return (
+<<<<<<< Updated upstream
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <Header/>
+            <div className="container">
+                <h1 className="alert alert-primary p-3 mt-5 text-center  border border-primary">A/L Accounting Mock Test 01</h1>
+
+                <div className="d-inline text-info-emphasis bg-info-subtle rounded-3 p-2">Timer: {timer} seconds</div>
+=======
         <div className="container">
-            <h1 className="title text-light">A/L Accounting Mock Test 01</h1>
 
-            <div className="timer">Timer: {timer} seconds</div>
+            <div className="timer">Timer: {formattedTime} </div>
+>>>>>>> Stashed changes
 
-            <Questions onChecked={onChecked} />
+                <Questions onChecked={onChecked} />
 
-            <div className="grid">
-                {trace > 0 ? (
-                    <button className="btn prev" onClick={onPrev}>
-                        Previous
+                <div className="">
+                    {trace > 0 ? (
+                        <button className="btn prev btn-grey" onClick={onPrev}>
+                            Previous
+                        </button>
+                    ) : (
+                        <div></div>
+                    )}
+                    <button className="btn next btn-primary" onClick={onClickNext} disabled={!timerActive}>
+                        {buttonText}
                     </button>
-                ) : (
-                    <div></div>
-                )}
-                <button className="btn next" onClick={onClickNext} disabled={!timerActive}>
-                    {buttonText}
-                </button>
+                </div>
             </div>
+            <Footer/>
         </div>
     );
 };
