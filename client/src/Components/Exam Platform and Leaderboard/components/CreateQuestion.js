@@ -17,6 +17,33 @@ const AddQuestionPage = () => {
   const dispatch = useDispatch();
 
   const handleAddQuestionClick = () => {
+    // Validation checks
+    const isExamNameEmpty = examName.trim() === '';
+    const isAnyQuestionEmpty = questions.some(question => question.question.trim() === '' || question.options.some(option => option.trim() === ''));
+    const isAnyQuestionWithoutQuestionMark = questions.some(question => !question.question.trim().endsWith('?'));
+    const isAnyAnswerOutOfRange = answers.some((answer, index) => answer === null || answer < 0 || answer > 2);
+    
+    // Additional validation for exam name
+    const examNameRegex = /^(?=.*(?:Accounting|Business Studies|Economics|Business Statistics|Commerce))(?=.*(?:O\/L|A\/L))(?=.*20\d{2})/;
+    const isExamNameValid = examNameRegex.test(examName);
+  
+    // Display error messages if validation fails
+    if (isExamNameEmpty || isAnyQuestionEmpty || isAnyQuestionWithoutQuestionMark || isAnyAnswerOutOfRange || !isExamNameValid) {
+      if (isExamNameEmpty) {
+        alert('Please enter the exam name.');
+      } else if (isAnyQuestionEmpty) {
+        alert('All fields must be filled for each question.');
+      } else if (isAnyQuestionWithoutQuestionMark) {
+        alert('Each question must end with a question mark (?).');
+      } else if (isAnyAnswerOutOfRange) {
+        alert('Correct answer index should be between 0 and 2.');
+      } else if (!isExamNameValid) {
+        alert('Invalid exam name format. Please follow the specified format.');
+      }
+      return; // Don't proceed if validation fails
+    }
+  
+    // If all validation checks pass, add the question
     handleAddQuestion(examName, questions, answers, setQuestions, setAnswers);
     // Clear input fields after successful addition
     setExamName('');
