@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 const TDetails = () => {
     const [teachers, setTeachers] = useState([]);
@@ -48,47 +50,37 @@ const TDetails = () => {
     }; */
 
     return (
-        <div className="container mt-5">
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+        <Header/>
+        <div className="container mt-5 mb-5">
             <div className="d-flex justify-content-center">
-                <Table striped bordered size="sm" style={{ backgroundColor: '#E0E6F0' }}>
-                    <thead style={{ backgroundColor: '#7DDEE2' }}>
-                        <tr>
-                            <th>#</th>
-                           {/*  <th>Photo</th> */}
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                           {/*  <th>NIC Number</th> */}
-                            <th>Subject</th>
-                            <th>District</th>
-                            <th>Education Qualification</th>
-                            {/* <th>Additional Information</th> */}
-                            {/* <th>Address</th> */}
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>Actions</th>
+                <Table bordered hover responsive="sm" style={{ backgroundColor: '#FFFFFF' }}>
+                    <thead>
+                        <tr className="table-primary">
+                            <th className="fw-bold text-dark">#</th>
+                            <th className="fw-bold text-dark">First Name</th>
+                            <th className="fw-bold text-dark">Last Name</th>
+                            <th className="fw-bold text-dark">Subject</th>
+                            <th className="fw-bold text-dark">District</th>
+                            <th className="fw-bold text-dark">Education Qualification</th>
+                            <th className="fw-bold text-dark">Phone Number</th>
+                            <th className="fw-bold text-dark">Email</th>
+                            <th className="fw-bold text-dark">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {teachers.map((teacher, index) => (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
-                               {/*  <td>
-                                    {teacher.photo && (
-                                        <img src={displayImage(teacher.photo)} alt="Teacher" width="50" height="50" />
-                                    )}
-                                </td> */}
                                 <td>{teacher.firstName}</td>
                                 <td>{teacher.lastName}</td>
-                                {/* <td>{teacher.nicNumber}</td> */}
                                 <td>{teacher.subject}</td>
                                 <td>{teacher.district}</td>
                                 <td>{teacher.eduQualification}</td>
-                               {/*  <td>{teacher.additionalInfo}</td> */}
-                                {/* <td>{teacher.address}</td> */}
                                 <td>{teacher.phoneNumber}</td>
                                 <td>{teacher.email}</td>
                                 <td>
-                                    <Button className='btn-sm' color="primary" onClick={() => handleEdit(teacher._id)}>Edit</Button>
+                                    <Button className='btn-sm me-2' color="info" onClick={() => handleEdit(teacher._id)}>Edit</Button>
                                     <Button className='btn-sm' color="danger" onClick={() => handleDelete(teacher._id)}>Delete</Button>
                                 </td>
                             </tr>
@@ -96,6 +88,8 @@ const TDetails = () => {
                     </tbody>
                 </Table>
             </div>
+        </div>
+        <Footer/>
         </div>
     );
 };

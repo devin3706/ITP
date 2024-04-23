@@ -44,33 +44,33 @@ const AdminCreate = () => {
     }
 
     return(
-        <div>
+        <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <AdminHeader />
             <div className="justify-content-md-center">
-                <div className="text-center mt-5 alert alert-dark col-5" style={{marginLeft: '30%'}}>
+                <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Create New Admin</label>
                 </div>
 
-                <div className="alert alert-primary col-5" style={{marginLeft: '30%'}}>
+                <div className="alert alert-secondary col-5 border border-dark shadow mb-5" style={{marginLeft: '30%'}}>
                     <div className="form-group">
 
-                        <div className="input-group">
-                            <span className="input-group-text text-bg-secondary p-2">Name</span>
-                            <input type="text" aria-label="First name" className="form-control" id="fName" placeholder="First Name" value={fName}
+                        <div className="input-group align-items-center">
+                            <span className="input-group-text text-bg-secondary border border-dark">Name</span>
+                            <input type="text" aria-label="First name" className="form-control border border-dark" id="fName" placeholder="First Name" value={fName}
                                 onChange={(e) => setFName(e.target.value)}/>
-                            <input type="text" aria-label="Last name" className="form-control" id="lName" placeholder="Last Name" value={lName}
+                            <input type="text" aria-label="Last name" className="form-control border border-dark" id="lName" placeholder="Last Name" value={lName}
                                 onChange={(e) => setLName(e.target.value)}/>
                         </div>
 
                         <div className="input-group mt-3">
-                            <span className="input-group-text text-bg-secondary p-2" id="username">Username</span>
-                            <input type="text" className="form-control" placeholder="username" aria-label="username" aria-describedby="basic-addon1" value={username}
+                            <span className="input-group-text text-bg-secondary border border-dark" id="username">Username</span>
+                            <input type="text" className="form-control border border-dark" placeholder="username" aria-label="username" aria-describedby="basic-addon1" value={username}
                                 onChange={(e) => setUsername(e.target.value)}/>
                         </div>
 
                         <div className="input-group mt-3">
-                            <span className="input-group-text text-bg-secondary p-2" id="email">Email</span>
-                            <input type="email" className="form-control" placeholder="name@example.com" aria-label="email" aria-describedby="basic-addon1" value={email}
+                            <span className="input-group-text text-bg-secondary border border-dark" id="email">Email</span>
+                            <input type="email" className="form-control border border-dark" placeholder="name@example.com" aria-label="email" aria-describedby="basic-addon1" value={email}
                                 onChange={(e) => setEmail(e.target.value)}/>
                         </div>
 
@@ -86,18 +86,18 @@ const AdminCreate = () => {
                         </div> */}
 
                         <div className="input-group mt-3">
-                            <span className="input-group-text text-bg-secondary p-2" id="email">Contact Number</span>
-                            <span className="input-group-text text-bg-secondary p-2" id="email">+94</span>
-                            <input type="number" className="form-control" id="contact" placeholder="7xxxxxxxx" aria-label="contact" aria-describedby="basic-addon1" value={contact}
+                            <span className="input-group-text text-bg-secondary border border-dark" id="email">Contact Number</span>
+                            <span className="input-group-text text-bg-secondary border border-dark" id="email">+94</span>
+                            <input type="number" className="form-control border border-dark" id="contact" placeholder="7xxxxxxxx" aria-label="contact" aria-describedby="basic-addon1" value={contact}
                                 onChange={(e) => setContact(e.target.value)}/>
                         </div>
 
                         <div className="input-group mt-3">
-                            <span className="input-group-text text-bg-secondary p-2">Password</span>
+                            <span className="input-group-text text-bg-secondary border border-dark">Password</span>
                             <input 
                                 type="password" 
                                 id="password" 
-                                className="form-control"
+                                className="form-control border border-dark"
                                 placeholder="Enter Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -106,7 +106,7 @@ const AdminCreate = () => {
                             <input 
                                 type="password" 
                                 id="confPassword" 
-                                className="form-control"
+                                className="form-control border border-dark"
                                 placeholder="Confirm Password"
                                 value={confPassword}
                                 onChange={(e) => setConfPassword(e.target.value)}

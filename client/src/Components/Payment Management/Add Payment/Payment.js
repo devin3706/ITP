@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Payment() {
   const navigate = useNavigate();
@@ -38,8 +40,10 @@ function Payment() {
   };
 
   return (
-    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-      <h1>Add Payment</h1>
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <Header/>
+    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-8 mx-auto">
+      <h1 className="text-center">Add Payment</h1>
 
       <div className="row">
         <form onSubmit={submitWorkouts}>
@@ -177,6 +181,8 @@ function Payment() {
           />
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

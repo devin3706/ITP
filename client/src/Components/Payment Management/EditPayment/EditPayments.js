@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function EditPayments() {
   const { Workoutid } = useParams();
@@ -60,39 +62,32 @@ function EditPayments() {
   };
 
   return (
-    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-      <h1>Edit Payment</h1>
-      <div className="row">
+    <div className="vh-100" style={{backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
+        <h1 className="text-center mb-4">Edit Payment</h1>
         <form onSubmit={editPayments}>
-          <div className="col-12 text-warning">
-            <div className=" ">
-              <label htmlFor="studentName" className="form-label">
-                Student Name:
-              </label>{" "}
-              <br></br>
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="studentName" className="form-label text-warning">Student Name:</label>
               <input
                 type="text"
                 id="studentName"
                 name="studentName"
                 value={studentName}
-                onChange={(e) => {
-                  setUpdateStudentName(e.target.value);
-                }}
+                onChange={(e) => setUpdateStudentName(e.target.value)}
+                className="form-control"
                 required
               />
             </div>
-            <div className="">
-              <label htmlFor="course" className="form-label">
-                Select Course:
-              </label>{" "}
-              <br></br>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="course" className="form-label text-warning">Select Course:</label>
               <select
                 id="course"
                 name="course"
                 value={course}
-                onChange={(e) => {
-                  setUpdateCourse(e.target.value);
-                }}
+                onChange={(e) => setUpdateCourse(e.target.value)}
+                className="form-select"
                 required
               >
                 <option value="">Select Course</option>
@@ -100,81 +95,63 @@ function EditPayments() {
                 <option value="O/L">Ordinary Level(O/L)</option>
               </select>
             </div>
-            <div className="">
-              <label htmlFor="sid" className="form-label">
-                Student ID:
-              </label>{" "}
-              <br></br>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="sid" className="form-label text-warning">Student ID:</label>
               <input
                 type="text"
                 id="sid"
                 name="sid"
                 value={sid}
-                onChange={(e) => {
-                  setUpdateSid(e.target.value);
-                }}
+                onChange={(e) => setUpdateSid(e.target.value)}
+                className="form-control"
                 required
               />
             </div>
-            <div className="">
-              <label htmlFor="contactNumber" className="form-label">
-                Contact No:
-              </label>{" "}
-              <br></br>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="contactNumber" className="form-label text-warning">Contact No:</label>
               <input
                 type="text"
                 id="contactNumber"
                 name="contactNumber"
                 value={contactNumber}
                 placeholder="07********"
-                onChange={(e) => {
-                  setUpdateContactNumber(e.target.value);
-                }}
+                onChange={(e) => setUpdateContactNumber(e.target.value)}
+                className="form-control"
                 required
               />
             </div>
-            <div className="">
-              <label htmlFor="address" className="form-label">
-                Address:{" "}
-              </label>{" "}
-              <br></br>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="address" className="form-label text-warning">Address:</label>
               <input
                 type="text"
                 id="address"
                 name="address"
                 value={address}
-                onChange={(e) => {
-                  setUpdateAddress(e.target.value);
-                }}
+                onChange={(e) => setUpdateAddress(e.target.value)}
+                className="form-control"
                 required
               />
             </div>
-            <div className="">
-              <label htmlFor="email" className="form-label">
-                E-mail:
-              </label>{" "}
-              <br></br>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="email" className="form-label text-warning">E-mail:</label>
               <input
                 type="text"
                 id="email"
                 name="email"
                 value={email}
                 placeholder="Example@address.com"
-                onChange={(e) => {
-                  setUpdateEmail(e.target.value);
-                }}
+                onChange={(e) => setUpdateEmail(e.target.value)}
+                className="form-control"
                 required
               />
             </div>
-            <br></br>
-            <div className="d-flex justify-content-between">
-              <button type="submit" className="btn btn-warning">
-                Update
-              </button>
+            <div className="col-12">
+              <button type="submit" className="btn btn-warning w-100 mt-5">Update</button>
             </div>
           </div>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }

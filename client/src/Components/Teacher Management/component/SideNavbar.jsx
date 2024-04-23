@@ -10,7 +10,7 @@ import {
      
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-import '../styles/SideNavbar.css';
+import './SideNavbar.css';
 
 
 const SideNavbar = ({ children }) => {
@@ -50,7 +50,7 @@ const SideNavbar = ({ children }) => {
         
     ]
     return (
-        <div className="container">
+        <div className="nvbcontainer">
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">
                <div className="top_section">
                    <h1 style={{display: isOpen ? "block" : "none"}} className="bars"></h1>

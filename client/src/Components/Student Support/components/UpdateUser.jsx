@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function UpdateUser() {
     const { id } = useParams();
@@ -60,8 +62,10 @@ function UpdateUser() {
     }
 
     return (
-        <div className='d-flex vh-100 bg-primary justify-content-center align-items-center'>
-            <div className='w-50 bg-white rounded p-3'>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+        <Header/>
+        <div className='d-flex vh-100 justify-content-center align-items-center'>
+            <div className='w-50 bg-white rounded p-3 shadow'>
                 <form onSubmit={Update}>
                     <h2>Update Feedback</h2>
                     <div className='mb-2'>
@@ -111,6 +115,8 @@ function UpdateUser() {
                     <button className='btn btn-success'>Update</button>
                 </form>
             </div>
+        </div>
+        <Footer/>
         </div>
     );
 }

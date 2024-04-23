@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import { Link } from "react-router-dom";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function CreateUser () {
     const [name, setName] = useState("")
@@ -22,9 +24,10 @@ function CreateUser () {
     }
 
     return (
-        <div className = "d-flex vh-100 justify-content-center align-items-center bg-primary ">
-        <div className = "bg-white p-3 rounded w-50">
-            <h2>Add User</h2>
+        <div className = "d-flex vh-100 justify-content-center align-items-center" style={{ backgroundColor: "#ECF0F5" }}>
+        <Header/>
+        <div className = "bg-white p-3 rounded w-50 shadow">
+            <h2 className="text-center">Add User</h2>
             <form onSubmit={Submit}>
                 <div className = "mb-2">
                     <label htmlFor="">
@@ -96,6 +99,7 @@ function CreateUser () {
                 </button>
                 </form> 
         </div>
+        <Footer/>
     </div>
     );
 } 

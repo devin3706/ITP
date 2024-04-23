@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
-import styles from '../styles/TLogin.css';
 import {
     MDBContainer,
     MDBCol,
@@ -11,6 +10,8 @@ import {
     MDBInput,
     MDBCheckbox  
 } from 'mdb-react-ui-kit';
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 const TLogin = () => {
     const [email, setEmail] = useState("");
@@ -57,6 +58,8 @@ const TLogin = () => {
     
 
     return (
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+        <Header/>
         <MDBContainer fluid className="p-3 my-5">
             <MDBRow>
                 <MDBCol col='10' md='6'>
@@ -76,6 +79,8 @@ const TLogin = () => {
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
+        <Footer/>
+        </div>
     );
 };
 

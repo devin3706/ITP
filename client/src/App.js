@@ -41,7 +41,6 @@ import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx'
 import AdminCreate from './Components/Daily Process Dashboard/pages/AdminCreate';
 import AdminLogin from './Components/Daily Process Dashboard/pages/AdminLogin';
 import AdminDetails from './Components/Daily Process Dashboard/pages/AdminDetails';
-import AdminEdit from './Components/Daily Process Dashboard/pages/AdminEdit';
 import AdminHeader from './Components/Daily Process Dashboard/components/AdminHeader.jsx';
 
 // Admin API functions
@@ -87,9 +86,10 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = getLoggedInAdmin().then((res) => {
-      if (res.error) alert(res.error);
-      else setAdmin(res.username);
-    }).catch((err) => alert(err));
+      // Leave empty without any action
+    }).catch((err) => {
+      // Leave empty without any action
+    });
 
     return () => unsubscribe;
   }, []);
@@ -136,7 +136,6 @@ const App = () => {
           <Route path="/adminCreate" element={<AdminCreate />} />
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminDetails" element={<AdminDetails />} />
-          <Route path="/adminEdit/:adminID" element={<AdminEdit />} />
           <Route path="/adminHeader" element={<AdminHeader />} />
 
           {/* Study Material Routes */}
