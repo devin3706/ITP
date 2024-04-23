@@ -1,5 +1,5 @@
 .footer {
-    display:flex;
+    width: 100%;
     justify-content: space-between;
     background-color: #021531;
     color: #fff;
@@ -16,29 +16,30 @@
 
 .logo {
   display: block;
-  width: 200px; 
+  width: 300px; 
   height: 100px;
-  margin-left: 115px;
-  margin-top: 10px;
+  margin-left: 4%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .para {
-    width: 500px; 
+    /* width: 500px; 
     margin-left: 50px;
-    margin-top: 30px;
+    margin-top: 30px; */
     font-family: Roboto, sans-serif;
 }
 
 .navigation{
     display: inline-block;
-    margin-right: 200px;
-    margin-left: 100px;
+    /* margin-right: 200px;
+    margin-left: 100px; */
 }
 
 .navigation ul {
     list-style-type: none;
     padding: 0;
-    background-color: #021531; /* Background color for the navigation */
+    /* background-color: #021531; */
     overflow: hidden;
 }
 
@@ -50,7 +51,7 @@
     display: block;
     color: #fff; /* Text color for the links */
     text-align: center;
-    padding: 14px 16px;
+    /* padding: 14px 16px; */
     text-decoration: none;
     transition: background-color 0.3s;
     font-family: Roboto, sans-serif;
@@ -67,7 +68,7 @@
 
 .contact {
     display: inline-block;
-    margin-right: 200px;
+    /* margin-right: 200px; */
 }
 
 .contact h2 {
@@ -76,16 +77,18 @@
 
 .copyright{
     padding: 1px;
+    width: 100%;
     background-color: dimgrey;
 }
 
 .copyright-para{
-    margin-left: 525px;
+    text-align: center;
+    margin-top: 1%;
 }
 
 .social {
     display: inline-block;
-    margin-right: 300px; /* Adjust this margin as needed */
+    /* margin-right: 300px; Adjust this margin as needed */
 }
 
 /* Remove the 'right' property from .social ul */
@@ -102,7 +105,7 @@
     display: block;
     color: #fff; /* Text color for the links */
     text-align: center;
-    padding: 3px 2px;
+    /* padding: 3px 2px; */
     text-decoration: none;
     transition: background-color 0.3s;
 }

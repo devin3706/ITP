@@ -1,8 +1,9 @@
-import './styles/PdfApp.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
+import Header from "../Exam Platform and Leaderboard/components/Header";
+import Footer from "../Exam Platform and Leaderboard/components/Footer";
  
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -82,77 +83,96 @@ function PdfApp() {
   
 
   return (
-    <div className="App">
-      <form className="formStyle" onSubmit={submitImage}>
-        <h4>Upload Study Materials</h4>
-        <br />
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Title"
-          required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <br />
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Description"
-          required
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <br />
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Grade"
-          required
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
-        />
-        <br />
-        <input
-          type="file"
-          className="form-control"
-          placeholder="application/pdf"
-          required
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-        <br />
-        <button className="btn btn-primary" type="submit">
-          Submit
-        </button>
+    <div style={{backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="d-flex justify-content-center">
+       
+        <form className="alert alert-info border border-primary col-5 text-center mt-4 mb-4 form-group" onSubmit={submitImage}>
+          
+          <h4>Upload Study Materials</h4>
+
+            <div className="input-group mt-3">
+              <span className="input-group-text text-bg-secondary border border-dark w-20">Title</span>
+              <input
+                type="text"
+                className="form-control border border-dark"
+                placeholder="Title"
+                required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group mt-3">
+              <span className="input-group-text text-bg-secondary border border-dark w-20">Description</span>
+              <input
+                type="text"
+                className="form-control border border-dark"
+                placeholder="Description"
+                required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group mt-3">
+              <span className="input-group-text text-bg-secondary border border-dark w-20">Grade</span>
+              <input
+                type="text"
+                className="form-control border border-dark"
+                placeholder="Grade"
+                required
+                value={grade}
+                onChange={(e) => setGrade(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group mt-3">
+              <label class="input-group-text text-bg-secondary border border-dark w-20">Upload</label>
+              <input
+                type="file"
+                className="form-control border border-dark"
+                placeholder="application/pdf"
+                required
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+            
+            <button className="btn btn-primary mt-4 mb-2" type="submit">
+              Submit
+            </button>
         </form>
-        <div className="uploaded">
+        </div>
+        
+        <div className="text-center">
           <br/>
           <h4>Uploaded Study Materials:</h4>
-          
-          <div className="output-div">
-            {allImage==null
-            ? ""
-            :allImage.map((data) =>{
-              return(
-           <div className="inner-div">
-            <h6>Title:{data.title}</h6>
-           
-            <button className="btn btn-primary" onClick={()=>showPdf(data.pdf)}>
-              Show PDF</button>
+          <div className="d-flex justify-content-center">
+            <div className="row">
+              {allImage==null
+              ? ""
+              :allImage.map((data) =>{
+                return(
+                  <div className="col-4">
+                    <h6>Title:{data.title}</h6>
+                  
+                    <button className="btn btn-primary" onClick={()=>showPdf(data.pdf)}>
+                      Show PDF</button>
 
-            <button className="btn btn-danger" onClick={() => deletePdf(data._id)}>
-                Delete PDF
-              </button>
-          </div>
-
-          );
-        })}
+                    <button className="btn btn-danger" onClick={() => deletePdf(data._id)}>
+                        Delete PDF
+                      </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
       </div>
-      <PdfComp pdfFile={pdfFile}/>
+      <div className="text-center mt-4">
+        <PdfComp pdfFile={pdfFile}/>
+      </div>
+      <Footer/>
     </div>
-
-    
   );
 
   

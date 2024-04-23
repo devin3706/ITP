@@ -10,7 +10,7 @@
     padding: 0;
   }
   
-  .container {
+  .nvbcontainer {
     display: flex;
   }
   
@@ -45,9 +45,6 @@
     padding: 20px 15px;
 }
 
-.logo {
-    font-size: 150%;
-}
 
 .bars {
     display: flex;

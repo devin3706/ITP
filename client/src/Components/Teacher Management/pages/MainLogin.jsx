@@ -3,10 +3,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
-import '../styles/MainLogin.css'; // Import custom CSS for additional styling
+import Header from '../../Exam Platform and Leaderboard/components/Header';
+import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 
 const MainLogin = () => {
   return (
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <Header/>
     <div className="main-login-container">
       <div className="row justify-content-center align-items-center h-100 ml-2 mr-2 mt-5">
         <div className="col-md-4 mb-3 ">
@@ -49,6 +52,8 @@ const MainLogin = () => {
           </Card>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };

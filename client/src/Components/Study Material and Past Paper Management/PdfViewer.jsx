@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Document, Page } from 'react-pdf';
+import Header from '../Exam Platform and Leaderboard/components/Header';
+import Footer from '../Exam Platform and Leaderboard/components/Footer';
 
 const PdfViewer = () => {
   const [pdfs, setPdfs] = useState([]);
@@ -35,20 +37,29 @@ const PdfViewer = () => {
   };
 
   return (
-    <div className="pdf-viewer">
-      <h1>Teacher Uploaded PDFs</h1>
-      {pdfs.map((pdf) => (
-        <div key={pdf._id} className="pdf-item">
-          <h3>{pdf.title}</h3>
-          <button onClick={() => downloadPdf(pdf.pdf)}>Download PDF</button>
-          <div className="pdf-preview">
-            <Document file={`http://localhost:8081/studyMaterial/files/${pdf.pdf}`}>
-              <Page pageNumber={1} />
-            </Document>
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <Header/>
+    <div className="container col-8 d-flex justify-content-center">
+      <div className='alert alert-light text-center border border-primary rounded mt-5 mb-5'>
+        <h1 className='text-center text-dark mt-4'>Teacher Uploaded PDFs</h1>
+        <div className='row'>
+        {pdfs.map((pdf) => (
+          <div key={pdf._id} className='col-4'>
+            <h3 className="mt-5">{pdf.title}</h3>
+            <button className='btn btn-info' onClick={() => downloadPdf(pdf.pdf)}>Download PDF</button>
+            <div className="pdf-preview">
+              <Document file={`http://localhost:8081/studyMaterial/files/${pdf.pdf}`}>
+                <Page pageNumber={1} />
+              </Document>
+            </div>
           </div>
+        ))}
         </div>
-      ))}
+      </div>
     </div>
+    <Footer/>
+    </div>
+
   );
 };
 

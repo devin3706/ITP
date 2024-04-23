@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./payments.css";
 import { useNavigate, Link } from "react-router-dom";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Payments() {
   const [workouts, setWorkouts] = useState([]);
@@ -34,8 +35,10 @@ function Payments() {
   }
 
   return (
-    <div className="fullDiv m-5">
-      <div className="row">
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <Header/>
+    <div className="fullDiv m-5 ">
+      <div className="row justify-content-center text-center">
         {workouts.map((workouts) => (
           <div className="col-md-6 p-4">
             <div
@@ -105,11 +108,10 @@ function Payments() {
                     >
                       Delete
                     </button>
-                    <div className="col-md-6">
-                      <Link to={"/editpayments"}>
-                        <input type="button" value="Update" />
-                      </Link>
-                    </div>
+                    <Link to={"/editpayments"}>
+                      <input className="btn btn-info" type="button" value="Update" />
+                    </Link>
+                    
                   </div>
                 </div>
               </div>
@@ -117,6 +119,8 @@ function Payments() {
           </div>
         ))}
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

@@ -12,30 +12,32 @@ export default function ResultTable(){
     }, []);
 
     return(
-        <div> 
-            <table>
-                <thead className='table-header'>
-                    <tr className='table-row'>
-                        <td>Name</td>
-                        <td>Questions Answered</td>
-                        <td>Marks</td>
-                        <td>Result</td>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+        <div className='container col mt-3 text-center'> 
+            <table className='table border border-dark'>
+                <thead className=''>
+                    <tr className='table-info'>
+                        <td className='w-10 fw-bold border border-dark'>Name</td>
+                        <td className='w-15 fw-bold border border-dark'>Questions Answered</td>
+                        <td className='w-5 fw-bold border border-dark'>Marks</td>
+                        <td className='w-10 fw-bold border border-dark'>Result</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className=''>
                     { !data ?? <div> No Data Found </div>}
                     {
                         data.map((v, i) => (
-                         <tr className='table-body' key={i}>
-                            <td>{v?.username || ''}</td>
-                            <td>{v?.attempts || 0}</td>
-                            <td>{v?.points || 0}</td>
-                            <td>{v?.achieved || ""}</td>
+                         <tr key={i}>
+                            <td className='border border-dark'>{v?.username || ''}</td>
+                            <td className='border border-dark'>{v?.attempts || 0}</td>
+                            <td className='border border-dark'>{v?.points || 0}</td>
+                            <td className='border border-dark'>{v?.achieved || ""}</td>
                         </tr>
                         ))
                     }
                 </tbody>
             </table>
+        </div>
         </div>
     )
 }

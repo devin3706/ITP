@@ -168,20 +168,20 @@ const AdminDetails = () => {
     };
 
     return (
-        <div>
-        <AdminHeader />
-        <div>
-            <h1 className="text-center mt-3 mb-4 fw-medium" style={{fontSize: '300%'}}>Admin Details</h1>
-            <table className="table table-striped table-bordered table-success">
+        <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
+        <AdminHeader/>
+        <div className="container mt-4">
+            <h1 className="text-center mt-3 mb-4 alert alert-dark border border-dark shadow" style={{fontSize: '300%'}}>Admin Details</h1>
+            <table className="table table-striped table-bordered table-dark text-center shadow">
                 <thead>
-                    <tr className="table-primary">
-                        <th className="fw-medium">#</th>
-                        <th className="col-1 fw-medium">First Name</th>
-                        <th className="col-1 fw-medium">Last Name</th>
-                        <th className="col-2 fw-medium">Username</th>
-                        <th className="col-2 fw-medium">Email</th>
-                        <th className="col-3 fw-medium">Contact</th>
-                        <th className="col-3 fw-medium">Action</th>
+                    <tr className="table-dark text-dark">
+                        <th className="w-1 fw-bold text-dark">#</th>
+                        <th className="w-15 fw-bold text-dark">First Name</th>
+                        <th className="w-15 fw-bold text-dark">Last Name</th>
+                        <th className="w-10 fw-bold text-dark">Username</th>
+                        <th className="w-15 fw-bold text-dark">Email</th>
+                        <th className="w-20 fw-bold text-dark">Contact</th>
+                        <th className="w-25 fw-bold text-dark">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -192,6 +192,7 @@ const AdminDetails = () => {
                                 {editAdminID === admin._id ? (
                                     <input
                                         type="text"
+                                        className="w-100"
                                         value={admin.fName}
                                         onChange={(e) => handleInputChange(e, admin._id, "fName")}
                                     />
@@ -203,6 +204,7 @@ const AdminDetails = () => {
                                 {editAdminID === admin._id ? (
                                     <input
                                         type="text"
+                                        className="w-100"
                                         value={admin.lName}
                                         onChange={(e) => handleInputChange(e, admin._id, "lName")}
                                     />
@@ -214,6 +216,7 @@ const AdminDetails = () => {
                                 {editAdminID === admin._id ? (
                                     <input
                                         type="text"
+                                        className="w-100"
                                         value={admin.username}
                                         onChange={(e) => handleInputChange(e, admin._id, "username")}
                                     />
@@ -225,6 +228,7 @@ const AdminDetails = () => {
                                 {editAdminID === admin._id ? (
                                     <input
                                         type="email"
+                                        className="w-100"
                                         value={admin.email}
                                         onChange={(e) => handleInputChange(e, admin._id, "email")}
                                     />
@@ -236,6 +240,7 @@ const AdminDetails = () => {
                                 {editAdminID === admin._id ? (
                                     <input
                                         type="number"
+                                        className="w-60"
                                         value={admin.contact}
                                         onChange={(e) => handleInputChange(e, admin._id, "contact")}
                                     />
@@ -264,16 +269,15 @@ const AdminDetails = () => {
                                     </button>
                                 ) : (
                                     <button
-                                        className="btn btn-outline-primary btn-sm"
+                                        className="btn btn-info btn-sm ml-3"
                                         onClick={() => handleEdit(admin._id)}
                                     >
                                         Edit
                                     </button>
                                 )}
-                                <span className="p-2"></span>
                                 <button
                                     onClick={() => handleDeleteAdmin(admin._id)}
-                                    className="btn btn-outline-danger btn-sm"
+                                    className="btn btn-danger btn-sm ml-3"
                                 >
                                     Delete
                                 </button>

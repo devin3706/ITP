@@ -5,6 +5,8 @@ import Questions from './Questions';
 import { MoveNextQuestion, MovePrevQuestion } from '../hooks/FetchQuestion';
 import { PushAnswer } from '../hooks/setResult';
 import { updateResultAction } from '../redux/result_reducer';
+import Header from './Header';
+import Footer from './Footer';
 
 const QUIZ_DURATION_SECONDS = 60;
 
@@ -83,25 +85,29 @@ const Quiz = () => {
     }
 
     return (
-        <div className="container">
-            <h1 className="title text-light">A/L Accounting Mock Test 01</h1>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <Header/>
+            <div className="container">
+                <h1 className="alert alert-primary p-3 mt-5 text-center  border border-primary">A/L Accounting Mock Test 01</h1>
 
-            <div className="timer">Timer: {timer} seconds</div>
+                <div className="d-inline text-info-emphasis bg-info-subtle rounded-3 p-2">Timer: {timer} seconds</div>
 
-            <Questions onChecked={onChecked} />
+                <Questions onChecked={onChecked} />
 
-            <div className="grid">
-                {trace > 0 ? (
-                    <button className="btn prev" onClick={onPrev}>
-                        Previous
+                <div className="">
+                    {trace > 0 ? (
+                        <button className="btn prev btn-grey" onClick={onPrev}>
+                            Previous
+                        </button>
+                    ) : (
+                        <div></div>
+                    )}
+                    <button className="btn next btn-primary" onClick={onClickNext} disabled={!timerActive}>
+                        {buttonText}
                     </button>
-                ) : (
-                    <div></div>
-                )}
-                <button className="btn next" onClick={onClickNext} disabled={!timerActive}>
-                    {buttonText}
-                </button>
+                </div>
             </div>
+            <Footer/>
         </div>
     );
 };

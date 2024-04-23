@@ -30,7 +30,7 @@ const Header = () => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
             <Link className="navbar-brand" style={{marginLeft: "3px"}} to="/adminHome">Admin Dashboard</Link>
-            <h4 style={{marginLeft: "10%"}}>{admin && <span className="text-light">Welcome {admin}!</span>}</h4>
+            <h4 className="w-50" style={{marginLeft: "10%"}}>{admin && <span className="text-light">Welcome {admin}!</span>}</h4>
             <button 
                 className="navbar-toggler" 
                 type="button" 
