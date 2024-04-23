@@ -1,4 +1,3 @@
-// fetchQuestion.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { handleChangeQuestion, handleChangeOption, handleChangeAnswer, handleAddQuestion} from '../helper/helper';
@@ -26,40 +25,22 @@ const AddQuestionPage = () => {
   }
   
   return (
-<<<<<<< Updated upstream
     <div style={{backgroundColor: '#ECF0F5'}}>
       <Header/>
       <div className='container text-center col-8'>
         <h2 className="alert alert-info border border-primary mt-4">Add Questions</h2>
-        {questions.map((question, questionIndex) => (
-          <div key={question.id} className="form-group text-center">
-            <div className="input-group mt-5">
-              <label className="input-group-text text-bg-secondary border border-dark w-15">Question {questionIndex + 1}:</label>
-=======
-    <div className="add-question-container">
-      <h2 className="add-question-header">Add Questions</h2>
-      <div className="exam-name-input">
-        <label className="exam-name-label">Exam Name:</label>
+        <div className="input-group mt-5">
+        <label className="input-group-text text-bg-secondary border border-dark w-15">Exam Name:</label>
         <input 
           type="text" 
           value={examName} 
           onChange={(e) => setExamName(e.target.value)} 
         />
       </div>
-      {questions.map((question, questionIndex) => (
-        <div key={question.id} className="question-container">
-          <div className="question-input">
-            <label className="question-label">Question {questionIndex + 1}:</label>
-            <input 
-              type="text" 
-              value={question.question} 
-              onChange={(e) => handleChangeQuestion(questions, setQuestions, questionIndex, e.target.value)} 
-            />
-          </div>
-          <div className="options-input">
-            <label className="options-label">Options:</label>
-            {question.options.map((option, optionIndex) => (
->>>>>>> Stashed changes
+        {questions.map((question, questionIndex) => (
+          <div key={question.id} className="form-group text-center">
+            <div className="input-group mt-5">
+              <label className="input-group-text text-bg-secondary border border-dark w-15">Question {questionIndex + 1}:</label>
               <input 
                 type="text"
                 className='form-control border border-dark'
