@@ -38,6 +38,7 @@ export default function Result(){
         <div className='container text-center'> 
             <h1 className='alert alert-info border border-primary mt-5'> Results </h1>
 
+<<<<<<< Updated upstream
             <div className='text-center fw-bolder'>
                 <div className='mt-5'>
                     <span>Username :</span>
@@ -59,6 +60,29 @@ export default function Result(){
 
             <div className="start mt-5">
                 <Link className='btn btn-sm btn-outline-primary' to={'/exam'} onClick={onRestart}>Back to Start</Link>
+=======
+            <div className='flex-center'>
+                <div className='flex'>
+                    <span>Username: </span>
+                    <span className='bold'>{ userId}</span>
+                </div>
+                <div className='flex'>
+                    <span>Total Marks: </span>
+                    <span className='bold'>{ totalPoints || 0}</span>
+                </div>
+                <div className='flex'>
+                    <span>Earned Marks: </span>
+                    <span className='bold'>{ earnPoints || 0}</span>
+                </div>
+                <div className='flex'>
+                    <span>Result: </span>
+                    <span style={ { color: `${flag ? "#2aff95" : "#ff2a66"}` }} className='bold'>{flag ? "Passed" : "Failed"}</span>
+                </div>
+            </div>
+
+            <div className="start">
+                <Link className='btn' to={'/studentInterface'} onClick={onRestart}>Back to Start</Link>
+>>>>>>> Stashed changes
             </div>
         </div>
         <Footer/>
