@@ -28,12 +28,18 @@ export default function Questions({ onChecked }) {
         }
     };
 
-    const handleDeleteQuestion = async () => {
-        try {
-            await dropQuestion(examId);
-            console.log('Questions deleted successfully');
-        } catch (error) {
-            console.error('Error deleting questions:', error);
+    const handleDeleteQuestion = async (event) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete all questions for this exam?');
+
+        if (!confirmDelete) {
+            event.preventDefault(); // Prevent the default behavior of the link
+        } else {
+            try {
+                await dropQuestion(examId);
+                console.log('Questions deleted successfully');
+            } catch (error) {
+                console.error('Error deleting questions:', error);
+            }
         }
     };
 
@@ -55,11 +61,7 @@ export default function Questions({ onChecked }) {
                                     <ul>
                                         {question.options.map((option, optionIndex) => (
                                             <li key={optionIndex}>
-                                                <input
-                                                    type="text"
-                                                    value={option}
-                                                    readOnly
-                                                />
+                                                {option}
                                             </li>
                                         ))}
                                     </ul>
@@ -69,10 +71,16 @@ export default function Questions({ onChecked }) {
                         </div>
                     ))}
                 </div>
+                <div className="row justify-content-between">
+                    <div className="col-auto">
+                        <Link to="/teacherInterface" className="btn btn-primary">Back</Link>
+                    </div>
+                    <div className="col-auto">
+                        <Link to="/teacherInterface" onClick={handleDeleteQuestion} className="btn btn-danger">Delete</Link>
+                    </div>
+                </div>
             </div>
             <Footer/>
-            <Link to="/teacherInterface">Back</Link> 
-            <Link to="/teacherInterface" onClick={handleDeleteQuestion}>Delete</Link>
         </div>
     );
 }
