@@ -24,7 +24,7 @@ const AddQuestionPage = () => {
     const isAnyAnswerOutOfRange = answers.some((answer, index) => answer === null || answer < 0 || answer > 2);
     
     // Additional validation for exam name
-    const examNameRegex = /^(?=.*(?:Accounting|Business Studies|Economics|Business Statistics|Commerce))(?=.*(?:O\/L|A\/L))(?=.*20\d{2})/;
+    const examNameRegex = /^(?=.*(?:Accounting|Business Studies|Economics|Business Statistics))(?=.*(?:O\/L|A\/L))(?=.*20\d{2})/;
     const isExamNameValid = examNameRegex.test(examName);
   
     // Display error messages if validation fails
