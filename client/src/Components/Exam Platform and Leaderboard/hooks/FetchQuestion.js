@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 //redux actions
 import * as Action from '../redux/question_reducer'
@@ -17,6 +17,7 @@ const shuffleArray = (array) => {
 //fetch question hook to fetch api data and set value to store
 export const useFetchQuestion = () => {
     const dispatch = useDispatch(); 
+    const examId = useSelector(state => state.examId.examId);
     const [getData, setGetData] = useState({ isLoading: false, apiData: [], serverError: null });
 
     useEffect(() => {
@@ -24,7 +25,7 @@ export const useFetchQuestion = () => {
 
         (async () => {
             try {
-                const [{ questions, answers }] = await getServerData('http://localhost:8081/api/questions');
+                const [{ questions, answers, ...rest }] = await getServerData(`http://localhost:8081/api/questions/${examId}`);
 
                 if (questions.length > 0) {
                     // Combine questions and answers into a single array for shuffling

@@ -14,7 +14,7 @@ const Leaderboard = () => {
                     // Sort the data based on points in descending order
                     const sortedData = resultData.sort((a, b) => b.points - a.points);
                     // Take the top five entries
-                    const topFive = sortedData.slice(0, 10);
+                    const topFive = sortedData.slice(0, 5);
                     setLeaderboardData(topFive);
                 } else {
                     setLeaderboardData([]);
@@ -25,7 +25,7 @@ const Leaderboard = () => {
         };
 
         fetchLeaderboardData();
-        const intervalId = setInterval(fetchLeaderboardData, 5000); // Update every 5 seconds
+        const intervalId = setInterval(fetchLeaderboardData, 1000); // Update every 1 second
 
         return () => clearInterval(intervalId);
     }, []);

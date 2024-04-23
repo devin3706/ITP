@@ -20,6 +20,8 @@ import Footer from './Components/Exam Platform and Leaderboard/components/Footer
 import Header from './Components/Exam Platform and Leaderboard/components/Header';
 import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion';
 import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard';
+import StudentInterface from './Components/Exam Platform and Leaderboard/components/StudentInterface.js';
+import TeacherInterface from './Components/Exam Platform and Leaderboard/components/TeacherInterface.js';
 
 // Teacher components
 import THome from "./Components/Teacher Management/pages/THome";
@@ -113,6 +115,8 @@ const App = () => {
           <Route path="/header" element={<Header />} />
           <Route path="/createQuestion" element={<CreateQuestion />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/studentInterface" element={<StudentInterface />} />
+          <Route path="/teacherInterface" element={<TeacherInterface />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />
