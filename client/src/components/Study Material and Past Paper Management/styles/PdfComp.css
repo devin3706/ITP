@@ -1,0 +1,30 @@
+.pdf-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .close-btn {
+    background-color: #ff6347; /* Tomato */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .nav-btn {
+    background-color: #007bff; /* Blue */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .nav-btn:disabled {
+    background-color: #ccc; /* Grey */
+    color: #999; /* Light Grey */
+    cursor: not-allowed;
+  }
+  
