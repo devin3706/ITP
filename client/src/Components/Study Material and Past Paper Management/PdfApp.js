@@ -1,9 +1,9 @@
-import './styles/PdfApp.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
-import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
+import Header from "../Exam Platform and Leaderboard/components/Header";
+import Footer from "../Exam Platform and Leaderboard/components/Footer";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -160,155 +160,159 @@ const saveEdit = async (e) => {
   
 
   return (
+    <div style={{backgroundColor: '#ECF0F5'}}>
+        <div>
+            <Header />
+        </div>
     <div className="App">
-      <form className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto" onSubmit={submitPdf}>
-        <h4>Upload Study Materials</h4>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Title"
-          required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <br />
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Description"
-          required
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <br />
-        <select
-          className="form-control"
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
-        >
-          <option value="">Select Grade</option>
-          <option value="Grade 10">Grade 10</option>
-          <option value="Grade 11">Grade 11</option>
-          <option value="A/L">A/L</option>
-        </select>
-        <br />
-        <select
-          className="form-control"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-        >
-          <option value="">Select Subject</option>
-          <option value="Business Studies">Business Studies</option>
-          <option value="Accounting">Accounting</option>
-          <option value="Economics">Economics</option>
-          <option value="Business Statistics">Business Statistics</option>
-        </select>
-        <br />
-        <input
-          type="file"
-          className="form-control"
-          placeholder="application/pdf"
-          required
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-        <br />
-        <button className="btn btn-primary" type="submit">Submit</button>
-      </form>
+    <form className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto" onSubmit={submitPdf}>
+      <h4>Upload Study Materials</h4>
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Title"
+        required
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <br />
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Description"
+        required
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <br />
+      <select
+        className="form-control"
+        value={grade}
+        onChange={(e) => setGrade(e.target.value)}
+      >
+        <option value="">Select Grade</option>
+        <option value="Grade 10">Grade 10</option>
+        <option value="Grade 11">Grade 11</option>
+        <option value="A/L">A/L</option>
+      </select>
+      <br />
+      <select
+        className="form-control"
+        value={subject}
+        onChange={(e) => setSubject(e.target.value)}
+      >
+        <option value="">Select Subject</option>
+        <option value="Business Studies">Business Studies</option>
+        <option value="Accounting">Accounting</option>
+        <option value="Economics">Economics</option>
+        <option value="Business Statistics">Business Statistics</option>
+      </select>
+      <br />
+      <input
+        type="file"
+        className="form-control"
+        placeholder="application/pdf"
+        required
+        onChange={(e) => setFile(e.target.files[0])}
+      />
+      <br />
+      <button className="btn btn-primary" type="submit">Submit</button>
+    </form>
 
-      <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-        <br />
-        <h4>Uploaded Study Materials:</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Grade</th>
-              <th>Subject</th>
-              <th>Actions</th>
+    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
+      <br />
+      <h4>Uploaded Study Materials:</h4>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Grade</th>
+            <th>Subject</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allPdf && allPdf.map((data) => (
+            <tr key={data._id} className="table-row">
+              <td>{data.title}</td>
+              <td>{data.description}</td>
+              <td>{data.grade}</td>
+              <td>{data.subject}</td>
+              <td>
+                <button className="btn btn-primary" onClick={() => showPdf(data.pdf)} style={{ marginRight: '10px' }}>Show</button>
+                <button className="btn btn-danger" onClick={() => deletePdf(data._id)} style={{ marginRight: '10px' }}>Delete</button>
+                <button className="btn btn-warning" onClick={() => openEditForm(data)}>Edit</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {allPdf && allPdf.map((data) => (
-              <tr key={data._id} className="table-row">
-                <td>{data.title}</td>
-                <td>{data.description}</td>
-                <td>{data.grade}</td>
-                <td>{data.subject}</td>
-                <td>
-                  <button className="btn btn-primary" onClick={() => showPdf(data.pdf)} style={{ marginRight: '10px' }}>Show</button>
-                  <button className="btn btn-danger" onClick={() => deletePdf(data._id)} style={{ marginRight: '10px' }}>Delete</button>
-                  <button className="btn btn-warning" onClick={() => openEditForm(data)}>Edit</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
- 
-      {showPdfPopup && (
-        <div className="pdf-modal-backdrop">
-          <div className="pdf-modal-content">
-            <span className="pdf-modal-close" onClick={closePdfPopup}>&times;</span>
-            <PdfComp pdfFile={pdfFile} onClose={closePdfPopup} />
-          </div>
-        </div>
-      )}                              
-      
-      {showEditForm && (
-        <div className="modal-backdrop">
-          <div className="modal-content">
-            <span className="close-button" onClick={closeEditForm}>&times;</span>
-            <h4>Edit PDF Details</h4>
-            <form className="formStyle2" onSubmit={saveEdit}>
-              <div className="form-group">
-                <label htmlFor="title">Title:</label>
-                <input type="text" id="title" name="title" value={editFormData.title} onChange={handleEditFormChange} required />
-                {editFormData.title === "" && <p className="error">Title is required</p>}
-              </div>
-              <div className="form-group">
-                <label htmlFor="description">Description:</label>
-                <input type="text" id="description" name="description" value={editFormData.description} onChange={handleEditFormChange} required />
-                {editFormData.description === "" && <p className="error">Description is required</p>}
-              </div>
-              <div className="form-group">
-                <label htmlFor="grade">Grade:</label>
-                <select className="form-control" value={editFormData.grade} onChange={handleEditFormChange} name="grade">
-                  <option value="">Select Grade</option>
-                  <option value="Grade 10">Grade 10</option>
-                  <option value="Grade 11">Grade 11</option>
-                  <option value="A/L">A/L</option>
-                </select>
-                {editFormData.grade === "" && <p className="error">Grade is required</p>}
-              </div>
-              <div className="form-group">
-                <label htmlFor="subject">Subject:</label>
-                <select className="form-control" value={editFormData.subject} onChange={handleEditFormChange} name="subject">
-                  <option value="">Select Subject</option>
-                  <option value="Business Studies">Business Studies</option>
-                  <option value="Accounting">Accounting</option>
-                  <option value="Economics">Economics</option>
-                  <option value="Business Statistics">Business Statistics</option>
-                </select>
-                {editFormData.subject === "" && <p className="error">Subject is required</p>}
-              </div>
-              <div className="form-group">
-                <label htmlFor="file">File:</label>
-                <input type="file" id="file" onChange={handleEditFormFileChange} />
-                {editFormData.file === "" && <p className="error">This field is required</p>}
-              </div>
-              <div className="button-group">
-                <button type="submit" className="btn btn-primary">Save Changes</button>
-                <button type="button" onClick={closeEditForm} className="btn btn-secondary">Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-       
-      <Footer />
+          ))}
+        </tbody>
+      </table>
     </div>
-  
+
+    {showPdfPopup && (
+      <div className="pdf-modal-backdrop">
+        <div className="pdf-modal-content">
+          <span className="pdf-modal-close" onClick={closePdfPopup}>&times;</span>
+          <PdfComp pdfFile={pdfFile} onClose={closePdfPopup} />
+        </div>
+      </div>
+    )}                              
+    
+    {showEditForm && (
+      <div className="modal-backdrop">
+        <div className="modal-content">
+          <span className="close-button" onClick={closeEditForm}>&times;</span>
+          <h4>Edit PDF Details</h4>
+          <form className="formStyle2" onSubmit={saveEdit}>
+            <div className="form-group">
+              <label htmlFor="title">Title:</label>
+              <input type="text" id="title" name="title" value={editFormData.title} onChange={handleEditFormChange} required />
+              {editFormData.title === "" && <p className="error">Title is required</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Description:</label>
+              <input type="text" id="description" name="description" value={editFormData.description} onChange={handleEditFormChange} required />
+              {editFormData.description === "" && <p className="error">Description is required</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="grade">Grade:</label>
+              <select className="form-control" value={editFormData.grade} onChange={handleEditFormChange} name="grade">
+                <option value="">Select Grade</option>
+                <option value="Grade 10">Grade 10</option>
+                <option value="Grade 11">Grade 11</option>
+                <option value="A/L">A/L</option>
+              </select>
+              {editFormData.grade === "" && <p className="error">Grade is required</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="subject">Subject:</label>
+              <select className="form-control" value={editFormData.subject} onChange={handleEditFormChange} name="subject">
+                <option value="">Select Subject</option>
+                <option value="Business Studies">Business Studies</option>
+                <option value="Accounting">Accounting</option>
+                <option value="Economics">Economics</option>
+                <option value="Business Statistics">Business Statistics</option>
+              </select>
+              {editFormData.subject === "" && <p className="error">Subject is required</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="file">File:</label>
+              <input type="file" id="file" onChange={handleEditFormFileChange} />
+              {editFormData.file === "" && <p className="error">This field is required</p>}
+            </div>
+            <div className="button-group">
+              <button type="submit" className="btn btn-primary">Save Changes</button>
+              <button type="button" onClick={closeEditForm} className="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    )}
+     
+    <Footer />
+  </div>
+</div>
   );
 
   

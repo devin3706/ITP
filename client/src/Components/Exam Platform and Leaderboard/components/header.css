@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#021531;
+    color: #fff;
+    padding: 20px 30px;
+}
+
+.logo {
+    width: 300px; /* Adjust as needed */
+    height: 100px;
+}
+
+.logo img {
+    width: 300px;
+    height: 100px;
+}
+
+.login-btn {
+    background-color: #ffa500;
+    color: #021531;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #ff7e00;
+}
+
+.academy-text {
+    font-size: 24px; /* Adjust as needed */
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+}

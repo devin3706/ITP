@@ -12,16 +12,31 @@ export async function getQuestions(req, res){
     }
 }
 
+//get question by id
+export async function getQuestionById(req, res) {
+    try {
+        const questionId = req.params.id;
+        const question = await Questions.findById(questionId);
+        if (!question) {
+            return res.status(404).json([]);
+        }
+        res.json([question]); // Wrap the question object inside an array
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 //insert all questions
 export async function insertQuestions(req, res) {
     try {
-        const { questions, answers } = req.body; // Extract questions and answers from request body
+        const { examName, questions, answers } = req.body; // Extract questions and answers from request body
 
-        if (!questions || !answers || questions.length !== answers.length) {
+        if (!examName || !questions || !answers || questions.length !== answers.length) {
             throw new Error('Invalid data provided');
         }
 
-        const insertedQuestions = await Questions.create({ questions, answers }); // Create a new document using Mongoose model
+        const insertedQuestions = await Questions.create({ examName, questions, answers }); // Create a new document using Mongoose model
         res.json({ msg: "Data Saved Successfully...!", data: insertedQuestions });
 
     } catch (error) {
@@ -29,7 +44,6 @@ export async function insertQuestions(req, res) {
         res.status(500).json({ error: "Failed to insert questions" });
     }
 }
-
 
 //delete all questions
 export async function dropQuestions(req, res) {
