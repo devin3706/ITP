@@ -31,12 +31,12 @@ const PdfViewer = () => {
 
   const showPdf = (pdf) => {
     setPdfFile(`http://localhost:8081/studyMaterial/files/${pdf}`);
-    setShowPdfPopup(true); 
-  };
- 
-  const closePdfPopup = () => {
-    setShowPdfPopup(false); // Close the PDF popup
-  };
+    setShowPdfPopup(true);
+};
+
+const closePdfPopup = () => {
+    setShowPdfPopup(false);
+};
 
   const downloadPdf = async (pdfId) => {
     try {
@@ -65,7 +65,8 @@ const PdfViewer = () => {
 
   useEffect(() => {
     const filtered = pdfs.filter(pdf =>
-      pdf.title.toLowerCase().includes(searchTerm.toLowerCase())
+      pdf.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pdf.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredPdfs(filtered);
   }, [searchTerm, pdfs]);
@@ -96,13 +97,13 @@ const PdfViewer = () => {
               <AiFillDislike onClick={() => dislikePdf(pdf._id)} style={{ marginLeft: '5px' }} /> <span>{pdf.dislikes}</span>
             </div>
             {showPdfPopup && (
-              <div className="pdf-modal-backdrop">
+            <div className="pdf-modal-backdrop">
                 <div className="pdf-modal-content">
-                  <span className="pdf-modal-close" onClick={closePdfPopup}>&times;</span>
-                  <PdfComp pdfFile={pdfFile} onClose={closePdfPopup} />
+                    <span className="pdf-modal-close" onClick={closePdfPopup}>&times;</span>
+                    <PdfComp pdfFile={pdfFile} onClose={closePdfPopup} />
                 </div>
-              </div>
-            )}
+            </div>
+        )}
           </div>
         ))}
       </div>
