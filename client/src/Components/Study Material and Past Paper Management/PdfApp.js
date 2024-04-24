@@ -4,6 +4,7 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Header from "../Exam Platform and Leaderboard/components/Header";
 import Footer from "../Exam Platform and Leaderboard/components/Footer";
+import './styles/PastPaperUpload.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -310,7 +311,7 @@ const saveEdit = async (e) => {
       </div>
     )}
      
-    <Footer />
+    <Footer/>
   </div>
 </div>
   );

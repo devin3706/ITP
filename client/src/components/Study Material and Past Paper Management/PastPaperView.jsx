@@ -25,14 +25,13 @@ const PastPaperView = () => {
   };
 
   const showPdf = (pastPaper) => {
-    setPdfFile(`http://localhost:8081/studyMaterial/files/${pastPaper.pdf}`)
-    setShowPdfPopup(true); 
-   };
- 
-   const closePdfPopup = () => {
-     setShowPdfPopup(false); // Close the PDF popup
-   };
- 
+    setPdfFile(`http://localhost:8081/studyMaterial/files/${pastPaper.pdf}`);
+    setShowPdfPopup(true);
+};
+
+const closePdfPopup = () => {
+    setShowPdfPopup(false);
+};
 
   const downloadPdf = async (pastPaperId) => {
     try {
@@ -71,7 +70,8 @@ const PastPaperView = () => {
 
   // Filter past papers based on search term
   const filteredPastPapers = pastPapers.filter(paper =>
-    paper.year.toLowerCase().includes(searchTerm.toLowerCase())
+    paper.year.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    paper.subject.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -100,13 +100,13 @@ const PastPaperView = () => {
               <AiFillDislike onClick={() => dislikePastPaper(pastPaper._id)} style={{ marginLeft: '5px' }} /> <span>{pastPaper.dislikes}</span>
             </div>
             {showPdfPopup && (
-        <div className="pdf-modal-backdrop">
-          <div className="pdf-modal-content">
-            <span className="pdf-modal-close" onClick={closePdfPopup}>&times;</span>
-            <PdfComp pdfFile={pdfFile} onClose={closePdfPopup} />
-          </div>
-        </div>
-      )}
+            <div className="pdf-modal-backdrop">
+                <div className="pdf-modal-content">
+                    <span className="pdf-modal-close" onClick={closePdfPopup}>&times;</span>
+                    <PdfComp pdfFile={pdfFile} onClose={closePdfPopup} />
+                </div>
+            </div>
+        )}
           </div>
         ))}
       </div>
