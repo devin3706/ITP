@@ -1,12 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import Header from '../../Exam Platform and Leaderboard/components/Header';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import { FaUser } from 'react-icons/fa'; // Import the user icon from react-icons/fa
 import SideNavbar from "../component/SideNavbar";
 
+
+
 const THome = () => {
+    const [authenticated, setAuthenticated] =useState(false);
+    const navigate = useNavigate(); 
+
+    useEffect(() => {
+        // Check if the user has a valid token
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            // User is authenticated
+            setAuthenticated(true);
+        } else {
+            //User is not authenticated, display alert and navigate Teacher 
+            alert("Please login to access this page.");
+            navigate('/tLogin'); // navigate to the login page
+            
+        }
+    }, [navigate]);
+
+
+    
+    if (!authenticated) {
+        return (
+            <div>
+                <p>Please log in to access this page.</p>
+            </div>
+        );
+    }
+
+
+
+
+    //If user Authenticated render the page
     return (
         <div style={{backgroundColor: '#ECF0F5'}}>
         <Header />
