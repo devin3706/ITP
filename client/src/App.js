@@ -48,6 +48,8 @@ import { getLoggedInAdmin } from './Components/Daily Process Dashboard/api/admin
 import PdfApp from './Components/Study Material and Past Paper Management/PdfApp.js';
 import PdfComp from './Components/Study Material and Past Paper Management/PdfComp.js';
 import PdfViewer from './Components/Study Material and Past Paper Management/PdfViewer.jsx';
+import PastPaperView from './components/Study Material and Past Paper Management/PastPaperView.jsx';
+import PastPaperUpload from './components/Study Material and Past Paper Management/PastPaperUpload.jsx';
 
 // Student Support System
 import Users from './Components/Student Support/components/Users.jsx';
@@ -135,6 +137,8 @@ const App = () => {
           <Route path="/pdfApp" element={<PdfApp />} />
           <Route path="/pdfComp" element={<PdfComp />} />
           <Route path="/pdfViewer" element={<PdfViewer />} />
+          <Route path="/pastPaperView" element={<PastPaperView />} />
+          <Route path="/pastPaperUpload" element={<PastPaperUpload />} />
 
           {/* Student Support routes */}
           <Route path='/users' element={<Users />}></Route>
