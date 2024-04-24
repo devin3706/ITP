@@ -64,6 +64,10 @@ import Dashboard from './Components/Student Management/components/dashboard.jsx'
 import Students from './Components/Student Management/components/Students.jsx';
 import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
 import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
+import Login from './Components/Student Management/components/login.jsx';
+import Profile from './Components/Student Management/components/profile.jsx';
+import ForgotPass from './Components/Student Management/components/ForgotPassword.jsx'
+import SignIn from '././Components/Student Management/components/SignUp.jsx';
 
 
 //Payment Management
@@ -78,6 +82,12 @@ import Announcement from "./Components/Announcement Handling/Home/Home.jsx";
 
 //Class Scheduling
 import Class from "./Components/Class Scheduling/Home/Class.jsx";
+
+//Student Login
+import StudentHome from "./Components/Student Login/Home.jsx";
+import StudentLogin from "./Components/Student Login/Login.jsx";
+import SignUp from "./Components/Student Login/Signup.jsx";
+import ForgotPassword from "./Components/Student Login/ForgotPassword.jsx";
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
@@ -151,6 +161,11 @@ const App = () => {
           <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
           <Route path = '/createStudent' element = {<CreateStudent/>}> </Route>
           <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
+          <Route path = '/login' element = {<Login />}> </Route>
+          <Route path = '/register' element = {<SignIn />}> </Route>
+          <Route path = '/profile' element = {<Profile />}> </Route>
+          <Route path = '/forgot' element = {<ForgotPass />}> </Route>
+          
 
           {/* Payment Management Routes */}
           <Route path="/payment" element={<Payment />} />
@@ -164,6 +179,12 @@ const App = () => {
 
           {/* Class Scheduling Routes */}
           <Route path="/class" element={<Class />} />
+
+          { /* Student Login Routes */}
+          <Route path="/studentHome" element={<StudentHome />} />
+          <Route path="/studentLogin" element={<StudentLogin />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
 
         </Routes>
       </AdminContext.Provider>

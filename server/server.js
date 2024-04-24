@@ -17,6 +17,7 @@ import payerRoutes from './router/payment management/payers.js';
 import workoutRoutes from './router/payment management/workouts.js';
 import announcementRoutes from './router/announcement handling/announcement.js';
 import classRoutes from './router/class scheduling/class.js';
+import studentLoginRoutes from './router/student login/studentLogin.js';
 
 // Import connection file
 import connect from './database/conn.js';
@@ -92,6 +93,7 @@ function startServer() {
 
   // Minesi Routes
   app.use('/student', studentRoutes);
+  app.use('/auth', studentLoginRoutes);
 
   //Nuradha Routes
   app.use('/payers', payerRoutes);
