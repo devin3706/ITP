@@ -24,6 +24,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: 'bold',
   },
+  chartContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  chart: {
+    width: '45%',
+    height: 200,
+  },
   row: {
     flexDirection: 'row',
     borderBottomWidth: 1,
@@ -39,7 +48,7 @@ const styles = StyleSheet.create({
 });
 
 // Create PDF component
-const TeacherDetailsPDF = ({ teachers }) => (
+const TeacherDetailsPDF = ({ teachers, pieChartData, barChartData }) => (
   <Document>
     <Page size="A4">
       <View style={styles.page}>
@@ -66,6 +75,8 @@ const TeacherDetailsPDF = ({ teachers }) => (
                 <Text style={styles.column}>{teacher.email}</Text>
               </View>
             ))}
+         
+          
           </View>
         </View>
       </View>

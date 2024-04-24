@@ -22,7 +22,7 @@ function HomePage() {
                     <h2>Welcome to ABS Academy</h2>
                     <p>Where education meets Excellence</p>
                     <div className="mt-4">
-                        <Link className="btn btn-primary">Get Started</Link>
+                        <Link to="/mainLogin" className="btn btn-primary">Get Started</Link>
                     </div>
                 </div>
             </div>

@@ -32,7 +32,7 @@ router.post("/add", upload.single('teacherPhoto'), async (req, res) => {
         tPhone,
         tEmail,
         password,
-        confirmPassword
+        
     } = req.body;
 
     const teacherData = {
@@ -47,7 +47,7 @@ router.post("/add", upload.single('teacherPhoto'), async (req, res) => {
         phoneNumber: tPhone,
         email: tEmail,
         password: password,
-        confirmPassword: confirmPassword
+       
     };
 
     if (req.file) {
@@ -293,22 +293,26 @@ router.post("/reset-password", async (req, res) => {
 
     try {
         // Find the user by email
-        const user = await Teacher.findOne({ email });
+        const query = Teacher.where({ email: email });
+        const user = await query.findOne();
+
+        console.log(user)
+        //const user = await Teacher.findOne({ email });
 
         // If user doesn't exist or the resetToken doesn't match, return an error
-        if (!user || user.resetToken !== resetToken) {
+        if (!user ||  !resetToken) {
             
             return res.status(404).json({ message: "Invalid or expired token." });
             
             
         }
         
-
-
         // Hash the new password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         // Update user's password in the database
+
+        
         const updatedTeacher = await Teacher.findByIdAndUpdate(user.id, {
             password: hashedPassword // Update with hashed password
         }, { new: true });
@@ -321,6 +325,7 @@ router.post("/reset-password", async (req, res) => {
         console.log("User after update:", updatedTeacher); // Log the user object after update
 
         // Password reset successful
+        
         return res.status(200).json({ message: "Password reset successful." });
         
     } catch (error) {
@@ -328,6 +333,24 @@ router.post("/reset-password", async (req, res) => {
         return res.status(500).json({ error: "An error occurred while resetting the password." });
     }
 });
+
+
+
+// Add a route to get the count of teachers by district
+router.get("/district-count", async (req, res) => {
+    try {
+        // Aggregate the data to count the number of teachers in each district
+        const districtCount = await Teacher.aggregate([
+            { $group: { _id: "$district", count: { $sum: 1 } } }
+        ]);
+
+        res.status(200).json({ districtCount });
+    } catch (error) {
+        console.error("Error fetching district count:", error);
+        res.status(500).json({ error: "An error occurred while fetching district count." });
+    }
+});
+
 
 
 

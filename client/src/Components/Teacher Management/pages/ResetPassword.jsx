@@ -30,7 +30,8 @@ const ResetPassword = ({ token }) => {
           email: email
         }
       );
-      setMessage(response.data.message);
+      
+      alert("Reset Password Success");
       // Redirect to login page
       navigate("/login");
 
