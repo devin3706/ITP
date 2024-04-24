@@ -7,7 +7,9 @@ import { Button } from "@mui/material";
 //api functions
 import { register } from "../api/admin";
 
-import AdminHeader from '../components/AdminHeader'
+//header and footer
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 const AdminCreate = () => {
     const navigate = useNavigate();
@@ -45,7 +47,7 @@ const AdminCreate = () => {
 
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
-        <AdminHeader />
+        <Header/>
             <div className="justify-content-md-center">
                 <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Create New Admin</label>
@@ -143,6 +145,7 @@ const AdminCreate = () => {
                 </div>
 
             </div>
+            <Footer/>
         </div>
     ); 
 };
