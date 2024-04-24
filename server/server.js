@@ -63,6 +63,7 @@ function startServer() {
   //Tharushi Middleware
   app.use("/files", express.static("files"));
   app.use(router);
+  
 
   // Application port
   const port = process.env.PORT || 8080;

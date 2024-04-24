@@ -95,12 +95,12 @@ router.put("/update/:id", async (req, res) => {
         tAddress,
         tPhone,
         tEmail,
-        password
+        /* password */
     } = req.body;
 
     try {
         // Hash the new password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        /* const hashedPassword = await bcrypt.hash(password, 10); */
 
         const updatedTeacher = await Teacher.findByIdAndUpdate(id, {
             firstName: tfirstName,
@@ -113,7 +113,7 @@ router.put("/update/:id", async (req, res) => {
             address: tAddress,
             phoneNumber: tPhone,
             email: tEmail,
-            password: hashedPassword // Update with hashed password
+           /*  password: hashedPassword // Update with hashed password */
         }, { new: true });
 
         if (!updatedTeacher) {
@@ -274,10 +274,12 @@ const sendResetEmail = async (email, resetToken) => {
   }
 };
 
+
+
 // Route to handle password reset form submission
 router.post("/reset-password", async (req, res) => {
     const { resetToken, newPassword, confirmPassword, email } = req.body;
-    console.log("Request Body:", req.body);
+   
 
     // Check if resetToken, newPassword, and confirmPassword are present in the request body
     if (!resetToken || !newPassword || !confirmPassword) {
@@ -290,33 +292,44 @@ router.post("/reset-password", async (req, res) => {
     }
 
     try {
-        // Update user's password in the database
-        // Hash the new password
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        // Find the user by email
         const user = await Teacher.findOne({ email });
 
+        // If user doesn't exist or the resetToken doesn't match, return an error
+        if (!user || user.resetToken !== resetToken) {
+            
+            return res.status(404).json({ message: "Invalid or expired token." });
+            
+            
+        }
+        
+
+
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update user's password in the database
         const updatedTeacher = await Teacher.findByIdAndUpdate(user.id, {
             password: hashedPassword // Update with hashed password
         }, { new: true });
+        
 
         if (!updatedTeacher) {
             return res.status(404).json({ message: "Teacher not found" });
         }
 
-        res.status(200).json({ message: "Teacher updated", teacher: updatedTeacher });
-        console.log("User after update:", user); // Log the user object after update
-
-        if (!user) {
-            return res.status(404).json({ message: "Invalid or expired token." });
-        }
+        console.log("User after update:", updatedTeacher); // Log the user object after update
 
         // Password reset successful
         return res.status(200).json({ message: "Password reset successful." });
+        
     } catch (error) {
-        console.error("Error resetting password:", error);
-        return res.status(500).json({ error: "An error occurred while processing the request." });
+        console.error("Error resetting password:", error); // Log the specific error that occurred
+        return res.status(500).json({ error: "An error occurred while resetting the password." });
     }
 });
+
+
 
 
 

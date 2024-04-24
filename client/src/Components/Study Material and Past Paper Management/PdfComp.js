@@ -1,41 +1,39 @@
 import { useState } from "react";
-import { Document, Page } from "react-pdf";
-import pdf from "./1.pdf";
+import { Document, Page, pdfjs } from "react-pdf";
 import Footer from "../Exam Platform and Leaderboard/components/Footer";
 import Header from "../Exam Platform and Leaderboard/components/Header";
 
-function PdfComp() {
-  const [numPages, setNumPages] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
+// You need to specify the PDF worker source to load PDF files properly
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+function PdfComp({ pdfFile, onClose }) {
+    const [pageNumber, setPageNumber] = useState(1);
+    const [numPages, setNumPages] = useState(null);
 
-  return (
-    <div style={{backgroundColor: '#ECF0F5'}}>
-      <Header/>
-    <div>
-          <p className="text-center">
-            Page {pageNumber} of {numPages}
-          </p>
-      <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-        {Array.apply(null,Array(numPages))
-        .map((x,i)=>i+1)
-        .map(page=>{return(
-          <page 
-          pageNumber={page}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}/>
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setNumPages(numPages);
+        setPageNumber(1); // Reset to the first page when a new document is loaded
+    };
 
-        );
-        })}
- 
-      </Document>
-   
-    </div>
-    <Footer/>
-    </div>
-  );
+    return (
+      <div style={{backgroundColor: '#ECF0F5'}}>
+        <div className="pdf-viewer-container">
+            <div className="pdf-controls">
+                <button onClick={onClose} className="close-btn">Close</button>
+                <p>Page {pageNumber} of {numPages}</p>
+                <button disabled={pageNumber <= 1} onClick={() => setPageNumber(pageNumber - 1)} className="nav-btn prev-btn">Previous</button>
+                <button disabled={pageNumber >= numPages || numPages === null} onClick={() => setPageNumber(pageNumber + 1)} className="nav-btn next-btn">Next</button>
+            </div>
+            <Document
+                file={pdfFile}
+                onLoadSuccess={onDocumentLoadSuccess}
+                className="pdf-document"
+            >
+                <Page pageNumber={pageNumber} />
+            </Document>
+        </div>
+        </div>
+    );
 }
+
 export default PdfComp;

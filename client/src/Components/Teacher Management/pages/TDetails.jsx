@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Button } from 'reactstrap';
+import { Table, Button, Input } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import TeacherDetailsPDF from './TeacherDetailsPDF'; // Assuming you have a component to render the PDF
 
 const TDetails = () => {
     const [teachers, setTeachers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate(); // Get the navigate function
 
     useEffect(() => {
@@ -27,7 +30,15 @@ const TDetails = () => {
     };
 
     const handleDelete = async (id) => {
+        // Show confirmation dialog
+        const isConfirmed = window.confirm("Are you sure you want to delete this account?");
+        if (!isConfirmed) {
+            // If not confirmed, do nothing
+            return;
+        }
+    
         try {
+            // If confirmed, proceed with deletion
             await axios.delete(`http://localhost:8081/teacher/delete/${id}`);
             // Refresh teacher details after deletion
             fetchData();
@@ -36,23 +47,23 @@ const TDetails = () => {
         }
     };
 
-   /*  const displayImage = (photoData) => {
-        if (photoData && photoData.data && photoData.contentType) {
-            const arrayBufferView = new Uint8Array(photoData.data.data);
-            const blob = new Blob([arrayBufferView], { type: photoData.contentType });
-            const reader = new FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = function() {
-                return reader.result;
-            };
-        }
-        return ""; // Return an empty string if photoData is missing or incomplete
-    }; */
+    const filteredTeachers = teachers.filter((teacher) => {
+        const fullName = `${teacher.firstName} ${teacher.lastName}`;
+        return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
         <Header/>
         <div className="container mt-5 mb-5">
+            <div className="d-flex justify-content-between mb-3">
+                <Input
+                    type="text"
+                    placeholder="Search by name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
             <div className="d-flex justify-content-center">
                 <Table bordered hover responsive="sm" style={{ backgroundColor: '#FFFFFF' }}>
                     <thead>
@@ -69,7 +80,7 @@ const TDetails = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {teachers.map((teacher, index) => (
+                        {filteredTeachers.map((teacher, index) => (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
                                 <td>{teacher.firstName}</td>
@@ -87,6 +98,21 @@ const TDetails = () => {
                         ))}
                     </tbody>
                 </Table>
+            </div>
+            <div className="d-flex justify-content-center mt-3">
+                <PDFDownloadLink
+                    document={<TeacherDetailsPDF teachers={filteredTeachers} />} // Pass the filtered teachers to the PDF component
+                    fileName="teacher_details.pdf"
+                    style={{ textDecoration: "none", color: "#fff" }}
+                >
+                    {({ blob, url, loading, error }) =>
+                        loading ? (
+                            <Button color="primary" disabled>Loading...</Button>
+                        ) : (
+                            <Button color="primary">Generate Report</Button>
+                        )
+                    }
+                </PDFDownloadLink>
             </div>
         </div>
         <Footer/>
