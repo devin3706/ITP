@@ -4,7 +4,6 @@ import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import './styles/PastPaperView.css';
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
-import './styles/PdfApp.css';
 
 const PastPaperView = () => {
   const [pastPapers, setPastPapers] = useState([]);
