@@ -1,12 +1,34 @@
 import React from 'react';
+import Header from './Components/Exam Platform and Leaderboard/components/Header.js';
+import Footer from './Components/Exam Platform and Leaderboard/components/Footer.js';
+import backgroundImage from './Components/Exam Platform and Leaderboard/images/Background.png';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
-  return (
-    <div className='text-center mt-5'>
-      <h1>Welcome to My Website</h1>
-      <p>This is the homepage of my website.</p>
-    </div>
-  );
+    return (
+        <div>
+            <Header />
+            <div
+                style={{
+                    backgroundImage: `url(${backgroundImage})`,
+                    minHeight: '100vh',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    position: 'relative',
+                    backgroundColor: 'rgba(236, 240, 245, 0.9)',
+                }}
+            >
+                <div className="container text-center pt-5">
+                    <h2>Welcome to ABS Academy</h2>
+                    <p>Where education meets Excellence</p>
+                    <div className="mt-4">
+                        <Link className="btn btn-primary">Get Started</Link>
+                    </div>
+                </div>
+            </div>
+            <Footer />
+        </div>
+    );
 }
 
 export default HomePage;
