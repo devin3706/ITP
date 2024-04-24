@@ -27,14 +27,13 @@ import TCreate from './Components/Teacher Management/pages/TCreate';
 import TLogin from './Components/Teacher Management/pages/TLogin';
 import TDetails from './Components/Teacher Management/pages/TDetails';
 import THeader from './Components/Teacher Management/component/THeader';
-import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
 import TUpdate from './Components/Teacher Management/pages/TUpdate.jsx';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
 import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
 import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
 import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
 import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
-import ParentComponent from './Components/Teacher Management/pages/ParentComponent.jsx';
+
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -119,7 +118,6 @@ const App = () => {
           <Route path="/tCreate" element={<TCreate />} />
           <Route path="/tLogin" element={<TLogin />} />
           <Route path="/tDetails" element={<TDetails />} />
-          <Route path="/tpagetest" element={<Tpagetest />} />
           <Route path="/tUpdate/:id" element={<TUpdate />} />
           <Route path="/tHeader" element={<THeader />} />
           <Route path="/sideNavbar" element={<SideNavbar />} />
@@ -127,7 +125,8 @@ const App = () => {
           <Route path="/mainLogin" element= {<MainLogin/>} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
           <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
-          <Route path="/parentComponent" element= {<ParentComponent/>} />
+         
+
         
 
 
