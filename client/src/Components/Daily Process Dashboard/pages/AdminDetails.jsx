@@ -1,109 +1,16 @@
-// import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-
-// //api functions
-// import { view, deleteAdmin } from "../api/admin";
-
-// const AdminDetails = () => {
-//     const [admins, setAdmins] = useState([]);
-//     const navigate = useNavigate();
-
-//     // Fetch admins
-//     useEffect(() => {
-//         const fetchAdmins = async () => {
-//             try {
-//                 const res = await view();
-//                 setAdmins(res.admins);
-//             } catch (error) {
-//                 console.error("Failed to fetch admins:", error.message);
-//             }
-//         };
-//         fetchAdmins();
-//     }, []);
-
-//     const handleEditDetails = (adminID) => {
-
-//         navigate(`/adminEdit/${adminID}`);
-//     };
-
-//     const handleDeleteAdmin = async (adminID) => {
-//         const confirmDelete = window.confirm("Are you sure you want to delete this admin account?");
-//         if (confirmDelete) {
-//             try {
-//                 await deleteAdmin(adminID);
-//                 setAdmins(admins.filter(admin => admin._id !== adminID));
-//                 alert("Admin account deleted successfully");
-//             } catch (error) {
-//                 console.error("Failed to delete admin account:", error.message);
-//                 alert("Failed to delete admin account");
-//             }
-//         }
-//     };
-
-//     var num = 0;
-
-//     return (
-//         <div className="container mt-5 text-center">
-//             <h1 className="text-center mb-4">Admin Details</h1>
-//             <table className="table table-striped table-bordered table-success">
-//                 <thead>
-//                     <tr className="table-primary">
-//                         <th>#</th>
-//                         <th className="col-2">First Name</th>
-//                         <th className="col-2">Last Name</th>
-//                         <th className="col-2">Username</th>
-//                         <th className="col-2">Email</th>
-//                         <th className="col-2">Contact</th>
-//                         <th>Action</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {admins.map((admin, index) => (
-//                         <tr key={index}>
-//                             <td>{++num}</td>
-//                             <td>{admin.fName}</td>
-//                             <td>{admin.lName}</td>
-//                             <td>{admin.username}</td>
-//                             <td>{admin.email}</td>
-//                             <td>0{admin.contact}</td>
-//                             <td>
-//                                 <button
-//                                     onClick={() => handleEditDetails(admin._id)}
-//                                     className="btn btn-outline-primary btn-sm"
-//                                 >
-//                                     Edit
-//                                 </button>
-//                                 <span className="p-2"></span>
-//                                 <button
-//                                     onClick={() => handleDeleteAdmin(admin._id)}
-//                                     className="btn btn-outline-danger btn-sm"
-//                                 >
-//                                     Delete
-//                                 </button>
-//                             </td>
-//                         </tr>
-//                     ))}
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// };
-
-// export default AdminDetails;
-
-
 import React, { useState, useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // api functions
 import { view, deleteAdmin, update } from "../api/admin";
 
-import AdminHeader from '../components/AdminHeader'
+//header and footer
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 const AdminDetails = () => {
     const [admins, setAdmins] = useState([]);
-    const [editAdminID, setEditAdminID] = useState(null); // State to track the admin being edited
-    //const navigate = useNavigate();
+    const [editAdminID, setEditAdminID] = useState(null);
 
     // Fetch admins
     useEffect(() => {
@@ -169,10 +76,25 @@ const AdminDetails = () => {
 
     return (
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
-        <AdminHeader/>
+        <Header/>
         <div className="container mt-4">
             <h1 className="text-center mt-3 mb-4 alert alert-dark border border-dark shadow" style={{fontSize: '300%'}}>Admin Details</h1>
-            <table className="table table-striped table-bordered table-dark text-center shadow">
+
+            <div className="row">
+                <div className="d-flex justify-content-start col">
+                    <Link to="/adminHome">                                
+                        <button className="btn btn-info rounded-5 mt-4 mb-3">dashboard</button>                                
+                    </Link>
+                </div>
+
+                <div className="d-flex justify-content-end col">
+                    <Link to="/adminCreate">                                
+                        <button className="btn btn-primary rounded-5 mt-4 mb-3">+ new admin</button>                                
+                    </Link>
+                </div>
+            </div>
+
+            <table className="table table-striped table-bordered table-light text-center shadow">
                 <thead>
                     <tr className="table-dark text-dark">
                         <th className="w-1 fw-bold text-dark">#</th>
@@ -287,7 +209,7 @@ const AdminDetails = () => {
                 </tbody>
             </table>
         </div>
-
+        <Footer/>
     </div>
     );
 };
