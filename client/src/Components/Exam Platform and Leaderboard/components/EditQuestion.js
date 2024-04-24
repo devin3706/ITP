@@ -1,69 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useFetchQuestion } from '../hooks/FetchQuestion';
-import { updateResult } from '../hooks/setResult';
+import { Link } from 'react-router-dom';
+import { getServerData } from '../helper/helper';
+import { useSelector } from 'react-redux';
+import { dropQuestion } from '../helper/helper';
 import Header from './Header';
 import Footer from './Footer';
 
 export default function Questions({ onChecked }) {
-    const [checked] = useState(undefined);
-    const { trace } = useSelector(state => state.questions);
-    const [{ isLoading, serverError }] = useFetchQuestion();
-    const questions = useSelector(state => state.questions.queue);
-
-    const dispatch = useDispatch();
+    const [questionsData, setQuestionsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [serverError, setServerError] = useState(null);
+    const examId = useSelector(state => state.examId.examId);
 
     useEffect(() => {
-        dispatch(updateResult({ trace, checked }));
-    }, [checked, dispatch, trace]);
+        getQuestionsData();
+    }, []);
 
-    function handleInputChange(index, e) {
-        const { name, value } = e.target;
-        const updatedQuestions = [...questions];
-        updatedQuestions[index][name] = value;
-        dispatch(updateResult({ trace, checked }));
-    }
+    const getQuestionsData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await getServerData(`http://localhost:8081/api/questions/${examId}`);
+            setQuestionsData(response);
+            setIsLoading(false);
+        } catch (error) {
+            setServerError(error);
+            setIsLoading(false);
+        }
+    };
+
+    const handleDeleteQuestion = async (event) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete all questions for this exam?');
+
+        if (!confirmDelete) {
+            event.preventDefault(); // Prevent the default behavior of the link
+        } else {
+            try {
+                await dropQuestion(examId);
+                console.log('Questions deleted successfully');
+            } catch (error) {
+                console.error('Error deleting questions:', error);
+            }
+        }
+    };
 
     if (isLoading) return <h3 className='text-light'>Loading...</h3>;
     if (serverError) return <h3 className='text-light'>{serverError.message || "Unknown Error"}</h3>;
 
     return (
         <div style={{backgroundColor: '#ECF0F5'}}>
-        <Header/>
-        <div className="container py-5">
-            <div className='row justify-content-center'>
-                {questions.map((q, index) => (
-                    <div key={index} className="col-md-8">
-                        <div className="card border-0 shadow mb-4">
-                            <div className="card-body">
-                                <h2 className='card-title mt-0 mb-4'>Question {index + 1}</h2>
-                                <input className='form-control mb-4'
-                                    type="text"
-                                    value={q.question}
-                                    name={`question${index}`}
-                                    onChange={(e) => handleInputChange(index, e)}
-                                    placeholder="Enter question"
-                                />
-                                <ul className='list-unstyled'>
-                                    {q.options.map((option, i) => (
-                                        <li key={i} className="mb-3">
-                                            <input className='form-control'
-                                                type="text"
-                                                value={option}
-                                                name={`option${index}-${i}`}
-                                                onChange={(e) => handleInputChange(index, e)}
-                                                placeholder={`Enter option ${i + 1}`}
-                                            />
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+            <Header/>
+            <div className="container py-5">
+                <div className='row justify-content-center'>
+                    {questionsData.map((exam, examIndex) => (
+                        <div key={examIndex}>
+                            <h2>{exam.examName}</h2>
+                            {exam.questions.map((question, questionIndex) => (
+                                <div key={questionIndex} className="question-container">
+                                    <h3>Question {question.id}</h3>
+                                    <p>{question.question}</p>
+                                    <ul>
+                                        {question.options.map((option, optionIndex) => (
+                                            <li key={optionIndex}>
+                                                {option}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p>Answer: {question.options[exam.answers[questionIndex]]}</p>
+                                </div>
+                            ))}
                         </div>
+                    ))}
+                </div>
+                <div className="row justify-content-between">
+                    <div className="col-auto">
+                        <Link to="/teacherInterface" className="btn btn-primary">Back</Link>
                     </div>
-                ))}
+                    <div className="col-auto">
+                        <Link to="/teacherInterface" onClick={handleDeleteQuestion} className="btn btn-danger">Delete</Link>
+                    </div>
+                </div>
             </div>
-        </div>
-        <Footer/>
+            <Footer/>
         </div>
     );
 }

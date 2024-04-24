@@ -20,6 +20,8 @@ import Footer from './Components/Exam Platform and Leaderboard/components/Footer
 import Header from './Components/Exam Platform and Leaderboard/components/Header';
 import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion';
 import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard';
+import StudentInterface from './Components/Exam Platform and Leaderboard/components/StudentInterface.js';
+import TeacherInterface from './Components/Exam Platform and Leaderboard/components/TeacherInterface.js';
 
 // Teacher components
 import THome from "./Components/Teacher Management/pages/THome";
@@ -49,6 +51,8 @@ import { getLoggedInAdmin } from './Components/Daily Process Dashboard/api/admin
 import PdfApp from './Components/Study Material and Past Paper Management/PdfApp.js';
 import PdfComp from './Components/Study Material and Past Paper Management/PdfComp.js';
 import PdfViewer from './Components/Study Material and Past Paper Management/PdfViewer.jsx';
+import PastPaperView from './Components/Study Material and Past Paper Management/PastPaperView.jsx';
+import PastPaperUpload from './Components/Study Material and Past Paper Management/PastPaperUpload.jsx';
 
 // Student Support System
 import Users from './Components/Student Support/components/Users.jsx';
@@ -112,6 +116,8 @@ const App = () => {
           <Route path="/header" element={<Header />} />
           <Route path="/createQuestion" element={<CreateQuestion />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/studentInterface" element={<StudentInterface />} />
+          <Route path="/teacherInterface" element={<TeacherInterface />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />
@@ -141,6 +147,8 @@ const App = () => {
           <Route path="/pdfApp" element={<PdfApp />} />
           <Route path="/pdfComp" element={<PdfComp />} />
           <Route path="/pdfViewer" element={<PdfViewer />} />
+          <Route path="/pastPaperView" element={<PastPaperView />} />
+          <Route path="/pastPaperUpload" element={<PastPaperUpload />} />
 
           {/* Student Support routes */}
           <Route path='/users' element={<Users />}></Route>

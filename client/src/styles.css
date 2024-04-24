@@ -41,22 +41,38 @@
     transition: transform 0.25s ease-in-out;
 }
 
-.cardHov:hover {
-    background-color: aquamarine;
-    transform: scale(1.1);
-}
-
-
 .cardHov:hover{
     background-color: aquamarine;
     transform: scale(1.1);
     transition: background 0.25s linear;
 }
 
+.cardDPDashboard {
+  transition: transform 0.1s ease-in-out;
+}
+
+.cardDPDashboard:hover{
+  transform: scale(1.15);
+}
+
 .rounded-end-custom {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+
+.iconDPDashboard {
+    position: absolute;
+    align-self: flex-end;
+    margin-top: 6%;
+    margin-right: 7%;
+    font-size: 24px;
+}
+
+.scrollable-table {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
 
 /* -------------------------------------- MainLogin.css -------------------------------------- */
 

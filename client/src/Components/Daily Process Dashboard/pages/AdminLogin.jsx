@@ -10,6 +10,8 @@ import { Button } from "@mui/material";
 import { login } from "../api/admin";
 
 import AdminHeader from '../components/AdminHeader'
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -41,7 +43,7 @@ const AdminLogin = () => {
 
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
-        <AdminHeader />
+        <Header/>
             <div className="justify-content-md-center">
                 <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Admin Login</label>
@@ -102,6 +104,7 @@ const AdminLogin = () => {
                 </div>
 
             </div>
+            <Footer/>
         </div>
     ); 
 };

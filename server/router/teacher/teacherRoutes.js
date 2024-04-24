@@ -5,6 +5,7 @@ import multer from 'multer';
 import crypto from 'crypto'; // Import crypto module for generating random bytes
 import nodemailer from 'nodemailer'; // Import nodemailer for sending emails
 import Teacher from "../../models/teacher/Teacher.js";
+import TLogins from "../../models/admin/teacherLogins.js";
 
 const router = express.Router();
 
@@ -183,6 +184,22 @@ router.post("/login", async (req, res) => {
 
         // If authentication is successful, generate a JSON Web Token (JWT)
         const token = jwt.sign({ userId: user._id }, 'your_secret_key_here', { expiresIn: '1h' });
+
+
+
+        //for DPDashboard
+                const teacherEmail = email
+
+                // Create a new Login document
+                const TLogin = new TLogins({
+                    teacherEmail: teacherEmail,
+                    timestamp: new Date()
+                });
+
+                // Save the login data to the database
+                await TLogin.save();
+
+
 
         // Return the token in the response
         res.status(200).json({ message: "Authentication successful", token });
