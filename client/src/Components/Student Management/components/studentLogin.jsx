@@ -41,7 +41,7 @@ function Login() {
                     style={{ width: '100%', padding: '8px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '3px' }}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <center><button type='submit' style={{ width: '100%', padding: '10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>Login</button></center>
+                <center><Link to="/dashboard" type='submit' style={{ width: '100%', padding: '10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>Login</Link></center>
                 <p style={{ marginTop: '15px', textAlign: 'center' }}>
                     <Link to="/forgotPassword" style={{ color: '#007bff', textDecoration: 'none' }}>Forgot Password</Link>
                 </p>
