@@ -56,12 +56,12 @@ import PdfViewer from './Components/Study Material and Past Paper Management/Pdf
 // Student Support System
 import Users from './Components/Student Support/components/Users.jsx';
 import CreateUser from './Components/Student Support/components/CreateUser.jsx';
-import UpdateUser from './Components/Student Support/components/UpdateUser.jsx';
-import Questions from './Components/Student Support/components/Questions.jsx';
-import Questions1 from './Components/Student Support/components/Questions1.jsx';
-import Questions2 from './Components/Student Support/components/Questions2.jsx';
-import QuectionTeacher from './Components/Student Support/components/QuectionTeacher.jsx';
-import UpdateQuestions from './Components/Student Support/components/UpdateQuestions';
+import UpdateUser from './Components/Student Support/components//UpdateUser.jsx';
+import CreateInquiry from './Components/Student Support/components/CreateInquiry.jsx';
+import StudentFeedback from './Components/Student Support/components/StudentFeedback';
+import TeacherFeedback from './Components/Student Support/components/TeacherFeedback';
+import Inquiry from './Components/Student Support/components/Inquiry.jsx';
+import UpdateInquiry from './Components/Student Support/components/UpdateInquiry';
 
 //Student Management
 import Dashboard from './Components/Student Management/components/dashboard.jsx';
@@ -151,11 +151,11 @@ const App = () => {
           <Route path='/users' element={<Users />}></Route>
           <Route path='/create' element={<CreateUser />}></Route>
           <Route path='/update/:id' element={<UpdateUser />}></Route>
-          <Route path='/question' element={<Questions />}></Route>
-          <Route path='/question1' element={<Questions1 />}></Route>
-          <Route path='/question2' element={<Questions2 />}></Route>
-          <Route path='/questionTeacher' element={<QuectionTeacher />}></Route>
-          <Route path='/updateQuestions' element={<UpdateQuestions />}></Route>
+          <Route path='/createInquiry' element={<CreateInquiry />}></Route>
+          <Route path='/studentFeedback' element={<StudentFeedback/>}></Route>
+          <Route path='/teacherFeedback' element={<TeacherFeedback/>}></Route>
+          <Route path='/inquiry' element={<Inquiry/>}></Route>
+          <Route path='/UpdateInquiry/:id' element={<UpdateInquiry />}></Route>
 
           {/* Student Management Routes */}
           <Route path = '/students' element = {<Students />}> </Route>
