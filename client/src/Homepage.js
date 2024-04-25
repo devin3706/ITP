@@ -19,11 +19,7 @@ function HomePage() {
                 }}
             >
 
-                <div className="container text-center pt-5">
-                    <h2>Welcome to ABS Academy</h2>
-                    <p>Where education meets Excellence</p>
-                    <div className="mt-4">
-                        <Link to="/mainLogin" className="btn btn-primary">Get Started</Link>
+               
 
                 <div className='d-flex justify-content-center align-items-center vh-100'>
                     <div className='container text-center pt-3'>
