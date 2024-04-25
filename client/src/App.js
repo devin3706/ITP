@@ -69,6 +69,7 @@ import Dashboard from './Components/Student Management/components/dashboard.jsx'
 import Students from './Components/Student Management/components/Students.jsx';
 import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
 import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
+import StudentLogin from './Components/Student Management/components/studentLogin.jsx';
 
 
 //Payment Management
@@ -165,6 +166,7 @@ const App = () => {
           <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
           <Route path = '/createStudent' element = {<CreateStudent/>}> </Route>
           <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
+          <Route path = '/studentLogin' element = {<StudentLogin />}> </Route>
 
           {/* Payment Management Routes */}
           <Route path="/payment" element={<Payment />} />
