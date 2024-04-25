@@ -54,7 +54,7 @@ const THome = () => {
                                 <Card className="h-100 shadow border border-dark cardHov">
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Feedback</Card.Title>
-                                        <Link to="#feedback" className="stretched-link"></Link>
+                                        <Link to="/teacherFeedback" className="stretched-link"></Link>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -62,7 +62,7 @@ const THome = () => {
                                 <Card className="h-100 shadow border border-dark cardHov">
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Q&A</Card.Title>
-                                        <Link to="#qna" className="stretched-link"></Link>
+                                        <Link to="/updateInquiry" className="stretched-link"></Link>
                                     </Card.Body>
                                 </Card>
                             </Col>

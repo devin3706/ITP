@@ -325,7 +325,7 @@ router.post("/reset-password", async (req, res) => {
         console.log("User after update:", updatedTeacher); // Log the user object after update
 
         // Password reset successful
-        
+        alert("Password reset Successful")
         return res.status(200).json({ message: "Password reset successful." });
         
     } catch (error) {
