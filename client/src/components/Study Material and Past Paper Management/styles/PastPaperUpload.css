@@ -114,3 +114,8 @@ canvas.react-pdf_Page_canvas {
 .pdf-modal-close:hover {
   color: #777;
 }
+
+.btn btn-info{
+  align-content: end;
+
+}
