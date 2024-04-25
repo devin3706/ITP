@@ -9,6 +9,11 @@ import { view, deleteAdmin, update } from "../api/admin";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
+//validations
+const isValidContact = (contact) => contact >= 700000000 && contact <= 799999999 && contact.toString().length === 9;
+const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+
 const AdminDetails = () => {
     const [admins, setAdmins] = useState([]);
     const [editAdminID, setEditAdminID] = useState(null);
@@ -38,6 +43,14 @@ const AdminDetails = () => {
             const adminToUpdate = admins.find((admin) => admin._id === adminID);
             if (!adminToUpdate) {
                 console.error("Admin not found for update");
+                return;
+            }
+
+            const validEmail = isValidEmail(adminToUpdate.email);
+            const validContact = isValidContact(adminToUpdate.contact);
+
+            if (!validEmail || !validContact) {
+                alert("Invalid email or contact number");
                 return;
             }
 
@@ -208,9 +221,6 @@ const AdminDetails = () => {
                                             || !admin.username
                                             || !admin.email
                                             || !admin.contact
-                                            || !(admin.contact >= 700000000)
-                                            || !(admin.contact <= 799999999)
-                                            || !(admin.contact.toString().length === 9)
 
                                         }
                                     >
