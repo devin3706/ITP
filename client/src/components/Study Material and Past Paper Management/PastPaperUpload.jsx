@@ -2,7 +2,9 @@ import './styles/PastPaperUpload.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
+import Header from "../Exam Platform and Leaderboard/components/Header";
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
+
 
 function PastPaperUpload() {
   const [year, setYear] = useState("");
@@ -125,9 +127,42 @@ function PastPaperUpload() {
     setEditFormData({ ...editFormData, file });
   };
 
+  const generateReport = () => {
+    const csvRows = [
+      ['Year', 'Description', 'Grade', 'Subject', 'File Name'].join(','), // CSV Header
+    ];
+    
+    allPastPapers.forEach(paper => {
+      const csvContent = [
+        paper.year,
+        `" ${paper.description.replace(/"/g, '""')}"`,  
+        paper.grade,
+        paper.subject,
+        paper.pdf
+      ].join(',');
+      csvRows.push(csvContent);
+    });
+  
+    const csvString = csvRows.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'pastPapersReport.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
+    <div style={{backgroundColor: '#ECF0F5'}}>
+        <div>
+            <Header />
+        </div>
     <div className="App">
+    
+       
       <form className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto" onSubmit={submitPastPaper}>
+      
         <h4>Upload Past Papers</h4>
         <input
           type="text"
@@ -179,10 +214,12 @@ function PastPaperUpload() {
         />
         <br />
         <button className="btn btn-primary" type="submit">Submit</button>
+        
       </form>
 
       <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
         <br />
+      <button className="btn btn-info" onClick={generateReport}>Generate Report</button>
        <h4>Uploaded Past Papers:</h4>
         <table className="table">
           <thead>
@@ -273,6 +310,7 @@ function PastPaperUpload() {
       )}
        
       <Footer />
+    </div>
     </div>
   );
 }

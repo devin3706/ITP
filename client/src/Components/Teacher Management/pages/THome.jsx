@@ -104,7 +104,7 @@ const THome = () => {
                                 <Card className="h-100 shadow border border-dark cardHov">
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Exam</Card.Title>
-                                        <Link to="/exam" className="stretched-link"></Link>
+                                        <Link to="/teacherInterface" className="stretched-link"></Link>
                                     </Card.Body>
                                 </Card>
                             </Col>

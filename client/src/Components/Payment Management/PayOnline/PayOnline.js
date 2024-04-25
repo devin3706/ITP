@@ -38,7 +38,7 @@ function PayOnline() {
     <div style={{backgroundColor: '#ECF0F5'}}>
       <Header/>
       <h1 className="text-center mt-5 mb-5">Online Payment</h1>
-      <div className="container col-5">
+      <div className="container col-5 mb-5">
         <form className="row g-3 bg-dark justify-content-center border border-dark rounded" onSubmit={submitPayers}>
           <div className="col-md-8">
             <label htmlFor="payerName" className="form-label text-warning">[1] Payer Name:</label>

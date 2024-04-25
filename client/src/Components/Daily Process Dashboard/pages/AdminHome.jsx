@@ -3,6 +3,7 @@ import Chart from "chart.js/auto";
 import { Link } from "react-router-dom";
 import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent } from "react-icons/pi";
 import '../../../styles.css';
+import { jsPDF } from 'jspdf';
 
 // API functions
 import { getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, getTotalExams, getTotalFiles, getTotalStudents, getTotalTeachers, view } from "../api/admin";
@@ -156,6 +157,59 @@ const AdminHome = () => {
         });
     };
 
+    //Creating the User logins report in PDF format
+    const generatePDFReport = () => {
+        const doc = new jsPDF();
+    
+        //current month
+        doc.text('Login statics for the current month:', 10,20)
+        doc.text(`Month: ${currentMonth}`, 10, 30);
+        doc.text(`Student Logins: ${student_LonginsCountForThisMonth}`, 20, 40);
+        doc.text(`Teacher Logins: ${teacher_LonginsCountForThisMonth}`, 20, 50);
+        doc.text(`Admin Logins: ${admin_LonginsCountForThisMonth}`, 20, 60);
+
+        // all months
+        // let loopCtrl = 1;
+        doc.text('Login statistics for all months:', 10, 80);
+
+        doc.text('Student logins', 20, 90);
+
+        let yPos = 100;
+        
+        studentLoginsByMonth.forEach((monthData, index) => {
+            const { _id, count } = monthData;
+            const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][_id - 1];
+            doc.text(`${monthName}: ${count}`, 30, yPos + index * 10);
+            //loopCtrl++;
+        });
+
+        // yPos = yPos + loopCtrl * 10;                                                            //yPos = 110
+        doc.text('Teacher logins', 80, 90);
+
+        yPos = 100;
+
+        teacherLoginsByMonth.forEach((monthData, index) => {
+            const { _id, count } = monthData;
+            const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][_id - 1];
+            doc.text(`${monthName}: ${count}`, 90, yPos + index * 10);
+            //loopCtrl++;
+        });
+
+        //yPos = yPos + loopCtrl * 10;
+        doc.text('Admin logins', 140, 90);
+
+        yPos = 100;
+
+        adminLoginsByMonth.forEach((monthData, index) => {
+            const { _id, count } = monthData;
+            const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][_id - 1];
+            doc.text(`${monthName}: ${count}`, 150, yPos + index * 10);
+        });
+
+    
+        doc.save('LoginStatistics.pdf');
+    };
+
     return(
         <div style={{backgroundColor: '#ECF0F5'}}>
             <Header />
@@ -239,10 +293,14 @@ const AdminHome = () => {
                 <hr className="my-4 border-2 border-dark" /> 
 
                 <div className="row mt-1 mb-5">
-                    <div className="col-8 mt-5 border border-dark rounded-4 shadow">
-                        <h2 className="mb-3 mt-3">Login Statistics</h2>
+                    <div className="col-8 mt-5 border border-dark rounded-4 shadow">                        
+                        <div className="row">
+                            <h2 className="mb-3 mt-3 col">Login Statistics</h2>
+                            <button className="btn btn-primary rounded-5 justify-content-end col-3 w-auto h-25 mt-4 mr-3" onClick={generatePDFReport}>Download Report</button>
+                        </div>
                         <h4>Month: {currentMonth}</h4>
                         <div className="row row-cols-1 row-cols-md-3 g-4 mb-5">
+
                             <div className="col">
                                 <div className="card rounded-4" style={{backgroundColor: '#FEC978'}}>
                                     <div className="card-body">
@@ -251,6 +309,7 @@ const AdminHome = () => {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="col">
                                 <div className="card rounded-4" style={{backgroundColor: '#69E0E0'}}>
                                     <div className="card-body">
@@ -259,6 +318,7 @@ const AdminHome = () => {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="col">
                                 <div className="card rounded-4" style={{backgroundColor: '#FB92A8'}}>
                                     <div className="card-body">
@@ -267,7 +327,9 @@ const AdminHome = () => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                         <div className="container shadow border border-info rounded mb-3">
                             <canvas id="loginChart"></canvas>
                         </div>
@@ -297,13 +359,13 @@ const AdminHome = () => {
                         </div>
                         <div className="row mt-4">
                             <div className="d-flex justify-content-start col">
-                                <Link to="/adminCreate">                                
+                                <Link to="/adminCreate">
                                     <button className="btn btn-primary rounded-5">new</button>                                
                                 </Link>
                             </div>
 
                             <div className="d-flex justify-content-end col">
-                                <Link to="/adminDetails">                                
+                                <Link to="/adminDetails">
                                     <button className="btn btn-info rounded-5">view</button>                                
                                 </Link>
                             </div>
