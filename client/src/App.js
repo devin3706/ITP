@@ -29,14 +29,13 @@ import TCreate from './Components/Teacher Management/pages/TCreate';
 import TLogin from './Components/Teacher Management/pages/TLogin';
 import TDetails from './Components/Teacher Management/pages/TDetails';
 import THeader from './Components/Teacher Management/component/THeader';
-import Tpagetest from './Components/Teacher Management/pages/Tpagetest';
 import TUpdate from './Components/Teacher Management/pages/TUpdate.jsx';
 import SideNavbar from './Components/Teacher Management/component/SideNavbar';
 import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
 import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
 import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
 import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
-import ParentComponent from './Components/Teacher Management/pages/ParentComponent.jsx';
+
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -52,6 +51,8 @@ import { getLoggedInAdmin } from './Components/Daily Process Dashboard/api/admin
 import PdfApp from './Components/Study Material and Past Paper Management/PdfApp.js';
 import PdfComp from './Components/Study Material and Past Paper Management/PdfComp.js';
 import PdfViewer from './Components/Study Material and Past Paper Management/PdfViewer.jsx';
+import PastPaperView from './Components/Study Material and Past Paper Management/PastPaperView.jsx';
+import PastPaperUpload from './Components/Study Material and Past Paper Management/PastPaperUpload.jsx';
 
 // Student Support System
 import Users from './Components/Student Support/components/Users.jsx';
@@ -123,7 +124,6 @@ const App = () => {
           <Route path="/tCreate" element={<TCreate />} />
           <Route path="/tLogin" element={<TLogin />} />
           <Route path="/tDetails" element={<TDetails />} />
-          <Route path="/tpagetest" element={<Tpagetest />} />
           <Route path="/tUpdate/:id" element={<TUpdate />} />
           <Route path="/tHeader" element={<THeader />} />
           <Route path="/sideNavbar" element={<SideNavbar />} />
@@ -131,7 +131,8 @@ const App = () => {
           <Route path="/mainLogin" element= {<MainLogin/>} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
           <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
-          <Route path="/parentComponent" element= {<ParentComponent/>} />
+         
+
         
 
 
@@ -146,6 +147,8 @@ const App = () => {
           <Route path="/pdfApp" element={<PdfApp />} />
           <Route path="/pdfComp" element={<PdfComp />} />
           <Route path="/pdfViewer" element={<PdfViewer />} />
+          <Route path="/pastPaperView" element={<PastPaperView />} />
+          <Route path="/pastPaperUpload" element={<PastPaperUpload />} />
 
           {/* Student Support routes */}
           <Route path='/users' element={<Users />}></Route>

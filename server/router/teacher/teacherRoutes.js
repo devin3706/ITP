@@ -5,6 +5,7 @@ import multer from 'multer';
 import crypto from 'crypto'; // Import crypto module for generating random bytes
 import nodemailer from 'nodemailer'; // Import nodemailer for sending emails
 import Teacher from "../../models/teacher/Teacher.js";
+import TLogins from "../../models/admin/teacherLogins.js";
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ router.post("/add", upload.single('teacherPhoto'), async (req, res) => {
         tPhone,
         tEmail,
         password,
-        confirmPassword
+        
     } = req.body;
 
     const teacherData = {
@@ -46,7 +47,7 @@ router.post("/add", upload.single('teacherPhoto'), async (req, res) => {
         phoneNumber: tPhone,
         email: tEmail,
         password: password,
-        confirmPassword: confirmPassword
+       
     };
 
     if (req.file) {
@@ -94,12 +95,12 @@ router.put("/update/:id", async (req, res) => {
         tAddress,
         tPhone,
         tEmail,
-        password
+        /* password */
     } = req.body;
 
     try {
         // Hash the new password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        /* const hashedPassword = await bcrypt.hash(password, 10); */
 
         const updatedTeacher = await Teacher.findByIdAndUpdate(id, {
             firstName: tfirstName,
@@ -112,7 +113,7 @@ router.put("/update/:id", async (req, res) => {
             address: tAddress,
             phoneNumber: tPhone,
             email: tEmail,
-            password: hashedPassword // Update with hashed password
+           /*  password: hashedPassword // Update with hashed password */
         }, { new: true });
 
         if (!updatedTeacher) {
@@ -183,6 +184,22 @@ router.post("/login", async (req, res) => {
 
         // If authentication is successful, generate a JSON Web Token (JWT)
         const token = jwt.sign({ userId: user._id }, 'your_secret_key_here', { expiresIn: '1h' });
+
+
+
+        //for DPDashboard
+                const teacherEmail = email
+
+                // Create a new Login document
+                const TLogin = new TLogins({
+                    teacherEmail: teacherEmail,
+                    timestamp: new Date()
+                });
+
+                // Save the login data to the database
+                await TLogin.save();
+
+
 
         // Return the token in the response
         res.status(200).json({ message: "Authentication successful", token });
@@ -257,10 +274,12 @@ const sendResetEmail = async (email, resetToken) => {
   }
 };
 
+
+
 // Route to handle password reset form submission
 router.post("/reset-password", async (req, res) => {
     const { resetToken, newPassword, confirmPassword, email } = req.body;
-    console.log("Request Body:", req.body);
+   
 
     // Check if resetToken, newPassword, and confirmPassword are present in the request body
     if (!resetToken || !newPassword || !confirmPassword) {
@@ -273,33 +292,67 @@ router.post("/reset-password", async (req, res) => {
     }
 
     try {
-        // Update user's password in the database
+        // Find the user by email
+        const query = Teacher.where({ email: email });
+        const user = await query.findOne();
+
+        console.log(user)
+        //const user = await Teacher.findOne({ email });
+
+        // If user doesn't exist or the resetToken doesn't match, return an error
+        if (!user ||  !resetToken) {
+            
+            return res.status(404).json({ message: "Invalid or expired token." });
+            
+            
+        }
+        
         // Hash the new password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
-        const user = await Teacher.findOne({ email });
 
+        // Update user's password in the database
+
+        
         const updatedTeacher = await Teacher.findByIdAndUpdate(user.id, {
             password: hashedPassword // Update with hashed password
         }, { new: true });
+        
 
         if (!updatedTeacher) {
             return res.status(404).json({ message: "Teacher not found" });
         }
 
-        res.status(200).json({ message: "Teacher updated", teacher: updatedTeacher });
-        console.log("User after update:", user); // Log the user object after update
-
-        if (!user) {
-            return res.status(404).json({ message: "Invalid or expired token." });
-        }
+        console.log("User after update:", updatedTeacher); // Log the user object after update
 
         // Password reset successful
+        alert("Password reset Successful")
         return res.status(200).json({ message: "Password reset successful." });
+        
     } catch (error) {
-        console.error("Error resetting password:", error);
-        return res.status(500).json({ error: "An error occurred while processing the request." });
+        console.error("Error resetting password:", error); // Log the specific error that occurred
+        return res.status(500).json({ error: "An error occurred while resetting the password." });
     }
 });
+
+
+
+// Add a route to get the count of teachers by district
+router.get("/district-count", async (req, res) => {
+    try {
+        // Aggregate the data to count the number of teachers in each district
+        const districtCount = await Teacher.aggregate([
+            { $group: { _id: "$district", count: { $sum: 1 } } }
+        ]);
+
+        res.status(200).json({ districtCount });
+    } catch (error) {
+        console.error("Error fetching district count:", error);
+        res.status(500).json({ error: "An error occurred while fetching district count." });
+    }
+});
+
+
+
 
 
 

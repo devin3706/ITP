@@ -7,7 +7,9 @@ import { Button } from "@mui/material";
 //api functions
 import { register } from "../api/admin";
 
-import AdminHeader from '../components/AdminHeader'
+//header and footer
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 const AdminCreate = () => {
     const navigate = useNavigate();
@@ -23,8 +25,11 @@ const AdminCreate = () => {
     const [confPassword, setConfPassword] = useState("");
 
 
-    //password validations
+    //validations
     let hasSixChar = password.length >= 6;
+    let isContact = contact >= 700000000 && contact <= 799999999 && contact.toString().length === 9;
+    let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 
     const handleAdminCreate = async (e) => {
         e.preventDefault();
@@ -45,7 +50,7 @@ const AdminCreate = () => {
 
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
-        <AdminHeader />
+        <Header/>
             <div className="justify-content-md-center">
                 <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Create New Admin</label>
@@ -73,6 +78,9 @@ const AdminCreate = () => {
                             <input type="email" className="form-control border border-dark" placeholder="name@example.com" aria-label="email" aria-describedby="basic-addon1" value={email}
                                 onChange={(e) => setEmail(e.target.value)}/>
                         </div>
+                        <div className="ml-1">
+                            <small className={isEmail ? 'text-success' : 'text-danger'}>Email should be a valid email</small>
+                        </div>
 
                         {/* <div className="input-group mt-3">
                             <label className="input-group-text text-bg-secondary p-2" for="province">Location - Province</label>
@@ -90,6 +98,9 @@ const AdminCreate = () => {
                             <span className="input-group-text text-bg-secondary border border-dark" id="email">+94</span>
                             <input type="number" className="form-control border border-dark" id="contact" placeholder="7xxxxxxxx" aria-label="contact" aria-describedby="basic-addon1" value={contact}
                                 onChange={(e) => setContact(e.target.value)}/>
+                        </div>
+                        <div className="ml-1">
+                            <small className={isContact ? 'text-success' : 'text-danger'}>Number should start with 7 and should contain 9 digits</small>
                         </div>
 
                         <div className="input-group mt-3">
@@ -126,14 +137,11 @@ const AdminCreate = () => {
                                 || !password
                                 || !hasSixChar
                                 || !confPassword
-                                || !contact
                                 || !username
-                                || !email
+                                || !isEmail
                                 || !fName
                                 || !lName
-                                || !(contact >= 700000000)
-                                || !(contact <= 799999999)
-                                || !(contact.toString().length === 9)
+                                || !isContact
                             }
                             onClick={handleAdminCreate}
                         >
@@ -143,6 +151,7 @@ const AdminCreate = () => {
                 </div>
 
             </div>
+            <Footer/>
         </div>
     ); 
 };

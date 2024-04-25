@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ResetPassword = ({ token }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const {resetToken, email} = useParams();
+  const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
@@ -29,7 +30,11 @@ const ResetPassword = ({ token }) => {
           email: email
         }
       );
-      setMessage(response.data.message);
+      
+      alert("Reset Password Success");
+      // Redirect to login page
+      navigate("/login");
+
     } catch (error) {
       setMessage("An error occurred while resetting the password");
       console.error("Reset password error:", error);
