@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import '../../../styles.css';
 
 // api functions
 import { view, deleteAdmin, update } from "../api/admin";
@@ -8,9 +9,16 @@ import { view, deleteAdmin, update } from "../api/admin";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
+//validations
+const isValidContact = (contact) => contact >= 700000000 && contact <= 799999999 && contact.toString().length === 9;
+const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+
 const AdminDetails = () => {
     const [admins, setAdmins] = useState([]);
     const [editAdminID, setEditAdminID] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchField, setSearchField] = useState("username");
 
     // Fetch admins
     useEffect(() => {
@@ -35,6 +43,14 @@ const AdminDetails = () => {
             const adminToUpdate = admins.find((admin) => admin._id === adminID);
             if (!adminToUpdate) {
                 console.error("Admin not found for update");
+                return;
+            }
+
+            const validEmail = isValidEmail(adminToUpdate.email);
+            const validContact = isValidContact(adminToUpdate.contact);
+
+            if (!validEmail || !validContact) {
+                alert("Invalid email or contact number");
                 return;
             }
 
@@ -74,6 +90,10 @@ const AdminDetails = () => {
         setAdmins(updatedAdmins);
     };
 
+    const filteredAdmins = admins.filter((admin) =>
+        admin[searchField].toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <Header/>
@@ -85,6 +105,26 @@ const AdminDetails = () => {
                     <Link to="/adminHome">                                
                         <button className="btn btn-info rounded-5 mt-4 mb-3">dashboard</button>                                
                     </Link>
+                </div>
+
+                <div className="d-flex justify-content-between mt-3 col-8">
+                    <input
+                        type="text"
+                        className="w-100 form-control shadow rounded-5"
+                        placeholder="Search by username"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <select
+                        className="form-control w-auto text-light shadow rounded-5 ml-2"
+                        style={{backgroundColor: '#494949'}}
+                        value={searchField}
+                        onChange={(e) => setSearchField(e.target.value)}
+                    >
+                        <option value="username">Username</option>
+                        <option value="fName">First Name</option>
+                        <option value="lName">Last Name</option>
+                    </select>
                 </div>
 
                 <div className="d-flex justify-content-end col">
@@ -107,7 +147,7 @@ const AdminDetails = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {admins.map((admin, index) => (
+                    {filteredAdmins.map((admin, index) => (
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td>
@@ -181,9 +221,6 @@ const AdminDetails = () => {
                                             || !admin.username
                                             || !admin.email
                                             || !admin.contact
-                                            || !(admin.contact >= 700000000)
-                                            || !(admin.contact <= 799999999)
-                                            || !(admin.contact.toString().length === 9)
 
                                         }
                                     >
@@ -191,7 +228,7 @@ const AdminDetails = () => {
                                     </button>
                                 ) : (
                                     <button
-                                        className="btn btn-info btn-sm ml-3"
+                                        className="btn btn-info btn-sm ml-3 rounded-5"
                                         onClick={() => handleEdit(admin._id)}
                                     >
                                         Edit
@@ -199,7 +236,7 @@ const AdminDetails = () => {
                                 )}
                                 <button
                                     onClick={() => handleDeleteAdmin(admin._id)}
-                                    className="btn btn-danger btn-sm ml-3"
+                                    className="btn btn-danger btn-sm ml-3 rounded-5"
                                 >
                                     Delete
                                 </button>

@@ -157,6 +157,32 @@ const saveEdit = async (e) => {
   
     return errors;
   };
+
+  const generateReport = () => {
+    const csvRows = [
+      ['title', 'Description', 'Grade', 'Subject', 'File Name'].join(','), // CSV Header
+    ];
+    
+    allPdf.forEach(pdf => {
+      const csvContent = [
+        pdf.title,
+        `" ${pdf.description.replace(/"/g, '""')}"`,  
+        pdf.grade,
+        pdf.subject,
+        pdf.pdf
+      ].join(',');
+      csvRows.push(csvContent);
+    });
+  
+    const csvString = csvRows.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'pastPapersReport.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   
   
 
@@ -218,10 +244,12 @@ const saveEdit = async (e) => {
       />
       <br />
       <button className="btn btn-primary" type="submit">Submit</button>
+    
     </form>
 
     <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
       <br />
+      <button className="btn btn-info" onClick={generateReport}>Generate Report</button>
       <h4>Uploaded Study Materials:</h4>
       <table className="table">
         <thead>
