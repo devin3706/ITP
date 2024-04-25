@@ -10,7 +10,8 @@ import cookieParser from 'cookie-parser';
 import expressValidator from 'express-validator';
 import adminRoutes from './router/admin/admin.js';
 import studyMaterialRoutes from './router/study materials/routes.js';
-import userRoutes from './router/student support/routes.js';
+import userRoutes from './router/student support/UserRoutes.js';
+import inquiryRoutes from './router/student support/InquiryRoutes.js';
 import { upload } from './middleware/study materials/multer.js';
 import studentRoutes from './router/student management/routes.js';
 import payerRoutes from './router/payment management/payers.js';
@@ -90,6 +91,7 @@ function startServer() {
 
   // Sansala Routes
   app.use('/users', userRoutes);
+  app.use('/inquiry', inquiryRoutes);
 
   // Minesi Routes
   app.use('/student', studentRoutes);

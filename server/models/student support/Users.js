@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     Rating: Number
 });
 
-const UserModel = mongoose.model("feedback", UserSchema);
+const UserModel = mongoose.model('feedback', UserSchema);
 
 export default UserModel;
+
