@@ -19,6 +19,7 @@ function HomePage() {
                 }}
             >
 
+
                 <div className='d-flex justify-content-center align-items-center vh-100'>
                     <div className='container text-center pt-3'>
                         <div className="container text-center pt-5 bg-light col-5 p-4 shadow rounded-5">
