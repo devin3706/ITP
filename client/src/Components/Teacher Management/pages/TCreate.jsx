@@ -131,6 +131,7 @@ const TCreate = () => {
                                                             e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
                                                         }
                                                     }}
+                                                    
                                                 />
                                                 
                                                 <ErrorMessage name="tnicNumber" component="div" className="text-danger" />
@@ -143,11 +144,13 @@ const TCreate = () => {
                                                 size='medium'
                                                 id='tnicNumber'
                                                 onKeyPress={(e) => {
-                                                    const allowedChars = ['v', 'V', 'x', 'X']; // Array of allowed characters
-                                                    if (!allowedChars.includes(e.key)) {
-                                                        e.preventDefault(); // Prevent the input of characters other than 'v', 'V', 'x', or 'X'
+                                                    const allowedChars = [/[0-9]/, 'v', 'V', 'x', 'X']; // Array of allowed characters
+                                                    if (!allowedChars.some(regex => (typeof regex === 'string' && regex === e.key) || (typeof regex === 'object' && regex.test(e.key)))) {
+                                                        e.preventDefault(); // Prevent the input of characters other than numbers, 'v', 'V', 'x', 'X'
                                                     }
                                                 }}
+                                                
+                                                
 />
 
                                                
