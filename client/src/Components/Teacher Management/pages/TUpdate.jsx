@@ -94,6 +94,8 @@ const districts = [
                 const { confirmPassword, ...dataToSend } = formData;
                 await axios.put(`http://localhost:8081/teacher/update/${id}`, dataToSend);
                 alert("Teacher updated successfully");
+
+                
             } catch (error) {
                 console.error("Error updating teacher:", error);
                 alert("An error occurred while updating the teacher");

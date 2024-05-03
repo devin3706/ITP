@@ -30,10 +30,10 @@ const ResetPassword = ({ token }) => {
           email: email
         }
       );
-      
+
       alert("Reset Password Success");
       // Redirect to login page
-      navigate("/login");
+      navigate("/tLogin");
 
     } catch (error) {
       setMessage("An error occurred while resetting the password");

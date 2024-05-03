@@ -130,6 +130,10 @@ const TDetails = () => {
         }
     };
 
+    const handleAddTeacher = () => {
+        navigate('/tCreate');
+    };
+
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
             <Header/>
@@ -141,6 +145,7 @@ const TDetails = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+                    
                 </div>
                 <div className="d-flex justify-content-center">
                     <Table bordered hover responsive="sm" style={{ backgroundColor: '#FFFFFF' }}>
@@ -187,6 +192,7 @@ const TDetails = () => {
                             <Button color="primary" size="lg" disabled={loading}>{loading ? 'Loading...' : 'Generate Report'}</Button>
                         )}
                     </PDFDownloadLink>
+                    <Button color="success" onClick={handleAddTeacher}>Add Teacher</Button>
                 </div>
                 <div className="d-flex justify-content-left mt-3" style={{ width: '300px', height: '300px' }}>
                     <Pie data={pieChartData} id="pie-chart" />

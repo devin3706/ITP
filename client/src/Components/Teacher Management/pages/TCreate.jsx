@@ -19,6 +19,8 @@ import * as Yup from 'yup';
 
 const TCreate = () => {
     
+
+    // District
     const districts = [
         "Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle",
         "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle",
@@ -101,14 +103,20 @@ const TCreate = () => {
                                                 <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>General Information</h3>
                                                 <ErrorMessage name="tfirstName" component="div" className="text-danger" />
                                                 <Field
-                                                    name="tfirstName"
-                                                    type="text"
-                                                    as={MDBInput}
-                                                    wrapperClass='mb-4'
-                                                    label='First Name'
-                                                    size='medium'
-                                                    id='tfirstName'
-                                                />
+                                                name="tfirstName"
+                                                type="text"
+                                                as={MDBInput}
+                                                wrapperClass='mb-4'
+                                                label='First Name'
+                                                size='medium'
+                                                id='tfirstName'
+                                                onKeyPress={(e) => {
+                                                    const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                    if (!regex.test(e.key)) {
+                                                        e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                    }
+                                                }}
+/>
                                                 
                                                 <ErrorMessage name="tlastName" component="div" className="text-danger" />
                                                 <Field
@@ -119,18 +127,34 @@ const TCreate = () => {
                                                     label='Last Name'
                                                     size='medium'
                                                     id='tlastName'
+                                                    onKeyPress={(e) => {
+                                                        const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                        if (!regex.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                        }
+                                                    }}
+                                                    
                                                 />
                                                 
                                                 <ErrorMessage name="tnicNumber" component="div" className="text-danger" />
                                                 <Field
-                                                    name="tnicNumber"
-                                                    type="text"
-                                                    as={MDBInput}
-                                                    wrapperClass='mb-4'
-                                                    label='NIC - Number'
-                                                    size='medium'
-                                                    id='tnicNumber'
-                                                />
+                                                name="tnicNumber"
+                                                type="text"
+                                                as={MDBInput}
+                                                wrapperClass='mb-4'
+                                                label='NIC - Number'
+                                                size='medium'
+                                                id='tnicNumber'
+                                                onKeyPress={(e) => {
+                                                    const allowedChars = [/[0-9]/, 'v', 'V', 'x', 'X']; // Array of allowed characters
+                                                    if (!allowedChars.some(regex => (typeof regex === 'string' && regex === e.key) || (typeof regex === 'object' && regex.test(e.key)))) {
+                                                        e.preventDefault(); // Prevent the input of characters other than numbers, 'v', 'V', 'x', 'X'
+                                                    }
+                                                }}
+                                                
+                                                
+/>
+
                                                
                                                 <div className="mb-4 mt-2">
                                                 <ErrorMessage name="tSubject" component="div" className="text-danger" />
@@ -186,14 +210,21 @@ const TCreate = () => {
                                                     
                                                 </div>
                                                 <Field
-                                                    name="tInfo"
-                                                    type="text"
-                                                    as={MDBInput}
-                                                    wrapperClass='mb-4'
-                                                    label='Additional Information'
-                                                    size='medium'
-                                                    id='tInfo'
-                                                />
+                                                name="tInfo"
+                                                type="text"
+                                                as={MDBInput}
+                                                wrapperClass='mb-4'
+                                                label='Additional Information'
+                                                size='medium'
+                                                id='tInfo'
+                                                onKeyPress={(e) => {
+                                                    const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                    if (!regex.test(e.key)) {
+                                                        e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                    }
+                                                }}
+/>
+
                                             </MDBCol>
                                             <MDBCol md='6' className='p-5 bg-info border border-primary rounded-end-custom'>
                                                 <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>Contact Details</h3>
@@ -206,6 +237,12 @@ const TCreate = () => {
                                                     label='Address'
                                                     size='medium'
                                                     id='tAddress'
+                                                    onKeyPress={(e) => {
+                                                        const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                        if (!regex.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                        }
+                                                    }}
                                                 />
                                                 
                                                 <ErrorMessage name="tPhone" component="div" className="text-danger" />
@@ -217,6 +254,12 @@ const TCreate = () => {
                                                     label='Phone Number'
                                                     size='medium'
                                                     id='tPhone'
+                                                    onKeyPress={(e) => {
+                                                        const isNumeric = /^[0-9]*$/; // Regex to match only numeric characters
+                                                        if (!isNumeric.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than numeric characters
+                                                        }
+                                                    }}
                                                 />
                                                
                                                 <ErrorMessage name="tEmail" component="div" className="text-danger" />
@@ -228,6 +271,12 @@ const TCreate = () => {
                                                     label='Your Email'
                                                     size='medium'
                                                     id='tEmail'
+                                                    onKeyPress={(e) => {
+                                                        const validChars = /^[a-zA-Z0-9@.]*$/; // Regex to match only valid email characters
+                                                        if (!validChars.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than valid email characters
+                                                        }
+                                                    }}
                                                 />
                                                 
                                                 <ErrorMessage name="password" component="div" className="text-danger" />

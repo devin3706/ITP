@@ -15,6 +15,7 @@ const AdminCreate = () => {
     const navigate = useNavigate();
 
     //form states
+    const [gbg, setGbg] = useState(null);
     const [fName, setFName] = useState("");
     const [lName, setLName] = useState("");
     const [username, setUsername] = useState("");
@@ -27,9 +28,37 @@ const AdminCreate = () => {
 
     //validations
     let hasSixChar = password.length >= 6;
-    let isContact = contact >= 700000000 && contact <= 799999999 && contact.toString().length === 9;
+    let contactStartWithSeven = contact.toString().startsWith('7');
+    let hasNineDigits = contact.toString().length === 9
     let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+    const isLetter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    const handleFName = (e) => {
+        const inputValue = e.target.value;
+        const nonLetters = inputValue.split('').filter(char => !isLetter.includes(char)).join('');
+        if (nonLetters) {
+            setGbg(nonLetters);
+            setTimeout(() => {
+                setGbg(null);
+            }, 1200);
+        } else {
+            setFName(inputValue);
+        }
+    };    
+    const handleLName = (e) => {
+        const inputValue = e.target.value;
+        const nonLetters = inputValue.split('').filter(char => !isLetter.includes(char)).join('');
+        if (nonLetters) {
+            setGbg(nonLetters);
+            setTimeout(() => {
+                setGbg(null);
+            }, 1200);
+        } else {
+            setLName(inputValue);
+        }
+    };
+    
     
 
     const handleAdminCreate = async (e) => {
@@ -49,6 +78,8 @@ const AdminCreate = () => {
         }
     }
 
+    
+
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <Header/>
@@ -62,27 +93,17 @@ const AdminCreate = () => {
 
                         <div className="input-group align-items-center">
                             <span className="input-group-text text-bg-secondary border border-dark">Name</span>
-                            <input 
-                                type="text" 
-                                aria-label="First name" 
-                                className="form-control border border-dark" 
-                                id="fName" 
-                                placeholder="First Name" 
-                                value={fName}
-                                onChange={(e) => {
-                                    const input = e.target.value;
-                                    // Regular expression to match only letters (both uppercase and lowercase)
-                                    const regex = /^[a-zA-Z]*$/;
-                                    // Check if the input matches the regex, if so update the state
-                                    if (regex.test(input) || input === '') {
-                                        setFName(input);
-                                    }
-                                }}
-                            />
-
+                            <input type="text" aria-label="First name" className="form-control border border-dark" id="fName" placeholder="First Name" value={fName}
+                                onChange={handleFName}/>
                             <input type="text" aria-label="Last name" className="form-control border border-dark" id="lName" placeholder="Last Name" value={lName}
-                                onChange={(e) => setLName(e.target.value)}/>
+                                onChange={handleLName}/>
                         </div>
+                        {gbg && (
+                            <div className="ml-1">
+                                <small className='text-danger'>Name should not contain: {gbg}</small>
+                            </div>
+                        )}
+                        
 
                         <div className="input-group mt-3">
                             <span className="input-group-text text-bg-secondary border border-dark" id="username">Username</span>
@@ -95,9 +116,11 @@ const AdminCreate = () => {
                             <input type="email" className="form-control border border-dark" placeholder="name@example.com" aria-label="email" aria-describedby="basic-addon1" value={email}
                                 onChange={(e) => setEmail(e.target.value)}/>
                         </div>
-                        <div className="ml-1">
-                            <small className={isEmail ? 'text-success' : 'text-danger'}>Email should be a valid email</small>
-                        </div>
+                        {email &&(
+                            <div className="ml-1">
+                                <small className={isEmail ? 'text-success' : 'text-danger'}>Email should be a valid email</small>
+                            </div>
+                        )}
 
                         {/* <div className="input-group mt-3">
                             <label className="input-group-text text-bg-secondary p-2" for="province">Location - Province</label>
@@ -116,9 +139,12 @@ const AdminCreate = () => {
                             <input type="number" className="form-control border border-dark" id="contact" placeholder="7xxxxxxxx" aria-label="contact" aria-describedby="basic-addon1" value={contact}
                                 onChange={(e) => setContact(e.target.value)}/>
                         </div>
-                        <div className="ml-1">
-                            <small className={isContact ? 'text-success' : 'text-danger'}>Number should start with 7 and should contain 9 digits</small>
-                        </div>
+                        {contact &&(
+                            <div className="ml-1">
+                                <small className={contactStartWithSeven ? 'text-success' : 'text-danger'}>Number must start with 7</small><br />
+                                <small className={hasNineDigits ? 'text-success' : 'text-danger'}>Number must have 9 digits</small>
+                            </div>
+                        )}
 
                         <div className="input-group mt-3">
                             <span className="input-group-text text-bg-secondary border border-dark">Password</span>
@@ -140,9 +166,11 @@ const AdminCreate = () => {
                                 onChange={(e) => setConfPassword(e.target.value)}
                             />
                         </div>
-                        <div className="ml-1">
-                            <small className={hasSixChar ? 'text-success' : 'text-danger'}>at least 6 characters</small>
-                        </div>
+                        {password &&(
+                            <div className="ml-1">
+                                <small className={hasSixChar ? 'text-success' : 'text-danger'}>at least 6 characters</small>
+                            </div>
+                        )}    
 
                     </div>
                     
@@ -158,7 +186,8 @@ const AdminCreate = () => {
                                 || !isEmail
                                 || !fName
                                 || !lName
-                                || !isContact
+                                || !contactStartWithSeven
+                                || !hasNineDigits
                             }
                             onClick={handleAdminCreate}
                         >
