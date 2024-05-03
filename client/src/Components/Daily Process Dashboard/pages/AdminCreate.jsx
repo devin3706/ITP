@@ -30,6 +30,7 @@ const AdminCreate = () => {
     let isContact = contact >= 700000000 && contact <= 799999999 && contact.toString().length === 9;
     let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+    
 
     const handleAdminCreate = async (e) => {
         e.preventDefault();
@@ -61,8 +62,24 @@ const AdminCreate = () => {
 
                         <div className="input-group align-items-center">
                             <span className="input-group-text text-bg-secondary border border-dark">Name</span>
-                            <input type="text" aria-label="First name" className="form-control border border-dark" id="fName" placeholder="First Name" value={fName}
-                                onChange={(e) => setFName(e.target.value)}/>
+                            <input 
+                                type="text" 
+                                aria-label="First name" 
+                                className="form-control border border-dark" 
+                                id="fName" 
+                                placeholder="First Name" 
+                                value={fName}
+                                onChange={(e) => {
+                                    const input = e.target.value;
+                                    // Regular expression to match only letters (both uppercase and lowercase)
+                                    const regex = /^[a-zA-Z]*$/;
+                                    // Check if the input matches the regex, if so update the state
+                                    if (regex.test(input) || input === '') {
+                                        setFName(input);
+                                    }
+                                }}
+                            />
+
                             <input type="text" aria-label="Last name" className="form-control border border-dark" id="lName" placeholder="Last Name" value={lName}
                                 onChange={(e) => setLName(e.target.value)}/>
                         </div>
