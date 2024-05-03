@@ -14,6 +14,7 @@ import userRoutes from './router/student support/UserRoutes.js';
 import inquiryRoutes from './router/student support/InquiryRoutes.js';
 import { upload } from './middleware/study materials/multer.js';
 import studentRoutes from './router/student management/routes.js';
+import studentLoginRoutes from './router/student login/student.js';
 import payerRoutes from './router/payment management/payers.js';
 import workoutRoutes from './router/payment management/workouts.js';
 import announcementRoutes from './router/announcement handling/announcement.js';
@@ -95,6 +96,7 @@ function startServer() {
 
   // Minesi Routes
   app.use('/student', studentRoutes);
+  app.use('/auth', studentLoginRoutes);
 
   //Nuradha Routes
   app.use('/payers', payerRoutes);

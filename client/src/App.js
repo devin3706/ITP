@@ -65,12 +65,20 @@ import Inquiry from './Components/Student Support/components/Inquiry.jsx';
 import UpdateInquiry from './Components/Student Support/components/UpdateInquiry';
 
 //Student Management
-import Dashboard from './Components/Student Management/components/dashboard.jsx';
 import Students from './Components/Student Management/components/Students.jsx';
 import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
 import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
 import StudentLogin from './Components/Student Management/components/studentLogin.jsx';
 
+//Student Login
+import Signup from './Components/Student Login/components/Signup.jsx';
+import Login from './Components/Student Login/components/Login';
+import Home from './Components/Student Login/components/Home';
+import Dashboard from './Components/Student Login/components/Dashboard';
+import UpdateProfile from './Components/Student Login/components/UpdateProfile';
+import Profile from './Components/Student Login/components/Profile';
+import ForgotPass from './Components/Student Login/components/ForgotPassword';
+import ResetPass from './Components/Student Login/components/ResetPassword';
 
 //Payment Management
 import Payment from "./Components/Payment Management/Add Payment/Payment.js";
@@ -162,11 +170,16 @@ const App = () => {
           <Route path='/UpdateInquiry/:id' element={<UpdateInquiry />}></Route>
 
           {/* Student Management Routes */}
-          <Route path = '/students' element = {<Students />}> </Route>
+          
+          {/* Student Login Routes */}
+          <Route path = '/signup' element = {<Signup />}> </Route>
+          <Route path = '/login' element = {<Login />}> </Route>
+          <Route path = '/home' element = {<Home />}> </Route>
+          <Route path = '/forgotPass' element = {<ForgotPass/>}> </Route>
+          <Route path = '/resetPass/:token' element = {<ResetPass/>}> </Route>
           <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
-          <Route path = '/createStudent' element = {<CreateStudent/>}> </Route>
-          <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
-          <Route path = '/studentLogin' element = {<StudentLogin />}> </Route>
+          <Route path = '/updateStudent/:id' element = {<UpdateProfile />}> </Route>
+          <Route path = '/profile' element = {<Profile/>}> </Route>
 
           {/* Payment Management Routes */}
           <Route path="/payment" element={<Payment />} />
