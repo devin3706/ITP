@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function Editdetails() {
   const { Payerid } = useParams();
@@ -57,100 +59,85 @@ function Editdetails() {
   };
 
   return (
-    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-      <div className="row">
-        <form onSubmit={editDetails}>
-          <div className="col-12 text-warning">
-            <div className=" ">
-              <label htmlFor="payerName" className="form-label">
-                Payer Name:
-              </label>{" "}
-              <br></br>
-              <input
-                type="text"
-                id="payerName"
-                name="payerName"
-                value={payerName}
-                onChange={(e) => {
-                  setUpdatePayerName(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <div className="">
-              <label htmlFor="cardNo" className="form-label">
-                Card No:
-              </label>{" "}
-              <br></br>
-              <input
-                type="text"
-                id="cardNo"
-                name="cardNo"
-                value={cardNo}
-                onChange={(e) => {
-                  setUpdateCardNo(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <div className="">
-              <label htmlFor="nic" className="form-label">
-                NIC:
-              </label>{" "}
-              <br></br>
-              <input
-                type="text"
-                id="nic"
-                name="nic"
-                value={nic}
-                onChange={(e) => {
-                  setUpdateNic(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <div className="">
-              <label htmlFor="amount" className="form-label">
-                Amount:
-              </label>{" "}
-              <br></br>
-              <input
-                type="text"
-                id="amount"
-                name="amount"
-                value={amount}
-                onChange={(e) => {
-                  setUpdateAmount(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <div class="">
-              <label htmlFor="date" className="form-lable">
-                Date:
-              </label>{" "}
-              <br></br>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                value={date}
-                onChange={(e) => {
-                  setUpdateDate(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <br></br>
-            <div className="d-flex justify-content-between">
-              <button type="submit" className="btn btn-warning">
-                Update
-              </button>
-            </div>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container mt-5 mb-5">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="bg-dark text-white shadow rounded-4 p-4">
+            <form onSubmit={editDetails}>
+              <div className="text-warning">
+                <div className="mb-3">
+                  <label htmlFor="payerName" className="form-label">Payer Name:</label>
+                  <input
+                    type="text"
+                    id="payerName"
+                    name="payerName"
+                    value={payerName}
+                    onChange={(e) => setUpdatePayerName(e.target.value)}
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="cardNo" className="form-label">Card No:</label>
+                  <input
+                    type="text"
+                    id="cardNo"
+                    name="cardNo"
+                    value={cardNo}
+                    onChange={(e) => setUpdateCardNo(e.target.value)}
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="nic" className="form-label">NIC:</label>
+                  <input
+                    type="text"
+                    id="nic"
+                    name="nic"
+                    value={nic}
+                    onChange={(e) => setUpdateNic(e.target.value)}
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="amount" className="form-label">Amount:</label>
+                  <input
+                    type="text"
+                    id="amount"
+                    name="amount"
+                    value={amount}
+                    onChange={(e) => setUpdateAmount(e.target.value)}
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="date" className="form-label">Date:</label>
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    value={date}
+                    onChange={(e) => setUpdateDate(e.target.value)}
+                    className="form-control col-3"
+                    required
+                  />
+                </div>
+                <div className="d-flex justify-content-end">
+                  <button type="submit" className="btn btn-warning">Update</button>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
+    <Footer/>
+  </div>
   );
 }
 
