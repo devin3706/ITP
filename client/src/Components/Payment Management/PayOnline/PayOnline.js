@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function PayOnline() {
   const navigate = useNavigate();
@@ -48,84 +50,60 @@ function PayOnline() {
   };
 
   return (
-    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-      <h1>Payment</h1>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form className="row">
-            <div className="col-12 text-warning">
-              <div className="">
-                <label htmlFor="payerName">Payer Name:</label>
-                <br />
-                <Field type="text" id="payerName" name="payerName" />
-                <ErrorMessage
-                  name="payerName"
-                  component="div"
-                  className="text-danger"
-                />
-              </div>
-              <br />
-              <div className="">
-                <label htmlFor="cardNo">Card No:</label>
-                <br />
-                <Field type="text" id="cardNo" name="cardNo" />
-                <ErrorMessage
-                  name="cardNo"
-                  component="div"
-                  className="text-danger"
-                />
-              </div>
-              <br />
-              <div className="">
-                <label htmlFor="nic">NIC:</label>
-                <br />
-                <Field type="text" id="nic" name="nic" />
-                <ErrorMessage
-                  name="nic"
-                  component="div"
-                  className="text-danger"
-                />
-              </div>
-              <br />
-              <div className="">
-                <label htmlFor="amount">Amount:</label>
-                <br />
-                <Field type="text" id="amount" name="amount" />
-                <ErrorMessage
-                  name="amount"
-                  component="div"
-                  className="text-danger"
-                />
-              </div>
-              <br />
-              <div className="col-md-12">
-                <label htmlFor="date">Date:</label>
-                <br />
-                <Field type="date" id="date" name="date" />
-                <ErrorMessage
-                  name="date"
-                  component="div"
-                  className="text-danger"
-                />
-              </div>
-              <br />
-              <div className="d-flex justify-content-between">
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Pay now"}
-                </button>
-              </div>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container mt-5 mb-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="m-4 p-4 bg-dark text-white rounded-4">
+              <h1 className="mb-4 text-center">Payment</h1>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({ isSubmitting }) => (
+                  <Form>
+                    <div className="text-warning">
+                      <div className="mb-3">
+                        <label htmlFor="payerName" className="form-label">Payer Name:</label>
+                        <Field type="text" id="payerName" name="payerName" className="form-control" />
+                        <ErrorMessage name="payerName" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="cardNo" className="form-label">Card No:</label>
+                        <Field type="text" id="cardNo" name="cardNo" className="form-control" />
+                        <ErrorMessage name="cardNo" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="nic" className="form-label">NIC:</label>
+                        <Field type="text" id="nic" name="nic" className="form-control" />
+                        <ErrorMessage name="nic" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="amount" className="form-label">Amount:</label>
+                        <Field type="text" id="amount" name="amount" className="form-control" />
+                        <ErrorMessage name="amount" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="date" className="form-label">Date:</label>
+                        <Field type="date" id="date" name="date" className="form-control col-3" />
+                        <ErrorMessage name="date" component="div" className="text-danger" />
+                      </div>
+                      <div className="">
+                        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                          {isSubmitting ? "Submitting..." : "Pay now"}
+                        </button>
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
             </div>
-          </Form>
-        )}
-      </Formik>
+          </div>
+        </div>
+      </div>
+      <Footer/>
     </div>
   );
 }
