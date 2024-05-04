@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import { Student } from '../../models/student login/Student.js';
+import SLogins from '../../models/admin/studentLogins.js';
 
 const router = express.Router();
 
@@ -43,6 +44,23 @@ router.post('/login',async (req,res) => {
 
     const token = jwt.sign({email: student.email}, process.env.KEY, {expiresIn: '1h'})
     res.cookie('token', token, { httpOnly: true, maxAge: 360000})
+
+
+    
+      //for DPDashboard
+          const studentEmail = email
+
+          // Create a new Login document
+          const SLogin = new SLogins({
+              studentEmail: studentEmail,
+              timestamp: new Date()
+          });
+
+          // Save the login data to the database
+          await SLogin.save();
+
+
+
     return res.json({status: true, message: "logged in successfully"})
 
     });

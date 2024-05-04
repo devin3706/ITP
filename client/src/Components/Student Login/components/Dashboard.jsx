@@ -2,35 +2,139 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/App.css';
+import '../../../styles.css';
+import Footer from '../../Exam Platform and Leaderboard/components/Footer';
+import Header from '../../Exam Platform and Leaderboard/components/Header';
 //import { FaUserCircle } from 'react-icons/fa'; // Import profile icon from react-icons library
 
 
 function Dashboard() {
   return (
-    
-    <div className="student-home-container">
-      
-      
-      <div className="button-container">
-      <div className="header">
-        <button className="profile-button"><Link to = "/profile">Profile</Link></button>
-        
+    <div style={{ backgroundColor: '#ECF0F5' }}>
+      <Header/>
+      <div className="container mt-5 mb-5">
+
+        {/* This is the profile card. After the header is completed, make it so that it navigates to profile after clicking the icon  */}
+        <div className="row justify-content-start g-4">
+          <div className="col-2">
+            <Link to="/profile">
+              <div className="card cardHov">
+                <div className="card-body">
+                  <h6 className="card-title text-center">Profile</h6>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
-        
-        <button className="large-button">Study Materials</button>
-        <button className="large-button">Past Papers</button>
-        <button className="large-button">Exam Platform</button>
-        <button className="large-button">Results</button>
-        <button className="large-button">Payment</button>
-        <button className="large-button">Feedback</button>
-        <button className="large-button">Inquiries</button>
-        <button className="large-button">Announcements</button>
-        <button className="large-button">Classes</button>
-        <button className="large-button">Leaderboard</button>
+
+        <div className="row justify-content-center">
+          <div className="row row-cols-1 row-cols-md-5 g-4">
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Study Materials</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Past Papers</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Exam Platform</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Results</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Payment</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Feedback</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Inquiries</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Announcements</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Classes</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="col">
+              <Link to="/">
+                <div className="card cardHov h-100">
+                  <div className="card-body">
+                    <h6 className="card-title text-center">Leaderboard</h6>
+                  </div>
+                </div>
+              </Link>
+            </div>          
+
+          </div>
+        </div>
       </div>
-    </div>  
-    
+      <Footer/>
+    </div>
   );
 }
 

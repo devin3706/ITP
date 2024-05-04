@@ -5,7 +5,7 @@ const { Schema, model } = mongoose;
 const studentLoginSchema = new Schema({
     studentEmail: {
         type: String,
-        ref: 'StudentModel',
+        ref: 'Student',
         required: true
     },
     timestamp: {

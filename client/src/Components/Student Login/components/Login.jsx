@@ -1,9 +1,11 @@
 import React from 'react'
-import '../styles/App.css'
+//import '../styles/App.css'
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Header from '../../Exam Platform and Leaderboard/components/Header';
+import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 
 function Login() {
     
@@ -26,41 +28,53 @@ function Login() {
     }
 
     return(
-        <div className='sign-up-container'>
-            <form className='sign-up-form' onSubmit={handleSubmit}>
-                <h2>Login</h2>
-                       
-                        <label htmlFor="email">
-                            <strong> Email </strong>
-                        </label>
-                        <input
-                        type = "email"
-                        placeholder = "Enter Email"
-                        autoComplete = "off"
-                        onChange = { (e) => setEmail(e.target.value)}/>
-                    
-                    
-                        <label htmlFor="email">
-                            <strong> Password </strong>
-                        </label>
-                        <input
-                        type = "password"
-                        placeholder = "******"
-                        autoComplete = "off"
-                        onChange = { (e) => setPassword(e.target.value)}/>
-                    
-                    <center><button type='submit'> Login </button></center>
-                    <p>
-                        <Link to = "/forgotPass">Forgot Password</Link>
-                    </p>
-                   
-                    <p>
-                        Don't have an account?
-                        <Link to = "/signup">Sign Up</Link>
-                    </p>
-                    </form>
-                
-
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+            <Header />
+            <div className='container mt-5 mb-5'>
+                <div className='row justify-content-center'>
+                    <div className='col-md-6'>
+                        <div className='card shadow-lg p-4 rounded-3'>
+                            <h2 className='text-center mb-4'>Login</h2>
+                            <form onSubmit={handleSubmit}>
+                                <div className='form-group'>
+                                    <label htmlFor='email'><strong>Email</strong></label>
+                                    <input
+                                        type='email'
+                                        className='form-control'
+                                        id='email'
+                                        placeholder='Enter Email'
+                                        autoComplete='off'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <label htmlFor='password'><strong>Password</strong></label>
+                                    <input
+                                        type='password'
+                                        className='form-control'
+                                        id='password'
+                                        placeholder='******'
+                                        autoComplete='off'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                <div className='text-center'>
+                                    <button type='submit' className='btn btn-primary mt-3'>Login</button>
+                                </div>
+                                <p className='mt-3 text-center'>
+                                    <Link to='/forgotPass'>Forgot Password</Link>
+                                </p>
+                                <p className='text-center'>
+                                    Don't have an account? <Link to='/signup'>Sign Up</Link>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <Footer/>
         </div>
     );
 
