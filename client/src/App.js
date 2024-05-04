@@ -86,6 +86,7 @@ import PayOnline from "./Components/Payment Management/PayOnline/PayOnline.js";
 import Payments from "./Components/Payment Management/Payment Details/Payments.js";
 import PayDetails from "./Components/Payment Management/PayerDetails/payDetails.js";
 import EditPayments from "./Components/Payment Management/EditPayment/EditPayments.js";
+import Editdetails from "./Components/Payment Management/EditDetails/Editdetails";
 
 //Announcement Handling
 import Announcement from "./Components/Announcement Handling/Home/Home.jsx";
@@ -187,6 +188,7 @@ const App = () => {
           <Route path="/onlinePay" element={<PayOnline />} />
           <Route path="/payerDetails" element={<PayDetails />} />
           <Route path="/editpayments/:Workoutid" element={<EditPayments />} />
+          <Route path="/editdetails/:Payerid" element={<Editdetails />} />
 
           {/* Announcement Handling Routes */}
           <Route path="/announcement" element={<Announcement />} />

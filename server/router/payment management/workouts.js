@@ -13,15 +13,15 @@ const router = express.Router();
 router.get("/read", getWorkouts);
 
 // Get a single workout
-router.get("/:id", getWorkout);
+router.get("/get/:Workoutid", getWorkout);
 
 // POST a new workout
 router.post("/create", createWorkout);
 
 // DELETE a workout
-router.delete("/:id", deleteWorkout);
+router.delete("/delete/:Workoutid", deleteWorkout);
 
 // UPDATE a workout
-router.patch("/update/:id", updateWorkout);
+router.put("/update/:Workoutid", updateWorkout);
 
 export default router;

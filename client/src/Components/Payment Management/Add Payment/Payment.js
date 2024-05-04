@@ -1,188 +1,218 @@
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../../Exam Platform and Leaderboard/components/Header";
-import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Payment() {
   const navigate = useNavigate();
 
-  // State variables to store from data
-  const [studentName, setStudentName] = useState("");
-  const [course, setCourse] = useState("");
-  const [sid, setSid] = useState("");
-  const [contactNumber, setContactNumber] = useState(0);
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
+  const initialValues = {
+    studentName: "",
+    course: "",
+    contactNumber: "",
+    address: "",
+    email: "",
+  };
 
-  const submitWorkouts = (t) => {
-    t.preventDefault();
+  const validationSchema = Yup.object({
+    studentName: Yup.string()
+      .matches(/^[a-zA-Z\s]+$/, "Only letters and spaces are allowed")
+      .required("Student name is required"),
+    course: Yup.string().required("Course selection is required"),
+    contactNumber: Yup.string()
+      .matches(/^\d{10}$/, "Contact number must be 10 digits")
+      .required("Contact number is required"),
+    address: Yup.string()
+      .matches(/^[a-zA-Z\s]+$/, "Only letters and spaces are allowed")
+      .required("Address is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+  });
 
-    const newWorkouts = {
-      studentName,
-      course,
-      sid,
-      contactNumber,
-      address,
-      email,
-    };
-
+  const onSubmit = (values, { setSubmitting }) => {
     axios
-      .post("http://localhost:4000/workouts/create", newWorkouts)
+      .post("http://localhost:8081/payments/create", values)
       .then(() => {
-        alert("payment added successful.");
         navigate("/paymentdetails");
       })
       .catch((err) => {
         console.error("Error adding workouts:", err);
         alert("Failed to add workouts. Check console for details.");
+      })
+      .finally(() => {
+        setSubmitting(false);
       });
   };
 
   return (
-    <div style={{backgroundColor: '#ECF0F5'}}>
-    <Header/>
-    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-8 mx-auto">
-      <h1 className="text-center">Add Payment</h1>
-
-      <div className="row">
-        <form onSubmit={submitWorkouts}>
-          <div className="col-12 text-warning">
-            <div className="row">
-              <div className="">
+    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
+      <h1>Payment</h1>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          values,
+          errors,
+          touched,
+        }) => (
+          <Form className="row">
+            <div className="col-12 text-warning">
+              <div className="col-md-12">
                 <label htmlFor="studentName" className="form-label">
                   Student Name:
                 </label>
-
-                <input
-                  className="form-control"
+                <Field
+                  className={`form-control ${
+                    errors.studentName && touched.studentName
+                      ? "is-invalid"
+                      : ""
+                  }`}
                   type="text"
                   id="studentName"
                   name="studentName"
-                  onChange={(t) => {
-                    setStudentName(t.target.value);
-                  }}
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.studentName}
+                />
+                <ErrorMessage
+                  name="studentName"
+                  component="div"
+                  className="text-danger"
                 />
               </div>
-              <div className="">
-                <label htmlFor="sid" className="form-label">
-                  Student ID:
-                </label>
 
-                <input
-                  className="form-control"
-                  type="text"
-                  id="sid"
-                  name="sid"
-                  onChange={(t) => {
-                    setSid(t.target.value);
-                  }}
-                  required
-                />
+              <br />
+
+              <div className="row">
+                <div className="col-md-5">
+                  <label htmlFor="course" className="form-label">
+                    Select Course:
+                  </label>
+                  <Field
+                    as="select"
+                    className={`form-control ${
+                      errors.course && touched.course ? "is-invalid" : ""
+                    }`}
+                    id="course"
+                    name="course"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.course}
+                  >
+                    <option value="">Select Course</option>
+                    <option value="A/L">Advance Level(A/L)</option>
+                    <option value="O/L">Ordinary Level(O/L)</option>
+                  </Field>
+                  <ErrorMessage
+                    name="course"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="row">
-              <div className="col-md-5  ">
-                <label htmlFor="course" className="form-label">
-                  Select Course:
-                </label>
-
-                <select
-                  className="form-control"
-                  id="course"
-                  name="course"
-                  onChange={(t) => {
-                    setCourse(t.target.value);
-                  }}
-                  required
-                >
-                  <option value="">Select Course</option>
-                  <option value="A/L">Advance Level(A/L)</option>
-                  <option value="O/L">Ordinary Level(O/L)</option>
-                </select>
-              </div>
+              <br />
 
               <div className="">
                 <label htmlFor="contactNumber" className="form-label">
                   Contact No:
                 </label>
-
-                <input
-                  className="form-control"
+                <Field
+                  className={`form-control ${
+                    errors.contactNumber && touched.contactNumber
+                      ? "is-invalid"
+                      : ""
+                  }`}
                   type="text"
                   id="contactNumber"
                   name="contactNumber"
-                  placeholder="07********"
-                  onChange={(t) => {
-                    setContactNumber(t.target.value);
-                  }}
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.contactNumber}
+                />
+                <ErrorMessage
+                  name="contactNumber"
+                  component="div"
+                  className="text-danger"
                 />
               </div>
-            </div>
 
-            <div className="row">
-              <div className="">
+              <br />
+              <div className="col-md-12">
                 <label htmlFor="address" className="form-label">
-                  Address:{" "}
+                  Address:
                 </label>
-
-                <input
-                  className="form-control"
+                <Field
+                  className={`form-control ${
+                    errors.address && touched.address ? "is-invalid" : ""
+                  }`}
                   type="text"
                   id="address"
                   name="address"
-                  onChange={(t) => {
-                    setAddress(t.target.value);
-                  }}
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.address}
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="text-danger"
                 />
               </div>
 
-              <div className="">
+              <br />
+
+              <div className="col-md-5">
                 <label htmlFor="email" className="form-label">
                   E-mail:
                 </label>
-
-                <input
-                  className="form-control"
-                  type="text"
+                <Field
+                  className={`form-control ${
+                    errors.email && touched.email ? "is-invalid" : ""
+                  }`}
+                  type="email"
                   id="email"
                   name="email"
                   placeholder="Example@address.com"
-                  onChange={(t) => {
-                    setEmail(t.target.value);
-                  }}
-                  required
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-danger"
                 />
               </div>
-            </div>
-            <br></br>
-            <div className="d-flex justify-content-between">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-              <Link to={"/onlinePay"}>
-                <button type="button" className="btn btn-success">
-                  Pay Online
+
+              <br />
+              <br />
+              <div className="d-flex justify-content-between">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={isSubmitting}
+                >
+                  Submit
                 </button>
-              </Link>
+                <Link to={"/onlinePay"}>
+                  <button type="button" className="btn btn-success">
+                    Pay Online
+                  </button>
+                </Link>
+              </div>
+              <br />
             </div>
-            <br></br>
-          </div>
-        </form>
-        <div className="col-md-6">
-          <img
-            src="https://www.searchenginejournal.com/wp-content/uploads/2020/03/the-top-10-most-popular-online-payment-solutions-5e9978d564973-1280x720.png"
-            alt="nur"
-            style={{ maxHeight: "600px", maxWidth: "550px" }}
-          />
-        </div>
-      </div>
-    </div>
-    <Footer/>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }

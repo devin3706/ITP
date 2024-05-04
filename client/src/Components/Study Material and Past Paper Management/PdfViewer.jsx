@@ -72,6 +72,10 @@ const closePdfPopup = () => {
   }, [searchTerm, pdfs]);
 
   return (
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <div>
+        <Header />
+    </div>
     <div className="pdf-viewer-container">
       <h1 className="pdf-viewer-heading">Study Materials</h1>
       <div className="search-bar">
@@ -108,6 +112,7 @@ const closePdfPopup = () => {
         ))}
       </div>
       <Footer />
+    </div>
     </div>
   );
 };
