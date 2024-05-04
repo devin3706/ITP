@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function UpdateInquiry() {
   const [inquiries, setInquiries] = useState([]);
@@ -34,17 +36,17 @@ function UpdateInquiry() {
   };
 
   return (
-    <div className="col-lg-8">
-      <div className="container-fluid">
-        <div className="d-flex vh-100 bg-primary row justify-content-center align-items-center">
-          <div className="w-50 bg-white rounded p-3">
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+        <div className="d-flex mt-10 mb-10 row justify-content-center align-items-center">
+          <div className="col-8 bg-white rounded p-3">
             <div className="mb-3">
               {/* Content before the table */}
             </div>
             <div className="table-responsive" style={{ maxHeight: "60vh", overflowY: "auto" }}>
               <table className="table table-striped">
                 <thead>
-                  
+                                 
                 </thead>
                 <tbody>
                   {inquiries.map((inquiry) => (
@@ -65,7 +67,7 @@ function UpdateInquiry() {
             </div>
           </div>
         </div>
-      </div>
+      <Footer/>
     </div>
   );
 }
