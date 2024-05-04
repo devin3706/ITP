@@ -31,7 +31,7 @@ function Dashboard() {
           <div className="row row-cols-1 row-cols-md-5 g-4">
 
             <div className="col">
-              <Link to="/">
+              <Link to="/pdfViewer">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Study Materials</h6>
@@ -41,7 +41,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/">
+              <Link to="/pastPaperView">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Past Papers</h6>
@@ -51,7 +51,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/">
+              <Link to="/studentInterface">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Exam Platform</h6>
@@ -71,7 +71,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/">
+              <Link to="/payment">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Payment</h6>
@@ -81,7 +81,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/">
+              <Link to="/create">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Feedback</h6>
@@ -91,7 +91,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/">
+              <Link to="/createInquiry">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Inquiries</h6>
@@ -111,24 +111,14 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/">
+              <Link to="/class">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Classes</h6>
                   </div>
                 </div>
               </Link>
-            </div>
-
-            <div className="col">
-              <Link to="/">
-                <div className="card cardHov h-100">
-                  <div className="card-body">
-                    <h6 className="card-title text-center">Leaderboard</h6>
-                  </div>
-                </div>
-              </Link>
-            </div>          
+            </div>     
 
           </div>
         </div>
