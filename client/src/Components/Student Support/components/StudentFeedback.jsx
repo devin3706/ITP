@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function StudentFeedback() {
   const [searchInput, setSearchInput] = useState("");
@@ -62,50 +64,54 @@ function StudentFeedback() {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="mb-3 d-flex">
-        <input
-          type="text"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search by Teacher Name"
-          className="form-control me-2"
-        />
-        <button onClick={handleSearch} className="btn btn-primary">
-          Search
-        </button>
-      </div>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container mt-5 mb-5">
+        <div className="mb-3 d-flex">
+          <input
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search by Teacher Name"
+            className="form-control h-100 me-2 shadow"
+          />
+          <button onClick={handleSearch} className="btn btn-primary">
+            Search
+          </button>
+        </div>
 
-      <div className="row">
-        {filteredUsers.map((user) => (
-          <div key={user._id} className="col-md-6 mb-4">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Student Feedback</h5>
-                <p className="card-text">Teacher: {user.Teacher}</p>
-                <p className="card-text">Feedback: {user.Feedback}</p>
-                <p className="card-text">Rating: {renderStars(user.Rating)}</p>
-                <div className="d-flex justify-content-between">
-                  <Link to={`/update/${user._id}`} className="btn btn-success me-2">
-                    Update
-                  </Link>
-                  <button onClick={() => handleDelete(user._id)} className="btn btn-danger">
-                    Delete
-                  </button>
+        <div className="row">
+          {filteredUsers.map((user) => (
+            <div key={user._id} className="col-md-6 mb-4">
+              <div className="card shadow">
+                <div className="card-body">
+                  <h5 className="card-title">Student Feedback</h5>
+                  <p className="card-text">Teacher: {user.Teacher}</p>
+                  <p className="card-text">Feedback: {user.Feedback}</p>
+                  <p className="card-text">Rating: {renderStars(user.Rating)}</p>
+                  <div className="d-flex justify-content-between">
+                    <Link to={`/update/${user._id}`} className="btn btn-success me-2">
+                      Update
+                    </Link>
+                    <button onClick={() => handleDelete(user._id)} className="btn btn-danger">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="row">
-        <div className="col-md-12 mt-3">
-          <Link to="/create" className="btn btn-primary">
-            Add your feedback
-          </Link>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <Link to="/create" className="btn btn-primary">
+              Add your feedback
+            </Link>
+          </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
