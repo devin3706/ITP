@@ -99,9 +99,9 @@ function startServer() {
   app.use('/auth', studentLoginRoutes);
 
   //Nuradha Routes
-  app.use('/payers', payerRoutes);
-  app.use('/workouts', workoutRoutes);
-
+  app.use("/payments", workoutRoutes);
+  app.use("/payers", payerRoutes);
+  
   //Jimutha Routes
   app.use('/announcements', announcementRoutes);
   app.use('/class', classRoutes);

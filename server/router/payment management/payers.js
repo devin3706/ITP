@@ -10,18 +10,18 @@ import {
 const router = express.Router();
 
 // Get all workouts
-router.get("/get", getPayers);
+router.get("/read", getPayers);
 
 // Get a single workout
-router.get("/get/:id", getPayer);
+router.get("/get/:Payerid", getPayer);
 
 // POST a new workout
 router.post("/create", createPayer);
 
 // DELETE a workout
-router.delete("/delete/:id", deletePayer);
+router.delete("/delete/:Payerid", deletePayer);
 
 // UPDATE a workout
-router.patch("/update/:id", updatePayer);
+router.put("/update/:Payerid", updatePayer);
 
 export default router;

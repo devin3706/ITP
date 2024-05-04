@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import Header from "../../Exam Platform and Leaderboard/components/Header";
-import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Payments() {
   const [workouts, setWorkouts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     function readWorkouts() {
       axios
-        .get("http://localhost:8081/workouts/read", readWorkouts)
+        .get("http://localhost:8081/payments/read")
         .then((res) => {
           setWorkouts(res.data);
         })
@@ -24,9 +23,9 @@ function Payments() {
 
   function handleDelete(Workoutid) {
     axios
-      .delete(`http://localhost:8081/workouts/${Workoutid}`)
+      .delete(`http://localhost:8081/payments/delete/${Workoutid}`)
       .then(() => {
-        alert("Workout Deleted.");
+        alert("Delete successful.");
         navigate("/payment");
       })
       .catch((err) => {
@@ -34,68 +33,78 @@ function Payments() {
       });
   }
 
+  const filteredWorkouts = workouts.filter(
+    (workout) =>
+      workout.studentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      workout.course.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (typeof workout.contactNumber === "string" &&
+        workout.contactNumber
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())) ||
+      workout.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      workout.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div style={{backgroundColor: '#ECF0F5'}}>
-    <Header/>
-    <div className="fullDiv m-5 ">
-      <div className="row justify-content-center text-center">
-        {workouts.map((workouts) => (
-          <div className="col-md-6 p-4">
+    <div className="fullDiv m-5">
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder="Search by"
+          className="form-control"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+      <div className="row">
+        {filteredWorkouts.map((workout) => (
+          <div className="col-md-6 p-4" key={workout._id}>
             <div
               className="card-block p-4 rounded-3 text-start text-primary"
               style={{ backgroundColor: "#05242a" }}
             >
               <div className="row">
                 <div className="col-md-6">
-                  <br></br>
+                  <br />
                   <label>Student Name</label>
                   <input
-                    value={workouts.studentName}
+                    value={workout.studentName}
                     className="form-control"
                     disabled
                   />
                 </div>
                 <div className="col-md-6">
-                  <br></br>
+                  <br />
                   <label>Course</label>
                   <input
-                    value={workouts.course}
+                    value={workout.course}
                     className="form-control"
                     disabled
                   />
                 </div>
                 <div className="col-md-6">
-                  <br></br>
-                  <label>Student ID</label>
-                  <input
-                    value={workouts.sid}
-                    className="form-control"
-                    disabled
-                  />
-                </div>
-                <div className="col-md-6">
-                  <br></br>
+                  <br />
                   <label>Contact No</label>
                   <input
-                    value={workouts.contactNumber}
+                    value={workout.contactNumber}
                     className="form-control"
                     disabled
                   />
                 </div>
                 <div className="col-md-6">
-                  <br></br>
+                  <br />
                   <label>Address</label>
                   <input
-                    value={workouts.address}
+                    value={workout.address}
                     className="form-control"
                     disabled
                   />
                 </div>
                 <div className="col-md-6">
-                  <br></br>
+                  <br />
                   <label>E-mail</label>
                   <input
-                    value={workouts.email}
+                    value={workout.email}
                     className="form-control"
                     disabled
                   />
@@ -104,14 +113,15 @@ function Payments() {
                   <div className="mt-3 d-flex justify-content-between">
                     <button
                       className="btn btn-danger"
-                      onClick={(d) => handleDelete(workouts._id)}
+                      onClick={(d) => handleDelete(workout._id)}
                     >
                       Delete
                     </button>
-                    <Link to={"/editpayments"}>
-                      <input className="btn btn-info" type="button" value="Update" />
-                    </Link>
-                    
+                    <div className="col-md-6">
+                      <Link to={`/editpayments/${workout._id}`}>
+                        <input type="button" value="Update" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -119,8 +129,6 @@ function Payments() {
           </div>
         ))}
       </div>
-    </div>
-    <Footer/>
     </div>
   );
 }
