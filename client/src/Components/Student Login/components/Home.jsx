@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import '../styles/App.css';
+//import '../styles/App.css';
 
 function Home() {
     const [studentData, setStudentData] = useState([]);

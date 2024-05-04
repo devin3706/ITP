@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Profile() {
     //const [studentData, setStudentData] = useState([]);
@@ -34,21 +36,33 @@ function Profile() {
 
 
     return (
-        <div>
-      <h2>Student Profile</h2>
-      {profileData && (
-        <div>
-          <p>Name: {profileData.name}</p>
-          <p>Email: {profileData.email}</p>
-          <p>Number: {profileData.number}</p>
-          <p>School: {profileData.school}</p>
-          <p>Address: {profileData.address}</p>
-          
-          <Link to={`/updateStudent/${profileData._id}`} className='btn btn-success mr-2'> Update</Link>
-          <button onClick={handleDeleteProfile}>Delete Profile</button>
+      <div style={{ backgroundColor: '#ECF0F5' }}>
+        <Header />
+        <div className="container mt-5 mb-5">
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              <div className="card shadow-lg p-4">
+                <h2 className="text-center mb-4">Student Profile</h2>
+                {profileData && (
+                  <div>
+                    <p><strong>Name:</strong> {profileData.name}</p>
+                    <p><strong>Email:</strong> {profileData.email}</p>
+                    <p><strong>Number:</strong> {profileData.number}</p>
+                    <p><strong>School:</strong> {profileData.school}</p>
+                    <p><strong>Address:</strong> {profileData.address}</p>
+
+                    <div className="d-flex justify-content-between mt-4">
+                        <Link to={`/updateStudent/${profileData._id}`} className='btn btn-success'>Update</Link>
+                        <button onClick={handleDeleteProfile} className="btn btn-danger">Delete Profile</button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+        <Footer />
+      </div>
     );
 }
 

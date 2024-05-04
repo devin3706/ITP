@@ -2,7 +2,9 @@ import React from 'react';
 import { useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import "../styles/App.css";
+import Header from '../../Exam Platform and Leaderboard/components/Header';
+import Footer from '../../Exam Platform and Leaderboard/components/Footer';
+import "../../../styles.css";
 
 function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -23,28 +25,36 @@ function ForgotPassword() {
     };
 
     return(
-        <div className = "sign-up-container">
-        <form className =  "sign-up-form" onSubmit = {handleSubmit}>  
-                <h4> Forgot Password </h4>
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+            <Header/>
+            <div className="container mt-10 mb-10">
+                <div className="row justify-content-center">
+                    <div className="col-md-5">
+                        <div className="card shadow-lg p-4">
+                            <form onSubmit={handleSubmit}>
+                                <h4 className="text-center mb-4">Forgot Password</h4>
 
-                        <label htmlFor="email">
-                            <strong> Email </strong>
-                        </label>
-                        <input
-                        type = "email"
-                        placeholder = "Enter Email"
-                        autoComplete = "off"
-                        onChange = { (e) => setEmail(e.target.value)}/>
-                   
-                    
-                  <button type ="submit" className = "btn btn-success w-100 rounded -0">
-                    Send 
-                    </button>
-                    </form> 
-                    
-                    
+                                <div className="mb-3">
+                                    <label htmlFor="email"><strong>Email</strong></label>
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        id="email"
+                                        placeholder="Enter Email"
+                                        autoComplete="off"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+
+                                <button type="submit" className="btn btn-success w-100 rounded-0">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-       
+            <Footer/>
+        </div>
     );
 
 } 

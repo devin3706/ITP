@@ -3,14 +3,14 @@ import SLogins from "../../models/admin/studentLogins.js";
 import TLogins from "../../models/admin/teacherLogins.js";
 import Class from "../../models/class scheduling/classModel.js";
 import Question from "../../models/exam/questionSchema.js";
-import StudentModel from "../../models/student management/Student.js";
+import { Student } from "../../models/student login/Student.js";
 import PdfDetails from "../../models/study material/PdfModel.js";
 import Teacher from "../../models/teacher/Teacher.js";
 
 const getTotalStudents = async (req, res) => {
     try {
         
-        const totalStudents = await StudentModel.countDocuments();
+        const totalStudents = await Student.countDocuments();
 
         res.status(200).json({ totalStudents });
     } catch (error) {

@@ -68,7 +68,7 @@ const AdminHome = () => {
                 //sorting by month
                 const s_LoginsByMonth = await getStudentLoginsByMonth();
                 s_LoginsByMonth.sort((a, b) => a._id - b._id);
-                setAdminLoginsByMonth(s_LoginsByMonth);
+                setStudentLoginsByMonth(s_LoginsByMonth);
 
                 const t_LoginsByMonth = await getTeacherLoginsByMonth();
                 t_LoginsByMonth.sort((a, b) => a._id - b._id);
