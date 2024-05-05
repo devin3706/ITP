@@ -17,7 +17,7 @@ import studentRoutes from './router/student management/routes.js';
 import studentLoginRoutes from './router/student login/student.js';
 import payerRoutes from './router/payment management/payers.js';
 import workoutRoutes from './router/payment management/workouts.js';
-import announcementRoutes from './router/announcement handling/announcement.js';
+import announcementRoutes from './router/class scheduling/announce.js';
 import classRoutes from './router/class scheduling/class.js';
 
 // Import connection file
@@ -103,8 +103,8 @@ function startServer() {
   app.use("/payers", payerRoutes);
   
   //Jimutha Routes
-  app.use('/announcements', announcementRoutes);
-  app.use('/class', classRoutes);
+  app.use("/announcements", announcementRoutes); // Changed base URL for announceRoutes
+  app.use("/classes", classRoutes);
 
   // Start server only when valid connection
   connect().then(() => {

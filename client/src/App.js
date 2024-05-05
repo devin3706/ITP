@@ -88,11 +88,13 @@ import PayDetails from "./Components/Payment Management/PayerDetails/payDetails.
 import EditPayments from "./Components/Payment Management/EditPayment/EditPayments.js";
 import Editdetails from "./Components/Payment Management/EditDetails/Editdetails";
 
-//Announcement Handling
-import Announcement from "./Components/Announcement Handling/Home/Home.jsx";
-
-//Class Scheduling
-import Class from "./Components/Class Scheduling/Home/Class.jsx";
+//Class Scheduling and Announcement Handling
+import CreateAnnouncement from "./Components/Class Scheduling and Announcement Handling/announcements/createAnnounce.js";
+import ReadClass from "./Components/Class Scheduling and Announcement Handling/classsched/readClass.js";
+import ReadAnnouncement from "./Components/Class Scheduling and Announcement Handling/readAnnounce/readAnnounce.js";
+import UpdateAnnouncement from "./Components/Class Scheduling and Announcement Handling/updateAnnounce/update.js";
+import UpdateClass from "./Components/Class Scheduling and Announcement Handling/updateclass/updatecl.js"
+import ClassHome from "./Components/Class Scheduling and Announcement Handling/ClassHome/ClassHome.jsx";
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
@@ -190,11 +192,13 @@ const App = () => {
           <Route path="/editpayments/:Workoutid" element={<EditPayments />} />
           <Route path="/editdetails/:Payerid" element={<Editdetails />} />
 
-          {/* Announcement Handling Routes */}
-          <Route path="/announcement" element={<Announcement />} />
-
-          {/* Class Scheduling Routes */}
-          <Route path="/class" element={<Class />} />
+          {/* Class Scheduling and Announcement Handling Routes */}
+          <Route path="/createClass" element={<ClassHome />} />
+          <Route path="/updateClass/:id" element={<UpdateClass />} />
+          <Route path="/createAnnouncement" element={<CreateAnnouncement />} />
+          <Route path="/readAnnouncement" element={<ReadAnnouncement />} />
+          <Route path="/updateAnnouncement/:id" element={<UpdateAnnouncement />} />
+          <Route path="/readClass" element={<ReadClass />} />
 
         </Routes>
       </AdminContext.Provider>
