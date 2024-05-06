@@ -78,7 +78,15 @@ const THome = () => {
                                 <Card className="h-100 shadow border border-dark cardHov">
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Timetable</Card.Title>
-                                        <Link to="#timetable" className="stretched-link"></Link>
+                                        <Link to="/createClass" className="stretched-link"></Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col className="mt-4 mb-4">
+                                <Card className="h-100 shadow border border-dark cardHov">
+                                    <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+                                        <Card.Title>Announcements</Card.Title>
+                                        <Link to="/createAnnouncement" className="stretched-link"></Link>
                                     </Card.Body>
                                 </Card>
                             </Col>
