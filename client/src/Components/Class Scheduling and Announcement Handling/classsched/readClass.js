@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function ReadClass() {
   const [workouts, setWorkouts] = useState([]);
@@ -37,85 +39,89 @@ function ReadClass() {
   }
 
   return (
-    <div className="fullDiv m-5">
-      <div className="row">
-        {workouts.map((workout) => (
-          <div className="col-md-6 p-4" key={workout._id}>
-            <div className="card-block p-4 rounded-3 text-start text-primary workout-card">
-              <form className="workout-form">
-                <div className="input-group">
-                  <div className="input-box">
-                    <label>Teacher Name</label>
-                    <input
-                      value={workout.teacherName}
-                      className="form-control"
-                      disabled
-                    />
-                  </div>
-                  <div className="input-box">
-                    <label>Subject</label>
-                    <input
-                      value={workout.subject}
-                      className="form-control"
-                      disabled
-                    />
-                  </div>
-                  <div className="input-box">
-                    <label>Date</label>
-                    <input
-                      value={workout.date}
-                      className="form-control"
-                      disabled
-                    />
-                  </div>
-                  <div className="input-box">
-                    <label>Start Time</label>
-                    <input
-                      value={workout.time}
-                      className="form-control"
-                      disabled
-                    />
-                  </div>
-                  <div className="input-box">
-                    <label>End Time</label>
-                    <input
-                      value={workout.duration}
-                      className="form-control"
-                      disabled
-                    />
-                  </div>
-                  <div className="input-box">
-                    <label>Venue</label>
-                    <input
-                      value={workout.venue}
-                      className="form-control"
-                      disabled
-                    />
-                  </div>
-                  <div className="input-group-btn">
-                  <Link to={`/updateClass/${workout._id}`}>
-                    <button
+    <div style={{ backgroundColor: '#ECF0F5' }}>
+      <Header/>
+      <div className="container-fluid mt-10 mb-10">
+        <h1 className="text-center mb-5">Classes</h1>
+        <div className="row justify-content-center">
+          {workouts.map((workout) => (
+            <div className="col-md-4 mb-4" key={workout._id}>
+              <div className="card bg-white shadow rounded-3">
+                <div className="card-body">
+                  <form className="workout-form row">
+                    <div className="mb-3 col-6">
+                      <label className="form-label">Teacher Name:</label>
+                      <input
+                        value={workout.teacherName}
+                        className="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3 col-6">
+                      <label className="form-label">Subject:</label>
+                      <input
+                        value={workout.subject}
+                        className="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3 col-6">
+                      <label className="form-label">Date:</label>
+                      <input
+                        value={workout.date}
+                        className="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3 col-6">
+                      <label className="form-label">Venue:</label>
+                      <input
+                        value={workout.venue}
+                        className="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3 col-6">
+                      <label className="form-label">Start Time:</label>
+                      <input
+                        value={workout.time}
+                        className="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3 col-6">
+                      <label className="form-label">End Time:</label>
+                      <input
+                        value={workout.duration}
+                        className="form-control"
+                        disabled
+                      />
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center">                      
+                      <button
                         type="button"
-                        className="btn btn-primary update-button"
+                        className="btn btn-danger"
+                        onClick={() => handleDelete(workout._id)}
                       >
-                        Update
+                        Delete
                       </button>
-                    </Link>
-
-                    <button
-                      type="button"
-                      className="btn btn-danger delete-button"
-                      onClick={() => handleDelete(workout._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                      <Link to={`/updateClass/${workout._id}`}>
+                        <button
+                          type="button"
+                          className="btn btn-info"
+                        >
+                          Update
+                        </button>
+                      </Link>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 }

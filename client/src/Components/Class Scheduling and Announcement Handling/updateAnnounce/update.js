@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function Update() {
   // Capitalized the first letter of the function name
@@ -53,66 +55,63 @@ function Update() {
   };
 
   return (
-    <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-      <h1>Edit Announcement</h1>
-      <div className="row">
-        <form onSubmit={editAnnouncement}>
-          <div className="col-12 text-warning">
-            <div className=" ">
-              <label htmlFor="TeacherNameID" className="form-label">
-                Teacher Name/ID:
-              </label>{" "}
-              <br />
-              <input
-                type="text"
-                id="TeacherNameID"
-                name="TeacherNameID"
-                value={TeacherNameID}
-                onChange={(e) => {
-                  setUpdateTeacherNameID(e.target.value);
-                }}
-                required
-              />
-            </div>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container fullDiv">
+        <div className="container bg-white mt-10 mb-10 col-8 rounded-3 shadow p-3">
+        <h1 className="text-center mb-4">Edit Announcement</h1>
+          <form className="justify-content-center" onSubmit={editAnnouncement}>
             <div className="">
-              <label htmlFor="SubjectSubjectID" className="form-label">
-                Subject/Subject ID:
-              </label>{" "}
-              <br />
-              <input
-                id="SubjectSubjectID"
-                name="SubjectSubjectID"
-                value={SubjectSubjectID}
-                onChange={(e) => {
-                  setUpdateSubjectSubjectID(e.target.value);
-                }}
-                required
-              />
+              <div className="mb-3">
+                <label htmlFor="TeacherNameID" className="form-label">
+                  Teacher Name/ID:
+                </label>
+                <input
+                  type="text"
+                  id="TeacherNameID"
+                  name="TeacherNameID"
+                  value={TeacherNameID}
+                  onChange={(e) => setUpdateTeacherNameID(e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="SubjectSubjectID" className="form-label">
+                  Subject/Subject ID:
+                </label>
+                <input
+                  id="SubjectSubjectID"
+                  name="SubjectSubjectID"
+                  value={SubjectSubjectID}
+                  onChange={(e) => setUpdateSubjectSubjectID(e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="Announcement" className="form-label">
+                  Announcement:
+                </label>
+                <textarea
+                  id="Announcement"
+                  name="Announcement"
+                  value={Announcement}
+                  onChange={(e) => setUpdateAnnouncement(e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="d-flex justify-content-end">
+                <button type="submit" className="btn btn-info">
+                  Update
+                </button>
+              </div>
             </div>
-            <div className="">
-              <label htmlFor="Announcement" className="form-label">
-                Announcement:
-              </label>{" "}
-              <br />
-              <input
-                type="text"
-                id="Announcement"
-                name="Announcement"
-                value={Announcement}
-                onChange={(e) => {
-                  setUpdateAnnouncement(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <div className="d-flex justify-content-between">
-              <button type="submit" className="btn btn-warning">
-                Update
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 }
