@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 export default function ReadAnnounce() {
   const [announcements, setAnnouncements] = useState([]);
@@ -26,7 +28,7 @@ export default function ReadAnnounce() {
       .delete(`http://localhost:8081/announcements/${id}`)
       .then(() => {
         alert("Class Deleted.");
-        navigate("/readAnnouncements");
+        navigate("/readAnnouncement");
       })
       .catch((err) => {
         console.error("Error deleting workout:", err);
@@ -35,94 +37,60 @@ export default function ReadAnnounce() {
   }
 
   return (
-    <div style={{ width: "100%" }} className="fullDiv m-5">
-      <div style={{ display: "flex", flexWrap: "wrap" }} className="row">
-        {announcements.map((announce) => (
-          <div
-            key={announce._id}
-            style={{ flex: "0 0 50%", maxWidth: "50%" }}
-            className="col-md-6 p-4"
-          >
-            <div className="card-block p-4 rounded-3 text-start text-primary workout-card">
-              <form className="workout-form">
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "space-between",
-                  }}
-                  className="input-group"
-                >
-                  <div
-                    style={{
-                      flex: "0 0 calc(50% - 10px)",
-                      maxWidth: "calc(50% - 10px)",
-                      marginBottom: "10px",
-                    }}
-                    className="input-box"
-                  >
-                    <label style={{ fontWeight: "bold" }}>
-                      Teacher Name ID
-                    </label>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container fullDiv mt-5 mb-5">
+        <h1 className="text-center mb-4">Announcements</h1>
+        <div className="row justify-content-center">
+          {announcements.map((announce) => (
+            <div key={announce._id} className="col-md-6">
+              <div className="card rounded-3 shadow p-3 mb-4">
+                <form className="workout-form">
+                  <div className="mb-3">
+                    <label className="form-label">Teacher Name ID</label>
                     <input
                       value={announce.TeacherNameID}
                       className="form-control"
                       disabled
                     />
                   </div>
-                  <div
-                    style={{
-                      flex: "0 0 calc(50% - 10px)",
-                      maxWidth: "calc(50% - 10px)",
-                      marginBottom: "10px",
-                    }}
-                    className="input-box"
-                  >
-                    <label style={{ fontWeight: "bold" }}>Subject ID</label>
+                  <div className="mb-3">
+                    <label className="form-label">Subject ID</label>
                     <input
                       value={announce.SubjectSubjectID}
                       className="form-control"
                       disabled
                     />
                   </div>
-                  <div
-                    style={{ flex: "0 0 100%", marginBottom: "10px" }}
-                    className="input-box"
-                  >
-                    <label style={{ fontWeight: "bold" }}>Announcement</label>
+                  <div className="mb-3">
+                    <label className="form-label">Announcement</label>
                     <textarea
                       value={announce.Announcement}
                       className="form-control"
                       disabled
                     />
                   </div>
-                  <div
-                    style={{ marginTop: "10px" }}
-                    className="input-group-btn"
-                  >
-                    <Link to={`/updateAnnouncement/${announce._id}`}>
-                    <button
-                        type="button"
-                        className="btn btn-primary update-button"
-                      >
-                        Update
-                      </button>
-                    </Link>
+                  <div className="mb-3 d-flex justify-content-between">
                     <button
                       type="button"
-                      className="btn btn-danger delete-button"
+                      className="btn btn-danger"
                       onClick={() => handleDelete(announce._id)}
-                      style={{ width: "100%", backgroundColor: "red" }}
                     >
                       Delete
                     </button>
+                    <Link to={`/updateAnnouncement/${announce._id}`}>
+                      <button type="button" className="btn btn-primary">
+                        Update
+                      </button>
+                    </Link>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 }

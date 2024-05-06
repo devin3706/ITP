@@ -261,7 +261,7 @@ const AdminHome = () => {
                     </div>
 
                     <div className="col mt-3">
-                        <Link to="/#">                        
+                        <Link to="/readClass">                        
                             <div className="card cardDPDashboard rounded-4" style={{backgroundColor: '#A0F5FF'}}>
                                 <div className="iconDPDashboard">
                                     <PiAlarm />

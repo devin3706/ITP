@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function UpdateClass() {
   const { id } = useParams();
@@ -61,89 +63,95 @@ function UpdateClass() {
   };
 
   return (
-    <div className="container">
-      <h1>Edit Class Schedule</h1>
-      <form id="classForm" onSubmit={editClass}>
-        <div className="form-group">
-          <label htmlFor="teacherName">Teacher Name:</label>
-          <input
-            type="text"
-            id="teacherName"
-            name="teacherName"
-            value={teacherName}
-            onChange={(e) => setTeacherName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="subject">Subject:</label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="time">Start Time:</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="duration">End Time:</label>
-          <input
-            type="time"
-            id="duration"
-            name="duration"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="venue">Venue:</label>
-          <select
-            id="venue"
-            name="venue"
-            value={venue}
-            onChange={(e) => setVenue(e.target.value)}
-            required
-          >
-            <option value="" disabled>
-              Select Venue
-            </option>
-            <option value="venue1">Venue 1</option>
-            <option value="venue2">Venue 2</option>
-            <option value="venue3">Venue 3</option>
-            <option value="venue4">Venue 4</option>
-          </select>
-        </div>
-        <div className="buttons">
-          <button type="submit" className="create-button">
-            Update
-          </button>
-        </div>
-      </form>
-      <div id="message" className="hidden"></div>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container bg-white col-6 rounded-3 shadow mt-5 mb-5 p-3">
+        <h1 className="mb-4 text-center">Edit Class Schedule</h1>
+        <form id="classForm" onSubmit={editClass}>
+          <div className="mb-3">
+            <label htmlFor="teacherName" className="form-label">Teacher Name:</label>
+            <input
+              type="text"
+              id="teacherName"
+              name="teacherName"
+              value={teacherName}
+              onChange={(e) => setTeacherName(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="subject" className="form-label">Subject:</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3 w-50">
+            <label htmlFor="date" className="form-label">Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3 w-50">
+            <label htmlFor="time" className="form-label">Start Time:</label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3 w-50">
+            <label htmlFor="duration" className="form-label">End Time:</label>
+            <input
+              type="time"
+              id="duration"
+              name="duration"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="venue" className="form-label">Venue:</label>
+            <select
+              id="venue"
+              name="venue"
+              value={venue}
+              onChange={(e) => setVenue(e.target.value)}
+              className="form-select"
+              required
+            >
+              <option value="" disabled>Select Venue</option>
+              <option value="venue1">Venue 1</option>
+              <option value="venue2">Venue 2</option>
+              <option value="venue3">Venue 3</option>
+              <option value="venue4">Venue 4</option>
+            </select>
+          </div>
+          <div className="mb-3 d-flex justify-content-end">
+            <button type="submit" className="btn btn-primary">Update</button>
+          </div>
+        </form>
+        <div id="message" className="hidden"></div>
+      </div>
+      <Footer/>
     </div>
   );
 }
