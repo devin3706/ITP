@@ -185,7 +185,7 @@ const TDetails = () => {
                 <div className="d-flex justify-content-center mt-3">
                     <PDFDownloadLink
                         document={<TeacherDetailsPDF teachers={filteredTeachers} pieChartData={pieChart} barChartData={barChart} />}
-                        fileName="teacher_details.pdf"
+                        fileName="Teacher_Details.pdf"
                         style={{ textDecoration: "none", color: "#fff" }}
                     >
                         {({ loading }) => (
