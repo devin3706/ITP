@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminContext } from "./AdminContext";
 import Homepage from "./Homepage.js";
 
-
 // Exam components
 import Main from './Components/Exam Platform and Leaderboard/components/Main';
 import Quiz from './Components/Exam Platform and Leaderboard/components/Quiz';
@@ -35,7 +34,6 @@ import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
 import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
 import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
 import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
-
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -65,10 +63,13 @@ import Inquiry from './Components/Student Support/components/Inquiry.jsx';
 import UpdateInquiry from './Components/Student Support/components/UpdateInquiry';
 
 //Student Management
-import Students from './Components/Student Management/components/Students.jsx';
-import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
-import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
-import StudentLogin from './Components/Student Management/components/studentLogin.jsx';
+import Students from './Components/Student Management/components/Users.jsx'
+import CreateStudent from './Components/Student Management/components/CreateUser.jsx'
+import UpdateStudent from './Components/Student Management/components/UpdateUser.jsx'
+import BSMarks from './Components/Student Management/components/BSMarks.jsx';
+import Attendance from './Components/Student Management/components/Attendance.jsx'
+import CreateBSMarks from './Components/Student Management/components/CreateBSMarks.jsx';
+import UpdateBSMarks from './Components/Student Management/components/UpdateBSMarks.jsx';
 
 //Student Login
 import Signup from './Components/Student Login/components/Signup.jsx';
@@ -143,10 +144,6 @@ const App = () => {
           <Route path="/mainLogin" element= {<MainLogin/>} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
           <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
-         
-
-        
-
 
           {/* Admin routes */}
           <Route path="/adminHome" element={<AdminHome />} />
@@ -173,6 +170,13 @@ const App = () => {
           <Route path='/UpdateInquiry/:id' element={<UpdateInquiry />}></Route>
 
           {/* Student Management Routes */}
+          <Route path = '/students' element = {<Students />}> </Route>
+          <Route path = '/createStudent' element = {<CreateStudent />}> </Route>
+          <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
+          <Route path = '/attendance' element = {<Attendance />}> </Route>
+          <Route path = '/bsmarks' element = {<BSMarks />}> </Route>
+          <Route path = '/createbsmarks' element = {<CreateBSMarks />}> </Route>
+          <Route path = '/updatebsmarks/:id' element = {<UpdateBSMarks />}> </Route>
           
           {/* Student Login Routes */}
           <Route path = '/signup' element = {<Signup />}> </Route>

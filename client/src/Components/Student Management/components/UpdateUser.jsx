@@ -2,48 +2,55 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {useState, useEffect } from "react";
 import axios from 'axios';
-import Footer from "../../Exam Platform and Leaderboard/components/Footer";
-import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function UpdateUser () {
-    const {id} = useParams()
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [school, setSchool] = useState('')
-    const [number, setNumber] = useState('')
-    const [address, setAddress] = useState('')
-    const navigate = useNavigate()
+    const {id} = useParams();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [school, setSchool] = useState('');
+    const [number, setNumber] = useState('');
+    const [address, setAddress] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:8081/student/getUser/${id}')
+        axios.get(`http://localhost:8081/student/getUser/${id}`)
         .then(result => {
-            console.log(result)
-            setName(result.data.name);
-            setEmail(result.data.email);
-            setSchool(result.data.school);
-            setNumber(result.data.number);
-            setAddress(result.data.address);
-        
+            
+            //setName(result.data.name);
+            //setEmail(result.data.email);
+            //setSchool(result.data.school);
+            //setNumber(result.data.number);
+            //setAddress(result.data.address);
+            const userData = result.data;
+                setName(userData.name || '');
+                setEmail(userData.email || '');
+                setSchool(userData.school || '');
+                setNumber(userData.number || '');
+                setAddress(userData.address || '');
         })
         .catch(err => console.log(err));
     },[id]);
 
     const Update = (e) => {
-        e.preventDefault()
-        axios.put('http://localhost:8081/student/updateUser/${id}', {name, email, school, number, address})
+        e.preventDefault();
+        axios.put(`http://localhost:8081/student/updateUser/${id}`, { 
+            name,
+            email,
+            school,
+            number,
+            address
+        })
         .then(result => {
-            console.log(result)
-            navigate('/')
-    }) 
+            console.log(result);
+            navigate('/students');
+        }) 
         .catch(err => console.log(err));
     }
     
     return (
-        <div style={{ backgroundColor: "#ECF0F5" }}>
-        <Header/>
-        <div className = "d-flex vh-100 justify-content-center align-items-center">
-        <div className = "bg-white p-3 rounded w-50 shadow">
-            <h2 className="text-center">Update User</h2>
+        <div className="d-flex vh-100 justify-content-center align-items-center" style={{ backgroundColor: '#005F69' }}>
+        <div className = "bg-white p-3 rounded w-50">
+            <h2>Update User</h2>
             <form onSubmit = {Update}>
                 <div className = "mb-2">
                     <label htmlFor="email">
@@ -123,9 +130,7 @@ function UpdateUser () {
             
         </div>
     </div>
-    <Footer/>
-    </div>
-    )
-} 
+    );
+} ;
 
 export default UpdateUser;
