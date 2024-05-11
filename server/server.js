@@ -13,7 +13,9 @@ import studyMaterialRoutes from './router/study materials/routes.js';
 import userRoutes from './router/student support/UserRoutes.js';
 import inquiryRoutes from './router/student support/InquiryRoutes.js';
 import { upload } from './middleware/study materials/multer.js';
-import studentRoutes from './router/student management/routes.js';
+import studentRoutes from './router/student management/student.js';
+import attendanceRoutes from './router/student management/attendance.js';
+import bsmarksRoutes from './router/student management/bsmarks.js';
 import studentLoginRoutes from './router/student login/student.js';
 import payerRoutes from './router/payment management/payers.js';
 import workoutRoutes from './router/payment management/workouts.js';
@@ -97,6 +99,8 @@ function startServer() {
   // Minesi Routes
   app.use('/student', studentRoutes);
   app.use('/auth', studentLoginRoutes);
+  app.use('/attendance', attendanceRoutes);
+  app.use('/marks', bsmarksRoutes);
 
   //Nuradha Routes
   app.use("/payments", workoutRoutes);
