@@ -2,6 +2,8 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {useState, useEffect } from "react";
 import axios from 'axios';
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function UpdateUser () {
     const {id} = useParams();
@@ -48,8 +50,10 @@ function UpdateUser () {
     }
     
     return (
-        <div className="d-flex vh-100 justify-content-center align-items-center" style={{ backgroundColor: '#005F69' }}>
-        <div className = "bg-white p-3 rounded w-50">
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <Header/>
+        <div className="d-flex mt-5 mb-5 vh-100 justify-content-center align-items-center">
+        <div className = "bg-white p-3 rounded-3 w-50">
             <h2>Update User</h2>
             <form onSubmit = {Update}>
                 <div className = "mb-2">
@@ -129,6 +133,8 @@ function UpdateUser () {
                
             
         </div>
+    </div>
+    <Footer/>
     </div>
     );
 } ;

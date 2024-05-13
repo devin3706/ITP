@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import jsPDF from 'jspdf';
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 
 function Attendance() {
@@ -64,7 +66,9 @@ const handleDownloadPDF = () => {
 
   
     return (
-      <div>
+      <div style={{backgroundColor: '#ECF0F5'}}>
+        <Header/>
+      <div className="mt-5 mb-5">
         <input type = "file" onChange ={e => setFile(e.target.files[0])}/>
         <button onClick = {handleUpload} className = 'btn btn-success'> Upload </button>
         <br/>
@@ -90,7 +94,8 @@ const handleDownloadPDF = () => {
         
         
     </div>
-
+    <Footer/>
+    </div>
 );
 } 
 
