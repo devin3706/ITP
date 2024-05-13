@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function Users () {
     const [users, setUsers] = useState([{
@@ -44,8 +46,10 @@ function Users () {
     };
 
     return (
-        <div className="d-flex vh-200 justify-content-center align-items-center" style={{ backgroundColor: '#005F69' }}>
-            <div className='w-75 bg-white rounded p-3' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', overflowX: 'auto' }}>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <Header />
+        <div className="d-flex mt-5 mb-5 vh-200 justify-content-center align-items-center">
+            <div className='w-75 bg-white rounded-3 p-3' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', overflowX: 'auto' }}>
                 <Link to="/createStudent" className='btn btn-success mr-2'> Add + </Link> <Link to="/dashboard" className='btn btn-success'> Dashboard </Link>
                 <form className="d-flex" onSubmit={handleSearchSubmit}>
                     <input
@@ -89,6 +93,8 @@ function Users () {
                     </tbody>
                 </table>
             </div> 
+        </div>
+        <Footer />
         </div>
     );
 } 

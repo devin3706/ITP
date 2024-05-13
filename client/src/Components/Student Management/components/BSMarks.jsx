@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function BSMarks() {
     const [bsmarks, setBSMarks] = useState([]);
@@ -21,9 +23,10 @@ function BSMarks() {
     }
 
     return (
-        <div className="d-flex vh-200 justify-content-center align-items-center"
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <Header/>
+        <div className="d-flex mt-5 mb-5 vh-200 justify-content-center align-items-center"
             style={{
-                backgroundColor: '#005F69',
                 display: 'flex', 
                 justifyContent: 'center', 
                 alignItems: 'center', 
@@ -31,7 +34,7 @@ function BSMarks() {
                 paddingTop: '20px', 
                 paddingBottom: '20px'
             }}>
-            <div className='w-50 bg-white rounded p-3'>
+            <div className='w-50 bg-white rounded-3 shadow p-3'>
             <Link to="/dashboard" className='btn btn-success'> Dashboard </Link>
                 <table className='table'>
                     <thead>
@@ -58,6 +61,8 @@ function BSMarks() {
                     </tbody>
                 </table>
             </div>
+        </div>
+        <Footer/>
         </div>
     );
 }

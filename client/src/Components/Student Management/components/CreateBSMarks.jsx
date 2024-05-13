@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function CreateBSMarks() {
     const [bsmarks, setBSMarks] = useState(0);
@@ -17,8 +19,10 @@ function CreateBSMarks() {
     };
 
     return (
-        <div className="d-flex vh-100 justify-content-center align-items-center" style={{ backgroundColor: '#005F69' }}>
-        <div className = "bg-white p-3 rounded w-50">
+        <div style={{backgroundColor: '#ECF0F5'}}>
+            <Header/>
+        <div className="d-flex vh-100 justify-content-center align-items-center">
+        <div className = "bg-white p-3 rounded-3 w-50 shadow">
             <h2>Upload Marks</h2>
             <form onSubmit={Submit}>
                 <div className = "mb-2">
@@ -42,6 +46,8 @@ function CreateBSMarks() {
                
             
         </div>
+    </div>
+    <Footer/>
     </div>
     );
 } 
