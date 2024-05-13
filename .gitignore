@@ -1,1 +1,4 @@
 
+server/models/teacher/Teacher.js
+server/router/student login/student.js
+server/router/teacher/teacherRoutes.js
