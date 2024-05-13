@@ -8,94 +8,94 @@ import { AdminContext } from "./AdminContext";
 import Homepage from "./Homepage.js";
 
 // Exam components
-import Main from './Components/Exam Platform and Leaderboard/components/Main';
-import Quiz from './Components/Exam Platform and Leaderboard/components/Quiz';
-import Result from './Components/Exam Platform and Leaderboard/components/Result';
-import ResultView from './Components/Exam Platform and Leaderboard/components/ResultView';
-import { CheckUserExist } from './Components/Exam Platform and Leaderboard/helper/helper';
-import Test from './Components/Exam Platform and Leaderboard/components/Test';
-import EditQuestion from './Components/Exam Platform and Leaderboard/components/EditQuestion';
-import Footer from './Components/Exam Platform and Leaderboard/components/Footer';
-import Header from './Components/Exam Platform and Leaderboard/components/Header';
-import CreateQuestion from './Components/Exam Platform and Leaderboard/components/CreateQuestion';
-import Leaderboard from './Components/Exam Platform and Leaderboard/components/Leaderboard';
-import StudentInterface from './Components/Exam Platform and Leaderboard/components/StudentInterface.js';
-import TeacherInterface from './Components/Exam Platform and Leaderboard/components/TeacherInterface.js';
+import Main from './components/Exam Platform and Leaderboard/components/Main';
+import Quiz from './components/Exam Platform and Leaderboard/components/Quiz';
+import Result from './components/Exam Platform and Leaderboard/components/Result';
+import ResultView from './components/Exam Platform and Leaderboard/components/ResultView';
+import { CheckUserExist } from './components/Exam Platform and Leaderboard/helper/helper';
+import Test from './components/Exam Platform and Leaderboard/components/Test';
+import EditQuestion from './components/Exam Platform and Leaderboard/components/EditQuestion';
+import Footer from './components/Exam Platform and Leaderboard/components/Footer.js';
+import Header from './components/Exam Platform and Leaderboard/components/Header.js';
+import CreateQuestion from './components/Exam Platform and Leaderboard/components/CreateQuestion';
+import Leaderboard from './components/Exam Platform and Leaderboard/components/Leaderboard';
+import StudentInterface from './components/Exam Platform and Leaderboard/components/StudentInterface.js';
+import TeacherInterface from './components/Exam Platform and Leaderboard/components/TeacherInterface.js';
 
 // Teacher components
-import THome from "./Components/Teacher Management/pages/THome";
-import TCreate from './Components/Teacher Management/pages/TCreate';
-import TLogin from './Components/Teacher Management/pages/TLogin';
-import TDetails from './Components/Teacher Management/pages/TDetails';
-import THeader from './Components/Teacher Management/component/THeader';
-import TUpdate from './Components/Teacher Management/pages/TUpdate.jsx';
-import SideNavbar from './Components/Teacher Management/component/SideNavbar';
-import TProfile from './Components/Teacher Management/pages/TProfile.jsx';
-import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
-import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
-import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
+import THome from "./components/Teacher Management/pages/THome";
+import TCreate from './components/Teacher Management/pages/TCreate';
+import TLogin from './components/Teacher Management/pages/TLogin';
+import TDetails from './components/Teacher Management/pages/TDetails';
+import THeader from './components/Teacher Management/component/THeader';
+import TUpdate from './components/Teacher Management/pages/TUpdate.jsx';
+import SideNavbar from './components/Teacher Management/component/SideNavbar.jsx';
+import TProfile from './components/Teacher Management/pages/TProfile.jsx';
+import MainLogin from './components/Teacher Management/pages/MainLogin.jsx';
+import TEnterEmail from './components/Teacher Management/pages/TEnterEmail.jsx';
+import ResetPassword from './components/Teacher Management/pages/ResetPassword.jsx';
 
 // Admin components
-import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
-import AdminCreate from './Components/Daily Process Dashboard/pages/AdminCreate';
-import AdminLogin from './Components/Daily Process Dashboard/pages/AdminLogin';
-import AdminDetails from './Components/Daily Process Dashboard/pages/AdminDetails';
-import AdminHeader from './Components/Daily Process Dashboard/components/AdminHeader.jsx';
+import AdminHome from './components/Daily Process Dashboard/pages/AdminHome.jsx';
+import AdminCreate from './components/Daily Process Dashboard/pages/AdminCreate';
+import AdminLogin from './components/Daily Process Dashboard/pages/AdminLogin';
+import AdminDetails from './components/Daily Process Dashboard/pages/AdminDetails';
+import AdminHeader from './components/Daily Process Dashboard/components/AdminHeader.jsx';
 
 // Admin API functions
-import { getLoggedInAdmin } from './Components/Daily Process Dashboard/api/admin.js';
+import { getLoggedInAdmin } from './components/Daily Process Dashboard/api/admin.js';
 
 // Study Material components
-import PdfApp from './Components/Study Material and Past Paper Management/PdfApp.js';
-import PdfComp from './Components/Study Material and Past Paper Management/PdfComp.js';
-import PdfViewer from './Components/Study Material and Past Paper Management/PdfViewer.jsx';
-import PastPaperView from './Components/Study Material and Past Paper Management/PastPaperView.jsx';
-import PastPaperUpload from './Components/Study Material and Past Paper Management/PastPaperUpload.jsx';
+import PdfApp from './components/Study Material and Past Paper Management/PdfApp.js';
+import PdfComp from './components/Study Material and Past Paper Management/PdfComp.js';
+import PdfViewer from './components/Study Material and Past Paper Management/PdfViewer.jsx';
+import PastPaperView from './components/Study Material and Past Paper Management/PastPaperView.jsx';
+import PastPaperUpload from './components/Study Material and Past Paper Management/PastPaperUpload.jsx';
 
 // Student Support System
-import Users from './Components/Student Support/components/Users.jsx';
-import CreateUser from './Components/Student Support/components/CreateUser.jsx';
-import UpdateUser from './Components/Student Support/components//UpdateUser.jsx';
-import CreateInquiry from './Components/Student Support/components/CreateInquiry.jsx';
-import StudentFeedback from './Components/Student Support/components/StudentFeedback';
-import TeacherFeedback from './Components/Student Support/components/TeacherFeedback';
-import Inquiry from './Components/Student Support/components/Inquiry.jsx';
-import UpdateInquiry from './Components/Student Support/components/UpdateInquiry';
+import Users from './components/Student Support/components/Users.jsx';
+import CreateUser from './components/Student Support/components/CreateUser.jsx';
+import UpdateUser from './components/Student Support/components//UpdateUser.jsx';
+import CreateInquiry from './components/Student Support/components/CreateInquiry.jsx';
+import StudentFeedback from './components/Student Support/components/StudentFeedback';
+import TeacherFeedback from './components/Student Support/components/TeacherFeedback';
+import Inquiry from './components/Student Support/components/Inquiry.jsx';
+import UpdateInquiry from './components/Student Support/components/UpdateInquiry';
 
 //Student Management
-import Students from './Components/Student Management/components/Users.jsx'
-import CreateStudent from './Components/Student Management/components/CreateUser.jsx'
-import UpdateStudent from './Components/Student Management/components/UpdateUser.jsx'
-import BSMarks from './Components/Student Management/components/BSMarks.jsx';
-import Attendance from './Components/Student Management/components/Attendance.jsx'
-import CreateBSMarks from './Components/Student Management/components/CreateBSMarks.jsx';
-import UpdateBSMarks from './Components/Student Management/components/UpdateBSMarks.jsx';
+import Students from './components/Student Management/components/Users.jsx'
+import CreateStudent from './components/Student Management/components/CreateUser.jsx'
+import UpdateStudent from './components/Student Management/components/UpdateUser.jsx'
+import BSMarks from './components/Student Management/components/BSMarks.jsx';
+import Attendance from './components/Student Management/components/Attendance.jsx'
+import CreateBSMarks from './components/Student Management/components/CreateBSMarks.jsx';
+import UpdateBSMarks from './components/Student Management/components/UpdateBSMarks.jsx';
 
 //Student Login
-import Signup from './Components/Student Login/components/Signup.jsx';
-import Login from './Components/Student Login/components/Login';
-import Home from './Components/Student Login/components/Home';
-import Dashboard from './Components/Student Login/components/Dashboard';
-import UpdateProfile from './Components/Student Login/components/UpdateProfile';
-import Profile from './Components/Student Login/components/Profile';
-import ForgotPass from './Components/Student Login/components/ForgotPassword';
-import ResetPass from './Components/Student Login/components/ResetPassword';
+import Signup from './components/Student Login/components/Signup.jsx';
+import Login from './components/Student Login/components/Login';
+import Home from './components/Student Login/components/Home';
+import Dashboard from './components/Student Login/components/Dashboard';
+import UpdateProfile from './components/Student Login/components/UpdateProfile';
+import Profile from './components/Student Login/components/Profile';
+import ForgotPass from './components/Student Login/components/ForgotPassword';
+import ResetPass from './components/Student Login/components/ResetPassword';
 
 //Payment Management
-import Payment from "./Components/Payment Management/Add Payment/Payment.js";
-import PayOnline from "./Components/Payment Management/PayOnline/PayOnline.js";
-import Payments from "./Components/Payment Management/Payment Details/Payments.js";
-import PayDetails from "./Components/Payment Management/PayerDetails/payDetails.js";
-import EditPayments from "./Components/Payment Management/EditPayment/EditPayments.js";
-import Editdetails from "./Components/Payment Management/EditDetails/Editdetails";
+import Payment from "./components/Payment Management/Add Payment/Payment.js";
+import PayOnline from "./components/Payment Management/PayOnline/PayOnline.js";
+import Payments from "./components/Payment Management/Payment Details/Payments.js";
+import PayDetails from "./components/Payment Management/PayerDetails/payDetails.js";
+import EditPayments from "./components/Payment Management/EditPayment/EditPayments.js";
+import Editdetails from "./components/Payment Management/EditDetails/Editdetails";
 
 //Class Scheduling and Announcement Handling
-import CreateAnnouncement from "./Components/Class Scheduling and Announcement Handling/announcements/createAnnounce.js";
-import ReadClass from "./Components/Class Scheduling and Announcement Handling/classsched/readClass.js";
-import ReadAnnouncement from "./Components/Class Scheduling and Announcement Handling/readAnnounce/readAnnounce.js";
-import UpdateAnnouncement from "./Components/Class Scheduling and Announcement Handling/updateAnnounce/update.js";
-import UpdateClass from "./Components/Class Scheduling and Announcement Handling/updateclass/updatecl.js"
-import ClassHome from "./Components/Class Scheduling and Announcement Handling/ClassHome/ClassHome.jsx";
+import CreateAnnouncement from "./components/Class Scheduling and Announcement Handling/announcements/createAnnounce.js";
+import ReadClass from "./components/Class Scheduling and Announcement Handling/classsched/readClass.js";
+import ReadAnnouncement from "./components/Class Scheduling and Announcement Handling/readAnnounce/readAnnounce.js";
+import UpdateAnnouncement from "./components/Class Scheduling and Announcement Handling/updateAnnounce/update.js";
+import UpdateClass from "./components/Class Scheduling and Announcement Handling/updateclass/updatecl.js"
+import ClassHome from "./components/Class Scheduling and Announcement Handling/ClassHome/ClassHome.jsx";
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
