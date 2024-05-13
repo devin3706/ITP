@@ -181,7 +181,6 @@ const App = () => {
           {/* Student Login Routes */}
           <Route path = '/signup' element = {<Signup />}> </Route>
           <Route path = '/login' element = {<Login />}> </Route>
-          <Route path = '/home' element = {<Home />}> </Route>
           <Route path = '/forgotPass' element = {<ForgotPass/>}> </Route>
           <Route path = '/resetPass/:token' element = {<ResetPass/>}> </Route>
           <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
