@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 //sdfgh
+//comment
 
 function BSMarks() {
     const [bsmarks, setBSMarks] = useState([]);
