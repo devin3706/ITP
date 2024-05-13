@@ -148,3 +148,111 @@ export const update = async (adminID, updatedAdminData) => {
         throw new Error(`Cannot update admin details: ${error}`);
     }
 };
+
+export const getTotalStudents = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/totalStudents`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch total number of students');
+      }
+      return await response.json();
+    } catch (error) {
+      throw new Error('Failed to fetch total number of students: ' + error.message);
+    }
+};
+
+export const getTotalTeachers = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/totalTeachers`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch total number of teachers');
+      }
+      return await response.json();
+    } catch (error) {
+      throw new Error('Failed to fetch total number of teachers: ' + error.message);
+    }
+};
+
+export const getTotalFiles = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/totalFiles`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch total number of files');
+      }
+      return await response.json();
+    } catch (error) {
+      throw new Error('Failed to fetch total number of files: ' + error.message);
+    }
+};
+
+export const getTotalClasses = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/totalClasses`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch total number of classes');
+      }
+      return await response.json();
+    } catch (error) {
+      throw new Error('Failed to fetch total number of classes: ' + error.message);
+    }
+};
+
+export const getTotalExams = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/totalExams`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch total number of Exams');
+      }
+      return await response.json();
+    } catch (error) {
+      throw new Error('Failed to fetch total number of Exams: ' + error.message);
+    }
+};
+
+export const getTotalTeacherLogins = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/totalTeacherLogins`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch total number of teacher logins');
+      }
+      return await response.json();
+    } catch (error) {
+      throw new Error('Failed to fetch total number of teacher logins: ' + error.message);
+    }
+};
+
+export const getStudentLoginsByMonth = async () => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/student-logins-by-month`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch student logins by month');
+        }
+        return response.json();
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+export const getTeacherLoginsByMonth = async () => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/teacher-logins-by-month`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch teacher logins by month');
+        }
+        return response.json();
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+export const getAdminLoginsByMonth = async () => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/admin-logins-by-month`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch admin logins by month');
+        }
+        return response.json();
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};

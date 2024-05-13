@@ -1,6 +1,7 @@
 import Admin from "../../models/admin/admins.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import ALogins from "../../models/admin/adminLogins.js";
 
 dotenv.config();
 
@@ -71,6 +72,21 @@ export const login = async (req, res) => {
         });
 
         res.cookie("jwt", token, { expire: new Date() + 9999, httpOnly: true });
+        
+
+        //for DPDashboard
+                    const teacherEmail = email
+
+                    // Create a new Login document
+                    const ALogin = new ALogins({
+                        adminEmail: teacherEmail,
+                        timestamp: new Date()
+                    });
+
+                    // Save the login data to the database
+                    await ALogin.save();
+
+
 
         return res.json({
             message: "Login Successful!",

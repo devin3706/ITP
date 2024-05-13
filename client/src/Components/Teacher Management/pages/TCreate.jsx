@@ -14,8 +14,13 @@ import {
     MDBCardBody,
     MDBInput
 } from 'mdb-react-ui-kit';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const TCreate = () => {
+    
+
+    // District
     const districts = [
         "Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle",
         "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle",
@@ -39,96 +44,41 @@ const TCreate = () => {
         confirmPassword: "",
         teacherPhoto: null
     });
-    const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === "tEdu") {
-            // If tEdu is an array, handle multiple selections
-            const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-            setFormData({ ...formData, [name]: selectedOptions });
-        } else {
-            setFormData({ ...formData, [name]: value });
+    const validationSchema = Yup.object().shape({
+        tfirstName: Yup.string().required('First Name is required'),
+        tlastName: Yup.string().required('Last Name is required'),
+        tnicNumber: Yup.string().matches(/^(([0-9]{9}[vVxX])|([12]\d{11}))$/, 'Enter Correct NIC number'),
+        tSubject: Yup.string().required('Subject is required'),
+        tDistrict: Yup.string().required('District is required'),
+        tEdu: Yup.array().required('Education Qualification is required').min(1, 'Select at least one qualification'),
+        tInfo: Yup.string(),
+        tAddress: Yup.string().required('Address is required'),
+        tPhone: Yup.string().matches(/^\d{10}$/, 'Invalid phone number').required('Phone Number is required'),
+        tEmail: Yup.string().email('Invalid email address').required('Email is required'),
+        password: Yup.string().min(6, 'Password must be at least 6 characters long').required('Password is required'),
+        confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirm Password is required'),
+    });
+
+    const handleSubmit = async (values) => {
+        try {
+            const formDataToSend = new FormData();
+            for (const key in values) {
+                formDataToSend.append(key, values[key]);
+            }
+
+            await axios.post("http://localhost:8081/teacher/add", formDataToSend);
+            alert("Teacher added successfully")
+            window.location.reload();
+        } catch (error) {
+            console.error("Error adding teacher:", error);
+            alert("Exist Email Address or Nic Number");
         }
-        setErrors({ ...errors, [name]: "" });
     };
 
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
         setFormData({ ...formData, teacherPhoto: file });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (validateForm()) {
-            try {
-                const formDataToSend = new FormData();
-                for (const key in formData) {
-                    formDataToSend.append(key, formData[key]);
-                }
-
-                await axios.post("http://localhost:8081/teacher/add", formDataToSend);
-                alert("Teacher added successfully")
-                window.location.reload();
-            } catch (error) {
-                console.error("Error adding teacher:", error);
-                alert("An error occurred while adding the teacher");
-            }
-        } else {
-            alert("Please fill in all required fields with valid Sri Lankan teacher information");
-        }
-    };
-
-    const validateForm = () => {
-        let isValid = true;
-        const newErrors = {};
-
-        // NIC Number Validation
-        const nicRegex = /^(([0-9]{9}[vVxX])|([12]\d{11}))$/;
-        if (!nicRegex.test(formData.tnicNumber)) {
-            newErrors.tnicNumber = "Enter Correct NIC number";
-            isValid = false;
-        }
-
-
-        // District Validation
-        if (!formData.tDistrict || !districts.includes(formData.tDistrict)) {
-            newErrors.tDistrict = "Please select a district";
-            isValid = false;
-        }
-
-        // Education Qualification Validation
-        if (formData.tEdu.length === 0) {
-            newErrors.tEdu = "Please select at least one education qualification";
-            isValid = false;
-        }
-
-        // Phone Number Validation
-        const phoneRegex = /^\d{10}$/;
-        if (!phoneRegex.test(formData.tPhone)) {
-            newErrors.tPhone = "Invalid phone number";
-            isValid = false;
-        }
-
-        // Email Validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.tEmail)) {
-            newErrors.tEmail = "Invalid email address";
-            isValid = false;
-        }
-
-        // Password Validation
-        if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = "Passwords do not match";
-            isValid = false;
-        }
-        if (formData.password.length < 6) {
-            newErrors.password = "Password must be at least 6 characters long";
-            isValid = false;
-        }
-
-        setErrors(newErrors);
-        return isValid;
     };
 
     return (
@@ -140,76 +90,230 @@ const TCreate = () => {
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                 <MDBCol col='12' className='m-5'>
                     <MDBCard className='card-registration card-registration-2' style={{ borderRadius: '15px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', backgroundColor: '#ffffff' }}>
-                        <form onSubmit={handleSubmit}>
-                            <MDBCardBody className='p-0'>
-                                <MDBRow>
-                                    <MDBCol md='6' className='p-5'>
-                                        <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>General Information</h3>
-                                        <MDBInput wrapperClass='mb-4' label='First Name' size='medium' name='tfirstName' id='tfirstName' type='text' value={formData.tfirstName} onChange={handleChange} error={errors.tfirstName} />
-                                        <MDBInput wrapperClass='mb-4' label='Last Name' size='medium' name='tlastName' id='tlastName' type='text' value={formData.tlastName} onChange={handleChange} error={errors.tlastName} />
-                                        {errors.tnicNumber && <div className="text-danger">{errors.tnicNumber}</div>}
-                                        <MDBInput wrapperClass='mb-4' label='NIC - Number' size='medium' name='tnicNumber' id='tnicNumber' type='text' value={formData.tnicNumber} onChange={handleChange} error={errors.tnicNumber} />
+                        <Formik
+                            initialValues={formData}
+                            validationSchema={validationSchema}
+                            onSubmit={handleSubmit}
+                        >
+                            {(formik) => (
+                                <Form onSubmit={formik.handleSubmit}>
+                                    <MDBCardBody className='p-0'>
+                                        <MDBRow>
+                                            <MDBCol md='6' className='p-5'>
+                                                <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>General Information</h3>
+                                                <ErrorMessage name="tfirstName" component="div" className="text-danger" />
+                                                <Field
+                                                name="tfirstName"
+                                                type="text"
+                                                as={MDBInput}
+                                                wrapperClass='mb-4'
+                                                label='First Name'
+                                                size='medium'
+                                                id='tfirstName'
+                                                onKeyPress={(e) => {
+                                                    const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                    if (!regex.test(e.key)) {
+                                                        e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                    }
+                                                }}
+/>
+                                                
+                                                <ErrorMessage name="tlastName" component="div" className="text-danger" />
+                                                <Field
+                                                    name="tlastName"
+                                                    type="text"
+                                                    as={MDBInput}
+                                                    wrapperClass='mb-4'
+                                                    label='Last Name'
+                                                    size='medium'
+                                                    id='tlastName'
+                                                    onKeyPress={(e) => {
+                                                        const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                        if (!regex.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                        }
+                                                    }}
+                                                    
+                                                />
+                                                
+                                                <ErrorMessage name="tnicNumber" component="div" className="text-danger" />
+                                                <Field
+                                                name="tnicNumber"
+                                                type="text"
+                                                as={MDBInput}
+                                                wrapperClass='mb-4'
+                                                label='NIC - Number'
+                                                size='medium'
+                                                id='tnicNumber'
+                                                onKeyPress={(e) => {
+                                                    const allowedChars = [/[0-9]/, 'v', 'V', 'x', 'X']; // Array of allowed characters
+                                                    if (!allowedChars.some(regex => (typeof regex === 'string' && regex === e.key) || (typeof regex === 'object' && regex.test(e.key)))) {
+                                                        e.preventDefault(); // Prevent the input of characters other than numbers, 'v', 'V', 'x', 'X'
+                                                    }
+                                                }}
+                                                
+                                                
+/>
 
-                                        <div className="mb-4 mt-2">
-                                            <select className="form-select" name='tSubject' id="tSubject" aria-label="Subject" value={formData.tSubject} onChange={handleChange} error={errors.tSubject}>
-                                                <option value="">Select the Subject</option>
-                                                <option value="Commerce(O/L)">Commerce(O/L)</option>
-                                                <option value="Accounting(A/L)">Accounting(A/L)</option>
-                                                <option value="Business Studies(A/L)">Business Studies(A/L)</option>
-                                                <option value="Economics(A/L)">Economics(A/L)</option>
-                                                <option value="Business Statistics(A/L)">Business Statistics(A/L)</option>
-                                            </select>
-                                            <label htmlFor="tSubject" className="form-label">Subject</label>
-                                        </div>
-                                        <div className="mb-4 mt-2">
-                                            {errors.tDistrict && <div className="text-danger">{errors.tDistrict}</div>}
-                                            <select className="form-select" name='tDistrict' id="tDistrict" aria-label="District" value={formData.tDistrict} onChange={handleChange} error={errors.tDistrict}>
-                                                <option value="">Select the District</option>
-                                                {districts.map((district, index) => (
-                                                    <option key={index} value={district}>{district}</option>
-                                                ))}
-                                            </select>
+                                               
+                                                <div className="mb-4 mt-2">
+                                                <ErrorMessage name="tSubject" component="div" className="text-danger" />
+                                                    <Field
+                                                        name="tSubject"
+                                                        as="select"
+                                                        className="form-select"
+                                                        id="tSubject"
+                                                        wrapperClass='mb-4 mt-2'
+                                                    >
+                                                        <option value="">Select the Subject</option>
+                                                        <option value="Commerce(O/L)">Commerce(O/L)</option>
+                                                        <option value="Accounting(A/L)">Accounting(A/L)</option>
+                                                        <option value="Business Studies(A/L)">Business Studies(A/L)</option>
+                                                        <option value="Economics(A/L)">Economics(A/L)</option>
+                                                        <option value="Business Statistics(A/L)">Business Statistics(A/L)</option>
+                                                    </Field>
+                                                   
+                                                </div>
+                                                <div className="mb-4 mt-2">
+                                                <ErrorMessage name="tDistrict" component="div" className="text-danger" />
+                                                    <Field
+                                                        name="tDistrict"
+                                                        as="select"
+                                                        className="form-select"
+                                                        id="tDistrict"
+                                                        wrapperClass='mb-4 mt-2'
+                                                    >
+                                                        <option value="">Select the District</option>
+                                                        {districts.map((district, index) => (
+                                                            <option key={index} value={district}>{district}</option>
+                                                        ))}
+                                                    </Field>
+                                                    
+                                                </div>
+                                                <div className="mb-4 mt-2">
+                                                <ErrorMessage name="tEdu" component="div" className="text-danger" />
+                                                    <Field
+                                                        name="tEdu"
+                                                        as="select"
+                                                        multiple
+                                                        className="form-select"
+                                                        id="tEdu"
+                                                        wrapperClass='mb-4 mt-2'
+                                                    >
+                                                        <option value="">Select Education Qualification(s)</option>
+                                                        <option value="O/L">O/L</option>
+                                                        <option value="A/L">A/L</option>
+                                                        <option value="Degree">Degree</option>
+                                                        <option value="Diploma">Diploma</option>
+                                                        <option value="Certificate">Certificate</option>
+                                                    </Field>
+                                                    
+                                                </div>
+                                                <Field
+                                                name="tInfo"
+                                                type="text"
+                                                as={MDBInput}
+                                                wrapperClass='mb-4'
+                                                label='Additional Information'
+                                                size='medium'
+                                                id='tInfo'
+                                                onKeyPress={(e) => {
+                                                    const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                    if (!regex.test(e.key)) {
+                                                        e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                    }
+                                                }}
+/>
 
-                                            <label htmlFor="tDistrict" className="form-label">District</label>
-                                        </div>
-
-                                        {errors.tEdu && <div className="text-danger">{errors.tEdu}</div>}
-                                        <div className="mb-4 mt-2">
-                                            <label htmlFor="tEdu" className="form-label">Education Qualification</label>
-                                            <select multiple className="form-select" name='tEdu' id="tEdu" aria-label="Education Qualification" value={formData.tEdu} onChange={handleChange} error={errors.tEdu}>
-                                                <option value="">Select Education Qualification(s)</option>
-                                                <option value="O/L">O/L</option>
-                                                <option value="A/L">A/L</option>
-                                                <option value="Degree">Degree</option>
-                                                <option value="Diploma">Diploma</option>
-                                                <option value="Certificate">Certificate</option>
-                                            </select>
-                                        </div>
-
-                                    <MDBInput wrapperClass='mb-4' label='Additional Information' size='medium' name='tInfo' id='tInfo' type='text' value={formData.tInfo} onChange={handleChange} error={errors.tInfo} />
-                                    </MDBCol>
-                                    <MDBCol md='6' className='p-5 bg-info border border-primary rounded-end-custom'>
-                                        <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>Contact Details</h3>
-                                        <MDBInput wrapperClass='mb-4' label='Address' size='medium' name='tAddress' id='tAddress' type='text' value={formData.tAddress} onChange={handleChange} error={errors.tAddress} />
-                                        {errors.tPhone && <div className="text-danger">{errors.tPhone}</div>}
-                                        <MDBInput wrapperClass='mb-4' label='Phone Number' size='medium' name='tPhone' id='tPhone' type='text' value={formData.tPhone} onChange={handleChange} error={errors.tPhone} />
-                                        {errors.tEmail && <div className="text-danger">{errors.tEmail}</div>}
-                                        <MDBInput wrapperClass='mb-4' label='Your Email' size='medium' name='tEmail' id='tEmail' type='email' value={formData.tEmail} onChange={handleChange} error={errors.tEmail} />
-                                        {errors.password && <div className="text-danger">{errors.password}</div>}
-                                        <MDBInput wrapperClass='mb-4' label='Password' size='medium' name='password' id='password' type='password' value={formData.password} onChange={handleChange} error={errors.password} />
-                                        {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}
-                                        <MDBInput wrapperClass='mb-4' label='Confirm Password' size='medium' name='confirmPassword' id='confirmPassword' type='password' value={formData.confirmPassword} onChange={handleChange} error={errors.confirmPassword} />
-                                        <div className="mb-4">
-                                            <label htmlFor="teacherPhoto" className="form-label">Upload Photo</label>
-                                            <input className="form-control" type="file" id="teacherPhoto" accept="image/*" onChange={handlePhotoChange} />
-                                        </div>
-                                        <div className="d-flex justify-content-center">
-                                            <button type="submit" className="btn btn-primary mt-5">Add Teacher</button>
-                                        </div>
-                                    </MDBCol>
-                                </MDBRow>
-                            </MDBCardBody>
-                        </form>
+                                            </MDBCol>
+                                            <MDBCol md='6' className='p-5 bg-info border border-primary rounded-end-custom'>
+                                                <h3 className="fw-normal mb-5" style={{ color: '#4835d4' }}>Contact Details</h3>
+                                                <ErrorMessage name="tAddress" component="div" className="text-danger" />
+                                                <Field
+                                                    name="tAddress"
+                                                    type="text"
+                                                    as={MDBInput}
+                                                    wrapperClass='mb-4'
+                                                    label='Address'
+                                                    size='medium'
+                                                    id='tAddress'
+                                                    onKeyPress={(e) => {
+                                                        const regex = /^[a-zA-Z\s]*$/; // Regex to match only alphabets and spaces
+                                                        if (!regex.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than alphabets and spaces
+                                                        }
+                                                    }}
+                                                />
+                                                
+                                                <ErrorMessage name="tPhone" component="div" className="text-danger" />
+                                                <Field
+                                                    name="tPhone"
+                                                    type="text"
+                                                    as={MDBInput}
+                                                    wrapperClass='mb-4'
+                                                    label='Phone Number'
+                                                    size='medium'
+                                                    id='tPhone'
+                                                    onKeyPress={(e) => {
+                                                        const isNumeric = /^[0-9]*$/; // Regex to match only numeric characters
+                                                        if (!isNumeric.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than numeric characters
+                                                        }
+                                                    }}
+                                                />
+                                               
+                                                <ErrorMessage name="tEmail" component="div" className="text-danger" />
+                                                <Field
+                                                    name="tEmail"
+                                                    type="email"
+                                                    as={MDBInput}
+                                                    wrapperClass='mb-4'
+                                                    label='Your Email'
+                                                    size='medium'
+                                                    id='tEmail'
+                                                    onKeyPress={(e) => {
+                                                        const validChars = /^[a-zA-Z0-9@.]*$/; // Regex to match only valid email characters
+                                                        if (!validChars.test(e.key)) {
+                                                            e.preventDefault(); // Prevent the input of characters other than valid email characters
+                                                        }
+                                                    }}
+                                                />
+                                                
+                                                <ErrorMessage name="password" component="div" className="text-danger" />
+                                                <Field
+                                                    name="password"
+                                                    type="password"
+                                                    as={MDBInput}
+                                                    wrapperClass='mb-4'
+                                                    label='Password'
+                                                    size='medium'
+                                                    id='password'
+                                                />
+                                                
+                                                <ErrorMessage name="confirmPassword" component="div" className="text-danger" />
+                                                <Field
+                                                    name="confirmPassword"
+                                                    type="password"
+                                                    as={MDBInput}
+                                                    wrapperClass='mb-4'
+                                                    label='Confirm Password'
+                                                    size='medium'
+                                                    id='confirmPassword'
+                                                />
+                                                
+                                                <div className="mb-4">
+                                                    <label htmlFor="teacherPhoto" className="form-label">Upload Photo</label>
+                                                    <input className="form-control" type="file" id="teacherPhoto" accept="image/*" onChange={handlePhotoChange} />
+                                                </div>
+                                                <div className="d-flex justify-content-center">
+                                                    <button type="submit" className="btn btn-primary mt-5">Add Teacher</button>
+                                                </div>
+                                            </MDBCol>
+                                        </MDBRow>
+                                    </MDBCardBody>
+                                </Form>
+                            )}
+                        </Formik>
                     </MDBCard>
                 </MDBCol>
             </MDBRow>

@@ -35,17 +35,37 @@
     width: 60%;
 }
 
+/* ------------------------------------------ margins ------------------------------------------ */
+
+.mt-10{
+  margin-top: 10%;
+}
+
+.mt-20{
+  margin-top: 20%;
+}
+
+.mt-30{
+  margin-top: 30%;
+}
+
+.mb-10{
+  margin-bottom: 10%;
+}
+
+.mb-20{
+  margin-bottom: 20%;
+}
+
+.mb-30{
+  margin-bottom: 30%;
+}
+
 /* ------------------------------------------ random ------------------------------------------ */
 
 .cardHov {
     transition: transform 0.25s ease-in-out;
 }
-
-.cardHov:hover {
-    background-color: aquamarine;
-    transform: scale(1.1);
-}
-
 
 .cardHov:hover{
     background-color: aquamarine;
@@ -53,10 +73,32 @@
     transition: background 0.25s linear;
 }
 
+.cardDPDashboard {
+  transition: transform 0.1s ease-in-out;
+}
+
+.cardDPDashboard:hover{
+  transform: scale(1.15);
+}
+
 .rounded-end-custom {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+
+.iconDPDashboard {
+    position: absolute;
+    align-self: flex-end;
+    margin-top: 6%;
+    margin-right: 7%;
+    font-size: 24px;
+}
+
+.scrollable-table {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
 
 /* -------------------------------------- MainLogin.css -------------------------------------- */
 

@@ -20,7 +20,7 @@ export default function Main(){
         <div style={{backgroundColor: '#ECF0F5'}}>
         <Header/>
         <div className='container mt-5 mb-5'>
-            <h1 className="alert alert-success p-3 mt-3 text-center  border border-success">A/L Accounting Mock Test 01</h1>
+            <h1 className="alert alert-success p-3 mt-3 text-center  border border-success">Exam Instructions</h1>
             
             <ol className='mt-5'>
             <li>Ensure a stable internet connection throughout the exam to avoid any disruptions. </li>

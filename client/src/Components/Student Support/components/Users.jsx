@@ -9,7 +9,7 @@ function Users() {
 
   useEffect(() => {
     const apiUrl = 'http://localhost:8081/users';
-  
+
     axios.get(apiUrl)
       .then(result => {
         setUsers(result.data);
@@ -22,7 +22,7 @@ function Users() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8081/users/deleteUser/${id}`)
+    axios.delete(`http://localhost:8081/users/delete/${id}`)
       .then(res => {
         console.log("User deleted successfully:", res.data);
         // Update the users state by filtering out the deleted user
@@ -32,12 +32,12 @@ function Users() {
         console.log("Error deleting user:", error);
         // Display a user-friendly message to the user, e.g., show an error toast
       });
-  }
+  };
 
   const renderStars = (rating) => {
     const stars = [];
     const filledStars = Math.floor(rating); // Determine the number of filled stars
-    
+
     for (let i = 1; i <= 5; i++) {
       if (i <= filledStars) {
         stars.push(<span key={i}>&#9733;</span>); // Render a filled star
@@ -45,49 +45,57 @@ function Users() {
         stars.push(<span key={i}>&#9734;</span>); // Render an empty star
       }
     }
-    
+
     return stars;
-  }
+  };
 
   return (
-    <div className="vh-100" style={{backgroundColor: '#ECF0F5'}}>
-    <Header/>
-    <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
-      <div className="w-75 bg-white rounded p-3 shadow">
-        <div className="mb-3">
-          <Link to="/create" className="btn btn-success">Add +</Link>
-          <Link to="/questionTeacher" className="btn btn-success ms-2">Questions</Link>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="mt-10 mb-10">
+        <div className="row justify-content-center">
+          <div className="col-lg-10">
+            <div className="bg-white shadow rounded-3 p-4">
+              <div className="row justify-content-center mb-4">
+                  <Link to="/studentFeedback" className="col-2 btn btn-success me-3 cardHov">Student Feedback</Link>
+                  <Link to="/teacherFeedback" className="col-2 btn btn-success me-3 cardHov">Teacher Feedback</Link>
+                  <Link to="/inquiry" className="col-2 btn btn-success me-3 cardHov">Display Questions</Link>
+                  <Link to="/createInquiry" className="col-2 btn btn-success me-3 cardHov">Create Questions</Link>
+                  <Link to="/updateInquiry" className="col-2 btn btn-success me-3 cardHov">Update Questions</Link>
+              </div>
+              <div className="table-responsive" style={{ maxHeight: "80vh", overflowY: "auto" }}>
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th className="col-2">Name</th>
+                      <th className="col-2">Email</th>
+                      <th className="col-1">Teacher</th>
+                      <th className="col-5">Feedback</th>
+                      <th className="col-1">Rating</th>
+                      <th className="col-1">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user) => (
+                      <tr key={user._id}>
+                        <td>{user.Name}</td>
+                        <td>{user.Email}</td>
+                        <td>{user.Teacher}</td>
+                        <td>{user.Feedback}</td>
+                        <td>{renderStars(user.Rating)}</td>
+                        <td>
+                            <button onClick={() => handleDelete(user._id)} className="btn btn-danger">Delete</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Teacher</th>
-              <th>Feedback</th>
-              <th>Rating</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user.Name}</td>
-                <td>{user.Email}</td>
-                <td>{user.Teacher}</td>
-                <td>{user.Feedback}</td>
-                <td>{renderStars(user.Rating)}</td>
-                <td>
-                  <Link to={`/update/${user._id}`} className="btn btn-success me-2">Update</Link>
-                  <button onClick={() => handleDelete(user._id)} className="btn btn-danger">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
-    </div>
-    <Footer/>
+      <Footer/>
     </div>
   );
 }

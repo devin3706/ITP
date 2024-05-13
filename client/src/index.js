@@ -5,7 +5,7 @@ import App from './App.js';
 import reportWebVitals from './reportWebVitals.js';
 
 //redux store
-import store from './components/Exam Platform and Leaderboard/redux/store.js';
+import store from './Components/Exam Platform and Leaderboard/redux/store.js';
 import { Provider } from 'react-redux';
 
 //Bootstrap CSS

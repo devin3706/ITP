@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import './styles/PastPaperView.css';
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
+import Header from '../Exam Platform and Leaderboard/components/Header.js';
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
 
 const PastPaperView = () => {
@@ -75,6 +76,10 @@ const closePdfPopup = () => {
   );
 
   return (
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <div>
+        <Header />
+    </div>
     <div className="pdf-viewer-container">
       <h1 className="pdf-viewer-heading">Past Papers</h1>
       <div className="search-bar">
@@ -111,6 +116,7 @@ const closePdfPopup = () => {
         ))}
       </div>
       <Footer />
+    </div>
     </div>
   );
 };

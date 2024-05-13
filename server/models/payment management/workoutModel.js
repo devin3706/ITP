@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// const bcrypt = require("bcrypt");
 const { Schema } = mongoose;
 
 const workoutSchema = new Schema(
@@ -9,10 +9,6 @@ const workoutSchema = new Schema(
       required: true,
     },
     course: {
-      type: String,
-      required: true,
-    },
-    sid: {
       type: String,
       required: true,
     },
@@ -28,8 +24,15 @@ const workoutSchema = new Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
   },
+
   { timestamps: true }
 );
 
-export default mongoose.model("Workout", workoutSchema);
+const Workout = mongoose.model("Workout", workoutSchema);
+
+export default Workout;

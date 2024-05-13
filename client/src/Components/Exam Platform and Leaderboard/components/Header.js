@@ -7,10 +7,7 @@ function Header() {
       <div className="logo col-5">
         <img src={logo} alt="Logo" />
       </div>
-      <div className="academy-text col-5">Hi Mr Nandana</div>
-      <div className='col-1'>  
-        <button className="login-btn ">Login</button>
-      </div>
+      <div className="academy-text col-5">We Strive to bring out the best in students</div>
     </div>
   );
 }
