@@ -10,14 +10,17 @@ import cookieParser from 'cookie-parser';
 import expressValidator from 'express-validator';
 import adminRoutes from './router/admin/admin.js';
 import studyMaterialRoutes from './router/study materials/routes.js';
-import userRoutes from './router/student support/routes.js';
+import userRoutes from './router/student support/UserRoutes.js';
+import inquiryRoutes from './router/student support/InquiryRoutes.js';
 import { upload } from './middleware/study materials/multer.js';
-import studentRoutes from './router/student management/routes.js';
+import studentRoutes from './router/student management/student.js';
+import attendanceRoutes from './router/student management/attendance.js';
+import bsmarksRoutes from './router/student management/bsmarks.js';
+import studentLoginRoutes from './router/student login/student.js';
 import payerRoutes from './router/payment management/payers.js';
 import workoutRoutes from './router/payment management/workouts.js';
-import announcementRoutes from './router/announcement handling/announcement.js';
+import announcementRoutes from './router/class scheduling/announce.js';
 import classRoutes from './router/class scheduling/class.js';
-import studentLoginRoutes from './router/student login/studentLogin.js';
 
 // Import connection file
 import connect from './database/conn.js';
@@ -64,6 +67,7 @@ function startServer() {
   //Tharushi Middleware
   app.use("/files", express.static("files"));
   app.use(router);
+  
 
   // Application port
   const port = process.env.PORT || 8080;
@@ -90,18 +94,21 @@ function startServer() {
 
   // Sansala Routes
   app.use('/users', userRoutes);
+  app.use('/inquiry', inquiryRoutes);
 
   // Minesi Routes
   app.use('/student', studentRoutes);
   app.use('/auth', studentLoginRoutes);
+  app.use('/attendance', attendanceRoutes);
+  app.use('/marks', bsmarksRoutes);
 
   //Nuradha Routes
-  app.use('/payers', payerRoutes);
-  app.use('/workouts', workoutRoutes);
-
+  app.use("/payments", workoutRoutes);
+  app.use("/payers", payerRoutes);
+  
   //Jimutha Routes
-  app.use('/announcements', announcementRoutes);
-  app.use('/class', classRoutes);
+  app.use("/announcements", announcementRoutes); // Changed base URL for announceRoutes
+  app.use("/classes", classRoutes);
 
   // Start server only when valid connection
   connect().then(() => {

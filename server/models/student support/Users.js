@@ -4,10 +4,13 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     Name: String,
-    StudentId: String,
+    Email: String,
     Teacher: String,
     Feedback: String,
     Rating: Number
 });
 
-export default mongoose.model("feedback", UserSchema);
+const UserModel = mongoose.model('feedback', UserSchema);
+
+export default UserModel;
+

@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 const { Schema, model } = mongoose;
 
 const teacherSchema = new Schema({
+  
   firstName: {
     type: String,
     required: true

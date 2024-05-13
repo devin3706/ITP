@@ -11,6 +11,8 @@ router.route('/questions')
     .post(controller.insertQuestions) //post request
     .delete(controller.dropQuestions) //delete request
 
+router.route('/questions/:id').get(controller.getQuestionById) //get request by id
+
 router.route('/result')
     .get(controller.getResult)
     .post(controller.storeResult)

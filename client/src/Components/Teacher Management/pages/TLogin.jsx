@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
-import styles from '../styles/TLogin.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate 
 import {
     MDBContainer,
     MDBCol,
@@ -11,11 +10,13 @@ import {
     MDBInput,
     MDBCheckbox  
 } from 'mdb-react-ui-kit';
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
-const TLogin = ({ onLogin }) => {
+const TLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); //  useNavigate
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -25,6 +26,7 @@ const TLogin = ({ onLogin }) => {
         setPassword(e.target.value);
     };
 
+    // Click Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -33,6 +35,7 @@ const TLogin = ({ onLogin }) => {
             alert("Please enter both email and password");
             return;
         }
+        
     
         try {
             // Make an HTTP request to your backend server to authenticate the user
@@ -41,29 +44,47 @@ const TLogin = ({ onLogin }) => {
             // Handle successful authentication (e.g., redirect to dashboard)
             console.log("User authenticated:", response.data);
             alert("Login Success.");
-            onLogin(); // Call the onLogin function passed from the parent component
-            navigate('/tHome'); // Redirect to the dashboard page
+
+            //Store the token in loacalStorage
+            localStorage.removeItem("token"); // Clear any previous token
+            localStorage.setItem("token", response.data.token);  
+
+            // Redirect to the dashboard page
+            navigate('/tHome'); 
+
         } catch (error) {
             // Handle authentication error (e.g., display error message)
             console.error("Authentication failed:", error);
             alert("Authentication failed. Please check your email and password.");
         }
     };
+
+
+    // Click Forgot Password
+    const handleForgotPassword = () => {
+        alert("If you forgot your password, please reset it.");
+
+        localStorage.setItem("forgotPasswordEmail", email);
+
+        // Navigate to the forgot password page
+        navigate('/tEnterEmail');
+    };
     
 
     return (
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+        <Header/>
         <MDBContainer fluid className="p-3 my-5">
             <MDBRow>
-                <MDBCol col='10' md='6'>
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" />
+                <MDBCol col='10' md='6'>  {/* Add Vector Boostrap image */}
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" /> 
                 </MDBCol>
                 <MDBCol col='4' md='6'>
                     <form onSubmit={handleSubmit}>
                         <MDBInput wrapperClass='mb-4' label='Email address' id='logName' type='email' value={email} onChange={handleChangeEmail} />
                         <MDBInput wrapperClass='mb-4' label='Password' id='logPassword' type='password' value={password} onChange={handleChangePassword} />
                         <div className="d-flex justify-content-between mx-4 mb-4">
-                            
-                            <a href="">Forgot password?</a>
+                            <a href="#" onClick={handleForgotPassword}>Forgot password?</a>
                         </div>
                         <div class="col-12">
                             <button class="btn btn-primary mb-4 w-100" size="lg" id='logSubmit' type="submit" >Sign in</button>
@@ -72,6 +93,8 @@ const TLogin = ({ onLogin }) => {
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
+        <Footer/>
+        </div>
     );
 };
 

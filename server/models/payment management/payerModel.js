@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 
 const payerSchema = new Schema(
   {
@@ -16,16 +16,19 @@ const payerSchema = new Schema(
       type: Number,
       required: true,
     },
-    cvv: {
+    amount: {
       type: Number,
       required: true,
     },
-    expiryDate: {
-      type: Number,
+    date: {
+      type: String,
       required: true,
     },
   },
+
   { timestamps: true }
 );
 
-export default mongoose.model("Payer", payerSchema);
+const Payer = mongoose.model("Payer", payerSchema);
+
+export default Payer;

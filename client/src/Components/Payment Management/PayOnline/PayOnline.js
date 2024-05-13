@@ -1,109 +1,109 @@
-import React, { useState } from "react";
-import "./PayOnline.css";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function PayOnline() {
-  // State variables to store form data
-  const [payerName, setPayerName] = useState("");
-  const [cardNo, setCardNo] = useState("");
-  const [nic, setNic] = useState("");
-  const [cvv, setCvv] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
+  const navigate = useNavigate();
 
-  const submitPayers = (event) => {
-    event.preventDefault();
+  const initialValues = {
+    payerName: "",
+    cardNo: "",
+    nic: "",
+    amount: "",
+    date: "",
+  };
 
-    const newPayers = {
-      payerName,
-      cardNo,
-      nic,
-      cvv,
-      expiryDate,
-    };
+  const validationSchema = Yup.object().shape({
+    payerName: Yup.string()
+      .matches(/^[a-zA-Z\s]+$/, "*Payer name is not valid")
+      .required("*Payer Name is required"),
+    cardNo: Yup.string()
+      .required("*Card No is required")
+      .matches(/^\d{16}$/, "*Card No is not valid"),
+    nic: Yup.string()
+      .required("*NIC is required")
+      .matches(/^\d{12}$/, "*NIC must is not valid"),
+    amount: Yup.number()
+      .typeError("*Amount must be a number")
+      .positive("*Amount must be positive")
+      .required("*Amount is required"),
+    date: Yup.date().required("*Date is required"),
+  });
 
+  const onSubmit = (values, { setSubmitting }) => {
     axios
-      .post("http://localhost:8081/payers/create", newPayers)
+      .post("http://localhost:8081/payers/create", values)
       .then(() => {
-        alert("Payer added successfully.");
+        navigate("/payerDetails");
       })
       .catch((err) => {
-        console.error("Error adding payer:", err);
-        alert("Failed to add payer. Check console for details.");
+        console.error("Error adding payers:", err);
+        alert("Failed to add payers. Check console for details.");
+      })
+      .finally(() => {
+        setSubmitting(false);
       });
   };
 
   return (
-    <div>
-      <h1>Online Payment</h1>
-      <br />
-      <div>
-        <form className="row g-3 text-primary" onSubmit={submitPayers}>
-          <div className="col-md-12">
-            <label htmlFor="payerName">[1] Payer Name:</label>
-            <input
-              type="text"
-              id="payerName"
-              name="payerName"
-              value={payerName}
-              onChange={(e) => setPayerName(e.target.value)}
-              required
-            />
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="container mt-5 mb-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-8">
+            <div className="m-4 p-4 bg-dark text-white rounded-4">
+              <h1 className="mb-4 text-center">Payment</h1>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({ isSubmitting }) => (
+                  <Form>
+                    <div className="text-warning">
+                      <div className="mb-3">
+                        <label htmlFor="payerName" className="form-label">Payer Name:</label>
+                        <Field type="text" id="payerName" name="payerName" className="form-control" />
+                        <ErrorMessage name="payerName" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="cardNo" className="form-label">Card No:</label>
+                        <Field type="text" id="cardNo" name="cardNo" className="form-control" />
+                        <ErrorMessage name="cardNo" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="nic" className="form-label">NIC:</label>
+                        <Field type="text" id="nic" name="nic" className="form-control" />
+                        <ErrorMessage name="nic" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="amount" className="form-label">Amount:</label>
+                        <Field type="text" id="amount" name="amount" className="form-control" />
+                        <ErrorMessage name="amount" component="div" className="text-danger" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="date" className="form-label">Date:</label>
+                        <Field type="date" id="date" name="date" className="form-control col-3" />
+                        <ErrorMessage name="date" component="div" className="text-danger" />
+                      </div>
+                      <div className="">
+                        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                          {isSubmitting ? "Submitting..." : "Pay now"}
+                        </button>
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+            </div>
           </div>
-          <div className="col-md-12">
-            <label htmlFor="cardNo">[2] Card No:</label>
-            <input
-              type="text"
-              id="cardNo"
-              name="cardNo"
-              value={cardNo}
-              onChange={(e) => setCardNo(e.target.value)}
-              required
-            />
-          </div>
-          <div className="col-md-12">
-            <label htmlFor="nic">[3] NIC:</label>
-            <input
-              type="text"
-              id="nic"
-              name="nic"
-              value={nic}
-              onChange={(e) => setNic(e.target.value)}
-              required
-            />
-          </div>
-          <div className="col-md-12">
-            <label htmlFor="cvv">[4] CVV:</label>
-            <input
-              type="text"
-              id="cvv"
-              name="cvv"
-              value={cvv}
-              onChange={(e) => setCvv(e.target.value)}
-              required
-            />
-          </div>
-          <div className="col-md-12">
-            <label htmlFor="expiryDate">[5] Expiry Date:</label>
-            <input
-              type="date"
-              id="expiryDate"
-              name="expiryDate"
-              value={expiryDate}
-              onChange={(e) => setExpiryDate(e.target.value)}
-              required
-            />
-          </div>
-          <div className="col-md-12">
-            <input type="submit" value="Pay Now" />
-          </div>
-          <div className="col-md-12">
-            <Link to={"/payerDetails"}>
-              <input type="button" value="Payer Details" />
-            </Link>
-          </div>
-        </form>
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 }

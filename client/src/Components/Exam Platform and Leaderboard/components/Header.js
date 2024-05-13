@@ -1,14 +1,13 @@
 import React from 'react';
-import '../styles/header.css'; 
+import './header.css'; 
 import logo from '../images/logo.png';
 function Header() {
   return (
     <div className="header">
-      <div className="logo">
+      <div className="logo col-5">
         <img src={logo} alt="Logo" />
       </div>
-      <div className="academy-text">Hi Mr Nandana</div>
-      <button className="login-btn">Login</button>
+      <div className="academy-text col-5">We Strive to bring out the best in students</div>
     </div>
   );
 }

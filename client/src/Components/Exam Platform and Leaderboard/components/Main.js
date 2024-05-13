@@ -1,8 +1,9 @@
 import React, {useRef} from 'react'
 import {Link} from 'react-router-dom'
-/* import '../styles/Main.css' */
 import { useDispatch } from 'react-redux'
 import { setUserId } from '../redux/result_reducer'
+import Header from './Header'
+import Footer from './Footer'
 
 export default function Main(){
 
@@ -16,10 +17,12 @@ export default function Main(){
     }
 
     return (
-        <div className='container'>
-            <h1 className="title text-light">A/L Accounting Mock Test 01</h1>
-
-            <ol>
+        <div style={{backgroundColor: '#ECF0F5'}}>
+        <Header/>
+        <div className='container mt-5 mb-5'>
+            <h1 className="alert alert-success p-3 mt-3 text-center  border border-success">Exam Instructions</h1>
+            
+            <ol className='mt-5'>
             <li>Ensure a stable internet connection throughout the exam to avoid any disruptions. </li>
             <li>Have your student ID and any required materials ready before starting. </li>
             <li>Read each question carefully and review your answers before submission. </li>
@@ -27,17 +30,17 @@ export default function Main(){
             <li>Do not navigate away from the exam page or open new tabs unless instructed. </li>
             </ol>
 
-            <form id='form'>
-                <input ref={inputRef} type="text" className="userid" placeholder='Username*'></input>
-            </form>
+            <div className="input-group mt-5 w-25 mx-auto">
+                <span className="input-group-text text-bg-success border border-success" id="basic-addon1">@</span>
+                <input ref={inputRef} type="text" className="form-control border border-success" placeholder='Username*'></input>
+            </div>
 
-        <div>
-            <Link className='btn1' to="/quiz" onClick={startQuiz}>Start Exam</Link>
+            <div className='mt-3'>
+                <Link style={{marginLeft: '43%'}} to="/quiz" onClick={startQuiz}>Start Exam</Link>
+                <Link style={{marginLeft: '5%'}} to="/test" onClick={startQuiz}>Test</Link>
+            </div>
         </div>
-
-        <div>
-            <Link className='btn1' to="/test" onClick={startQuiz}>Test</Link>
+        <Footer/>
         </div>
-    </div>
     )
 }
