@@ -1,5 +1,5 @@
 import express from "express";
-//import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import multer from "multer";
 import crypto from "crypto"; // Import crypto module for generating random bytes

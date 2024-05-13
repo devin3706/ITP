@@ -1,5 +1,5 @@
 import express from "express";
-//import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { Student } from "../../models/student login/Student.js";
