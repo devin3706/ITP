@@ -61,6 +61,7 @@ import StudentFeedback from './Components/Student Support/components/StudentFeed
 import TeacherFeedback from './Components/Student Support/components/TeacherFeedback';
 import Inquiry from './Components/Student Support/components/Inquiry.jsx';
 import UpdateInquiry from './Components/Student Support/components/UpdateInquiry';
+import ReplyInquiry from './Components/Student Support/components/ReplyInquiry.jsx';
 
 //Student Management
 import Students from './Components/Student Management/components/Users.jsx'
@@ -167,7 +168,10 @@ const App = () => {
           <Route path='/studentFeedback' element={<StudentFeedback/>}></Route>
           <Route path='/teacherFeedback' element={<TeacherFeedback/>}></Route>
           <Route path='/inquiry' element={<Inquiry/>}></Route>
-          <Route path='/UpdateInquiry/:id' element={<UpdateInquiry />}></Route>
+          <Route path="/updateInquiry" element={<UpdateInquiry />} />
+          <Route path="/replyInquiry" element={<ReplyInquiry/>}/>
+          
+
 
           {/* Student Management Routes */}
           <Route path = '/students' element = {<Students />}> </Route>
