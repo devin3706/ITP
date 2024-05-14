@@ -35,36 +35,17 @@ function UpdateInquiry() {
   };
 
   return (
-<<<<<<< Updated upstream
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
         <div className="d-flex mt-10 mb-10 row justify-content-center align-items-center">
           <div className="col-8 bg-white rounded p-3">
-=======
-    <div className="container-fluid h-100">
-      <div className="row h-100 justify-content-center align-items-center">
-        <div className="col-lg-8"> {/* Adjust the column width based on your layout */}
-          <div className="bg-white rounded p-3 h-100">
->>>>>>> Stashed changes
             <div className="mb-3">
               {/* Content before the table */}
             </div>
             <div className="table-responsive" style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
               {/* Adjust the maxHeight as per your requirement */}
               <table className="table table-striped">
-<<<<<<< Updated upstream
-                <thead>
-                                 
-=======
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">Email</th>
-                    <th scope="col">Teacher</th>
-                    <th scope="col">Class</th>
-                    <th scope="col">Question</th>
-                    <th scope="col">Action</th>
-                  </tr>
->>>>>>> Stashed changes
+                <thead>               
                 </thead>
                 <tbody>
                   {inquiries.map((inquiry) => (
