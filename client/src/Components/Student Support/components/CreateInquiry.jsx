@@ -5,7 +5,7 @@ import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function CreateInquiry (){
- 
+
     const [Email, setEmail] = useState("");
     const [Teacher, setTeacher] = useState("");
     const [Class, setClass] = useState("");
@@ -14,13 +14,22 @@ function CreateInquiry (){
 
     const Submit = (e) => {
         e.preventDefault();
+
+        // Check if all fields are filled
+        if (!Email || !Teacher || !Class || !Question) {
+            alert("Please fill all fields.");
+            return;
+        }
+
         axios.post("http://localhost:8081/inquiry/create", { Email, Teacher, Class, Question})
         .then(result => {
             console.log(result);
             navigate('/inquiries');
         })
-        .catch(err => console.log(err));
-    }
+        .catch(err => {
+            console.log(err);
+        });
+    };
 
     const handleTeacherChange = (e) => {
         const value = e.target.value;
@@ -47,6 +56,7 @@ function CreateInquiry (){
                                 placeholder='Enter Email'
                                 className='form-control'
                                 onChange={(e) => setEmail(e.target.value)}
+                                value={Email}
                             />
                         </div>
                         <div className='mb-2'>
@@ -66,6 +76,7 @@ function CreateInquiry (){
                                 placeholder='Enter Class'
                                 className='form-control'
                                 onChange={(e) => setClass(e.target.value)}
+                                value={Class}
                             />
                         </div>
                         <div className='mb-2'>
@@ -75,12 +86,11 @@ function CreateInquiry (){
                                 className='form-control'
                                 rows='4' // Adjust rows based on your preference
                                 onChange={(e) => setQuestion(e.target.value)}
+                                value={Question}
                             />
                         </div>
-                    
+                   
                         <button className='btn btn-success'>Submit</button>
-                    
-                        
                     </form>
                 </div>
             </div>

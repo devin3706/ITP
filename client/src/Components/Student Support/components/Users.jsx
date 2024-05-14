@@ -60,7 +60,7 @@ function Users() {
               <h1 className="card-title text-center mb-4">Feedback Page</h1>
                   <Link to="/studentFeedback" className="col-2 btn btn-success me-3 cardHov">Student Feedback</Link>
                   <Link to="/teacherFeedback" className="col-2 btn btn-success me-3 cardHov">Teacher Feedback</Link>
-                  <Link to="/inquiry" className="col-2 btn btn-success me-3 cardHov">Display Questions</Link>
+
                 
               </div>
               <div className="table-responsive" style={{ maxHeight: "80vh", overflowY: "auto" }}>
