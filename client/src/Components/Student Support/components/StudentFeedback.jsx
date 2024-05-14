@@ -63,6 +63,7 @@ function StudentFeedback() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      <b><h1 className="card-title text-center mb-4">Feedback Page</h1></b>
       <div className="container mt-5 mb-5">
         <div className="mb-3 d-flex">
           <input
@@ -76,7 +77,7 @@ function StudentFeedback() {
             search
           </button>
         </div>
-
+       
         <div className="row">
           {filteredUsers.map((user) => (
             <div key={user._id} className="col-md-6 mb-4">

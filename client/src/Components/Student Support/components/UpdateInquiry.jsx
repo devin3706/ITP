@@ -68,9 +68,7 @@ function UpdateInquiry() {
                       <td>{inquiry.Teacher}</td>
                       <td>{inquiry.Class}</td>
                       <td>{inquiry.Question}</td>
-                      <td>
-                         <Link to="/replyInquiry" className="btn btn-primary">Reply</Link>
-                      </td>
+                      
                     </tr>
                   ))}
                 </tbody>
