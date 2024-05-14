@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Header from "../../Exam Platform and Leaderboard/components/Header";
-import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
-function UpdateInquiry() {
+function ReplyInquiry() {
   const [inquiries, setInquiries] = useState([]);
 
   useEffect(() => {
@@ -35,27 +33,16 @@ function UpdateInquiry() {
   };
 
   return (
-<<<<<<< Updated upstream
-    <div style={{ backgroundColor: '#ECF0F5'}}>
-      <Header/>
-        <div className="d-flex mt-10 mb-10 row justify-content-center align-items-center">
-          <div className="col-8 bg-white rounded p-3">
-=======
     <div className="container-fluid h-100">
       <div className="row h-100 justify-content-center align-items-center">
         <div className="col-lg-8"> {/* Adjust the column width based on your layout */}
           <div className="bg-white rounded p-3 h-100">
->>>>>>> Stashed changes
             <div className="mb-3">
               {/* Content before the table */}
             </div>
             <div className="table-responsive" style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
               {/* Adjust the maxHeight as per your requirement */}
               <table className="table table-striped">
-<<<<<<< Updated upstream
-                <thead>
-                                 
-=======
                 <thead className="thead-dark">
                   <tr>
                     <th scope="col">Email</th>
@@ -63,8 +50,8 @@ function UpdateInquiry() {
                     <th scope="col">Class</th>
                     <th scope="col">Question</th>
                     <th scope="col">Action</th>
+                    <th scope="col">Reply</th> {/* New column for reply */}
                   </tr>
->>>>>>> Stashed changes
                 </thead>
                 <tbody>
                   {inquiries.map((inquiry) => (
@@ -76,6 +63,11 @@ function UpdateInquiry() {
                       <td>
                         <button onClick={() => handleDelete(inquiry._id)} className="btn btn-primary me-2">Reply</button>
                       </td>
+                      <td>
+                        <div className="d-flex">
+                          <input type="text" className="form-control" placeholder="Enter your reply" />
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -83,9 +75,9 @@ function UpdateInquiry() {
             </div>
           </div>
         </div>
-      <Footer/>
+      </div>
     </div>
   );
 }
 
-export default UpdateInquiry;
+export default ReplyInquiry;
