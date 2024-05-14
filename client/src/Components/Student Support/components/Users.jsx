@@ -57,11 +57,11 @@ function Users() {
           <div className="col-lg-10">
             <div className="bg-white shadow rounded-3 p-4">
               <div className="row justify-content-center mb-4">
+              <h1 className="card-title text-center mb-4">Feedback Page</h1>
                   <Link to="/studentFeedback" className="col-2 btn btn-success me-3 cardHov">Student Feedback</Link>
                   <Link to="/teacherFeedback" className="col-2 btn btn-success me-3 cardHov">Teacher Feedback</Link>
                   <Link to="/inquiry" className="col-2 btn btn-success me-3 cardHov">Display Questions</Link>
-                  <Link to="/createInquiry" className="col-2 btn btn-success me-3 cardHov">Create Questions</Link>
-                  <Link to="/updateInquiry" className="col-2 btn btn-success me-3 cardHov">Update Questions</Link>
+                
               </div>
               <div className="table-responsive" style={{ maxHeight: "80vh", overflowY: "auto" }}>
                 <table className="table table-striped">

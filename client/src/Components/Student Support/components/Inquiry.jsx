@@ -42,7 +42,8 @@ function Inquiry() {
           <div className="col-md-10">
             <div className="card">
               <div className="card-body  shadow">
-                <h3 className="card-title text-center mb-4">Inquiries</h3>
+                <h1 className="card-title text-center mb-4">Inquiries</h1>
+                  <Link to="/updateInquiry" className="col-2 btn btn-success me-3 cardHov">Update Questions</Link>
                 <div className="table-responsive">
                   <table className="table table-striped">
                     <thead>
