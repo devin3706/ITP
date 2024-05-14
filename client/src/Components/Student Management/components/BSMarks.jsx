@@ -9,7 +9,7 @@ function BSMarks() {
     const [bsmarks, setBSMarks] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8081/marks')
+        axios.get('http://localhost:8081/student')
             .then(result => setBSMarks(result.data))
             .catch(err => console.log(err))
     }, []);
