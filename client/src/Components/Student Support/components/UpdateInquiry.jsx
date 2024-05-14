@@ -40,6 +40,12 @@ function UpdateInquiry() {
       <Header/>
         <div className="d-flex mt-10 mb-10 row justify-content-center align-items-center">
           <div className="col-8 bg-white rounded p-3">
+=======
+    <div className="container-fluid h-100">
+      <div className="row h-100 justify-content-center align-items-center">
+        <div className="col-lg-8"> {/* Adjust the column width based on your layout */}
+          <div className="bg-white rounded p-3 h-100">
+>>>>>>> Stashed changes
             <div className="mb-3">
               {/* Content before the table */}
             </div>
