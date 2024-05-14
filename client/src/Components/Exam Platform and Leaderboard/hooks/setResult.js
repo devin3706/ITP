@@ -19,10 +19,10 @@ export const updateResult = (index) => async (dispatch) => {
 
 //insert user data
 export const usePublishResult = (resultData) => {
-    const {result, username} = resultData;
+    const {result, username, examName} = resultData;
     (async () => { 
         try{
-            if(result.length === 0 && !username) throw new Error("Couldn't get result");
+            if(result.length === 0 && !username && !examName) throw new Error("Couldn't get result");
             await postServerData('http://localhost:8081/api/result', resultData, data => data)
         } catch (error) {
             console.log(error)

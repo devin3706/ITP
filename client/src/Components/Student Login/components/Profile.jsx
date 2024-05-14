@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import axios from 'axios';
-import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function Profile() {
-    const dispatch = useDispatch();
     //const [studentData, setStudentData] = useState([]);
     //const [loading, setLoading] = useState(true);
     const [profileData, setProfileData] = useState(null);
@@ -18,12 +15,11 @@ function Profile() {
         axios.get('http://localhost:8081/auth/profile', { withCredentials: true })
           .then(response => {
             setProfileData(response.data);
-            dispatch(setUsername(response.data.name));
           })
           .catch(error => {
             console.error('Error fetching profile data:', error);
           });
-      }, [dispatch]);
+      }, []);
     
       const handleDeleteProfile = () => {
         axios.delete('http://localhost:8081/auth/deleteProfile', { withCredentials: true })
