@@ -21,8 +21,17 @@ function CreateInquiry (){
         })
         .catch(err => console.log(err));
     }
-    
 
+    const handleTeacherChange = (e) => {
+        const value = e.target.value;
+        // Preventing numbers and special characters in the Teacher field
+        if (!/^[a-zA-Z\s]*$/.test(value)) {
+            // If the entered value contains numbers or special characters, don't update the state
+            return;
+        }
+        // If the entered value is valid, update the state
+        setTeacher(value);
+    };
 
     return(
         <div style={{ backgroundColor: '#ECF0F5'}}>
@@ -46,7 +55,8 @@ function CreateInquiry (){
                                 type="text"
                                 placeholder='Enter Teacher Name'
                                 className='form-control'
-                                onChange={(e) => setTeacher(e.target.value)}
+                                onChange={handleTeacherChange}
+                                value={Teacher}
                             />
                         </div>
                         <div className='mb-2'>

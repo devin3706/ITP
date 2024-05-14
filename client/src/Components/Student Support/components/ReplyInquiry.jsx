@@ -1,83 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-//reply
+import React, { useState } from "react";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+
 function ReplyInquiry() {
-  const [inquiries, setInquiries] = useState([]);
+    const [email, setEmail] = useState("");
+    const [teacher, setTeacher] = useState("");
+    const [classValue, setClass] = useState("");
+    const [question, setQuestion] = useState(""); 
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const apiUrl = 'http://localhost:8081/inquiry';
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:8081/inquiry/create", { email, teacher, class: classValue, question })
+        .then(result => {
+            console.log(result);
+            navigate('/inquiries');
+        })
+        .catch(err => console.log(err));
+    }
 
-    axios.get(apiUrl)
-      .then(result => {
-        setInquiries(result.data);
-        console.log("Inquiries fetched successfully:", result.data);
-      })
-      .catch(error => {
-        console.error("Error fetching inquiries:", error);
-        console.error("Request URL:", apiUrl);
-      });
-  }, []);
-
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:8081/inquiry/deleteInquiry/${id}`)
-      .then(res => {
-        console.log("Inquiry deleted successfully:", res.data);
-        // Update the inquiries state by filtering out the deleted inquiry
-        setInquiries(prevInquiries => prevInquiries.filter(inquiry => inquiry._id !== id));
-      })
-      .catch(error => {
-        console.log("Error deleting inquiry:", error);
-        // Display a user-friendly message to the user, e.g., show an error toast
-      });
-  };
-
-  return (
-    <div className="container-fluid h-100">
-      <div className="row h-100 justify-content-center align-items-center">
-        <div className="col-lg-8"> {/* Adjust the column width based on your layout */}
-          <div className="bg-white rounded p-3 h-100">
-            <div className="mb-3">
-              {/* Content before the table */}
-            </div>
-            <div className="table-responsive" style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
-              {/* Adjust the maxHeight as per your requirement */}
-              <table className="table table-striped">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">Email</th>
-                    <th scope="col">Teacher</th>
-                    <th scope="col">Class</th>
-                    <th scope="col">Question</th>
-                    <th scope="col">Action</th>
-                    <th scope="col">Reply</th> {/* New column for reply */}
-                  </tr>
-                </thead>
-                <tbody>
-                  {inquiries.map((inquiry) => (
-                    <tr key={inquiry._id}>
-                      <td>{inquiry.Email}</td>
-                      <td>{inquiry.Teacher}</td>
-                      <td>{inquiry.Class}</td>
-                      <td>{inquiry.Question}</td>
-                      <td>
-                        <button onClick={() => handleDelete(inquiry._id)} className="btn btn-primary me-2">Reply</button>
-                      </td>
-                      <td>
-                        <div className="d-flex">
-                          <input type="text" className="form-control" placeholder="Enter your reply" />
+    return (
+        <div style={{ backgroundColor: '#ECF0F5'}}>
+            <Header/>
+            <div className='d-flex mt-10 mb-10 justify-content-center align-items-center'>
+                <div className='w-50 bg-white shadow rounded-3 p-3'>
+                    <form onSubmit={handleSubmit}>
+                        <h2>Reply Question</h2>
+                        
+                        <div className='mb-2'>
+                            <label htmlFor="question"></label>
+                            <textarea
+                                placeholder='Enter Your Question'
+                                className='form-control'
+                                rows='4'
+                                value={question}
+                                onChange={(e) => setQuestion(e.target.value)}
+                            />
                         </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                        <button className='btn btn-success'>Submit</button>
+                    </form>
+                </div>
             </div>
-          </div>
+            <Footer/>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default ReplyInquiry;

@@ -6,6 +6,7 @@ import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function UpdateInquiry() {
   const [inquiries, setInquiries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const apiUrl = 'http://localhost:8081/inquiry';
@@ -34,28 +35,41 @@ function UpdateInquiry() {
       });
   };
 
+  const filteredInquiries = inquiries.filter(inquiry => {
+    return inquiry.Teacher.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      
         <div className="d-flex mt-10 mb-10 row justify-content-center align-items-center">
           <div className="col-8 bg-white rounded p-3">
             <div className="mb-3">
-              {/* Content before the table */}
+            <h2 className="card-title">Student's Questions</h2>
+              <input 
+                type="text" 
+                placeholder="Search by teacher name" 
+                value={searchTerm} 
+                onChange={(e) => setSearchTerm(e.target.value)} 
+                className="form-control"
+              />
             </div>
             <div className="table-responsive" style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
               {/* Adjust the maxHeight as per your requirement */}
+              
               <table className="table table-striped">
                 <thead>               
                 </thead>
                 <tbody>
-                  {inquiries.map((inquiry) => (
+                  {filteredInquiries.map((inquiry) => (
                     <tr key={inquiry._id}>
                       <td>{inquiry.Email}</td>
                       <td>{inquiry.Teacher}</td>
                       <td>{inquiry.Class}</td>
                       <td>{inquiry.Question}</td>
                       <td>
-                        <button onClick={() => handleDelete(inquiry._id)} className="btn btn-primary me-2">Reply</button>
+                         <Link to="/replyInquiry" className="btn btn-primary">Reply</Link>
                       </td>
                     </tr>
                   ))}
