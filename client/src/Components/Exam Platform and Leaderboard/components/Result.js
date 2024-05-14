@@ -10,8 +10,8 @@ import Header from './Header';
 export default function Result(){
 
     const dispatch = useDispatch();
+    const examName = useSelector(state => state.examName.examName);
     const { questions : {queue, answers}, result : { result, userId}} = useSelector(state => state);
-
     const totalPoints = queue.length * 10;
     const attempts = attempts_Number(result);
     const earnPoints = earnPoints_Number(result, answers, 10);
@@ -20,6 +20,7 @@ export default function Result(){
     //store user result
     usePublishResult({ result,
          username : userId,
+         examName,
          attempts,
          points : earnPoints,
          achieved : flag ? "Passed" : "Failed"});
@@ -38,6 +39,10 @@ export default function Result(){
                 <div className='mt-5'>
                     <span>Username :</span>
                     <span className='ml-2 fw-bold'>{userId}</span>
+                </div>
+                <div className='mt-5'>
+                    <span>Exam Name :</span>
+                    <span className='ml-2 fw-bold'>{examName}</span>
                 </div>
                 <div className='mt-2'>
                     <span>Total Marks :</span>
