@@ -3,6 +3,7 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import SideNavBar from "../../Teacher Management/component/SideNavbar.jsx";
 
 function Attendance() {
     const [file, setFile] = useState(null);
@@ -71,6 +72,7 @@ function Attendance() {
     return (
         <div style={{ backgroundColor: '#ECF0F5', textAlign: 'center', padding: '20px' }}>
             <Header />
+            <SideNavBar />
             <div className="mt-5 mb-5" style={{ maxWidth: '800px', margin: 'auto', backgroundColor: 'white', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', padding: '20px' }}>
                 <form onSubmit={(e) => { e.preventDefault(); handleUpload(); }}>
                     <div className="form-group">
