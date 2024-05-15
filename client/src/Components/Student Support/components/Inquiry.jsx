@@ -37,6 +37,9 @@ function Inquiry() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
       <div className="mt-10 mb-10">
         <div className="row justify-content-center">
           <div className="col-md-10">

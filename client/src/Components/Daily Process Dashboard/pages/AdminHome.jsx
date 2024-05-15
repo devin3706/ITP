@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import Chart from "chart.js/auto";
 import { Link, useNavigate } from "react-router-dom";
 import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent, PiUserCircle } from "react-icons/pi";
-import { AdminContext } from "../../../AdminContext.js";
 import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
+import { getAdminProfile } from '../api/admin';
 import { useDispatch } from "react-redux";
 import '../../../styles.css';
 import { jsPDF } from 'jspdf';
@@ -40,10 +40,49 @@ const AdminHome = () => {
     const teacher_LonginsCountForThisMonth = teacherLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const admin_LonginsCountForThisMonth = adminLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
 
-    const {admin} = useContext(AdminContext);
-
     const dispatch = useDispatch();
-    dispatch(setUsername(admin));
+
+    //logout
+    const navigate = useNavigate();
+
+    const handleAdminLogout = async (e) => {
+        e.preventDefault();
+
+        try {
+            // Dispatching setUsername action with an empty string parameter
+            dispatch(setUsername('')); 
+
+            // Clearing adminUsername cookie
+            document.cookie = 'adminUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+            // Redirecting to login page
+            navigate("/adminLogin");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        const fetchAdminName = async () => {
+          try {
+            const cookies = document.cookie.split("; ");
+            let username = "";
+            for (const cookie of cookies) {
+              const [name, value] = cookie.split("=");
+              if (name === "adminUsername") {
+                username = value;
+                break;
+              }
+            }
+    
+            dispatch(setUsername(username)); // Dispatch action to store admin username in Redux
+          } catch (error) {
+            console.error('Error fetching admin details:', error);
+          }
+        };
+    
+        fetchAdminName();
+    }, [dispatch]);
     
     // Fetch admins
     useEffect(() => {
@@ -226,24 +265,6 @@ const AdminHome = () => {
         doc.save('LoginStatistics.pdf');
     };
 
-    //logout
-    const navigate = useNavigate();
-
-    const handleAdminLogout = async(e) => {
-        e.preventDefault();
-
-        logout()
-            .then((res) => {
-                alert(res.message);
-
-                document.cookie = 'adminUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                
-                //redirect to login page
-                navigate("/adminLogin");
-
-        }).catch(err => console.error(err));
-    }
-
     return(
         <div style={{backgroundColor: '#ECF0F5'}}>
             <Header />
@@ -315,7 +336,7 @@ const AdminHome = () => {
                     </div>
 
                     <div className="col mt-3 mb-5">
-                        <Link to="/teacherInterface">                        
+                        <Link to="/adminInterface">                        
                             <div className="card cardDPDashboard rounded-4" style={{backgroundColor: '#DDDDFF '}}>
                                 <div className="iconDPDashboard">
                                     <PiExam />

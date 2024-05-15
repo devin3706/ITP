@@ -63,6 +63,9 @@ function StudentFeedback() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
       <b><h1 className="card-title text-center mb-4">Feedback Page</h1></b>
       <div className="container mt-5 mb-5">
       <div className="row">

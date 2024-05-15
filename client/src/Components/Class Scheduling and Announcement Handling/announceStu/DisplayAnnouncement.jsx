@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
@@ -24,7 +25,9 @@ const DisplayAnnouncement = () => {
   return (
     <div style={{ backgroundColor: "#ECF0F5" }}>
       <Header />
-
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
       <div
         className="mt-5 mb-5"
         style={{ maxWidth: "800px", margin: "0 auto" }}

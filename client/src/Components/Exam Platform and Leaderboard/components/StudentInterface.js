@@ -33,6 +33,9 @@ const QuestionPage = () => {
     <div style={{backgroundColor: '#ECF0F5'}}>
         <div>
             <Header />
+            <div className="headerBtns">
+              <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+            </div>
         </div>
     <div className="container mt-4"> {/* Added Bootstrap container class */}
       <div className="row"> {/* Added Bootstrap row class */}

@@ -66,6 +66,9 @@ function Payment() {
   return (
     <div style={{ backgroundColor: "#ECF0F5" }}>
       <Header />
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
       <div className="container mt-5 mb-5 row justify-content-center col-lg-8 m-4 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
         <h1 className="mb-4 text-center">Payment</h1>
         <Formik
