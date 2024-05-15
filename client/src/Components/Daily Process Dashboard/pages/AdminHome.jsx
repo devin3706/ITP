@@ -235,6 +235,8 @@ const AdminHome = () => {
         logout()
             .then((res) => {
                 alert(res.message);
+
+                document.cookie = 'adminUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                 
                 //redirect to login page
                 navigate("/adminLogin");
