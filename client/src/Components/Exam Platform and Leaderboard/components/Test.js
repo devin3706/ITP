@@ -104,7 +104,7 @@ export default function EditableResultView() {
                 {data.length === 0 ? (
                     <p>No results found.</p>
                 ) : (
-                    <div className='col-12'>
+                    <div className='col-12 mb-10'>
                         {data.map((result, index) => (
                             <li key={result._id} className='row align-items-center border border-dark-subtle p-1'>
                                 <strong className='w-auto'>Username:</strong>

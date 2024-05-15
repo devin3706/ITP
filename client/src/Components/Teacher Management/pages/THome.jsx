@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import Cookies from 'js-cookie';
+import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
 import Header from '../../Exam Platform and Leaderboard/components/Header';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import { 
@@ -19,11 +23,36 @@ import {
  } from 'react-icons/fa';
 import SideNavbar from "../component/SideNavbar";
 
-
-
 const THome = () => {
     const [authenticated, setAuthenticated] =useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        const email = Cookies.get("email");
+        if (!email) {
+            return;
+        }
+
+        const fetchTeacherData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8081/teacher/find-by-email/${email}`);
+                const { firstName, lastName } = response.data.teacher; // Extract firstName and lastName from response
+
+                // Combine firstName and lastName into a single string
+                const fullName = `${firstName} ${lastName}`;
+
+                // Dispatch setUsername action with the combined fullName
+                dispatch(setUsername(fullName));
+            } catch (error) {
+                console.error('Error fetching teacher data:', error);
+            }
+        };
+
+        fetchTeacherData();
+    }, [dispatch]);
 
     useEffect(() => {
         // Check if the user has a valid token ....
