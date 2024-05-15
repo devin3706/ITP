@@ -90,7 +90,7 @@ function CreateInquiry (){
                             />
                         </div>
                    
-                        <button className='btn btn-success'>Submit</button>
+                        <button className='btn btn-primary'>Submit</button>
                     </form>
                 </div>
             </div>

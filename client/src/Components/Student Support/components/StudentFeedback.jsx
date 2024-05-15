@@ -65,6 +65,14 @@ function StudentFeedback() {
       <Header/>
       <b><h1 className="card-title text-center mb-4">Feedback Page</h1></b>
       <div className="container mt-5 mb-5">
+      <div className="row">
+          <div className="col-md-12 mt-3">
+            <Link to="/create" className="btn btn-primary">
+              Add your feedback
+            </Link>
+          </div>
+        </div>
+        <br></br>
         <div className="mb-3 d-flex">
           <input
             type="text"
@@ -83,7 +91,6 @@ function StudentFeedback() {
             <div key={user._id} className="col-md-6 mb-4">
               <div className="card shadow">
                 <div className="card-body">
-                  <h5 className="card-title">Student Feedback</h5>
                   <p className="card-text">Teacher: {user.Teacher}</p>
                   <p className="card-text">Feedback: {user.Feedback}</p>
                   <p className="card-text">Rating: {renderStars(user.Rating)}</p>
@@ -99,14 +106,6 @@ function StudentFeedback() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="row">
-          <div className="col-md-12 mt-3">
-            <Link to="/create" className="btn btn-primary">
-              Add your feedback
-            </Link>
-          </div>
         </div>
       </div>
       <Footer/>
