@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 
 // Import controllers
-import { register, login, logout, getLoggedInAdmin, view, deleteAdmin, updateAdmin } from "../../controllers/admin/admin.js";
+import { register, login, logout, getLoggedInAdmin, view, deleteAdmin, updateAdmin, getAdminProfile } from "../../controllers/admin/admin.js";
 import { 
     getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, getTotalExams, getTotalFiles, 
     getTotalStudents, getTotalTeacherLogins, getTotalTeachers, getTeachersByDistrict, getDistrictWithMostTeachers
@@ -22,6 +22,8 @@ router.get("/view", view);
 router.delete("/admin/:adminID", deleteAdmin);
 router.get("/admin/:adminID", adminById);
 router.put("/admin/:adminID", updateAdmin);
+router.get("/adminProfile/:username", getAdminProfile);
+
 
 //Summaries
 router.get('/totalStudents', getTotalStudents);

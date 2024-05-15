@@ -284,3 +284,10 @@
   top: 560px;
   left: 50px;
 }
+
+/* -------------------------------------- for Daily Process Dashboard -------------------------------------- */
+.headerBtns {
+  position: absolute;
+  top: 65px;
+  left: 1250px;
+}

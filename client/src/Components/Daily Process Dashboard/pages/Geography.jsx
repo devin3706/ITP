@@ -4,10 +4,11 @@ import sriLankaImage from '../images/sriLanka.png';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import Header from '../../Exam Platform and Leaderboard/components/Header';
 import { Pie } from 'react-chartjs-2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // API functions
-import { getTeachersByDistrict } from '../api/admin';
+import { getTeachersByDistrict, logout } from '../api/admin';
+import { PiUserCircle } from 'react-icons/pi';
 
 const Geography = () => {
     const [teachers, setTeachers] = useState([]);
@@ -120,12 +121,34 @@ const Geography = () => {
                 borderWidth: 1,
             },
         ],
-    };    
+    };
+
+    //logout
+    const navigate = useNavigate();
+
+    const handleAdminLogout = async(e) => {
+        e.preventDefault();
+
+        logout()
+            .then((res) => {
+                alert(res.message);
+                
+                //redirect to login page
+                navigate("/adminLogin");
+
+        }).catch(err => console.error(err));
+    }
 
 
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
             <Header />
+            <div className="headerBtns">
+                <button className="btn btn-grey fs-6" onClick={handleAdminLogout}>Log out</button>
+                <Link to="/adminProfile">
+                    <PiUserCircle className="text-white ml-3" style={{fontSize: '70px'}}/>
+                </Link>
+            </div>
             <div className="d-flex mt-5 mb-5 justify-content-center align-items-center col-9">
                 <div className="geography-container bg-white shadow rounded-4 border border-dark p-3" onMouseEnter={(e) => setCountText()}>
                     <h1 className='text-center text-dark alert alert-info border border-info rounded-4'>Geography</h1>

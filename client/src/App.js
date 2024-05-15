@@ -42,6 +42,7 @@ import AdminLogin from './Components/Daily Process Dashboard/pages/AdminLogin';
 import AdminDetails from './Components/Daily Process Dashboard/pages/AdminDetails';
 import AdminHeader from './Components/Daily Process Dashboard/components/AdminHeader.jsx';
 import Geography from './Components/Daily Process Dashboard/pages/Geography.jsx';
+import AdminProfile from "./Components/Daily Process Dashboard/pages/AdminProfile.jsx";
 
 
 // Admin API functions
@@ -174,6 +175,7 @@ const App = () => {
           <Route path="/adminDetails" element={<AdminDetails />} />
           <Route path="/adminHeader" element={<AdminHeader />} />
           <Route path="/geography" element={<Geography />} />
+          <Route path="/adminProfile" element={<AdminProfile />} />
 
           {/* Study Material Routes */}
           <Route path="/pdfApp" element={<PdfApp />} />
