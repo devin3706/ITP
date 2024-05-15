@@ -41,6 +41,9 @@ function ReadClass() {
   return (
     <div style={{ backgroundColor: '#ECF0F5' }}>
       <Header/>
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
       <div className="container-fluid mt-10 mb-10">
         <h1 className="text-center mb-5">Classes</h1>
         <div className="row justify-content-center">

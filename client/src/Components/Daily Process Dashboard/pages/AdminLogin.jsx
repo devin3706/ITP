@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { AdminContext } from "../../../AdminContext";
 
@@ -48,6 +48,9 @@ const AdminLogin = () => {
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <Header/>
+        <div className="headerBtns">
+          <Link to='/' className="btn btn-grey fs-6">Home</Link>
+        </div>
             <div className="justify-content-md-center">
                 <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Admin Login</label>

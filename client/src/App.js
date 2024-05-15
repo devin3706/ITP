@@ -21,6 +21,8 @@ import CreateQuestion from "./Components/Exam Platform and Leaderboard/component
 import Leaderboard from "./Components/Exam Platform and Leaderboard/components/Leaderboard";
 import StudentInterface from "./Components/Exam Platform and Leaderboard/components/StudentInterface.js";
 import TeacherInterface from "./Components/Exam Platform and Leaderboard/components/TeacherInterface.js";
+import AdminInterface from "./Components/Exam Platform and Leaderboard/components/AdminInterface.js";
+import AdminView from "./Components/Exam Platform and Leaderboard/components/AdminView.js";
 
 // Teacher components
 import THome from "./Components/Teacher Management/pages/THome";
@@ -151,6 +153,8 @@ const App = () => {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/studentInterface" element={<StudentInterface />} />
           <Route path="/teacherInterface" element={<TeacherInterface />} />
+          <Route path="/adminInterface" element={<AdminInterface />} />
+          <Route path="/adminView" element={<AdminView />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />

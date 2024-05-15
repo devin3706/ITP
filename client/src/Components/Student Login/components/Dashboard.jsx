@@ -2,7 +2,7 @@ import axios from 'axios';
 import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
 import { useDispatch } from "react-redux";
 import React , {useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../styles.css';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import Header from '../../Exam Platform and Leaderboard/components/Header';
@@ -12,6 +12,22 @@ import Header from '../../Exam Platform and Leaderboard/components/Header';
 function Dashboard() {
 
   const dispatch = useDispatch();
+
+  //logout
+  const navigate = useNavigate();
+
+  const handleStudentLogout = async (e) => {
+      
+      try {
+          // Dispatching setUsername action with an empty string parameter
+          dispatch(setUsername('')); 
+
+          // Redirecting to login page
+          navigate("/login");
+      } catch (error) {
+          console.error(error);
+      }
+  }
 
   useEffect(() => {
     // Fetch profile data from backend
@@ -27,6 +43,9 @@ function Dashboard() {
   return (
     <div style={{ backgroundColor: '#ECF0F5' }}>
       <Header/>
+      <div className="headerBtns">
+        <button className="btn btn-grey fs-6" onClick={handleStudentLogout}>Log out</button>
+      </div>
       <div className="container mt-5 mb-5">
 
         {/* This is the profile card. After the header is completed, make it so that it navigates to profile after clicking the icon  */}
@@ -70,16 +89,6 @@ function Dashboard() {
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Exam Platform</h6>
-                  </div>
-                </div>
-              </Link>
-            </div>
-
-            <div className="col">
-              <Link to="/">
-                <div className="card cardHov h-100">
-                  <div className="card-body">
-                    <h6 className="card-title text-center">Results</h6>
                   </div>
                 </div>
               </Link>
