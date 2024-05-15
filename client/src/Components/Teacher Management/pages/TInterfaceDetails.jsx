@@ -4,12 +4,13 @@ import { Table, Button, Input } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import SideNavbar from "../component/SideNavbar";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import TeacherDetailsPDF from './TeacherDetailsPDF';
 import { Pie, Bar } from 'react-chartjs-2';
 import domtoimage from 'dom-to-image';
 
-const TDetails = () => {
+const TInterfaceDetails = () => {
     const [teachers, setTeachers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [districtCounts, setDistrictCounts] = useState({});
@@ -112,36 +113,22 @@ const TDetails = () => {
         ],
     };
 
-    const handleEdit = (id) => {
-        navigate(`/tUpdate/${id}`);
-    };
-
-    const handleDelete = async (id) => {
-        const isConfirmed = window.confirm("Are you sure you want to delete this account?");
-        if (!isConfirmed) {
-            return;
-        }
     
-        try {
-            await axios.delete(`http://localhost:8081/teacher/delete/${id}`);
-            fetchData();
-        } catch (error) {
-            console.error("Error deleting teacher:", error);
-        }
-    };
-
-    const handleAddTeacher = () => {
-        navigate('/tCreate');
-    };
 
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
             <Header/>
+            <SideNavbar/>
 
             <center>
-                <h1 className="text-center mt-5 mb-4 alert border border-dark shadow col-10" style={{fontSize: '300%', backgroundColor: '#c1dee3'}}>Teacher Details</h1>
+                <h1 className="text-center mt-5 mb-4 alert border border-dark shadow col-10" style={{fontSize: '300%', backgroundColor: '#BCDAED'}}>Teacher Details</h1>
+            </center>
 
-                <div className="d-flex justify-content-center mt-5 mb-5">
+            
+            <div className="mt-5 mb-5">
+
+                <center>
+                <div className="d-flex justify-content-center mb-5">
                     <div className="d-flex mt-3" style={{ width: '300px', height: '300px' }}>
                         <Pie data={pieChartData} id="pie-chart" />
                     </div>
@@ -149,14 +136,12 @@ const TDetails = () => {
                         <Bar data={barChartData} id="bar-chart" />
                     </div>
                 </div>
-            </center>
+                </center>
 
-            
-            <div className="mt-5 mb-5">
-                <div className="d-flex justify-content-center mb-5">
+                <div className="d-flex justify-content-center mb-5 mt-5">
                     <Input
                         type="text"
-                        className="col-10"
+                        className="col-9"
                         placeholder="Search by name..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -165,14 +150,15 @@ const TDetails = () => {
                 </div>
 
                 <center>
-                    <hr className="my-4 col-10 border-2 border-dark mb-5" />
-
+                    <hr className="my-4 col-9 border-2 border-dark mb-5" />
                 </center>
+               
+                
 
                 <div className="d-flex justify-content-center">
-                    <Table bordered responsive="sm" className="table table-striped table-light" style={{ backgroundColor: '#FFFFFF' }}>
+                    <Table bordered responsive="lg" className="table table-striped table-info " >
                         <thead>
-                            <tr className="table-primary text-center">
+                            <tr className="table-dark text-center" >
                                 
                                 <th className="fw-bold text-dark col-1">First Name</th>
                                 <th className="fw-bold text-dark col-1">Last Name</th>
@@ -181,7 +167,6 @@ const TDetails = () => {
                                 <th className="fw-bold text-dark col-1">Education Qualification</th>
                                 <th className="fw-bold text-dark col-1">Phone Number</th>
                                 <th className="fw-bold text-dark col-3">Email</th>
-                                <th className="fw-bold text-dark col-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody >
@@ -195,15 +180,15 @@ const TDetails = () => {
                                     <td>{teacher.eduQualification}</td>
                                     <td>{teacher.phoneNumber}</td>
                                     <td>{teacher.email}</td>
-                                    <td>
-                                        <Button className='btn-sm me-2 rounded-3' color="info" onClick={() => handleEdit(teacher._id)}>Edit</Button>
-                                        <Button className='btn-sm me-2 rounded-3' color="danger" onClick={() => handleDelete(teacher._id)}>Delete</Button>
-                                    </td>
+                                    
                                 </tr>
                             ))}
                         </tbody>
                     </Table>
                 </div>
+                <center>
+                    <hr className="my-4 col-9 border-2 border-dark mb-5" />
+                </center>
                 <div className="d-flex justify-content-center mt-3">
                     <PDFDownloadLink
                         document={<TeacherDetailsPDF teachers={filteredTeachers} pieChartData={pieChart} barChartData={barChart} />}
@@ -214,7 +199,6 @@ const TDetails = () => {
                             <Button color="primary" className="rounded-4" size="lg" disabled={loading}>{loading ? 'Loading...' : 'Generate Report'}</Button>
                         )}
                     </PDFDownloadLink>
-                    <Button color="success" className="rounded-4" onClick={handleAddTeacher}>Add Teacher</Button>
                 </div>
                 
             </div>
@@ -223,4 +207,4 @@ const TDetails = () => {
     );
 };
 
-export default TDetails;
+export default TInterfaceDetails;

@@ -36,6 +36,7 @@ import TProfile from "./Components/Teacher Management/pages/TProfile.jsx";
 import MainLogin from "./Components/Teacher Management/pages/MainLogin.jsx";
 import TEnterEmail from "./Components/Teacher Management/pages/TEnterEmail.jsx";
 import ResetPassword from "./Components/Teacher Management/pages/ResetPassword.jsx";
+import TInterfaceDetails from "./Components/Teacher Management/pages/TInterfaceDetails.jsx";
 
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
@@ -167,6 +168,7 @@ const App = () => {
           <Route path="/tProfile" element={<TProfile />} />
           <Route path="/mainLogin" element={<MainLogin />} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
+          <Route path="/tInterfaceDetails" element={<TInterfaceDetails/>} />
           <Route
             path="/resetPassword/:resetToken/:email"
             element={<ResetPassword />}
