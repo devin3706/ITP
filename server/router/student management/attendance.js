@@ -1,3 +1,5 @@
+// backend: attendance.js
+
 import express from "express";
 import AttendanceModel from "../../models/student management/Attendance.js";
 import multer from "multer";
@@ -39,6 +41,16 @@ router.get("/getImage/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch image" });
+  }
+});
+
+router.get("/getAllImages", async (req, res) => {
+  try {
+    const allAttendance = await AttendanceModel.find();
+    res.json(allAttendance);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch all images" });
   }
 });
 
