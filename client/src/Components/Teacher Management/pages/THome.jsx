@@ -3,7 +3,20 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Header from '../../Exam Platform and Leaderboard/components/Header';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
-import { FaUser } from 'react-icons/fa'; // Import the user icon from react-icons/fa
+import { 
+    FaFileAlt,
+    FaTh,
+    FaBars,
+    FaSignOutAlt ,
+    FaRegChartBar,
+    FaCommentAlt,
+    FaBook,
+    FaUserCircle,
+    FaQuestionCircle,
+    FaCalendarAlt,
+    FaBullhorn,
+    FaUserCheck
+ } from 'react-icons/fa';
 import SideNavbar from "../component/SideNavbar";
 
 
@@ -46,7 +59,7 @@ const THome = () => {
         <Header />
         <SideNavbar />
         <div className="container-fluid">
-            <div className="row">
+            <div className="row mr-5">
                 <main className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     <Container fluid className={`mt-5 mb-5`}>
                         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
@@ -55,6 +68,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Feedback</Card.Title>
                                         <Link to="/teacherFeedback" className="stretched-link"></Link>
+                                        <div>
+                                            <FaCommentAlt size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -63,6 +79,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Q&A</Card.Title>
                                         <Link to="/updateInquiry" className="stretched-link"></Link>
+                                        <div>
+                                            <FaQuestionCircle size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -73,6 +92,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Timetable</Card.Title>
                                         <Link to="/createClass" className="stretched-link"></Link>
+                                        <div>
+                                            <FaCalendarAlt size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -81,6 +103,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Announcements</Card.Title>
                                         <Link to="/createAnnouncement" className="stretched-link"></Link>
+                                        <div>
+                                            <FaBullhorn size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -89,6 +114,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Study Material</Card.Title>
                                         <Link to="/pdfApp" className="stretched-link"></Link>
+                                        <div>
+                                            <FaRegChartBar size={24} /> 
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -98,6 +126,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Past Papers</Card.Title>
                                         <Link to="/PastPaperUpload" className="stretched-link"></Link>
+                                        <div>
+                                            <FaFileAlt size={24} /> 
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -107,6 +138,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Exam</Card.Title>
                                         <Link to="/teacherInterface" className="stretched-link"></Link>
+                                        <div>
+                                            <FaBook size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -116,6 +150,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Marks</Card.Title>
                                         <Link to="/bsmarks" className="stretched-link"></Link>
+                                        <div>
+                                            <FaRegChartBar size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -125,6 +162,9 @@ const THome = () => {
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
                                         <Card.Title>Attendance</Card.Title>
                                         <Link to="/attendance" className="stretched-link"></Link>
+                                        <div>
+                                            <FaUserCheck size={24} />
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
@@ -137,7 +177,7 @@ const THome = () => {
                                             <Link to="/tProfile" className="stretched-link"></Link>
                                         </div>
                                         <div>
-                                            <FaUser size={24} />
+                                            <FaUserCircle size={24} />
                                         </div>
                                     </Card.Body>
                                 </Card>

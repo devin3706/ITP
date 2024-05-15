@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'; // Import useNavigate 
+import Cookies from 'js-cookie'; // Import js-cookie
 import {
     MDBContainer,
     MDBCol,
@@ -45,10 +46,9 @@ const TLogin = () => {
             console.log("User authenticated:", response.data);
             alert("Login Success.");
 
-            //Store the token in loacalStorage
-            localStorage.removeItem("token"); // Clear any previous token
-            localStorage.setItem("token", response.data.token);  
-            localStorage.setItem("user", JSON.stringify(response.data.user));
+            // Store the token and email in localStorage and cookie
+            localStorage.setItem("token", response.data.token);
+            Cookies.set("email", email, { expires: 7 });  // Set cookie to expire in 7 days
 
 
             // Redirect to the dashboard page
