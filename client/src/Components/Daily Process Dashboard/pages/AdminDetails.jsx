@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../../../styles.css';
 
 // api functions
-import { view, deleteAdmin, update } from "../api/admin";
+import { view, deleteAdmin, update, logout } from "../api/admin";
 
 //header and footer
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import { PiUserCircle } from "react-icons/pi";
 
 //validations
 const isValidContact = (contact) => contact >= 700000000 && contact <= 799999999 && contact.toString().length === 9;
@@ -94,9 +95,31 @@ const AdminDetails = () => {
         admin[searchField].toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    //logout
+    const navigate = useNavigate();
+
+    const handleAdminLogout = async(e) => {
+        e.preventDefault();
+
+        logout()
+            .then((res) => {
+                alert(res.message);
+                
+                //redirect to login page
+                navigate("/adminLogin");
+
+        }).catch(err => console.error(err));
+    }
+
     return (
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <Header/>
+        <div className="headerBtns">
+            <button className="btn btn-grey fs-6" onClick={handleAdminLogout}>Log out</button>
+            <Link to="/adminProfile">
+                <PiUserCircle className="text-white ml-3" style={{fontSize: '70px'}}/>
+            </Link>
+        </div>
         <div className="container mt-4">
             <h1 className="text-center mt-3 mb-4 alert alert-dark border border-dark shadow" style={{fontSize: '300%'}}>Admin Details</h1>
 

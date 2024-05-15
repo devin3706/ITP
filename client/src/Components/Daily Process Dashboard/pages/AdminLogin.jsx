@@ -9,7 +9,7 @@ import { Button } from "@mui/material";
 //api functions
 import { login } from "../api/admin";
 
-import AdminHeader from '../components/AdminHeader'
+//import AdminHeader from '../components/AdminHeader'
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
@@ -31,6 +31,8 @@ const AdminLogin = () => {
             else{
                 alert(res.message);
                 setAdmin(res.username);
+
+                document.cookie = `adminUsername=${res.username};max-age=36000`;
                 
                 navigate("/adminHome");
             }
@@ -95,7 +97,7 @@ const AdminLogin = () => {
                         <Button 
                             variant="contained" 
                             disabled={!email || !username || !password}
-                            onClick={handleAdminLogin}                    
+                            onClick={handleAdminLogin}
                         >
                             Login
                         </Button>
