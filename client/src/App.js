@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AdminContext } from "./AdminContext";
 import Homepage from "./Homepage.js";
 
-
 // Exam components
 import Main from './Components/Exam Platform and Leaderboard/components/Main';
 import Quiz from './Components/Exam Platform and Leaderboard/components/Quiz';
@@ -36,7 +35,6 @@ import MainLogin from './Components/Teacher Management/pages/MainLogin.jsx';
 import TEnterEmail from './Components/Teacher Management/pages/TEnterEmail.jsx';
 import ResetPassword from './Components/Teacher Management/pages/ResetPassword.jsx';
 
-
 // Admin components
 import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
 import AdminCreate from './Components/Daily Process Dashboard/pages/AdminCreate';
@@ -64,13 +62,25 @@ import TeacherFeedback from './Components/Student Support/components/TeacherFeed
 import Inquiry from './Components/Student Support/components/Inquiry.jsx';
 import UpdateInquiry from './Components/Student Support/components/UpdateInquiry';
 
-//Student Management
-import Dashboard from './Components/Student Management/components/dashboard.jsx';
-import Students from './Components/Student Management/components/Students.jsx';
-import CreateStudent from './Components/Student Management/components/CreateStudent.jsx';
-import UpdateStudent from './Components/Student Management/components/UpdateStudent.jsx';
-import StudentLogin from './Components/Student Management/components/studentLogin.jsx';
 
+//Student Management
+import Students from './Components/Student Management/components/Users.jsx'
+import CreateStudent from './Components/Student Management/components/CreateUser.jsx'
+import UpdateStudent from './Components/Student Management/components/UpdateUser.jsx'
+import BSMarks from './Components/Student Management/components/BSMarks.jsx';
+import Attendance from './Components/Student Management/components/Attendance.jsx'
+import CreateBSMarks from './Components/Student Management/components/CreateBSMarks.jsx';
+import UpdateBSMarks from './Components/Student Management/components/UpdateBSMarks.jsx';
+
+//Student Login
+import Signup from './Components/Student Login/components/Signup.jsx';
+import Login from './Components/Student Login/components/Login';
+import Home from './Components/Student Login/components/Home';
+import Dashboard from './Components/Student Login/components/Dashboard';
+import UpdateProfile from './Components/Student Login/components/UpdateProfile';
+import Profile from './Components/Student Login/components/Profile';
+import ForgotPass from './Components/Student Login/components/ForgotPassword';
+import ResetPass from './Components/Student Login/components/ResetPassword';
 
 //Payment Management
 import Payment from "./Components/Payment Management/Add Payment/Payment.js";
@@ -78,12 +88,15 @@ import PayOnline from "./Components/Payment Management/PayOnline/PayOnline.js";
 import Payments from "./Components/Payment Management/Payment Details/Payments.js";
 import PayDetails from "./Components/Payment Management/PayerDetails/payDetails.js";
 import EditPayments from "./Components/Payment Management/EditPayment/EditPayments.js";
+import Editdetails from "./Components/Payment Management/EditDetails/Editdetails";
 
-//Announcement Handling
-import Announcement from "./Components/Announcement Handling/Home/Home.jsx";
-
-//Class Scheduling
-import Class from "./Components/Class Scheduling/Home/Class.jsx";
+//Class Scheduling and Announcement Handling
+import CreateAnnouncement from "./Components/Class Scheduling and Announcement Handling/announcements/createAnnounce.js";
+import ReadClass from "./Components/Class Scheduling and Announcement Handling/classsched/readClass.js";
+import ReadAnnouncement from "./Components/Class Scheduling and Announcement Handling/readAnnounce/readAnnounce.js";
+import UpdateAnnouncement from "./Components/Class Scheduling and Announcement Handling/updateAnnounce/update.js";
+import UpdateClass from "./Components/Class Scheduling and Announcement Handling/updateclass/updatecl.js"
+import ClassHome from "./Components/Class Scheduling and Announcement Handling/ClassHome/ClassHome.jsx";
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
@@ -132,10 +145,6 @@ const App = () => {
           <Route path="/mainLogin" element= {<MainLogin/>} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
           <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
-         
-
-        
-
 
           {/* Admin routes */}
           <Route path="/adminHome" element={<AdminHome />} />
@@ -159,14 +168,28 @@ const App = () => {
           <Route path='/studentFeedback' element={<StudentFeedback/>}></Route>
           <Route path='/teacherFeedback' element={<TeacherFeedback/>}></Route>
           <Route path='/inquiry' element={<Inquiry/>}></Route>
-          <Route path='/UpdateInquiry/:id' element={<UpdateInquiry />}></Route>
+          <Route path="/updateInquiry" element={<UpdateInquiry />} />
+          
+          
+
 
           {/* Student Management Routes */}
           <Route path = '/students' element = {<Students />}> </Route>
-          <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
-          <Route path = '/createStudent' element = {<CreateStudent/>}> </Route>
+          <Route path = '/createStudent' element = {<CreateStudent />}> </Route>
           <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
-          <Route path = '/studentLogin' element = {<StudentLogin />}> </Route>
+          <Route path = '/attendance' element = {<Attendance />}> </Route>
+          <Route path = '/bsmarks' element = {<BSMarks />}> </Route>
+          <Route path = '/createbsmarks' element = {<CreateBSMarks />}> </Route>
+          <Route path = '/updatebsmarks/:id' element = {<UpdateBSMarks />}> </Route>
+          
+          {/* Student Login Routes */}
+          <Route path = '/signup' element = {<Signup />}> </Route>
+          <Route path = '/login' element = {<Login />}> </Route>
+          <Route path = '/forgotPass' element = {<ForgotPass/>}> </Route>
+          <Route path = '/resetPass/:token' element = {<ResetPass/>}> </Route>
+          <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
+          <Route path = '/updateStudent/:id' element = {<UpdateProfile />}> </Route>
+          <Route path = '/profile' element = {<Profile/>}> </Route>
 
           {/* Payment Management Routes */}
           <Route path="/payment" element={<Payment />} />
@@ -174,12 +197,15 @@ const App = () => {
           <Route path="/onlinePay" element={<PayOnline />} />
           <Route path="/payerDetails" element={<PayDetails />} />
           <Route path="/editpayments/:Workoutid" element={<EditPayments />} />
+          <Route path="/editdetails/:Payerid" element={<Editdetails />} />
 
-          {/* Announcement Handling Routes */}
-          <Route path="/announcement" element={<Announcement />} />
-
-          {/* Class Scheduling Routes */}
-          <Route path="/class" element={<Class />} />
+          {/* Class Scheduling and Announcement Handling Routes */}
+          <Route path="/createClass" element={<ClassHome />} />
+          <Route path="/updateClass/:id" element={<UpdateClass />} />
+          <Route path="/createAnnouncement" element={<CreateAnnouncement />} />
+          <Route path="/readAnnouncement" element={<ReadAnnouncement />} />
+          <Route path="/updateAnnouncement/:id" element={<UpdateAnnouncement />} />
+          <Route path="/readClass" element={<ReadClass />} />
 
         </Routes>
       </AdminContext.Provider>

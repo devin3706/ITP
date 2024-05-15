@@ -68,7 +68,7 @@ const AdminHome = () => {
                 //sorting by month
                 const s_LoginsByMonth = await getStudentLoginsByMonth();
                 s_LoginsByMonth.sort((a, b) => a._id - b._id);
-                setAdminLoginsByMonth(s_LoginsByMonth);
+                setStudentLoginsByMonth(s_LoginsByMonth);
 
                 const t_LoginsByMonth = await getTeacherLoginsByMonth();
                 t_LoginsByMonth.sort((a, b) => a._id - b._id);
@@ -261,7 +261,7 @@ const AdminHome = () => {
                     </div>
 
                     <div className="col mt-3">
-                        <Link to="/#">                        
+                        <Link to="/readClass">                        
                             <div className="card cardDPDashboard rounded-4" style={{backgroundColor: '#A0F5FF'}}>
                                 <div className="iconDPDashboard">
                                     <PiAlarm />

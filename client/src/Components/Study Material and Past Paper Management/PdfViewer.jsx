@@ -3,8 +3,8 @@ import axios from 'axios';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import './styles/PdfViewer.css';
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
+import Header from '../Exam Platform and Leaderboard/components/Header.js';
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
-import Header from '../Exam Platform and Leaderboard/components/Header';
 import { Document, Page } from 'react-pdf';
 
 const PdfViewer = () => {
@@ -72,6 +72,10 @@ const closePdfPopup = () => {
   }, [searchTerm, pdfs]);
 
   return (
+    <div style={{backgroundColor: '#ECF0F5'}}>
+    <div>
+        <Header />
+    </div>
     <div className="pdf-viewer-container">
       <h1 className="pdf-viewer-heading">Study Materials</h1>
       <div className="search-bar">
@@ -108,6 +112,7 @@ const closePdfPopup = () => {
         ))}
       </div>
       <Footer />
+    </div>
     </div>
   );
 };

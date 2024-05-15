@@ -4,7 +4,8 @@ import axios from "axios";
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Header from "../Exam Platform and Leaderboard/components/Header";
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
-
+import jsPDF from 'jspdf';
+import { pdfjs } from "react-pdf";
 
 function PastPaperUpload() {
   const [year, setYear] = useState("");
@@ -17,6 +18,7 @@ function PastPaperUpload() {
   const [editFormData, setEditFormData] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
   const [showPdfPopup, setShowPdfPopup] = useState(false);
+ 
 
   useEffect(() => {
     fetchPastPapers();
@@ -128,30 +130,23 @@ function PastPaperUpload() {
   };
 
   const generateReport = () => {
-    const csvRows = [
-      ['Year', 'Description', 'Grade', 'Subject', 'File Name'].join(','), // CSV Header
-    ];
-    
-    allPastPapers.forEach(paper => {
-      const csvContent = [
-        paper.year,
-        `" ${paper.description.replace(/"/g, '""')}"`,  
-        paper.grade,
-        paper.subject,
-        paper.pdf
-      ].join(',');
-      csvRows.push(csvContent);
+    const doc = new jsPDF();
+    let y = 10;
+    allPastPapers.forEach(pastPaper => {
+      doc.text(`Title: ${pastPaper.title}`, 10, y);
+      doc.text(`Description: ${pastPaper.description}`, 10, y + 10);
+      doc.text(`Grade: ${pastPaper.grade}`, 10, y + 20);
+      doc.text(`Subject: ${pastPaper.subject}`, 10, y + 30);
+      doc.text(`File Name: ${pastPaper.pdf}`, 10, y + 40);
+      y += 50;
     });
   
-    const csvString = csvRows.join('\n');
-    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', 'pastPapersReport.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    doc.save('past Papers Report.pdf');
   };
+  
+  
+  
+  
 
   return (
     <div style={{backgroundColor: '#ECF0F5'}}>

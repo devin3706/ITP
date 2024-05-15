@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function Inquiry() {
   const [inquiries, setInquiries] = useState([]);
@@ -33,45 +35,49 @@ function Inquiry() {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row justify-content-center">
-        <div className="col-md-10">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title text-center mb-4">Inquiries</h3>
-              <div className="table-responsive">
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Email</th>
-                      <th>Teacher</th>
-                      <th>Class</th>
-                      <th>Question</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {inquiries.map((inquiry) => (
-                      <tr key={inquiry._id}>
-                        <td>{inquiry.Email}</td>
-                        <td>{inquiry.Teacher}</td>
-                        <td>{inquiry.Class}</td>
-                        <td>{inquiry.Question}</td>
-                        <td>
-                          <button onClick={() => handleDelete(inquiry._id)} className="btn btn-danger btn-sm">Delete</button>
-                        </td>
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="mt-10 mb-10">
+        <div className="row justify-content-center">
+          <div className="col-md-10">
+            <div className="card">
+              <div className="card-body  shadow">
+                <h1 className="card-title text-center mb-4">Ask Your Questions</h1>
+                <div className="text-center mt-4">
+                  <Link to="/createInquiry" className="btn btn-primary">Add Your Question</Link>
+                </div>
+                <div className="table-responsive">
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th className="col-2">Email</th>
+                        <th className="col-1">Teacher</th>
+                        <th className="col-1">Class</th>
+                        <th className="col-5">Question</th>
+                        <th className="col-1">Action</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="text-center mt-4">
-                <Link to="/createInquiry" className="btn btn-success">Add Your Question</Link>
+                    </thead>
+                    <tbody>
+                      {inquiries.map((inquiry) => (
+                        <tr key={inquiry._id}>
+                          <td>{inquiry.Email}</td>
+                          <td>{inquiry.Teacher}</td>
+                          <td>{inquiry.Class}</td>
+                          <td>{inquiry.Question}</td>
+                          <td>
+                            <button onClick={() => handleDelete(inquiry._id)} className="btn btn-danger btn-sm">Delete</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

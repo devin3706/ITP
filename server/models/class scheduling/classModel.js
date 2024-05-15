@@ -13,15 +13,15 @@ const classSchema = new Schema(
       required: true,
     },
     date: {
-      type: Number,
+      type: String,
       required: true,
     },
     time: {
-      type: Number,
+      type: String,
       required: true,
     },
     duration: {
-      type: Number,
+      type: String,
       required: true,
     },
     venue: {

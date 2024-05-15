@@ -5,6 +5,7 @@ import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Header from "../Exam Platform and Leaderboard/components/Header";
 import Footer from "../Exam Platform and Leaderboard/components/Footer";
 import './styles/PastPaperUpload.css';
+import jsPDF from 'jspdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.js',
@@ -159,31 +160,19 @@ const saveEdit = async (e) => {
   };
 
   const generateReport = () => {
-    const csvRows = [
-      ['title', 'Description', 'Grade', 'Subject', 'File Name'].join(','), // CSV Header
-    ];
-    
+    const doc = new jsPDF();
+    let y = 10;
     allPdf.forEach(pdf => {
-      const csvContent = [
-        pdf.title,
-        `" ${pdf.description.replace(/"/g, '""')}"`,  
-        pdf.grade,
-        pdf.subject,
-        pdf.pdf
-      ].join(',');
-      csvRows.push(csvContent);
+      doc.text(`Title: ${pdf.title}`, 10, y);
+      doc.text(`Description: ${pdf.description}`, 10, y + 10);
+      doc.text(`Grade: ${pdf.grade}`, 10, y + 20);
+      doc.text(`Subject: ${pdf.subject}`, 10, y + 30);
+      doc.text(`File Name: ${pdf.pdf}`, 10, y + 40);
+      y += 50;
     });
   
-    const csvString = csvRows.join('\n');
-    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', 'pastPapersReport.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    doc.save('Study Material Report.pdf');
   };
-  
   
 
   return (

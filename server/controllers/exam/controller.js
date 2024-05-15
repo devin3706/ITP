@@ -77,12 +77,12 @@ export async function getResult(req,res){
 //post all results
 export async function storeResult(req, res) {
     try {
-        const { username, result, attempts, points, achieved } = req.body;
+        const { username, examName, result, attempts, points, achieved } = req.body;
         if (!username || !result) {
             throw new Error('Data not provided');
         }
 
-        const createdResult = await Results.create({ username, result, attempts, points, achieved });
+        const createdResult = await Results.create({ username, examName, result, attempts, points, achieved });
         res.json({ msg: "Results saved successfully", data: createdResult });
     } catch (error) {
         res.status(500).json({ error: error.message || "Failed to store result" });
@@ -92,7 +92,7 @@ export async function storeResult(req, res) {
 //update results
 export async function updateResult(req, res) {
     try {
-        const { _id, username, result, attempts, points, achieved } = req.body;
+        const { _id, username, examName, result, attempts, points, achieved } = req.body;
         // Find the existing result by ID
         const existingResult = await Results.findById(_id);
         if (!existingResult) {
@@ -102,6 +102,9 @@ export async function updateResult(req, res) {
         // Update the fields (only if provided in the request)
         if (username !== undefined) {
             existingResult.username = username;
+        }
+        if (examName !== undefined) {
+            existingResult.examName = examName;
         }
         if (result !== undefined) {
             existingResult.result = result;

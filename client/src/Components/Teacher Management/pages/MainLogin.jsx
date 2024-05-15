@@ -45,7 +45,7 @@ const MainLogin = () => {
               <Card.Text>
                 Login as a student to access student features.
               </Card.Text>
-              <Link to="/studentLogin">
+              <Link to="/login">
                 <Button variant="primary">Login</Button>
               </Link>
             </Card.Body>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Header from "../../Exam Platform and Leaderboard/components/Header";
+import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
 function TeacherFeedback() {
   const [users, setUsers] = useState([]);
@@ -46,22 +48,32 @@ function TeacherFeedback() {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-        <div className="w-100 bg-white rounded p-3">
-          <form onSubmit={handleSearchSubmit} className="mb-3">
+    <div style={{ backgroundColor: '#ECF0F5'}}>
+      <Header/>
+      <div className="d-flex mt-10 mb-10 justify-content-center align-items-center">
+        <div className="col-10 bg-white shadow rounded p-3">
+          <form onSubmit={handleSearchSubmit} className="row justify-content-center align-items-center mb-2">
             <input
               type="text"
               placeholder="Search by Teacher Name"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="form-control"
+              className="form-control col-10"
             />
-            <button type="submit" className="btn btn-primary mt-2">Search</button>
+           <button type="submit" className="col-1 btn btn-md btn-primary ml-3" style={{ width: '600px' }}>Search</button>
+
           </form>
           
           <div className="table-responsive" style={{ maxHeight: "200vh", overflowY: "auto" }}>
             <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th className="col-3">Email</th>
+                  <th className="col-2">Teacher</th>
+                  <th className="col">Feedback</th>
+                  <th className="col-1">Rating</th>
+                </tr>
+              </thead>
               <tbody>
                 {users.map((user) => (
                   <tr key={user._id}>
@@ -83,6 +95,7 @@ function TeacherFeedback() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
