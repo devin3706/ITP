@@ -96,7 +96,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/create">
+              <Link to="/studentFeedback">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Feedback</h6>
@@ -106,7 +106,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/createInquiry">
+              <Link to="/inquiry">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Inquiries</h6>

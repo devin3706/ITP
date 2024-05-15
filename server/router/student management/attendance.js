@@ -2,8 +2,10 @@ import express from "express";
 import AttendanceModel from "../../models/student management/Attendance.js";
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 
 const router = express.Router();
+const __dirname = path.resolve();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -22,8 +24,14 @@ const upload = multer({
 });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
+  const { date, subject, batch } = req.body; // Destructure additional data from the request body
   try {
-    const result = await AttendanceModel.create({ image: req.file.filename });
+    const result = await AttendanceModel.create({
+      image: req.file.filename,
+      date,
+      subject,
+      batch
+    });
     res.json(result);
   } catch (error) {
     console.error(error);
@@ -35,21 +43,17 @@ router.get("/getImage/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const attendance = await AttendanceModel.findById(id);
-    res.json(attendance);
+    if (!attendance) {
+      return res.status(404).json({ error: "Image not found" });
+    }
+    const imagePath = path.join(__dirname, "images", attendance.image);
+    if (!fs.existsSync(imagePath)) {
+      return res.status(404).json({ error: "Image file not found" });
+    }
+    res.sendFile(imagePath);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch image" });
-  }
-});
-
-router.delete("/deleteImage/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const image = await AttendanceModel.findByIdAndDelete(id);
-    res.json(image);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to delete image" });
   }
 });
 
@@ -60,6 +64,24 @@ router.get("/getAllImages", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch all images" });
+  }
+});
+
+router.delete("/deleteImage/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const image = await AttendanceModel.findByIdAndDelete(id);
+    if (!image) {
+      return res.status(404).json({ error: "Image not found" });
+    }
+    const imagePath = path.join(__dirname, "images", image.image);
+    if (fs.existsSync(imagePath)) {
+      fs.unlinkSync(imagePath); // Delete image file from the filesystem
+    }
+    res.json(image);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to delete image" });
   }
 });
 

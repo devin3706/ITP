@@ -9,7 +9,10 @@ import '../../../styles.css';
 import { jsPDF } from 'jspdf';
 
 // API functions
-import { getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, getTotalExams, getTotalFiles, getTotalStudents, getTotalTeachers, view } from "../api/admin";
+import { 
+    getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, 
+    getTotalExams, getTotalFiles, getTotalStudents, getTotalTeachers, view, getDistrictWithMostTeachers
+} from "../api/admin";
 
 // Header and Footer
 //import AdminHeader from '../components/AdminHeader'
@@ -25,6 +28,8 @@ const AdminHome = () => {
     const [studentLoginsByMonth, setStudentLoginsByMonth] = useState([]);
     const [teacherLoginsByMonth, setTeacherLoginsByMonth] = useState([]);
     const [adminLoginsByMonth, setAdminLoginsByMonth] = useState([]);
+
+    const [teacherDistrict, setTeacherDistrict] = useState(null);
 
     const [admins, setAdmins] = useState([]);
 
@@ -72,6 +77,9 @@ const AdminHome = () => {
                 const { totalExams } = await getTotalExams();
                 setTotalExams(totalExams);
 
+                //highest frequency district
+                const data = await getDistrictWithMostTeachers();
+                setTeacherDistrict(data);
 
                 //sorting by month
                 const s_LoginsByMonth = await getStudentLoginsByMonth();
@@ -300,7 +308,7 @@ const AdminHome = () => {
 
                 <hr className="my-4 border-2 border-dark" /> 
 
-                <div className="row mt-1 mb-5">
+                <div className="row mt-1">
                     <div className="col-8 mt-5 border border-dark rounded-4 shadow">                        
                         <div className="row">
                             <h2 className="mb-3 mt-3 col">Login Statistics</h2>
@@ -377,9 +385,37 @@ const AdminHome = () => {
                                     <button className="btn btn-info rounded-5">view</button>                                
                                 </Link>
                             </div>
-                        </div>
+                        </div>                        
+                    </div>
+                </div>
 
-                        
+                <div className="row mt-3 mb-5 border border-dark shadow rounded-4 p-3">
+                    <h2 className="mb-5 mt-3 col">Location Statistics</h2>
+                    <div className="row">
+                        <h5 className="col">
+                            {teacherDistrict ? (
+                                <div>
+                                    <p>Most Teachers are from: {teacherDistrict._id}</p>
+                                    <p>Number of Teachers: {teacherDistrict.tCount}</p>
+                                </div>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </h5>
+                        <h5 className="col">
+                            {teacherDistrict ? (
+                                <div>
+                                </div>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </h5>
+                    </div>
+
+                    <div className="d-flex justify-content-end col">
+                        <Link to="/geography">
+                            <button className="btn btn-info rounded-5">More Details</button>
+                        </Link>
                     </div>
                 </div>
             </div>
