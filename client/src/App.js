@@ -62,6 +62,7 @@ import TeacherFeedback from "./Components/Student Support/components/TeacherFeed
 import Inquiry from "./Components/Student Support/components/Inquiry.jsx";
 import UpdateInquiry from "./Components/Student Support/components/UpdateInquiry";
 
+
 //Student Management
 import Students from "./Components/Student Management/components/Users.jsx";
 import CreateStudent from "./Components/Student Management/components/CreateUser.jsx";
@@ -179,14 +180,15 @@ const App = () => {
           <Route path="/pastPaperUpload" element={<PastPaperUpload />} />
 
           {/* Student Support routes */}
-          <Route path="/users" element={<Users />}></Route>
-          <Route path="/create" element={<CreateUser />}></Route>
-          <Route path="/update/:id" element={<UpdateUser />}></Route>
-          <Route path="/createInquiry" element={<CreateInquiry />}></Route>
-          <Route path="/studentFeedback" element={<StudentFeedback />}></Route>
-          <Route path="/teacherFeedback" element={<TeacherFeedback />}></Route>
-          <Route path="/inquiry" element={<Inquiry />}></Route>
-          <Route path="/UpdateInquiry/:id" element={<UpdateInquiry />}></Route>
+
+          <Route path='/users' element={<Users />}></Route>
+          <Route path='/create' element={<CreateUser />}></Route>
+          <Route path='/update/:id' element={<UpdateUser />}></Route>
+          <Route path='/createInquiry' element={<CreateInquiry />}></Route>
+          <Route path='/studentFeedback' element={<StudentFeedback/>}></Route>
+          <Route path='/teacherFeedback' element={<TeacherFeedback/>}></Route>
+          <Route path='/inquiry' element={<Inquiry/>}></Route>
+          <Route path="/updateInquiry" element={<UpdateInquiry />} />
 
           {/* Student Management Routes */}
           <Route path="/students" element={<Students />}>

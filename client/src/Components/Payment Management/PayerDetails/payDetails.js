@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
+import jsPDF from "jspdf";
 
 const PayDetails = () => {
   const [payers, setPayers] = useState([]);
@@ -48,11 +49,43 @@ const PayDetails = () => {
       (typeof payer.date === "string" &&
         payer.date.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.setFont("helvetica");
+    doc.setFontSize(18);
+    doc.setTextColor(0, 0, 255); // Blue color
+    doc.text("Payer Details", 10, 20); // Heading
+    doc.setTextColor(0); // Reset text color to black
+    let y = 30; // Initial Y position
+    filteredPayers.forEach((workout, index) => {
+      // Add background colors to alternate rows
+      if (index % 2 === 0) {
+        doc.setFillColor(211, 211, 211); // Grey color
+      } else {
+        doc.setFillColor(255, 255, 255);
+      }
+      doc.rect(0, y - 5, 220, 50, "F"); // Draw rectangle behind each row
+
+      // Add data to PDF
+      doc.setFontSize(12);
+      doc.setTextColor(0); // Set text color to black
+      doc.text(`Payer Name: ${workout.payerName}`, 10, y);
+      doc.text(`Card No: ${workout.cardNo}`, 10, y + 10);
+      doc.text(`NIC: ${workout.nic}`, 10, y + 20);
+      doc.text(`Amount: ${workout.amount}`, 10, y + 30);
+      doc.text(`Date: ${workout.date}`, 10, y + 40);
+      y += 60; // Increment Y position for next entry
+    });
+    doc.save("payerDetails.pdf"); // Save PDF
+  };
 
   return (
-    <div style={{ backgroundColor: '#ECF0F5'}}>
-      <Header/>
+    <div style={{ backgroundColor: "#ECF0F5" }}>
+      <Header />
       <div className="fullDiv m-5">
+        <button className="btn btn-primary" onClick={generatePDF}>
+          Generate PDF
+        </button>
         <div className="col-md-12">
           <input
             type="text"
@@ -91,7 +124,11 @@ const PayDetails = () => {
                   <div className="col-sm-6">
                     <br />
                     <label>NIC</label>
-                    <input value={payer.nic} className="form-control" disabled />
+                    <input
+                      value={payer.nic}
+                      className="form-control"
+                      disabled
+                    />
                   </div>
                   <div className="col-sm-6">
                     <br />
@@ -105,11 +142,14 @@ const PayDetails = () => {
                   <div className="col-sm-6">
                     <br />
                     <label>Date</label>
-                    <input value={payer.date} className="form-control" disabled />
+                    <input
+                      value={payer.date}
+                      className="form-control"
+                      disabled
+                    />
                   </div>
                   <div className="">
                     <div className="mt-3 d-flex justify-content-between">
-
                       <button
                         className="btn btn-danger"
                         onClick={() => handleDelete(payer._id)}
@@ -118,9 +158,12 @@ const PayDetails = () => {
                       </button>
 
                       <Link to={`/editdetails/${payer._id}`}>
-                        <input type="button" className="btn btn-info" value="Update" />
+                        <input
+                          type="button"
+                          className="btn btn-info"
+                          value="Update"
+                        />
                       </Link>
-
                     </div>
                   </div>
                 </div>
@@ -129,7 +172,7 @@ const PayDetails = () => {
           ))}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

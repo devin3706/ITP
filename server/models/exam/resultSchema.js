@@ -7,6 +7,10 @@ const resultSchema = new Schema({
         type: String,
         required: [true, 'Username is required'] // Validation for required field
     },
+    examName: {
+        type: String,
+        required: [true, "Exam Name is Required"]
+    },
     result: {
         type: Array,
         default: [] // Default value

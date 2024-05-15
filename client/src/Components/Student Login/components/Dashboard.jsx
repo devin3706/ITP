@@ -1,6 +1,7 @@
-
-
-import React from 'react';
+import axios from 'axios';
+import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
+import { useDispatch } from "react-redux";
+import React , {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import '../../../styles.css';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
@@ -9,6 +10,20 @@ import Header from '../../Exam Platform and Leaderboard/components/Header';
 
 
 function Dashboard() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Fetch profile data from backend
+    axios.get('http://localhost:8081/auth/profile', { withCredentials: true })
+      .then(response => {
+        dispatch(setUsername(response.data.name));
+      })
+      .catch(error => {
+        console.error('Error fetching profile data:', error);
+      });
+  }, [dispatch]);
+
   return (
     <div style={{ backgroundColor: '#ECF0F5' }}>
       <Header/>
@@ -81,7 +96,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/create">
+              <Link to="/studentFeedback">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Feedback</h6>
@@ -91,7 +106,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/createInquiry">
+              <Link to="/inquiry">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Inquiries</h6>

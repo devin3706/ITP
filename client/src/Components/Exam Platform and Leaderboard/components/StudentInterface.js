@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'; // Import useDispatch
 import { getServerData } from '../helper/helper.js';
 import { setExamId } from '../actions/id_actions.js'; // Import setExamId action creator
+import { setExamName } from '../actions/exam_actions.js';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.js';
 import Header from '../components/Header.js';
@@ -23,8 +24,9 @@ const QuestionPage = () => {
     fetchQuestions();
   }, []);
 
-  const handleAttemptClick = (examId) => {
+  const handleAttemptClick = (examId, examName) => {
     dispatch(setExamId(examId)); // Dispatch action to update exam ID in Redux store
+    dispatch(setExamName(examName));
   };
 
   return (
@@ -41,7 +43,7 @@ const QuestionPage = () => {
                 <h5 className="card-title">{question.examName}</h5>
                 <div className="d-flex justify-content-between align-items-center">
                   {/* Pass examId to handleAttemptClick */}
-                  <Link className="btn btn-primary" to={'/exam'} onClick={() => handleAttemptClick(question._id)}>Attempt</Link> {/* Replaced action-button with Bootstrap button classes */}
+                  <Link className="btn btn-primary" to={'/exam'} onClick={() => handleAttemptClick(question._id, question.examName)}>Attempt</Link> {/* Replaced action-button with Bootstrap button classes */}
                   <Link className="btn btn-secondary" to={'/leaderboard'}>Leaderboard</Link> {/* Replaced action-button with Bootstrap button classes */}
                 </div>
               </div>
