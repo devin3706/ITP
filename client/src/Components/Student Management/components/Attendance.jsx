@@ -1,5 +1,3 @@
-// frontend: Attendance.jsx
-
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import jsPDF from 'jspdf';
@@ -48,34 +46,40 @@ function Attendance() {
             const response = await axios.get(`http://localhost:8081/attendance/getImage/${imageId}`, {
                 responseType: 'blob' // Ensure response type is blob to handle binary data
             });
-            const imageData = await response.data; // Image data as Blob
-            const imageURL = URL.createObjectURL(imageData); // Create object URL for the blob
-            const pdf = new jsPDF();
-            pdf.addImage(imageURL, 'JPEG', 10, 10, 180, 120);
-            pdf.save('attendance_record.pdf');
+
+            const imageData = response.data; // Image data as Blob
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const pdf = new jsPDF();
+                pdf.addImage(reader.result, 'JPEG', 10, 10, 180, 160); // Adjust size as needed
+                pdf.save('attendance_record.pdf');
+            };
+
+            reader.readAsDataURL(imageData); // Read the blob as a data URL
         } catch (error) {
             console.error('Error generating PDF:', error);
         }
     };
-  
+
     return (
-        <div style={{backgroundColor: '#ECF0F5'}}>
-            <Header/>
+        <div style={{ backgroundColor: '#ECF0F5' }}>
+            <Header />
             <div className="mt-5 mb-5">
-                <input type="file" onChange={e => setFile(e.target.files[0])}/>
+                <input type="file" onChange={e => setFile(e.target.files[0])} />
                 <button onClick={handleUpload} className='btn btn-success'> Upload </button>
-                <br/>
+                <br />
                 {images.map((image, index) => (
                     <div key={index}>
-                        <img src={`http://localhost:8081/images/${image.image}`} alt="" />
+                        <img src={`http://localhost:8081/images/${image.image}`} alt="" style={{ width: '200px', height: 'auto' }} />
                         <button className='btn btn-primary' onClick={() => generatePDF(image._id)}> Generate PDF </button>
                         <button className='btn btn-danger' onClick={() => handleDelete(image._id)}>Delete</button>
                     </div>
                 ))}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
-} 
+}
 
 export default Attendance;
