@@ -8,6 +8,10 @@ import {
     FaRegChartBar,
     FaCommentAlt,
     FaShoppingBag,
+    FaBook,
+    FaBookOpen,
+    FaFileAlt
+
      
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
@@ -32,12 +36,28 @@ const SideNavbar = ({ children }) => {
             icon: <FaTh />
         },
         {
+            path: "/teacherInterface", // Define the new path
+            name: "Exam",  // Name of the new route
+            icon: <FaBook /> // Icon for the new route
+        },
+        {
+            path: "/pdfApp", // Define the new path for Study Material
+            name: "Study Material",  // Name of the new route
+            icon: <FaBookOpen /> // Icon for the new route
+        },
+        {
+            path: "/PastPaperUpload", // Define the new path for Past Paper
+            name: "Past Paper",  // Name of the new route
+            icon: <FaFileAlt /> // Icon for the new route
+        },
+        {
             path: '/tLogin',
             name: 'Logout',
             icon: <FaSignOutAlt />,
             onClick: logout // Assign the logout function to the onClick event
             
-        }
+        },
+        
         /* {
             path: "/tCreate",
             name: "Add ",
