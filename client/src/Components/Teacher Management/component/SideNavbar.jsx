@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import {
     FaTh,
     FaBars,
+    FaUsers,
     FaSignOutAlt ,
     FaRegChartBar,
     FaCommentAlt,
@@ -76,6 +77,11 @@ const SideNavbar = ({ children }) => {
                 path: "/tProfile", // Profile path
                 name: "Profile",
                 icon: <FaUserCircle />
+            },
+            {
+                path: "/tInterfaceDetails", // Profile path
+                name: "All Teacher",
+                icon: <FaUsers />
             },
             {
                 path: '/tLogin',

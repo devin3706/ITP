@@ -5,7 +5,7 @@ import Header from '../../Exam Platform and Leaderboard/components/Header';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import { 
     FaFileAlt,
-    FaTh,
+    FaUsers,
     FaBars,
     FaSignOutAlt ,
     FaRegChartBar,
@@ -61,7 +61,7 @@ const THome = () => {
         <div className="container-fluid">
             <div className="row mr-5">
                 <main className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                    <Container fluid className={`mt-5 mb-5`}>
+                    <Container fluid className={`mt-5 mb-5 `}>
                         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
                             <Col className="mt-4 mb-4">
                                 <Card className="h-100 shadow border border-dark cardHov">
@@ -178,6 +178,19 @@ const THome = () => {
                                         </div>
                                         <div>
                                             <FaUserCircle size={24} />
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col className="mt-4 mb-4">
+                                <Card className="h-100 shadow border border-dark cardHov">
+                                    <Card.Body className="d-flex flex-column justify-content-between align-items-center">
+                                        <div>
+                                            <Card.Title>All Teacher View</Card.Title>
+                                            <Link to="/tInterfaceDetails" className="stretched-link"></Link>
+                                        </div>
+                                        <div>
+                                            <FaUsers size={24} />
                                         </div>
                                     </Card.Body>
                                 </Card>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Button } from 'reactstrap'; // Import Button from reactstrap
+import { FaEdit, FaTrash, FaUsers  } from 'react-icons/fa';
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import SideNavbar from "../component/SideNavbar";
@@ -60,6 +61,10 @@ const TProfile = () => {
         }
     };
 
+    const handleAllTeacherView = () => {
+        navigate('/tInterfaceDetails'); // Navigate to the all teacher view page
+    };
+
 
     return (
         <div style={{ backgroundColor: '#ECF0F5' }} className='vh-100'>
@@ -74,21 +79,39 @@ const TProfile = () => {
                     ) : teacherData ? (
                         <div className="card rounded-4 border border-dark shadow alert alert-info">
                             <div className="card-body">
-                                <h1 className="text-dark card-title text-center">{`${teacherData.firstName} ${teacherData.lastName}`}</h1><hr/>
-                                <h5 className="text-dark"><b>NIC Number: </b>{teacherData.nicNumber}</h5>
-                                <h5 className="text-dark"><b>Subject: </b>{teacherData.subject}</h5>
-                                <h5 className="text-dark"><b>District: </b>{teacherData.district}</h5>
-                                <h5 className="text-dark"><b>Education Qualification: </b>{teacherData.eduQualification}</h5>
-                                <h5 className="text-dark"><b>Phone Number: </b>{teacherData.phoneNumber}</h5>
-                                <h5 className="text-dark"><b>Email: </b>{teacherData.email}</h5><hr/>
+                                <h1 className="text-dark card-title text-center">{`${teacherData.firstName} ${teacherData.lastName}`}</h1><hr/><hr/>
+                                <h5 className="text-dark ml-5"><b>NIC Number: </b>{teacherData.nicNumber}</h5>
+                                <h5 className="text-dark ml-5 mt-3"><b>Subject: </b>{teacherData.subject}</h5>
+                                <h5 className="text-dark ml-5 mt-3"><b>District: </b>{teacherData.district}</h5>
+                                <h5 className="text-dark ml-5 mt-3"><b>Education Qualification: </b>{teacherData.eduQualification}</h5>
+                                <h5 className="text-dark ml-5 mt-3"><b>Phone Number: </b>{teacherData.phoneNumber}</h5>
+                                <h5 className="text-dark ml-5 mt-3"><b>Email: </b>{teacherData.email}</h5><hr/><hr/>
+
+                                <center>
+                                <div>
+                                    <Button className='btn-lg mr-5 me-2 rounded-5' color="info" onClick={() => handleEdit(teacherData._id)}>
+                                        <FaEdit className='me-2' /> Edit Details
+                                    </Button>
+                                    <Button className='btn-lg ml-5 me-2 rounded-5' color="danger" onClick={() => handleDelete(teacherData._id)}>
+                                        <FaTrash className='me-2' /> Delete
+                                    </Button>
+                                </div>
+                                </center>
                                 
-                                <Button className='btn-lg me-2' color="info" onClick={() => handleEdit(teacherData._id)}>Edit Details</Button>
-                                <Button className='btn-lg me-2' color="danger" onClick={() => handleDelete(teacherData._id)}>Delete</Button>
+                                
                             </div>
+                            
                         </div>
+                        
                     ) : (
                         <p className="text-danger">Teacher not found</p>
                     )}
+                    <center>
+                    <Button className='btn-lg me-2 rounded-5 mt-4 mb-5' color="success" onClick={() => handleAllTeacherView()}>
+                        <FaUsers className='me-2' /> All Teacher View
+                    </Button>
+                    </center>
+                    
                 </div>
             </div>
             <Footer/>
