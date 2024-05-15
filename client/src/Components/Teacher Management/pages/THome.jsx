@@ -13,7 +13,7 @@ const THome = () => {
     const navigate = useNavigate(); 
 
     useEffect(() => {
-        // Check if the user has a valid token
+        // Check if the user has a valid token ....
         const token = localStorage.getItem('token');
 
         if (token) {
@@ -66,6 +66,8 @@ const THome = () => {
                                     </Card.Body>
                                 </Card>
                             </Col>
+                            
+                            
                             <Col className="mt-4 mb-4">
                                 <Card className="h-100 shadow border border-dark cardHov">
                                     <Card.Body className="d-flex flex-column justify-content-center align-items-center">
