@@ -13,19 +13,15 @@ export default function ResultTable({ searchQuery, selectedExam, onSearchResults
 
     useEffect(() => {
         // Filter data based on selected exam
-        const filteredData = selectedExam ? data.filter((result) => result.examName === selectedExam) : data;
-        setFilteredData(filteredData); // Update filtered data based on selected exam
-    }, [selectedExam, data]);
-
-    useEffect(() => {
-        // Filter data based on search query
+        const filteredByExam = selectedExam ? data.filter((result) => result.examName === selectedExam) : data;
+        // Filter data based on search query within the filtered results
         const filteredData = searchQuery
-            ? data.filter((result) =>
+            ? filteredByExam.filter((result) =>
                   result.username.toLowerCase().includes(searchQuery.toLowerCase())
               )
-            : data;
-        setFilteredData(filteredData); // Update filtered data based on search query
-    }, [searchQuery, data]);
+            : filteredByExam;
+        setFilteredData(filteredData); // Update filtered data based on selected exam and search query
+    }, [searchQuery, selectedExam, data]);
 
     useEffect(() => {
         // Update parent component with filtered data
@@ -48,7 +44,7 @@ export default function ResultTable({ searchQuery, selectedExam, onSearchResults
                     <tbody className=''>
                         {filteredData.length === 0 ? (
                             <tr>
-                                <td colSpan='4' className='text-center'>
+                                <td colSpan='5' className='text-center'>
                                     No results found
                                 </td>
                             </tr>

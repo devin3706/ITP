@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Chart from "chart.js/auto";
 import { Link } from "react-router-dom";
 import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent } from "react-icons/pi";
+import { AdminContext } from "../../../AdminContext.js";
+import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
+import { useDispatch } from "react-redux";
 import '../../../styles.css';
 import { jsPDF } from 'jspdf';
 
@@ -36,6 +39,11 @@ const AdminHome = () => {
     const student_LonginsCountForThisMonth = studentLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const teacher_LonginsCountForThisMonth = teacherLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const admin_LonginsCountForThisMonth = adminLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
+
+    const {admin} = useContext(AdminContext);
+
+    const dispatch = useDispatch();
+    dispatch(setUsername(admin));
     
     // Fetch admins
     useEffect(() => {
