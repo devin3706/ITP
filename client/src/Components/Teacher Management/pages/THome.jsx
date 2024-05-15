@@ -66,14 +66,7 @@ const THome = () => {
                                     </Card.Body>
                                 </Card>
                             </Col>
-                            <Col className="mt-4 mb-4">
-                                <Card className="h-100 shadow border border-dark cardHov">
-                                    <Card.Body className="d-flex flex-column justify-content-center align-items-center">
-                                        <Card.Title>Attendance</Card.Title>
-                                        <Link to="#attendance" className="stretched-link"></Link>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
+                            
                             
                             <Col className="mt-4 mb-4">
                                 <Card className="h-100 shadow border border-dark cardHov">
