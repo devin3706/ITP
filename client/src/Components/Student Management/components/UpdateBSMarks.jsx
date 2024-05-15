@@ -38,7 +38,7 @@ function UpdateBSMarks() {
         <div className="d-flex vh-100 justify-content-center align-items-center">
         <div className = "bg-white p-3 rounded-3 w-50 shadow">
             <h2>Update User</h2>
-            <form onSubmit = {UpdateBSMarks}>
+            <form onSubmit = {Update}>
                 <div className = "mb-2">
                     <label htmlFor="email">
                         <strong> Marks </strong>
