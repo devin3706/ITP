@@ -39,7 +39,7 @@ function UpdateUser() {
         axios.put(`http://localhost:8081/users/update/${id}`, { Name, Email, Teacher, Feedback, Rating })
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate('/studentFeedback');
             })
             .catch(err => console.log(err));
     }
