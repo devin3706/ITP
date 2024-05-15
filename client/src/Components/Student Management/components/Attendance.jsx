@@ -7,6 +7,9 @@ import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 function Attendance() {
     const [file, setFile] = useState(null);
     const [images, setImages] = useState([]);
+    const [date, setDate] = useState('');
+    const [subject, setSubject] = useState('');
+    const [batch, setBatch] = useState('');
 
     useEffect(() => {
         fetchImages();
@@ -25,6 +28,9 @@ function Attendance() {
         try {
             const formData = new FormData();
             formData.append('file', file);
+            formData.append('date', date);
+            formData.append('subject', subject);
+            formData.append('batch', batch);
             await axios.post('http://localhost:8081/attendance/upload', formData);
             fetchImages(); // Refresh images after successful upload
         } catch (error) {
@@ -63,19 +69,43 @@ function Attendance() {
     };
 
     return (
-        <div style={{ backgroundColor: '#ECF0F5' }}>
+        <div style={{ backgroundColor: '#ECF0F5', textAlign: 'center', padding: '20px' }}>
             <Header />
-            <div className="mt-5 mb-5">
-                <input type="file" onChange={e => setFile(e.target.files[0])} />
-                <button onClick={handleUpload} className='btn btn-success'> Upload </button>
-                <br />
-                {images.map((image, index) => (
-                    <div key={index}>
-                        <img src={`http://localhost:8081/images/${image.image}`} alt="" style={{ width: '200px', height: 'auto' }} />
-                        <button className='btn btn-primary' onClick={() => generatePDF(image._id)}> Generate PDF </button>
-                        <button className='btn btn-danger' onClick={() => handleDelete(image._id)}>Delete</button>
+            <div className="mt-5 mb-5" style={{ maxWidth: '800px', margin: 'auto', backgroundColor: 'white', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', padding: '20px' }}>
+                <form onSubmit={(e) => { e.preventDefault(); handleUpload(); }}>
+                    <div className="form-group">
+                        <label htmlFor="date">Date:</label>
+                        <input type="date" id="date" className="form-control" value={date} onChange={e => setDate(e.target.value)} required />
                     </div>
-                ))}
+                    <div className="form-group">
+                        <label htmlFor="subject">Subject:</label>
+                        <input type="text" id="subject" className="form-control" value={subject} onChange={e => setSubject(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="batch">Batch:</label>
+                        <input type="text" id="batch" className="form-control" value={batch} onChange={e => setBatch(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="file">Upload Image:</label>
+                        <input type="file" id="file" className="form-control" onChange={e => setFile(e.target.files[0])} required />
+                    </div>
+                    <button type="submit" className='btn btn-success'>Upload</button>
+                </form>
+                <br />
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
+                    {images.map((image, index) => (
+                        <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '200px' }}>
+                            <img src={`http://localhost:8081/images/${image.image}`} alt="" style={{ width: '200px', height: 'auto' }} />
+                            <div>
+                                <p>Date: {new Date(image.date).toLocaleDateString()}</p>
+                                <p>Subject: {image.subject}</p>
+                                <p>Batch: {image.batch}</p>
+                            </div>
+                            <button className='btn btn-primary' onClick={() => generatePDF(image._id)}>Generate PDF</button>
+                            <button className='btn btn-danger' onClick={() => handleDelete(image._id)}>Delete</button>
+                        </div>
+                    ))}
+                </div>
             </div>
             <Footer />
         </div>

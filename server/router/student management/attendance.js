@@ -24,8 +24,14 @@ const upload = multer({
 });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
+  const { date, subject, batch } = req.body; // Destructure additional data from the request body
   try {
-    const result = await AttendanceModel.create({ image: req.file.filename });
+    const result = await AttendanceModel.create({
+      image: req.file.filename,
+      date,
+      subject,
+      batch
+    });
     res.json(result);
   } catch (error) {
     console.error(error);
