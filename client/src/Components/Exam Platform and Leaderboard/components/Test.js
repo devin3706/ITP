@@ -95,12 +95,16 @@ export default function EditableResultView() {
     return (
         <div style={{backgroundColor: '#ECF0F5'}}>
             <Header/>
-            <div className='container'>
-                <h2 className='alert alert-info mt-5 text-center text-primary border border-primary'>Result Manager</h2>
+            <div className=''>
+                <div className='row justify-content-center'> {/* Center the content */}
+                    <div className='col-md-6'> {/* Set the width of the column */}
+                        <h2 className='alert alert-info mt-5 text-center text-primary border border-primary'>Result Manager</h2>
+                    </div>
+                </div>
                 {data.length === 0 ? (
                     <p>No results found.</p>
                 ) : (
-                    <div>
+                    <div className='col-12'>
                         {data.map((result, index) => (
                             <li key={result._id} className='row align-items-center border border-dark-subtle p-1'>
                                 <strong className='w-auto'>Username:</strong>

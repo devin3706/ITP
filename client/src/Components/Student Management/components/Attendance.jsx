@@ -20,7 +20,7 @@ function Attendance() {
   };
 
     useEffect(() => {
-        axios.get('http://localhost:8081/attendance/getImage')
+        axios.get('http://localhost:8081/attendance/getAllImages')
         .then(res => setImage(res.data[0].image))
         .catch(err => console.log(err))
     }, []);

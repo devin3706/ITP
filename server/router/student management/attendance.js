@@ -53,4 +53,14 @@ router.delete("/deleteImage/:id", async (req, res) => {
   }
 });
 
+router.get("/getAllImages", async (req, res) => {
+  try {
+    const allAttendance = await AttendanceModel.find();
+    res.json(allAttendance);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch all images" });
+  }
+});
+
 export default router;

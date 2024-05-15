@@ -141,7 +141,7 @@ const App = () => {
           <Route path="/tUpdate/:id" element={<TUpdate />} />
           <Route path="/tHeader" element={<THeader />} />
           <Route path="/sideNavbar" element={<SideNavbar />} />
-          <Route path="/tProfile" element={<TProfile />} />
+          <Route path="/tProfile/:id" element={<TProfile />} />
           <Route path="/mainLogin" element= {<MainLogin/>} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
           <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />

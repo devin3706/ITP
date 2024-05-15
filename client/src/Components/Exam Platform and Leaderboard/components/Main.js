@@ -50,8 +50,7 @@ export default function Main(){
             </div>
 
             <div className='mt-3'>
-                <Link style={{marginLeft: '43%'}} to="/quiz" onClick={startQuiz}>Start Exam</Link>
-                <Link style={{marginLeft: '5%'}} to="/test" onClick={startQuiz}>Test</Link>
+                <Link style={{marginLeft: '47%'}} to="/quiz" onClick={startQuiz}>Start Exam</Link>
             </div>
         </div>
         <Footer/>
