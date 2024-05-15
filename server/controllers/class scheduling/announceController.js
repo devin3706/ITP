@@ -83,4 +83,10 @@ const updateannounce = async (req, res) => {
   res.status(200).json(announce);
 };
 
-export { getannounces, getannounce, createannounce, deleteannounce, updateannounce };
+export {
+  getannounces,
+  getannounce,
+  createannounce,
+  deleteannounce,
+  updateannounce,
+};
