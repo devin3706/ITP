@@ -6,8 +6,20 @@ import {
   deleteWorkout,
   updateWorkout,
 } from "../../controllers/payment management/workoutController.js";
+import multer from "multer";
+
+//image upload middleware
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "_" + file.originalname);
+  },
+});
 
 const router = express.Router();
+const upload = multer({ storage: storage });
 
 // Get all workouts
 router.get("/read", getWorkouts);
@@ -16,7 +28,7 @@ router.get("/read", getWorkouts);
 router.get("/get/:Workoutid", getWorkout);
 
 // POST a new workout
-router.post("/create", createWorkout);
+router.post("/create", upload.single("slip"), createWorkout);
 
 // DELETE a workout
 router.delete("/delete/:Workoutid", deleteWorkout);

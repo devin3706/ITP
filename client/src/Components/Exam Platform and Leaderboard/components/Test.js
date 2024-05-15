@@ -36,7 +36,7 @@ export default function EditableResultView() {
         const errors = [];
     
         // Validate input fields
-        if (!result.username || !result.attempts || !result.points || !result.achieved) {
+        if (!result.username || !result.examName || !result.attempts || !result.points || !result.achieved) {
             errors.push('All fields are required.');
         }
         if (result.attempts < 0 || result.attempts > 5) {
@@ -109,6 +109,13 @@ export default function EditableResultView() {
                                     className='w-10'
                                     value={result.username}
                                     readOnly // Username cannot be changed
+                                />
+                                <strong className='w-auto'>Exam Name:</strong>
+                                <input
+                                    type="text"
+                                    className='w-5'
+                                    value={result.examName}
+                                    readOnly
                                 />
                                 <strong className='w-auto ml-4'>Questions Answered:</strong>
                                 <input

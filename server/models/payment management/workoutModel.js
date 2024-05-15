@@ -28,6 +28,10 @@ const workoutSchema = new Schema(
       type: String,
       required: true,
     },
+    slip: {
+      type: String,
+      required: true,
+    },
   },
 
   { timestamps: true }

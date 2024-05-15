@@ -5,12 +5,12 @@ import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function CreateBSMarks() {
-    const [bsmarks, setBSMarks] = useState(0);
+    const [bsmarks, setBSMarks] = useState('');
     const navigate = useNavigate()
 
     const Submit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/marks/createBSMarks', {bsmarks})
+        axios.post('http://localhost:8081/marks/createBSMarks', {marks: bsmarks})
         .then(result => {
             console.log(result);
             navigate('/bsmarks');
@@ -31,8 +31,6 @@ function CreateBSMarks() {
                     </label>
                     <input
                     type = "number" placeholder = "Enter Marks"
-                    //autoComplete = "off"
-                   // name ="email"
                     className = "form-control "
                     onChange = { (e) => setBSMarks(e.target.value)}
                    />

@@ -27,11 +27,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const GenerateReport = ({ data }) => (
+const GenerateReport = ({ data, selectedExam }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
         <Text style={styles.header}>Result Report</Text>
+        <Text style={{ marginBottom: 10, textAlign: 'center' }}>Exam Name: {selectedExam}</Text>
         <View style={styles.row}>
           <Text style={styles.cell}>Username</Text>
           <Text style={styles.cell}>Questions Answered</Text>

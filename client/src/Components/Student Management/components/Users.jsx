@@ -50,7 +50,7 @@ function Users () {
             <Header />
         <div className="d-flex mt-5 mb-5 vh-200 justify-content-center align-items-center">
             <div className='w-75 bg-white rounded-3 p-3' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', overflowX: 'auto' }}>
-                <Link to="/createStudent" className='btn btn-success mr-2'> Add + </Link> <Link to="/dashboard" className='btn btn-success'> Dashboard </Link>
+                <Link to="/createStudent" className='btn btn-success mr-2'> Add + </Link> 
                 <form className="d-flex" onSubmit={handleSearchSubmit}>
                     <input
                         type="text"
