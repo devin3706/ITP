@@ -48,6 +48,8 @@ const TLogin = () => {
             //Store the token in loacalStorage
             localStorage.removeItem("token"); // Clear any previous token
             localStorage.setItem("token", response.data.token);  
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+
 
             // Redirect to the dashboard page
             navigate('/tHome'); 
