@@ -19,7 +19,10 @@ function PayOnline() {
 
   const validationSchema = Yup.object().shape({
     payerName: Yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "*Payer name is not valid")
+      .matches(/^[a-zA-Z\s]+$/, {
+        message: "Only letters and spaces are allowed",
+        excludeEmptyString: true,
+      })
       .required("*Payer Name is required"),
     cardNo: Yup.string()
       .required("*Card No is required")
@@ -50,8 +53,8 @@ function PayOnline() {
   };
 
   return (
-    <div style={{ backgroundColor: '#ECF0F5'}}>
-      <Header/>
+    <div style={{ backgroundColor: "#ECF0F5" }}>
+      <Header />
       <div className="container mt-5 mb-5">
         <div className="row justify-content-center">
           <div className="col-lg-8">
@@ -62,36 +65,103 @@ function PayOnline() {
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
               >
-                {({ isSubmitting }) => (
+                {({ isSubmitting, setFieldValue }) => (
                   <Form>
                     <div className="text-warning">
                       <div className="mb-3">
-                        <label htmlFor="payerName" className="form-label">Payer Name:</label>
-                        <Field type="text" id="payerName" name="payerName" className="form-control" />
-                        <ErrorMessage name="payerName" component="div" className="text-danger" />
+                        <label htmlFor="payerName" className="form-label">
+                          Payer Name:
+                        </label>
+                        <Field
+                          type="text"
+                          id="payerName"
+                          name="payerName"
+                          className="form-control"
+                          onChange={(e) => {
+                            const newValue = e.target.value.replace(
+                              /[^a-zA-Z\s]/g,
+                              ""
+                            );
+                            setFieldValue("payerName", newValue);
+                          }}
+                        />
+                        <ErrorMessage
+                          name="payerName"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="cardNo" className="form-label">Card No:</label>
-                        <Field type="text" id="cardNo" name="cardNo" className="form-control" />
-                        <ErrorMessage name="cardNo" component="div" className="text-danger" />
+                        <label htmlFor="cardNo" className="form-label">
+                          Card No:
+                        </label>
+                        <Field
+                          type="number"
+                          id="cardNo"
+                          name="cardNo"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="cardNo"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="nic" className="form-label">NIC:</label>
-                        <Field type="text" id="nic" name="nic" className="form-control" />
-                        <ErrorMessage name="nic" component="div" className="text-danger" />
+                        <label htmlFor="nic" className="form-label">
+                          NIC:
+                        </label>
+                        <Field
+                          type="number"
+                          id="nic"
+                          name="nic"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="nic"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="amount" className="form-label">Amount:</label>
-                        <Field type="text" id="amount" name="amount" className="form-control" />
-                        <ErrorMessage name="amount" component="div" className="text-danger" />
+                        <label htmlFor="amount" className="form-label">
+                          Amount:
+                        </label>
+                        <Field
+                          type="number"
+                          id="amount"
+                          name="amount"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="amount"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="date" className="form-label">Date:</label>
-                        <Field type="date" id="date" name="date" className="form-control col-3" />
-                        <ErrorMessage name="date" component="div" className="text-danger" />
+                        <label htmlFor="date" className="form-label">
+                          Date:
+                        </label>
+                        <Field
+                          type="date"
+                          id="date"
+                          name="date"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="date"
+                          component="div"
+                          className="text-danger"
+                        />
                       </div>
+                      <br></br>
                       <div className="">
-                        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                        <button
+                          type="submit"
+                          className="btn btn-primary"
+                          disabled={isSubmitting}
+                        >
                           {isSubmitting ? "Submitting..." : "Pay now"}
                         </button>
                       </div>
@@ -103,7 +173,7 @@ function PayOnline() {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
