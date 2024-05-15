@@ -153,7 +153,7 @@ function CreateUser() {
                 <div className="error">{formik.errors.Rating}</div>
               ) : null}
             </div>
-            <button type="submit" className="btn btn-success">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>
