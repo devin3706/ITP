@@ -136,5 +136,69 @@ const getAdminLoginsByMonth = async (req, res) => {
     }
 };
 
+// const getStudentsByDistrict = async (req, res) => {
+//     try {
+//         const teachersByDistrict = await Teacher.aggregate([
+//             {
+//                 $group: {
+//                     _id: '$district',
+//                     sCount: { $sum: 1 }
+//                 }
+//             }
+//         ]);
+//         res.status(200).json(teachersByDistrict);
+//     } catch (error) {
+//         console.error('Error fetching teachers grouped by district:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// };
 
-export { getTotalStudents, getTotalTeachers, getTotalFiles, getTotalClasses, getTotalExams, getTotalTeacherLogins, getTeacherLoginsByMonth, getAdminLoginsByMonth, getStudentLoginsByMonth };
+const getTeachersByDistrict = async (req, res) => {
+    try {
+        const teachersByDistrict = await Teacher.aggregate([
+            {
+                $group: {
+                    _id: '$district',
+                    tCount: { $sum: 1 },
+                    teachers: { $push: '$$ROOT' }
+                }
+            }
+        ]);
+        res.status(200).json(teachersByDistrict);
+    } catch (error) {
+        console.error('Error fetching teachers grouped by district:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+const getDistrictWithMostTeachers = async (req, res) => {
+    try {
+        const teachersByDistrict = await Teacher.aggregate([
+            {
+                $group: {
+                    _id: '$district',
+                    tCount: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { tCount: -1 }
+            },
+            {
+                $limit: 1
+            }
+        ]);
+        const districtWithMostTeachers = teachersByDistrict[0];
+
+        res.status(200).json(districtWithMostTeachers);
+    } catch (error) {
+        console.error('Error fetching district with most teachers:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
+
+export { 
+    getTotalStudents, getTotalTeachers, getTotalFiles, getTotalClasses, getTotalExams, getTotalTeacherLogins, 
+    getTeacherLoginsByMonth, getAdminLoginsByMonth, getStudentLoginsByMonth, getTeachersByDistrict, getDistrictWithMostTeachers
+ };

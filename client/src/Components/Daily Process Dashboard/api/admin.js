@@ -256,3 +256,31 @@ export const getAdminLoginsByMonth = async () => {
         throw new Error(error.message);
     }
 };
+
+export const getTeachersByDistrict = async () => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/teachers-by-district`);        
+        if (!response.ok) {
+            throw new Error('Failed to fetch teachers grouped by district');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching teachers grouped by district:', error);
+        throw error;
+    }
+};
+
+export const getDistrictWithMostTeachers = async () => {
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/district-with-most-teachers`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch district with most teachers');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching district with most teachers:', error);
+        throw error;
+    }
+};
