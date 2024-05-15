@@ -36,6 +36,9 @@ export default function ResultView() {
         setSelectedExam(event.target.value); // Update selected exam
     };
 
+    // Determine the value of examName based on the selectedExam
+    const ExamName = selectedExam ? selectedExam : 'Multiple Exams';
+
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
             <div>
@@ -62,7 +65,7 @@ export default function ResultView() {
                 </div>
                 <ResultTable searchQuery={searchQuery} selectedExam={selectedExam} onSearchResults={handleSearchResults} /> {/* Pass handleSearchResults as prop */}
                 <div className="text-center mt-3 mb-5">
-                    <PDFDownloadLink document={<GenerateReport data={searchQueryResults} selectedExam={selectedExam} />} fileName="report.pdf">
+                    <PDFDownloadLink document={<GenerateReport data={searchQueryResults} selectedExam={ExamName} />} fileName="report.pdf">
                         {({ blob, url, loading, error }) =>
                             loading ? 'Loading document...' : 'Download PDF'
                         }

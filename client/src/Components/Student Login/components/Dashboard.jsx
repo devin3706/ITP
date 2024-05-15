@@ -116,7 +116,7 @@ function Dashboard() {
             </div>
 
             <div className="col">
-              <Link to="/readAnnouncement">
+              <Link to="/display">
                 <div className="card cardHov h-100">
                   <div className="card-body">
                     <h6 className="card-title text-center">Announcements</h6>

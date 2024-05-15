@@ -35,7 +35,7 @@ function CreateUser() {
         .post("http://localhost:8081/users/create", values)
         .then((result) => {
           console.log(result);
-          navigate("/users");
+          navigate("/studentFeedback");
         })
         .catch((err) => console.log(err));
     },

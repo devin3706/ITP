@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Chart from "chart.js/auto";
-import { Link } from "react-router-dom";
-import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent } from "react-icons/pi";
+import { Link, useNavigate } from "react-router-dom";
+import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent, PiUserCircle } from "react-icons/pi";
+import { AdminContext } from "../../../AdminContext.js";
+import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
+import { useDispatch } from "react-redux";
 import '../../../styles.css';
 import { jsPDF } from 'jspdf';
 
 // API functions
 import { 
-    getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, 
+    getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, logout,
     getTotalExams, getTotalFiles, getTotalStudents, getTotalTeachers, view, getDistrictWithMostTeachers
 } from "../api/admin";
 
@@ -36,6 +39,11 @@ const AdminHome = () => {
     const student_LonginsCountForThisMonth = studentLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const teacher_LonginsCountForThisMonth = teacherLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const admin_LonginsCountForThisMonth = adminLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
+
+    const {admin} = useContext(AdminContext);
+
+    const dispatch = useDispatch();
+    dispatch(setUsername(admin));
     
     // Fetch admins
     useEffect(() => {
@@ -218,9 +226,33 @@ const AdminHome = () => {
         doc.save('LoginStatistics.pdf');
     };
 
+    //logout
+    const navigate = useNavigate();
+
+    const handleAdminLogout = async(e) => {
+        e.preventDefault();
+
+        logout()
+            .then((res) => {
+                alert(res.message);
+
+                document.cookie = 'adminUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                
+                //redirect to login page
+                navigate("/adminLogin");
+
+        }).catch(err => console.error(err));
+    }
+
     return(
         <div style={{backgroundColor: '#ECF0F5'}}>
             <Header />
+            <div className="headerBtns">
+                <button className="btn btn-grey fs-6" onClick={handleAdminLogout}>Log out</button>
+                <Link to="/adminProfile">
+                    <PiUserCircle className="text-white ml-3" style={{fontSize: '70px'}}/>
+                </Link>
+            </div>
             <div className="container mt-5">
 
                 <h2 className="mb-3 mt-3">Total Statistics</h2>

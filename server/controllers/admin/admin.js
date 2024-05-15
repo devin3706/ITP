@@ -154,12 +154,26 @@ export const updateAdmin = async (req, res) => {
     }
 };
 
+export const getAdminProfile = async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        // Find admin by username in the database
+        const admin = await Admin.findOne({ username });
+
+        // Check if admin exists
+        if (!admin) {
+            return res.status(404).json({ message: "Admin not found" });
+        }
+
+        // If admin exists, return admin details
+        return res.status(200).json(admin);
+    } catch (error) {
+        console.error('Error fetching admin details:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 export default {
-    register,
-    login,
-    logout,
-    getLoggedInAdmin,
-    view,
-    deleteAdmin,
-    updateAdmin,
+    register, login, logout, getLoggedInAdmin, view, deleteAdmin, updateAdmin, getAdminProfile
 };

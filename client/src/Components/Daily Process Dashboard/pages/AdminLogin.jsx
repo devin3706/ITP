@@ -9,7 +9,7 @@ import { Button } from "@mui/material";
 //api functions
 import { login } from "../api/admin";
 
-import AdminHeader from '../components/AdminHeader'
+//import AdminHeader from '../components/AdminHeader'
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 
@@ -31,6 +31,8 @@ const AdminLogin = () => {
             else{
                 alert(res.message);
                 setAdmin(res.username);
+
+                document.cookie = `adminUsername=${res.username};max-age=36000`;
                 
                 navigate("/adminHome");
             }
@@ -40,6 +42,8 @@ const AdminLogin = () => {
 
         }
     }
+
+    let isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
@@ -51,7 +55,7 @@ const AdminLogin = () => {
 
                 <div className="alert alert-primary col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <div className="form-group">
-                        <div className="mb-3">
+                        <div>
                             <label for="email" className="form-label">Email</label>
                             <input 
                                 type="email" 
@@ -62,6 +66,11 @@ const AdminLogin = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
+                        {email &&(
+                            <div className="ml-1 mb-3">
+                                <small className={isEmail ? 'text-success' : 'text-danger'}>Email should be a valid email</small>
+                            </div>
+                        )}
                     </div>
 
                     <div className="form-group">
@@ -95,7 +104,7 @@ const AdminLogin = () => {
                         <Button 
                             variant="contained" 
                             disabled={!email || !username || !password}
-                            onClick={handleAdminLogin}                    
+                            onClick={handleAdminLogin}
                         >
                             Login
                         </Button>

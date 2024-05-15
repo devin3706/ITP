@@ -149,6 +149,26 @@ export const update = async (adminID, updatedAdminData) => {
     }
 };
 
+export const getAdminProfile = async (username) => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/adminProfile/${username}`, {
+        method: "GET",
+        credentials: "include",
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to fetch admin details");
+      }
+  
+      return await res.json();
+    } catch (err) {
+      throw new Error(`Cannot fetch admin details: ${err}`);
+    }
+  };
+
+
+
+//summaries
 export const getTotalStudents = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/totalStudents`);
