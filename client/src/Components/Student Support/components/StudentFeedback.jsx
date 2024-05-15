@@ -81,7 +81,7 @@ function StudentFeedback() {
             placeholder="Search by Teacher Name"
             className="form-control h-100 me-2 shadow"
           />
-          <button className="btn btn-primary" onClick={() => setSearchInput("")}>
+          <button className="btn btn-secondary" onClick={() => setSearchInput("")}>
             search
           </button>
         </div>

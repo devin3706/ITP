@@ -24,7 +24,7 @@ function CreateInquiry (){
         axios.post("http://localhost:8081/inquiry/create", { Email, Teacher, Class, Question})
         .then(result => {
             console.log(result);
-            navigate('/inquiries');
+            navigate('/inquiry');
         })
         .catch(err => {
             console.log(err);

@@ -60,7 +60,7 @@ function TeacherFeedback() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="form-control col-10"
             />
-           <button type="submit" className="col-1 btn btn-md btn-primary ml-3" style={{ width: '600px' }}>Search</button>
+           <button type="submit" className="col-1 btn btn-md btn btn-secondary ml-3" style={{ width: '600px' }}>Search</button>
 
           </form>
           
