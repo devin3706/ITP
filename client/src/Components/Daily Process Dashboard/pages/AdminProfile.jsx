@@ -67,11 +67,11 @@ const AdminProfile = () => {
               <h2 className="text-center mb-4 text-dark">Admin Profile</h2>
               {adminDetails && (
                 <div>
-                  <p><strong>First Name:</strong> {adminDetails.fName}</p>
-                  <p><strong>Last Name:</strong> {adminDetails.lName}</p>
-                  <p><strong>Username:</strong> {adminDetails.username}</p>
-                  <p><strong>Email:</strong> {adminDetails.email}</p>
-                  <p><strong>Number:</strong> {adminDetails.contact}</p>
+                  <p><strong className="fw-bold">First Name:</strong> {adminDetails.fName}</p>
+                  <p><strong className="fw-bold">Last Name:</strong> {adminDetails.lName}</p>
+                  <p><strong className="fw-bold">Username:</strong> {adminDetails.username}</p>
+                  <p><strong className="fw-bold">Email:</strong> {adminDetails.email}</p>
+                  <p><strong className="fw-bold">Number:</strong> 0{adminDetails.contact}</p>
                 </div>
               )}
               <div className="d-flex justify-content-center col">
