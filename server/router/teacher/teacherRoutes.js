@@ -339,6 +339,27 @@ router.post("/reset-password", async (req, res) => {
   }
 });
 
+// Get teacher details by email
+router.get("/find-by-email/:email", async (req, res) => {
+  const { email } = req.params;
+
+  try {
+    // Find the teacher by email in the database
+    const teacher = await Teacher.findOne({ email });
+
+    if (!teacher) {
+      // If teacher is not found, return an error
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+
+    // If teacher is found, return the teacher details
+    res.status(200).json({ teacher });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // Add a route to get the count of teachers by district
 router.get("/district-count", async (req, res) => {
   try {

@@ -4,6 +4,7 @@ import axios from "axios";
 import { PDFDownloadLink, Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import SideNavbar from "../../Teacher Management/component/SideNavbar";
 
 const styles = StyleSheet.create({
   page: {
@@ -77,8 +78,8 @@ function UpdateInquiry() {
 
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
-      <Header/>
-      
+      <Header />
+      <SideNavbar />
       <div className="d-flex mt-10 mb-10 row justify-content-center align-items-center">
         <div className="col-8 bg-white rounded p-3">
           <div className="mb-3">

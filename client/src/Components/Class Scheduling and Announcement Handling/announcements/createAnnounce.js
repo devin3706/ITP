@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import SideNavbar from "../../Teacher Management/component/SideNavbar";
 
 function Announce() {
   const [teacherNameID, setTeacherNameID] = useState("");
@@ -49,6 +50,8 @@ function Announce() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      <SideNavbar />
+
       <div
         className="bg-white mt-5 mb-5 rounded-3 shadow p-3"
         style={{

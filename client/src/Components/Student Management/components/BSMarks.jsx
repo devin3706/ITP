@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
+import SideNavbar from "../../Teacher Management/component/SideNavbar";
 
 
 function BSMarks() {
@@ -26,6 +27,8 @@ function BSMarks() {
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
             <Header />
+            <SideNavbar />
+
             <div className="d-flex mt-5 mb-5 vh-200 justify-content-center align-items-center"
                 style={{
                     display: 'flex',

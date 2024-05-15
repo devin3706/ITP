@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import SideNavbar from "../../Teacher Management/component/SideNavbar";
 
 function TeacherFeedback() {
   const [users, setUsers] = useState([]);
@@ -50,7 +51,8 @@ function TeacherFeedback() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
-      <div className="d-flex mt-10 mb-10 justify-content-center align-items-center">
+      <SideNavbar />
+      <div className="d-flex mt-10 mb-10 justify-content-end align-items-center" style={{marginRight: '15%'}}>
         <div className="col-10 bg-white shadow rounded p-3">
           <form onSubmit={handleSearchSubmit} className="row justify-content-center align-items-center mb-2">
             <input
@@ -60,7 +62,7 @@ function TeacherFeedback() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="form-control col-10"
             />
-           <button type="submit" className="col-1 btn btn-md btn-primary ml-3" style={{ width: '600px' }}>Search</button>
+           <button type="submit" className="col-1 btn btn-primary p-2 ml-3" style={{ width: '600px' }}>Search</button>
 
           </form>
           
