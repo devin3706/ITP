@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {} from "react-router-dom";
 import axios from "axios";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
@@ -134,7 +135,7 @@ function Home() {
           </div>
           <div className="mb-3 d-flex justify-content-between">
             <button type="button" className="btn btn-info">Back</button>
-            <button type="submit" className="btn btn-primary me-3">Create</button>
+            <Link to='/readclass' type="submit" className="btn btn-primary me-3">Create</Link>
           </div>
         </form>
         <div id="message" className=""></div>
