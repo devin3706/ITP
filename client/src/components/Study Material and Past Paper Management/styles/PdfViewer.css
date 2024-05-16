@@ -13,6 +13,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 20px;
+    
   }
   
   .pdf-item {
@@ -139,4 +140,12 @@
 
 .pdf-modal-close:hover {
     color: #333;
+}
+
+.btn.btn-danger{
+  background-color: #da71d9;
+}
+
+.pdf-viewer-heading{
+  font-size:xx-large;
 }

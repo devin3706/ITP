@@ -4,6 +4,7 @@ import axios from "axios";
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Header from "../Exam Platform and Leaderboard/components/Header";
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
+import SideNavbar from '../Teacher Management/component/SideNavbar.jsx';
 import jsPDF from 'jspdf';
 import { pdfjs } from "react-pdf";
 
@@ -152,6 +153,7 @@ function PastPaperUpload() {
     <div style={{backgroundColor: '#ECF0F5'}}>
         <div>
             <Header />
+            <SideNavbar />
         </div>
     <div className="App">
     
@@ -214,7 +216,7 @@ function PastPaperUpload() {
 
       <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
         <br />
-      <button className="btn btn-info" onClick={generateReport}>Generate Report</button>
+      <button className="btn btn-secondary" onClick={generateReport}>Generate Report</button>
        <h4>Uploaded Past Papers:</h4>
         <table className="table">
           <thead>

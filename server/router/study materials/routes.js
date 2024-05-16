@@ -14,7 +14,7 @@ import {
   uploadPastPaperFile,
   updatePastPaperById,
   pastPaperLikeCount,
-  pastPaperDislikeCount
+  pastPaperDislikeCount,
 } from '../../controllers/study materials/controller.js';
 
 const router = express.Router();

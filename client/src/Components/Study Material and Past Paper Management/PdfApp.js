@@ -4,6 +4,7 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Header from "../Exam Platform and Leaderboard/components/Header";
 import Footer from "../Exam Platform and Leaderboard/components/Footer";
+import SideNavbar from '../Teacher Management/component/SideNavbar.jsx';
 import './styles/PastPaperUpload.css';
 import jsPDF from 'jspdf';
 
@@ -179,6 +180,7 @@ const saveEdit = async (e) => {
     <div style={{backgroundColor: '#ECF0F5'}}>
         <div>
             <Header />
+            <SideNavbar />
         </div>
     <div className="App">
     <form className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto" onSubmit={submitPdf}>
@@ -238,7 +240,7 @@ const saveEdit = async (e) => {
 
     <div className="fullDiv m-5 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
       <br />
-      <button className="btn btn-info" onClick={generateReport}>Generate Report</button>
+      <button className="btn btn-secondary" onClick={generateReport}>Generate Report</button>
       <h4>Uploaded Study Materials:</h4>
       <table className="table">
         <thead>
