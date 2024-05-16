@@ -54,9 +54,8 @@ function BSMarks() {
                                         <td> {bsmark.email}  </td>
                                         <td>{bsmark.marks}  </td>
                                         <td>
-                                            <Link to="/createbsmarks" className='btn btn-success'> Add + </Link>
-                                            <Link to={`/updatebsmarks/${bsmark._id}`} className='btn btn-success'> Update</Link>
-                                            <button className='btn btn-danger' onClick={() => handleDelete(bsmark._id)}>Delete</button>
+                                            <Link to="/createbsmarks" className='btn btn-primary' style={{ display: 'inline-block', marginRight: '10px' }}> Upload </Link> 
+                                            <button className='btn btn-danger' style={{ display: 'inline-block' }} onClick={() => handleDelete(bsmark._id)}>Delete</button>
                                         </td>
                                     </tr>
                                 )
