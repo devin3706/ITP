@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getServerData, putServerData, deleteServerData } from '../helper/helper';
 import '../../../styles.css';
 import Footer from './Footer';
@@ -163,6 +164,7 @@ export default function EditableResultView() {
                         </ul>
                     </div>
                 )}
+                <Link className='btn btn-sm btn-primary' to={'/teacherInterface'}>Back to Start</Link>
             </div>
             <Footer/>
         </div>

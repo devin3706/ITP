@@ -53,7 +53,7 @@ const QuestionPage = () => {
                   <h5 className="card-title">{question.examName}</h5>
                   <div className="d-flex justify-content-between align-items-center">
                     <Link className="btn btn-primary" to={'/editQuestion'} onClick={() => handleAttemptClick(question._id)}>View</Link>
-                    <Link className="btn btn-secondary" to={'/test'}>Results</Link>
+                    <Link className="btn btn-secondary" to={'/resultView'}>Results</Link>
                   </div>
                 </div>
               </div>

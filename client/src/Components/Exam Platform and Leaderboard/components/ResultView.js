@@ -72,6 +72,7 @@ export default function ResultView() {
                     </PDFDownloadLink>
                 </div>
                 <Link className='btn btn-sm btn-primary' to={'/teacherInterface'}>Back to Start</Link>
+                <Link className='btn btn-sm btn-primary' to={'/test'}>Edit Results</Link>
             </div>
             <div>
                 <Footer />
