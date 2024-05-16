@@ -50,7 +50,7 @@ function Users () {
             <Header />
         <div className="d-flex mt-5 mb-5 vh-200 justify-content-center align-items-center">
             <div className='w-75 bg-white rounded-3 p-3' style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', overflowX: 'auto' }}>
-                <Link to="/createStudent" className='btn btn-success mr-2'> Add + </Link> 
+                <Link to="/createStudent" className='btn btn-primary mr-2'> Add + </Link> 
                 <form className="d-flex" onSubmit={handleSearchSubmit}>
                     <input
                         type="text"
@@ -61,7 +61,7 @@ function Users () {
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
                     />
-                    <button type="submit" className="btn btn-primary mx-2">Search</button>
+                    <button type="submit" className="btn btn-secondary mx-2">Search</button>
                 </form>
                 <table className='table table-hover mt-3'>
                     <thead>
@@ -84,7 +84,7 @@ function Users () {
                                     <td>{user.number}  </td>
                                     <td>{user.address}  </td>
                                     <td>
-                                        <Link to={`/updateStudent/${user._id}`} className='btn btn-success mr-2'> Update</Link>
+                                        <Link to={`/updateStudent/${user._id}`} className='btn btn-primary mr-2'> Update</Link> 
                                         <button className='btn btn-danger' onClick={() => handleDelete(user._id)}>Delete</button>
                                     </td>
                                 </tr>
