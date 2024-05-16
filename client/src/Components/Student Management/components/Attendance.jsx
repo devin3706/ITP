@@ -74,6 +74,8 @@ function Attendance() {
             <Header />
             <SideNavBar />
             <div className="mt-5 mb-5" style={{ maxWidth: '800px', margin: 'auto', backgroundColor: 'white', borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', padding: '20px' }}>
+            <h2><center> Upload attendance</center></h2>
+            <br></br>
                 <form onSubmit={(e) => { e.preventDefault(); handleUpload(); }}>
                     <div className="form-group">
                         <label htmlFor="date">Date:</label>
@@ -91,9 +93,9 @@ function Attendance() {
                         <label htmlFor="file">Upload Image:</label>
                         <input type="file" id="file" className="form-control" onChange={e => setFile(e.target.files[0])} required />
                     </div>
-                    <button type="submit" className='btn btn-success'>Upload</button>
+                    <button type="submit" className='btn btn-secondary'>Upload</button>
                 </form>
-                <br />
+                <br /> <br></br>
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px' }}>
                     {images.map((image, index) => (
                         <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '200px' }}>

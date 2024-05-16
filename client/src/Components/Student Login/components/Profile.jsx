@@ -55,8 +55,9 @@ function Profile() {
                     <p><strong>Address:</strong> {profileData.address}</p>
 
                     <div className="d-flex justify-content-between mt-4">
-                        <Link to={`/updateStudent/${profileData._id}`} className='btn btn-success'>Update</Link>
+                        <Link to={`/updateStudent/${profileData._id}`} className='btn btn-primary'>Update</Link>
                         <button onClick={handleDeleteProfile} className="btn btn-danger">Delete Profile</button>
+                        <Link to="/login" className='btn btn-danger'> Log out </Link>
                     </div>
                   </div>
                 )}
