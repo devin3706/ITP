@@ -1,5 +1,3 @@
-// ReadClass.js
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -8,6 +6,7 @@ import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function ReadClass() {
   const [workouts, setWorkouts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,29 +24,51 @@ function ReadClass() {
     readWorkouts();
   }, []);
 
-  function handleDelete(WorkoutId) {
+  function handleDelete(workoutId) {
     axios
-      .delete(`http://localhost:8081/classes/${WorkoutId}`)
+      .delete(`http://localhost:8081/classes/${workoutId}`)
       .then(() => {
         alert("Class Deleted.");
         navigate("/classHome");
       })
       .catch((err) => {
-        console.error("Error deleting workout:", err);
+        console.error("Error deleting class:", err);
         alert("Failed to delete class. Check console for details.");
       });
   }
 
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter workouts based on search term
+  const filteredWorkouts = workouts.filter((workout) =>
+    `${workout.teacherName} ${workout.subject} ${workout.date} ${workout.venue} ${workout.time} ${workout.duration}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div style={{ backgroundColor: '#ECF0F5' }}>
-      <Header/>
+    <div style={{ backgroundColor: "#ECF0F5" }}>
+      <Header />
       <div className="headerBtns">
-          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+        <Link to="/dashboard" className="btn btn-grey fs-6">
+          Dashboard
+        </Link>
       </div>
       <div className="container-fluid mt-10 mb-10">
         <h1 className="text-center mb-5">Classes</h1>
+        {/* Search bar */}
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="form-control mb-3"
+        />
         <div className="row justify-content-center">
-          {workouts.map((workout) => (
+          {filteredWorkouts.map((workout) => (
             <div className="col-md-4 mb-4" key={workout._id}>
               <div className="card bg-white shadow rounded-3">
                 <div className="card-body">
@@ -100,7 +121,7 @@ function ReadClass() {
                         disabled
                       />
                     </div>
-                    <div className="d-flex justify-content-between align-items-center">                      
+                    <div className="d-flex justify-content-between align-items-center">
                       <button
                         type="button"
                         className="btn btn-danger"
@@ -109,10 +130,7 @@ function ReadClass() {
                         Delete
                       </button>
                       <Link to={`/updateClass/${workout._id}`}>
-                        <button
-                          type="button"
-                          className="btn btn-info"
-                        >
+                        <button type="button" className="btn btn-info">
                           Update
                         </button>
                       </Link>
@@ -124,7 +142,7 @@ function ReadClass() {
           ))}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
