@@ -23,8 +23,8 @@
 
 /* Add this CSS to your stylesheet */
 .popup-content img {
-  width: 612px;
-  height: 612px;
+  width: 1395px;
+  height: 577px;
   object-fit: cover; /* Ensures the image covers the entire space without distortion */
 }
 
