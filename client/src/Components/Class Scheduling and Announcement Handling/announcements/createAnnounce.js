@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
@@ -174,7 +175,8 @@ function Announce() {
             >
               Preview
             </button>
-            <button
+            <Link
+              to="/readAnnouncement"
               type="submit"
               className="bg-primary"
               style={{
@@ -187,7 +189,7 @@ function Announce() {
               }}
             >
               Upload Announcement
-            </button>
+            </Link>
           </div>
         </form>
 
