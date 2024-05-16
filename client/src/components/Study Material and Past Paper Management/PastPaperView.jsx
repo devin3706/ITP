@@ -5,6 +5,7 @@ import './styles/PastPaperView.css';
 import PdfComp from "../Study Material and Past Paper Management/PdfComp.js";
 import Header from '../Exam Platform and Leaderboard/components/Header.js';
 import Footer from "../Exam Platform and Leaderboard/components/Footer.js";
+ 
 
 const PastPaperView = () => {
   const [pastPapers, setPastPapers] = useState([]);
@@ -79,6 +80,7 @@ const closePdfPopup = () => {
     <div style={{backgroundColor: '#ECF0F5'}}>
     <div>
         <Header />
+         
     </div>
     <div className="pdf-viewer-container">
       <h1 className="pdf-viewer-heading">Past Papers</h1>
@@ -97,7 +99,7 @@ const closePdfPopup = () => {
             <h3 className="pastPaper-year">{pastPaper.year}</h3>
             <h3 className="pastPaper-subject">{pastPaper.subject}</h3>
             <button className="btn btn-primary" onClick={() => showPdf(pastPaper)} style={{ marginRight: '10px' }}>Show PDF</button>
-            <button className="btn btn-danger" onClick={() => downloadPdf(pastPaper.pdf)} style={{ marginRight: '10px' }}>Download PDF</button>
+            <button className="btn btn-secondary" onClick={() => downloadPdf(pastPaper.pdf)} style={{ marginRight: '10px' }}>Download PDF</button>
             
             <div className="like-dislike-icons">
               <AiFillLike onClick={() => likePastPaper(pastPaper._id)} style={{ marginRight: '5px' }} /> <span>{pastPaper.likes}</span>

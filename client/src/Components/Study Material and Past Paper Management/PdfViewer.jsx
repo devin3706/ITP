@@ -94,7 +94,7 @@ const closePdfPopup = () => {
             <h3 className="pdf-description">{pdf.description}</h3>
              
             <button className="btn btn-primary" onClick={() => showPdf(pdf.pdf)} style={{ marginRight: '10px' }}>Show PDF</button>
-            <button className="btn btn-danger" onClick={() => downloadPdf(pdf.pdf)} style={{ marginRight: '10px' }}>Download PDF</button>
+            <button className="btn btn-secondary" onClick={() => downloadPdf(pdf.pdf)} style={{ marginRight: '10px' }}>Download PDF</button>
             <div className="like-dislike-icons">
               <AiFillLike onClick={() => likePdf(pdf._id)} style={{ marginRight: '5px' }} /> <span>{pdf.likes}</span>
               <span style={{ margin: '0 5px' }}>|</span>

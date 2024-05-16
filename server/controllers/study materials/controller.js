@@ -48,7 +48,7 @@ export async function deletePdfById(req, res){
 export async function updateById(req, res) {
   const { id } = req.params;
   const { title, description, grade, subject } = req.body;
-  let updateData = { title, description, grade, subject };
+  let updateData = { title, description, grade, subject,date };
 
   if (req.file) {
     updateData.pdf = req.file.filename;
