@@ -31,7 +31,12 @@ const getWorkout = async (req, res) => {
 
 // create new workout
 const createWorkout = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file Uploaded" });
+  }
+
   const { studentName, course, contactNumber, address, email } = req.body;
+  const slip = req.file.path;
 
   // add doc to db
   try {
@@ -41,6 +46,7 @@ const createWorkout = async (req, res) => {
       contactNumber,
       address,
       email,
+      slip,
     });
     res.status(200).json("workout una");
   } catch (error) {
@@ -87,10 +93,4 @@ const updateWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-export {
-  getWorkouts,
-  getWorkout,
-  createWorkout,
-  deleteWorkout,
-  updateWorkout,
-};
+export { getWorkouts, getWorkout, createWorkout, deleteWorkout, updateWorkout };

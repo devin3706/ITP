@@ -1,6 +1,6 @@
-import React, {useRef} from 'react'
+import React, {useRef, useEffect} from 'react'
 import {Link} from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUserId } from '../redux/result_reducer'
 import Header from './Header'
 import Footer from './Footer'
@@ -10,9 +10,17 @@ export default function Main(){
     const inputRef = useRef(null)
     const dispatch = useDispatch()
 
+    const username = useSelector(state => state.name.name)
+
+    useEffect(() => {
+        if(username){
+            inputRef.current.value = username;
+        }
+    }, [username]);
+
     function startQuiz(){
-        if(inputRef.current?.value){
-             dispatch(setUserId(inputRef.current?.value))
+        if(username){
+             dispatch(setUserId(username))
         }
     }
 
@@ -32,12 +40,17 @@ export default function Main(){
 
             <div className="input-group mt-5 w-25 mx-auto">
                 <span className="input-group-text text-bg-success border border-success" id="basic-addon1">@</span>
-                <input ref={inputRef} type="text" className="form-control border border-success" placeholder='Username*'></input>
+                <input
+                        ref={inputRef}
+                        type="text"
+                        className="form-control border border-success"
+                        placeholder='Username*'
+                        disabled
+                />
             </div>
 
             <div className='mt-3'>
-                <Link style={{marginLeft: '43%'}} to="/quiz" onClick={startQuiz}>Start Exam</Link>
-                <Link style={{marginLeft: '5%'}} to="/test" onClick={startQuiz}>Test</Link>
+                <Link style={{marginLeft: '47%'}} to="/quiz" onClick={startQuiz}>Start Exam</Link>
             </div>
         </div>
         <Footer/>

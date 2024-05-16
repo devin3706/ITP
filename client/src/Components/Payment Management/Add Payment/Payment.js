@@ -15,27 +15,42 @@ function Payment() {
     contactNumber: "",
     address: "",
     email: "",
+    slip: null,
   };
 
   const validationSchema = Yup.object({
     studentName: Yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Only letters and spaces are allowed")
+      .matches(/^[a-zA-Z\s]+$/, {
+        message: "Only letters and spaces are allowed",
+        excludeEmptyString: true,
+      })
       .required("Student name is required"),
     course: Yup.string().required("Course selection is required"),
     contactNumber: Yup.string()
       .matches(/^\d{10}$/, "Contact number must be 10 digits")
       .required("Contact number is required"),
-    address: Yup.string()
-      .matches(/^[a-zA-Z\s]+$/, "Only letters and spaces are allowed")
-      .required("Address is required"),
+    address: Yup.string().required("Address is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
+    slip: Yup.mixed().required("Slip is required"),
   });
 
   const onSubmit = (values, { setSubmitting }) => {
+    const formData = new FormData();
+    formData.append("studentName", values.studentName);
+    formData.append("course", values.course);
+    formData.append("contactNumber", values.contactNumber);
+    formData.append("address", values.address);
+    formData.append("email", values.email);
+    formData.append("slip", values.slip);
+
     axios
-      .post("http://localhost:8081/payments/create", values)
+      .post("http://localhost:8081/payments/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(() => {
         navigate("/paymentdetails");
       })
@@ -49,10 +64,13 @@ function Payment() {
   };
 
   return (
-    <div style={{ backgroundColor: '#ECF0F5'}}>
-      <Header/>
-      <div className="fullDiv mt-10 mb-10 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
-        <h1>Payment</h1>
+    <div style={{ backgroundColor: "#ECF0F5" }}>
+      <Header />
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
+      <div className="container mt-5 mb-5 row justify-content-center col-lg-8 m-4 p-4 bg-dark text-white rounded-4 col-10 mx-auto">
+        <h1 className="mb-4 text-center">Payment</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -62,13 +80,14 @@ function Payment() {
             isSubmitting,
             handleChange,
             handleBlur,
+            setFieldValue,
             values,
             errors,
             touched,
           }) => (
-            <Form className="mt-4">
-              <div className="col-12 text-warning">
-                <div className="col-md-12">
+            <Form>
+              <div className="text-warning">
+                <div className="mb-3">
                   <label htmlFor="studentName" className="form-label">
                     Student Name:
                   </label>
@@ -81,7 +100,13 @@ function Payment() {
                     type="text"
                     id="studentName"
                     name="studentName"
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      const newValue = e.target.value.replace(
+                        /[^a-zA-Z\s]/g,
+                        ""
+                      );
+                      setFieldValue("studentName", newValue);
+                    }}
                     onBlur={handleBlur}
                     value={values.studentName}
                   />
@@ -92,61 +117,57 @@ function Payment() {
                   />
                 </div>
 
-                <div className="mt-3">
-                  <div className="col-md-5">
-                    <label htmlFor="course" className="form-label">
-                      Select Course:
-                    </label>
-                    <Field
-                      as="select"
-                      className={`form-control ${
-                        errors.course && touched.course ? "is-invalid" : ""
-                      }`}
-                      id="course"
-                      name="course"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.course}
-                    >
-                      <option value="">Select Course</option>
-                      <option value="A/L">Advance Level(A/L)</option>
-                      <option value="O/L">Ordinary Level(O/L)</option>
-                    </Field>
-                    <ErrorMessage
-                      name="course"
-                      component="div"
-                      className="text-danger"
-                    />
-                  </div>
+                <div className="mb-3">
+                  <label htmlFor="course" className="form-label">
+                    Select Course:
+                  </label>
+                  <Field
+                    as="select"
+                    className={`form-control ${
+                      errors.course && touched.course ? "is-invalid" : ""
+                    }`}
+                    id="course"
+                    name="course"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.course}
+                  >
+                    <option value="">Select Course</option>
+                    <option value="A/L">Advance Level(A/L)</option>
+                    <option value="O/L">Ordinary Level(O/L)</option>
+                  </Field>
+                  <ErrorMessage
+                    name="course"
+                    component="div"
+                    className="text-danger"
+                  />
                 </div>
 
-                <div className="mt-3">
-                  <div className="col-md-5">
-                    <label htmlFor="contactNumber" className="form-label">
-                      Contact No:
-                    </label>
-                    <Field
-                      className={`form-control ${
-                        errors.contactNumber && touched.contactNumber
-                          ? "is-invalid"
-                          : ""
-                      }`}
-                      type="text"
-                      id="contactNumber"
-                      name="contactNumber"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.contactNumber}
-                    />
-                    <ErrorMessage
-                      name="contactNumber"
-                      component="div"
-                      className="text-danger"
-                    />
-                  </div>
+                <div className="mb-3">
+                  <label htmlFor="contactNumber" className="form-label">
+                    Contact No:
+                  </label>
+                  <Field
+                    className={`form-control ${
+                      errors.contactNumber && touched.contactNumber
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    type="number"
+                    id="contactNumber"
+                    name="contactNumber"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.contactNumber}
+                  />
+                  <ErrorMessage
+                    name="contactNumber"
+                    component="div"
+                    className="text-danger"
+                  />
                 </div>
 
-                <div className="col-md-12 mt-3">
+                <div className="mb-3">
                   <label htmlFor="address" className="form-label">
                     Address:
                   </label>
@@ -168,7 +189,7 @@ function Payment() {
                   />
                 </div>
 
-                <div className="col-md-5 mt-3">
+                <div className="mb-3">
                   <label htmlFor="email" className="form-label">
                     E-mail:
                   </label>
@@ -191,8 +212,31 @@ function Payment() {
                   />
                 </div>
 
+                <div className="mb-3">
+                  <label htmlFor="slip" className="form-label">
+                    Upload Slip:
+                  </label>
+                  <input
+                    type="file"
+                    id="slip"
+                    name="slip"
+                    onChange={(event) => {
+                      setFieldValue("slip", event.currentTarget.files[0]);
+                    }}
+                    onBlur={handleBlur}
+                    className={`form-control ${
+                      errors.slip && touched.slip ? "is-invalid" : ""
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="slip"
+                    component="div"
+                    className="text-danger"
+                  />
+                </div>
+
                 <br />
-                <br />
+
                 <div className="d-flex justify-content-between">
                   <button
                     type="submit"
@@ -213,7 +257,7 @@ function Payment() {
           )}
         </Formik>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

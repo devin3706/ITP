@@ -66,80 +66,82 @@ function CreateUser() {
   return (
     <div style={{backgroundColor: '#ECF0F5'}}>
       <Header/>
-    <div className="d-flex mt-5 mb-5 vh-100 justify-content-center align-items-center">
-      <div className="bg-white p-3 rounded-3 w-50 shadow">
-        <h2>Add User</h2>
-        <Formik
-          initialValues={initialValues}
-          validate={validate}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <div className="mb-2">
-                <label htmlFor="name"><strong>Name</strong></label>
-                <Field
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Enter Name"
-                  className="form-control"
-                />
-                <ErrorMessage name="name" component="div" className="text-danger" />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="email"><strong>Email</strong></label>
-                <Field
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter Email"
-                  className="form-control"
-                />
-                <ErrorMessage name="email" component="div" className="text-danger" />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="school"><strong>School</strong></label>
-                <Field
-                  type="text"
-                  id="school"
-                  name="school"
-                  placeholder="Enter School"
-                  className="form-control"
-                />
-                <ErrorMessage name="school" component="div" className="text-danger" />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="number"><strong>Contact Number</strong></label>
-                <Field
-                  type="text"
-                  id="number"
-                  name="number"
-                  placeholder="Enter Contact Number"
-                  className="form-control"
-                />
-                <ErrorMessage name="number" component="div" className="text-danger" />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="address"><strong>Address</strong></label>
-                <Field
-                  type="text"
-                  id="address"
-                  name="address"
-                  placeholder="Enter Address"
-                  className="form-control"
-                />
-                <ErrorMessage name="address" component="div" className="text-danger" />
-              </div>
-              <button type="submit" className="btn btn-success w-100 rounded-0" disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Submit"}
-              </button>
-            </Form>
-          )}
-        </Formik>
+      <div className="d-flex mt-5 mb-5 vh-100 justify-content-center align-items-center">
+        <div className="bg-white p-3 rounded-3 w-50 shadow">
+          <h2>Add User</h2>
+          <Formik
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <div className="mb-2">
+                  <label htmlFor="name"><strong>Name</strong></label>
+                  <Field
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter Name"
+                    className="form-control"
+                    pattern="[A-Za-z ]+"
+                    title="Name must contain only letters"
+                  />
+                  <ErrorMessage name="name" component="div" className="text-danger" />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="email"><strong>Email</strong></label>
+                  <Field
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter Email"
+                    className="form-control"
+                  />
+                  <ErrorMessage name="email" component="div" className="text-danger" />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="school"><strong>School</strong></label>
+                  <Field
+                    type="text"
+                    id="school"
+                    name="school"
+                    placeholder="Enter School"
+                    className="form-control"
+                  />
+                  <ErrorMessage name="school" component="div" className="text-danger" />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="number"><strong>Contact Number</strong></label>
+                  <Field
+                    type="text"
+                    id="number"
+                    name="number"
+                    placeholder="Enter Contact Number"
+                    className="form-control"
+                  />
+                  <ErrorMessage name="number" component="div" className="text-danger" />
+                </div>
+                <div className="mb-2">
+                  <label htmlFor="address"><strong>Address</strong></label>
+                  <Field
+                    type="text"
+                    id="address"
+                    name="address"
+                    placeholder="Enter Address"
+                    className="form-control"
+                  />
+                  <ErrorMessage name="address" component="div" className="text-danger" />
+                </div>
+                <button type="submit" className="btn btn-success w-100 rounded-0" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </div>
   );
 }

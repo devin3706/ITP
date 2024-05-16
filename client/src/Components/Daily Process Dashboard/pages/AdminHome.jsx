@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Chart from "chart.js/auto";
-import { Link } from "react-router-dom";
-import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent } from "react-icons/pi";
+import { Link, useNavigate } from "react-router-dom";
+import { PiFilesLight, PiAlarm, PiExam, PiChalkboardTeacherLight, PiStudent, PiUserCircle } from "react-icons/pi";
+import { setUsername } from "../../Exam Platform and Leaderboard/actions/username_actions";
+import { getAdminProfile } from '../api/admin';
+import { useDispatch } from "react-redux";
 import '../../../styles.css';
 import { jsPDF } from 'jspdf';
 
 // API functions
-import { getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, getTotalExams, getTotalFiles, getTotalStudents, getTotalTeachers, view } from "../api/admin";
+import { 
+    getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, logout,
+    getTotalExams, getTotalFiles, getTotalStudents, getTotalTeachers, view, getDistrictWithMostTeachers
+} from "../api/admin";
 
 // Header and Footer
 //import AdminHeader from '../components/AdminHeader'
@@ -23,6 +29,8 @@ const AdminHome = () => {
     const [teacherLoginsByMonth, setTeacherLoginsByMonth] = useState([]);
     const [adminLoginsByMonth, setAdminLoginsByMonth] = useState([]);
 
+    const [teacherDistrict, setTeacherDistrict] = useState(null);
+
     const [admins, setAdmins] = useState([]);
 
     const [currentMonth, setCurrentMonth] = useState('');
@@ -31,6 +39,50 @@ const AdminHome = () => {
     const student_LonginsCountForThisMonth = studentLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const teacher_LonginsCountForThisMonth = teacherLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
     const admin_LonginsCountForThisMonth = adminLoginsByMonth.find(monthData => monthData._id === currentMonthID)?.count ?? 0;
+
+    const dispatch = useDispatch();
+
+    //logout
+    const navigate = useNavigate();
+
+    const handleAdminLogout = async (e) => {
+        e.preventDefault();
+
+        try {
+            // Dispatching setUsername action with an empty string parameter
+            dispatch(setUsername('')); 
+
+            // Clearing adminUsername cookie
+            document.cookie = 'adminUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+            // Redirecting to login page
+            navigate("/adminLogin");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        const fetchAdminName = async () => {
+          try {
+            const cookies = document.cookie.split("; ");
+            let username = "";
+            for (const cookie of cookies) {
+              const [name, value] = cookie.split("=");
+              if (name === "adminUsername") {
+                username = value;
+                break;
+              }
+            }
+    
+            dispatch(setUsername(username)); // Dispatch action to store admin username in Redux
+          } catch (error) {
+            console.error('Error fetching admin details:', error);
+          }
+        };
+    
+        fetchAdminName();
+    }, [dispatch]);
     
     // Fetch admins
     useEffect(() => {
@@ -64,6 +116,9 @@ const AdminHome = () => {
                 const { totalExams } = await getTotalExams();
                 setTotalExams(totalExams);
 
+                //highest frequency district
+                const data = await getDistrictWithMostTeachers();
+                setTeacherDistrict(data);
 
                 //sorting by month
                 const s_LoginsByMonth = await getStudentLoginsByMonth();
@@ -213,6 +268,12 @@ const AdminHome = () => {
     return(
         <div style={{backgroundColor: '#ECF0F5'}}>
             <Header />
+            <div className="headerBtns">
+                <button className="btn btn-grey fs-6" onClick={handleAdminLogout}>Log out</button>
+                <Link to="/adminProfile">
+                    <PiUserCircle className="text-white ml-3" style={{fontSize: '70px'}}/>
+                </Link>
+            </div>
             <div className="container mt-5">
 
                 <h2 className="mb-3 mt-3">Total Statistics</h2>
@@ -275,7 +336,7 @@ const AdminHome = () => {
                     </div>
 
                     <div className="col mt-3 mb-5">
-                        <Link to="/teacherInterface">                        
+                        <Link to="/adminInterface">                        
                             <div className="card cardDPDashboard rounded-4" style={{backgroundColor: '#DDDDFF '}}>
                                 <div className="iconDPDashboard">
                                     <PiExam />
@@ -292,7 +353,7 @@ const AdminHome = () => {
 
                 <hr className="my-4 border-2 border-dark" /> 
 
-                <div className="row mt-1 mb-5">
+                <div className="row mt-1">
                     <div className="col-8 mt-5 border border-dark rounded-4 shadow">                        
                         <div className="row">
                             <h2 className="mb-3 mt-3 col">Login Statistics</h2>
@@ -369,9 +430,37 @@ const AdminHome = () => {
                                     <button className="btn btn-info rounded-5">view</button>                                
                                 </Link>
                             </div>
-                        </div>
+                        </div>                        
+                    </div>
+                </div>
 
-                        
+                <div className="row mt-3 mb-5 border border-dark shadow rounded-4 p-3">
+                    <h2 className="mb-5 mt-3 col">Location Statistics</h2>
+                    <div className="row">
+                        <h5 className="col">
+                            {teacherDistrict ? (
+                                <div>
+                                    <p>Most Teachers are from: {teacherDistrict._id}</p>
+                                    <p>Number of Teachers: {teacherDistrict.tCount}</p>
+                                </div>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </h5>
+                        <h5 className="col">
+                            {teacherDistrict ? (
+                                <div>
+                                </div>
+                            ) : (
+                                <p>Loading...</p>
+                            )}
+                        </h5>
+                    </div>
+
+                    <div className="d-flex justify-content-end col">
+                        <Link to="/geography">
+                            <button className="btn btn-info rounded-5">More Details</button>
+                        </Link>
                     </div>
                 </div>
             </div>

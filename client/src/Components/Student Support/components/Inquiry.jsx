@@ -37,12 +37,18 @@ function Inquiry() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
       <div className="mt-10 mb-10">
         <div className="row justify-content-center">
           <div className="col-md-10">
             <div className="card">
               <div className="card-body  shadow">
-                <h3 className="card-title text-center mb-4">Inquiries</h3>
+                <h1 className="card-title text-center mb-4">Ask Your Questions</h1>
+                <div className="text-center mt-4">
+                  <Link to="/createInquiry" className="btn btn-primary">Add Your Question</Link>
+                </div>
                 <div className="table-responsive">
                   <table className="table table-striped">
                     <thead>
@@ -68,9 +74,6 @@ function Inquiry() {
                       ))}
                     </tbody>
                   </table>
-                </div>
-                <div className="text-center mt-4">
-                  <Link to="/createInquiry" className="btn btn-success">Add Your Question</Link>
                 </div>
               </div>
             </div>

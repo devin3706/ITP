@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
 import './styles/PastPaperView.css';
@@ -80,7 +81,9 @@ const closePdfPopup = () => {
     <div style={{backgroundColor: '#ECF0F5'}}>
     <div>
         <Header />
-         
+        <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+        </div>
     </div>
     <div className="pdf-viewer-container">
       <h1 className="pdf-viewer-heading">Past Papers</h1>

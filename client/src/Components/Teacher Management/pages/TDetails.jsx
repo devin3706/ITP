@@ -137,32 +137,54 @@ const TDetails = () => {
     return (
         <div style={{ backgroundColor: '#ECF0F5' }}>
             <Header/>
-            <div className="container mt-5 mb-5">
-                <div className="d-flex justify-content-between mb-3">
+
+            <center>
+                <h1 className="text-center mt-5 mb-4 alert border border-dark shadow col-10" style={{fontSize: '300%', backgroundColor: '#c1dee3'}}>Teacher Details</h1>
+
+                <div className="d-flex justify-content-center mt-5 mb-5">
+                    <div className="d-flex mt-3" style={{ width: '300px', height: '300px' }}>
+                        <Pie data={pieChartData} id="pie-chart" />
+                    </div>
+                    <div className="d-flex mt-3 ml-5" style={{ width: '700px', height: '300px' }}>
+                        <Bar data={barChartData} id="bar-chart" />
+                    </div>
+                </div>
+            </center>
+
+            
+            <div className="mt-5 mb-5">
+                <div className="d-flex justify-content-center mb-5">
                     <Input
                         type="text"
+                        className="col-10"
                         placeholder="Search by name..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     
                 </div>
+
+                <center>
+                    <hr className="my-4 col-10 border-2 border-dark mb-5" />
+
+                </center>
+
                 <div className="d-flex justify-content-center">
-                    <Table bordered hover responsive="sm" style={{ backgroundColor: '#FFFFFF' }}>
+                    <Table bordered responsive="sm" className="table table-striped table-light" style={{ backgroundColor: '#FFFFFF' }}>
                         <thead>
-                            <tr className="table-primary">
+                            <tr className="table-primary text-center">
                                 
-                                <th className="fw-bold text-dark">First Name</th>
-                                <th className="fw-bold text-dark">Last Name</th>
-                                <th className="fw-bold text-dark">Subject</th>
-                                <th className="fw-bold text-dark">District</th>
-                                <th className="fw-bold text-dark">Education Qualification</th>
-                                <th className="fw-bold text-dark">Phone Number</th>
-                                <th className="fw-bold text-dark">Email</th>
-                                <th className="fw-bold text-dark">Actions</th>
+                                <th className="fw-bold text-dark col-1">First Name</th>
+                                <th className="fw-bold text-dark col-1">Last Name</th>
+                                <th className="fw-bold text-dark col-2">Subject</th>
+                                <th className="fw-bold text-dark col-1">District</th>
+                                <th className="fw-bold text-dark col-1">Education Qualification</th>
+                                <th className="fw-bold text-dark col-1">Phone Number</th>
+                                <th className="fw-bold text-dark col-3">Email</th>
+                                <th className="fw-bold text-dark col-2">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             {filteredTeachers.map((teacher, index) => (
                                 <tr key={index}>
                                     
@@ -174,8 +196,8 @@ const TDetails = () => {
                                     <td>{teacher.phoneNumber}</td>
                                     <td>{teacher.email}</td>
                                     <td>
-                                        <Button className='btn-sm me-2' color="info" onClick={() => handleEdit(teacher._id)}>Edit</Button>
-                                        <Button className='btn-sm me-2' color="danger" onClick={() => handleDelete(teacher._id)}>Delete</Button>
+                                        <Button className='btn-sm me-2 rounded-3' color="info" onClick={() => handleEdit(teacher._id)}>Edit</Button>
+                                        <Button className='btn-sm me-2 rounded-3' color="danger" onClick={() => handleDelete(teacher._id)}>Delete</Button>
                                     </td>
                                 </tr>
                             ))}
@@ -189,18 +211,12 @@ const TDetails = () => {
                         style={{ textDecoration: "none", color: "#fff" }}
                     >
                         {({ loading }) => (
-                            <Button color="primary" size="lg" disabled={loading}>{loading ? 'Loading...' : 'Generate Report'}</Button>
+                            <Button color="primary" className="rounded-4" size="lg" disabled={loading}>{loading ? 'Loading...' : 'Generate Report'}</Button>
                         )}
                     </PDFDownloadLink>
-                    <Button color="success" onClick={handleAddTeacher}>Add Teacher</Button>
+                    <Button color="success" className="rounded-4" onClick={handleAddTeacher}>Add Teacher</Button>
                 </div>
-                <div className="d-flex justify-content-left mt-3" style={{ width: '300px', height: '300px' }}>
-                    <Pie data={pieChartData} id="pie-chart" />
                 
-                <div className="d-flex justify-content-right mt-3 ml-5" style={{ width: '700px', height: '300px' }}>
-                    <Bar data={barChartData} id="bar-chart" />
-                </div>
-                </div>
             </div>
             <Footer/>
         </div>

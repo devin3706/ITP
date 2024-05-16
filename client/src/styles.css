@@ -142,3 +142,152 @@
   background-color: #0056b3; /* Darker blue on hover */
   border-color: #0056b3; /* Darker blue on hover */
 }
+
+
+/* -------------------------------------- for geography page in DPDashboard -------------------------------------- */
+
+.geography-container {
+  position: relative;
+}
+
+.map-image {
+  width: auto;
+  height: auto;
+}
+
+.district-button {
+  position: absolute;
+  border: none;
+}
+
+.Jaffna {
+  top: 140px;
+  left: 160px;
+}
+
+.Ampara {
+  top: 700px;
+  left: 550px;
+}
+
+.Kandy {
+  top: 705px;
+  left: 300px;
+}
+
+.Kilinochchi {
+  top: 220px;
+  left: 100px;
+}
+
+.Mannar {
+  top: 340px;
+  left: 80px;
+}
+
+.Mullaitivu {
+  top: 240px;
+  left: 250px;
+}
+
+.Nuwara-Eliya {
+  top: 780px;
+  left: 260px;
+}
+
+.Anuradhapura {
+  top: 470px;
+  left: 190px;
+}
+
+.Batticaloa {
+  top: 580px;
+  left: 480px;
+}
+
+.Hambantota {
+  top: 970px;
+  left: 400px;
+}
+
+.Matale {
+  top: 640px;
+  left: 290px;
+}
+
+.colombo {
+  top: 820px;
+  left: 80px;
+}
+
+.Galle {
+  top: 980px;
+  left: 150px;
+}
+
+.Kalutara {
+  top: 890px;
+  left: 120px;
+}
+
+.Matara {
+  top: 1000px;
+  left: 255px;
+}
+
+.Kurunegala {
+  top: 620px;
+  left: 150px;
+}
+
+.Badulla {
+  top: 780px;
+  left: 380px;
+}
+
+.Gampaha {
+  top: 770px;
+  left: 80px;
+}
+
+.Monaragala {
+  top: 840px;
+  left: 450px;
+}
+
+.Polonnaruwa {
+  top: 530px;
+  left: 340px;
+}
+
+.Trincomalee {
+  top: 370px;
+  left: 350px;
+}
+
+.Ratnapura {
+  top: 880px;
+  left: 250px;
+}
+
+.Vavuniya {
+  top: 350px;
+  left: 200px;
+}
+
+.Kegalle {
+  top: 735px;
+  left: 195px;
+}
+
+.Puttalam {
+  top: 560px;
+  left: 50px;
+}
+
+/* -------------------------------------- for Daily Process Dashboard -------------------------------------- */
+.headerBtns {
+  position: absolute;
+  top: 65px;
+  left: 1250px;
+}

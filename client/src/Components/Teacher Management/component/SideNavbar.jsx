@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-
+import Cookies from 'js-cookie';
 import {
     FaTh,
     FaBars,
+    FaUsers,
     FaSignOutAlt ,
-    FaUserAlt,
     FaRegChartBar,
     FaCommentAlt,
-    FaShoppingBag,
+    FaBook,
+    FaUserCircle,
+    FaQuestionCircle,
+    FaCalendarAlt,
+    FaBullhorn,
+    FaUserCheck
      
 }from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
@@ -21,45 +26,71 @@ const SideNavbar = ({ children }) => {
     const logout = () => {
         // Remove the token from localStorage
         localStorage.removeItem("token");
+        // Remove the email cookie
+        Cookies.remove("email");
         // Redirect to the login page
-        window.location.href = '/tLogin';
-    };
+            window.location.href = '/tLogin';
+            };
     
-    const menuItem = [
-        {
-            path: "/tHome",
-            name: "Dashboard",
-            icon: <FaTh />
-        },
-        {
-            path: '/tLogin',
-            name: 'Logout',
-            icon: <FaSignOutAlt />,
-            onClick: logout // Assign the logout function to the onClick event
-            
-        }
-        /* {
-            path: "/tCreate",
-            name: "Add ",
-            icon: <FaUserAlt />
-        },
-        {
-            path: "/tLogin",
-            name: "Login",
-            icon: <FaRegChartBar />
-        },
-        {
-            path: "/tDetails",
-            name: "List",
-            icon: <FaCommentAlt />
-        },
-        {
-            path: "/tpagetest",
-            name: "test",
-            icon: <FaShoppingBag />
-        }, */
+        const menuItem = [
+            {
+                path: "/tHome",
+                name: "Dashboard",
+                icon: <FaTh />
+            },
+            {
+                path: "/teacherFeedback", // Feedback path
+                name: "Feedback",
+                icon: <FaCommentAlt />
+            },
+            {
+                path: "/updateInquiry", // Q&A path
+                name: "Q&A",
+                icon: <FaQuestionCircle />
+            },
+            {
+                path: "/createClass", // Timetable path
+                name: "Timetable",
+                icon: <FaCalendarAlt />
+            },
+            {
+                path: "/createAnnouncement", // Announcements path
+                name: "Announcements",
+                icon: <FaBullhorn />
+            },
+            {
+                path: "/teacherInterface", // Exam path
+                name: "Exam",
+                icon: <FaBook />
+            },
+            {
+                path: "/bsmarks", // Marks path
+                name: "Marks",
+                icon: <FaRegChartBar />
+            },
+            {
+                path: "/attendance", // Attendance path
+                name: "Attendance",
+                icon: <FaUserCheck />
+            },
+            {
+                path: "/tProfile", // Profile path
+                name: "Profile",
+                icon: <FaUserCircle />
+            },
+            {
+                path: "/tInterfaceDetails", // Profile path
+                name: "All Teacher",
+                icon: <FaUsers />
+            },
+            {
+                path: '/tLogin',
+                name: 'Logout',
+                icon: <FaSignOutAlt />,
+                onClick: logout
+            }
+        ];
         
-    ]
     return (
         <div className="nvbcontainer">
            <div style={{width: isOpen ? "200px" : "50px"}} className="sidebar">

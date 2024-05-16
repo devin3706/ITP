@@ -2,8 +2,11 @@ import express from "express";
 const router = express.Router();
 
 // Import controllers
-import { register, login, logout, getLoggedInAdmin, view, deleteAdmin, updateAdmin } from "../../controllers/admin/admin.js";
-import { getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, getTotalExams, getTotalFiles, getTotalStudents, getTotalTeacherLogins, getTotalTeachers } from "../../controllers/admin/summaries.js";
+import { register, login, logout, getLoggedInAdmin, view, deleteAdmin, updateAdmin, getAdminProfile } from "../../controllers/admin/admin.js";
+import { 
+    getAdminLoginsByMonth, getStudentLoginsByMonth, getTeacherLoginsByMonth, getTotalClasses, getTotalExams, getTotalFiles, 
+    getTotalStudents, getTotalTeacherLogins, getTotalTeachers, getTeachersByDistrict, getDistrictWithMostTeachers
+} from "../../controllers/admin/summaries.js";
 
 // Import middlewares
 import { verifyToken } from "../../middleware/admin/adminAuth.js";
@@ -19,6 +22,8 @@ router.get("/view", view);
 router.delete("/admin/:adminID", deleteAdmin);
 router.get("/admin/:adminID", adminById);
 router.put("/admin/:adminID", updateAdmin);
+router.get("/adminProfile/:username", getAdminProfile);
+
 
 //Summaries
 router.get('/totalStudents', getTotalStudents);
@@ -30,5 +35,7 @@ router.get('/totalTeacherLogins', getTotalTeacherLogins);
 router.get('/student-logins-by-month', getStudentLoginsByMonth);
 router.get('/teacher-logins-by-month', getTeacherLoginsByMonth);
 router.get('/admin-logins-by-month', getAdminLoginsByMonth);
+router.get('/teachers-by-district', getTeachersByDistrict);
+router.get('/district-with-most-teachers', getDistrictWithMostTeachers)
 
 export default router;

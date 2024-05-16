@@ -3,6 +3,7 @@ import {} from "react-router-dom";
 import axios from "axios";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
+import SideNavbar from "../../Teacher Management/component/SideNavbar";
 
 function Home() {
   // State variables to store from data
@@ -40,6 +41,8 @@ function Home() {
   return (
     <div style={{ backgroundColor: '#ECF0F5' }}>
       <Header/>
+      <SideNavbar />
+
       <div className="container bg-white col-6 mt-5 rounded-3 shadow mt-5 mb-5 p-3">
         <h1 className="text-center mb-5">New Class Schedule</h1>
         <form id="classForm" onSubmit={submitWorkouts}>

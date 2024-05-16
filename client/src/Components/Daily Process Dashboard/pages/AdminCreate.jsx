@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //design
 import { Button } from "@mui/material";
 
 //api functions
-import { register } from "../api/admin";
+import { logout, register } from "../api/admin";
 
 //header and footer
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
+import { PiUserCircle } from "react-icons/pi";
 
 const AdminCreate = () => {
     const navigate = useNavigate();
@@ -78,11 +79,33 @@ const AdminCreate = () => {
         }
     }
 
+    //logout
+    const handleAdminLogout = async(e) => {
+        e.preventDefault();
+
+        logout()
+            .then((res) => {
+                alert(res.message);
+
+                document.cookie = 'adminUsername=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                
+                //redirect to login page
+                navigate("/adminLogin");
+
+        }).catch(err => console.error(err));
+    }
+
     
 
     return(
         <div style={{backgroundColor: '#ECF0F5'}} className="vh-100">
         <Header/>
+        <div className="headerBtns">
+            <button className="btn btn-grey fs-6" onClick={handleAdminLogout}>Log out</button>
+            <Link to="/adminProfile">
+                <PiUserCircle className="text-white ml-3" style={{fontSize: '70px'}}/>
+            </Link>
+        </div>
             <div className="justify-content-md-center">
                 <div className="text-center mt-5 alert alert-dark col-5 border border-dark shadow" style={{marginLeft: '30%'}}>
                     <label htmlFor="" className="h2">Create New Admin</label>

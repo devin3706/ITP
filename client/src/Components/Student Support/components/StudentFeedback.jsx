@@ -6,37 +6,34 @@ import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function StudentFeedback() {
   const [searchInput, setSearchInput] = useState("");
+  const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = 'http://localhost:8081/users';
-        const url = searchInput ? `${apiUrl}?search=${searchInput}` : apiUrl;
-        const response = await axios.get(url);
-        setFilteredUsers(response.data); // Update filteredUsers with fetched data
+        const response = await axios.get('http://localhost:8081/users');
+        setUsers(response.data);
+        setFilteredUsers(response.data);
         console.log("Users fetched successfully:", response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
-        setFilteredUsers([]); // Reset filteredUsers in case of error
+        setUsers([]);
+        setFilteredUsers([]);
       }
     };
 
     fetchData();
-  }, [searchInput]);
+  }, []);
 
-  const handleSearch = async () => {
-    try {
-      const apiUrl = 'http://localhost:8081/users';
-      const url = searchInput ? `${apiUrl}?search=${searchInput}` : apiUrl;
-      const response = await axios.get(url);
-      setFilteredUsers(response.data); // Update filteredUsers with search results
-      console.log("Filtered users fetched successfully:", response.data);
-    } catch (error) {
-      console.error("Error fetching filtered users:", error);
-      setFilteredUsers([]); // Reset filteredUsers in case of error
+  useEffect(() => {
+    if (searchInput.trim() === "") {
+      setFilteredUsers(users);
+    } else {
+      const filtered = users.filter(user => user.Teacher.toLowerCase().includes(searchInput.toLowerCase()));
+      setFilteredUsers(filtered);
     }
-  };
+  }, [searchInput, users]);
 
   const handleDelete = async (id) => {
     try {
@@ -66,7 +63,19 @@ function StudentFeedback() {
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
+      <div className="headerBtns">
+          <Link to='/dashboard' className="btn btn-grey fs-6">Dashboard</Link>
+      </div>
+      <b><h1 className="card-title text-center mb-4">Feedback Page</h1></b>
       <div className="container mt-5 mb-5">
+      <div className="row">
+          <div className="col-md-12 mt-3">
+            <Link to="/create" className="btn btn-primary">
+              Add your feedback
+            </Link>
+          </div>
+        </div>
+        <br></br>
         <div className="mb-3 d-flex">
           <input
             type="text"
@@ -75,22 +84,21 @@ function StudentFeedback() {
             placeholder="Search by Teacher Name"
             className="form-control h-100 me-2 shadow"
           />
-          <button onClick={handleSearch} className="btn btn-primary">
-            Search
+          <button className="btn btn-secondary" onClick={() => setSearchInput("")}>
+            search
           </button>
         </div>
-
+       
         <div className="row">
           {filteredUsers.map((user) => (
             <div key={user._id} className="col-md-6 mb-4">
               <div className="card shadow">
                 <div className="card-body">
-                  <h5 className="card-title">Student Feedback</h5>
                   <p className="card-text">Teacher: {user.Teacher}</p>
                   <p className="card-text">Feedback: {user.Feedback}</p>
                   <p className="card-text">Rating: {renderStars(user.Rating)}</p>
                   <div className="d-flex justify-content-between">
-                    <Link to={`/update/${user._id}`} className="btn btn-success me-2">
+                    <Link to={`/update/${user._id}`} className="btn btn-primary">
                       Update
                     </Link>
                     <button onClick={() => handleDelete(user._id)} className="btn btn-danger">
@@ -101,14 +109,6 @@ function StudentFeedback() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="row">
-          <div className="col-md-12 mt-3">
-            <Link to="/create" className="btn btn-primary">
-              Add your feedback
-            </Link>
-          </div>
         </div>
       </div>
       <Footer/>

@@ -1,111 +1,121 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { AdminContext } from "./AdminContext";
 import Homepage from "./Homepage.js";
 
 // Exam components
-import Main from './components/Exam Platform and Leaderboard/components/Main';
-import Quiz from './components/Exam Platform and Leaderboard/components/Quiz';
-import Result from './components/Exam Platform and Leaderboard/components/Result';
-import ResultView from './components/Exam Platform and Leaderboard/components/ResultView';
-import { CheckUserExist } from './components/Exam Platform and Leaderboard/helper/helper';
-import Test from './components/Exam Platform and Leaderboard/components/Test';
-import EditQuestion from './components/Exam Platform and Leaderboard/components/EditQuestion';
-import Footer from './components/Exam Platform and Leaderboard/components/Footer.js';
-import Header from './components/Exam Platform and Leaderboard/components/Header.js';
-import CreateQuestion from './components/Exam Platform and Leaderboard/components/CreateQuestion';
-import Leaderboard from './components/Exam Platform and Leaderboard/components/Leaderboard';
-import StudentInterface from './components/Exam Platform and Leaderboard/components/StudentInterface.js';
-import TeacherInterface from './components/Exam Platform and Leaderboard/components/TeacherInterface.js';
+import Main from "./Components/Exam Platform and Leaderboard/components/Main";
+import Quiz from "./Components/Exam Platform and Leaderboard/components/Quiz";
+import Result from "./Components/Exam Platform and Leaderboard/components/Result";
+import ResultView from "./Components/Exam Platform and Leaderboard/components/ResultView";
+import { CheckUserExist } from "./Components/Exam Platform and Leaderboard/helper/helper";
+import Test from "./Components/Exam Platform and Leaderboard/components/Test";
+import EditQuestion from "./Components/Exam Platform and Leaderboard/components/EditQuestion";
+import Footer from "./Components/Exam Platform and Leaderboard/components/Footer";
+import Header from "./Components/Exam Platform and Leaderboard/components/Header";
+import CreateQuestion from "./Components/Exam Platform and Leaderboard/components/CreateQuestion";
+import Leaderboard from "./Components/Exam Platform and Leaderboard/components/Leaderboard";
+import StudentInterface from "./Components/Exam Platform and Leaderboard/components/StudentInterface.js";
+import TeacherInterface from "./Components/Exam Platform and Leaderboard/components/TeacherInterface.js";
+import AdminInterface from "./Components/Exam Platform and Leaderboard/components/AdminInterface.js";
+import AdminView from "./Components/Exam Platform and Leaderboard/components/AdminView.js";
 
 // Teacher components
-import THome from "./components/Teacher Management/pages/THome";
-import TCreate from './components/Teacher Management/pages/TCreate';
-import TLogin from './components/Teacher Management/pages/TLogin';
-import TDetails from './components/Teacher Management/pages/TDetails';
-import THeader from './components/Teacher Management/component/THeader';
-import TUpdate from './components/Teacher Management/pages/TUpdate.jsx';
-import SideNavbar from './components/Teacher Management/component/SideNavbar.jsx';
-import TProfile from './components/Teacher Management/pages/TProfile.jsx';
-import MainLogin from './components/Teacher Management/pages/MainLogin.jsx';
-import TEnterEmail from './components/Teacher Management/pages/TEnterEmail.jsx';
-import ResetPassword from './components/Teacher Management/pages/ResetPassword.jsx';
+import THome from "./Components/Teacher Management/pages/THome";
+import TCreate from "./Components/Teacher Management/pages/TCreate";
+import TLogin from "./Components/Teacher Management/pages/TLogin";
+import TDetails from "./Components/Teacher Management/pages/TDetails";
+import THeader from "./Components/Teacher Management/component/THeader";
+import TUpdate from "./Components/Teacher Management/pages/TUpdate.jsx";
+import SideNavbar from "./Components/Teacher Management/component/SideNavbar";
+import TProfile from "./Components/Teacher Management/pages/TProfile.jsx";
+import MainLogin from "./Components/Teacher Management/pages/MainLogin.jsx";
+import TEnterEmail from "./Components/Teacher Management/pages/TEnterEmail.jsx";
+import ResetPassword from "./Components/Teacher Management/pages/ResetPassword.jsx";
+import TInterfaceDetails from "./Components/Teacher Management/pages/TInterfaceDetails.jsx";
 
 // Admin components
-import AdminHome from './components/Daily Process Dashboard/pages/AdminHome.jsx';
-import AdminCreate from './components/Daily Process Dashboard/pages/AdminCreate';
-import AdminLogin from './components/Daily Process Dashboard/pages/AdminLogin';
-import AdminDetails from './components/Daily Process Dashboard/pages/AdminDetails';
-import AdminHeader from './components/Daily Process Dashboard/components/AdminHeader.jsx';
+import AdminHome from './Components/Daily Process Dashboard/pages/AdminHome.jsx';
+import AdminCreate from './Components/Daily Process Dashboard/pages/AdminCreate';
+import AdminLogin from './Components/Daily Process Dashboard/pages/AdminLogin';
+import AdminDetails from './Components/Daily Process Dashboard/pages/AdminDetails';
+import AdminHeader from './Components/Daily Process Dashboard/components/AdminHeader.jsx';
+import Geography from './Components/Daily Process Dashboard/pages/Geography.jsx';
+import AdminProfile from "./Components/Daily Process Dashboard/pages/AdminProfile.jsx";
+
 
 // Admin API functions
-import { getLoggedInAdmin } from './components/Daily Process Dashboard/api/admin.js';
+import { getLoggedInAdmin } from "./Components/Daily Process Dashboard/api/admin.js";
 
 // Study Material components
-import PdfApp from './components/Study Material and Past Paper Management/PdfApp.js';
-import PdfComp from './components/Study Material and Past Paper Management/PdfComp.js';
-import PdfViewer from './components/Study Material and Past Paper Management/PdfViewer.jsx';
-import PastPaperView from './components/Study Material and Past Paper Management/PastPaperView.jsx';
-import PastPaperUpload from './components/Study Material and Past Paper Management/PastPaperUpload.jsx';
+import PdfApp from "./Components/Study Material and Past Paper Management/PdfApp.js";
+import PdfComp from "./Components/Study Material and Past Paper Management/PdfComp.js";
+import PdfViewer from "./Components/Study Material and Past Paper Management/PdfViewer.jsx";
+import PastPaperView from "./Components/Study Material and Past Paper Management/PastPaperView.jsx";
+import PastPaperUpload from "./Components/Study Material and Past Paper Management/PastPaperUpload.jsx";
 
 // Student Support System
-import Users from './components/Student Support/components/Users.jsx';
-import CreateUser from './components/Student Support/components/CreateUser.jsx';
-import UpdateUser from './components/Student Support/components//UpdateUser.jsx';
-import CreateInquiry from './components/Student Support/components/CreateInquiry.jsx';
-import StudentFeedback from './components/Student Support/components/StudentFeedback';
-import TeacherFeedback from './components/Student Support/components/TeacherFeedback';
-import Inquiry from './components/Student Support/components/Inquiry.jsx';
-import UpdateInquiry from './components/Student Support/components/UpdateInquiry';
+import Users from "./Components/Student Support/components/Users.jsx";
+import CreateUser from "./Components/Student Support/components/CreateUser.jsx";
+import UpdateUser from "./Components/Student Support/components//UpdateUser.jsx";
+import CreateInquiry from "./Components/Student Support/components/CreateInquiry.jsx";
+import StudentFeedback from "./Components/Student Support/components/StudentFeedback";
+import TeacherFeedback from "./Components/Student Support/components/TeacherFeedback";
+import Inquiry from "./Components/Student Support/components/Inquiry.jsx";
+import UpdateInquiry from "./Components/Student Support/components/UpdateInquiry";
+
 
 //Student Management
-import Students from './components/Student Management/components/Users.jsx'
-import CreateStudent from './components/Student Management/components/CreateUser.jsx'
-import UpdateStudent from './components/Student Management/components/UpdateUser.jsx'
-import BSMarks from './components/Student Management/components/BSMarks.jsx';
-import Attendance from './components/Student Management/components/Attendance.jsx'
-import CreateBSMarks from './components/Student Management/components/CreateBSMarks.jsx';
-import UpdateBSMarks from './components/Student Management/components/UpdateBSMarks.jsx';
+import Students from "./Components/Student Management/components/Users.jsx";
+import CreateStudent from "./Components/Student Management/components/CreateUser.jsx";
+import UpdateStudent from "./Components/Student Management/components/UpdateUser.jsx";
+import BSMarks from "./Components/Student Management/components/BSMarks.jsx";
+import Attendance from "./Components/Student Management/components/Attendance.jsx";
+import CreateBSMarks from "./Components/Student Management/components/CreateBSMarks.jsx";
+import UpdateBSMarks from "./Components/Student Management/components/UpdateBSMarks.jsx";
 
 //Student Login
-import Signup from './components/Student Login/components/Signup.jsx';
-import Login from './components/Student Login/components/Login';
-import Home from './components/Student Login/components/Home';
-import Dashboard from './components/Student Login/components/Dashboard';
-import UpdateProfile from './components/Student Login/components/UpdateProfile';
-import Profile from './components/Student Login/components/Profile';
-import ForgotPass from './components/Student Login/components/ForgotPassword';
-import ResetPass from './components/Student Login/components/ResetPassword';
+import Signup from "./Components/Student Login/components/Signup.jsx";
+import Login from "./Components/Student Login/components/Login";
+import Home from "./Components/Student Login/components/Home";
+import Dashboard from "./Components/Student Login/components/Dashboard";
+import UpdateProfile from "./Components/Student Login/components/UpdateProfile";
+import Profile from "./Components/Student Login/components/Profile";
+import ForgotPass from "./Components/Student Login/components/ForgotPassword";
+import ResetPass from "./Components/Student Login/components/ResetPassword";
 
 //Payment Management
-import Payment from "./components/Payment Management/Add Payment/Payment.js";
-import PayOnline from "./components/Payment Management/PayOnline/PayOnline.js";
-import Payments from "./components/Payment Management/Payment Details/Payments.js";
-import PayDetails from "./components/Payment Management/PayerDetails/payDetails.js";
-import EditPayments from "./components/Payment Management/EditPayment/EditPayments.js";
-import Editdetails from "./components/Payment Management/EditDetails/Editdetails";
+import Payment from "./Components/Payment Management/Add Payment/Payment.js";
+import PayOnline from "./Components/Payment Management/PayOnline/PayOnline.js";
+import Payments from "./Components/Payment Management/Payment Details/Payments.js";
+import PayDetails from "./Components/Payment Management/PayerDetails/payDetails.js";
+import EditPayments from "./Components/Payment Management/EditPayment/EditPayments.js";
+import Editdetails from "./Components/Payment Management/EditDetails/Editdetails";
 
 //Class Scheduling and Announcement Handling
-import CreateAnnouncement from "./components/Class Scheduling and Announcement Handling/announcements/createAnnounce.js";
-import ReadClass from "./components/Class Scheduling and Announcement Handling/classsched/readClass.js";
-import ReadAnnouncement from "./components/Class Scheduling and Announcement Handling/readAnnounce/readAnnounce.js";
-import UpdateAnnouncement from "./components/Class Scheduling and Announcement Handling/updateAnnounce/update.js";
-import UpdateClass from "./components/Class Scheduling and Announcement Handling/updateclass/updatecl.js"
-import ClassHome from "./components/Class Scheduling and Announcement Handling/ClassHome/ClassHome.jsx";
+import CreateAnnouncement from "./Components/Class Scheduling and Announcement Handling/announcements/createAnnounce.js";
+import ReadClass from "./Components/Class Scheduling and Announcement Handling/classsched/readClass.js";
+import ReadAnnouncement from "./Components/Class Scheduling and Announcement Handling/readAnnounce/readAnnounce.js";
+import UpdateAnnouncement from "./Components/Class Scheduling and Announcement Handling/updateAnnounce/update.js";
+import UpdateClass from "./Components/Class Scheduling and Announcement Handling/updateclass/updatecl.js";
+import ClassHome from "./Components/Class Scheduling and Announcement Handling/ClassHome/ClassHome.jsx";
+import DisplayAnnouncement from "./Components/Class Scheduling and Announcement Handling/announceStu/DisplayAnnouncement.jsx";
 
 const App = () => {
   const [admin, setAdmin] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = getLoggedInAdmin().then((res) => {
-      // Leave empty without any action
-    }).catch((err) => {
-      // Leave empty without any action
-    });
+    const unsubscribe = getLoggedInAdmin()
+      .then((res) => {
+        // Leave empty without any action
+      })
+      .catch((err) => {
+        // Leave empty without any action
+      });
 
     return () => unsubscribe;
   }, []);
@@ -114,14 +124,27 @@ const App = () => {
     <Router>
       <AdminContext.Provider value={{ admin, setAdmin }}>
         <Routes>
-
           {/* Public Routes */}
           <Route exact path="/" element={<Homepage />} />
 
           {/* Exam routes */}
           <Route path="/exam" element={<Main />} />
-          <Route path="/quiz" element={<CheckUserExist><Quiz /></CheckUserExist>} />
-          <Route path="/result" element={<CheckUserExist><Result /></CheckUserExist>} />
+          <Route
+            path="/quiz"
+            element={
+              <CheckUserExist>
+                <Quiz />
+              </CheckUserExist>
+            }
+          />
+          <Route
+            path="/result"
+            element={
+              <CheckUserExist>
+                <Result />
+              </CheckUserExist>
+            }
+          />
           <Route path="/resultView" element={<ResultView />} />
           <Route path="/test" element={<Test />} />
           <Route path="/editQuestion" element={<EditQuestion />} />
@@ -131,6 +154,8 @@ const App = () => {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/studentInterface" element={<StudentInterface />} />
           <Route path="/teacherInterface" element={<TeacherInterface />} />
+          <Route path="/adminInterface" element={<AdminInterface />} />
+          <Route path="/adminView" element={<AdminView />} />
 
           {/* Teacher routes */}
           <Route path="/tHome" element={<THome />} />
@@ -141,9 +166,13 @@ const App = () => {
           <Route path="/tHeader" element={<THeader />} />
           <Route path="/sideNavbar" element={<SideNavbar />} />
           <Route path="/tProfile" element={<TProfile />} />
-          <Route path="/mainLogin" element= {<MainLogin/>} />
+          <Route path="/mainLogin" element={<MainLogin />} />
           <Route path="/tEnterEmail" element={<TEnterEmail />} />
-          <Route path="/resetPassword/:resetToken/:email" element= {<ResetPassword/>} />
+          <Route path="/tInterfaceDetails" element={<TInterfaceDetails/>} />
+          <Route
+            path="/resetPassword/:resetToken/:email"
+            element={<ResetPassword />}
+          />
 
           {/* Admin routes */}
           <Route path="/adminHome" element={<AdminHome />} />
@@ -151,6 +180,8 @@ const App = () => {
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminDetails" element={<AdminDetails />} />
           <Route path="/adminHeader" element={<AdminHeader />} />
+          <Route path="/geography" element={<Geography />} />
+          <Route path="/adminProfile" element={<AdminProfile />} />
 
           {/* Study Material Routes */}
           <Route path="/pdfApp" element={<PdfApp />} />
@@ -160,6 +191,7 @@ const App = () => {
           <Route path="/pastPaperUpload" element={<PastPaperUpload />} />
 
           {/* Student Support routes */}
+
           <Route path='/users' element={<Users />}></Route>
           <Route path='/create' element={<CreateUser />}></Route>
           <Route path='/update/:id' element={<UpdateUser />}></Route>
@@ -167,25 +199,53 @@ const App = () => {
           <Route path='/studentFeedback' element={<StudentFeedback/>}></Route>
           <Route path='/teacherFeedback' element={<TeacherFeedback/>}></Route>
           <Route path='/inquiry' element={<Inquiry/>}></Route>
-          <Route path='/UpdateInquiry/:id' element={<UpdateInquiry />}></Route>
+          <Route path="/updateInquiry" element={<UpdateInquiry />} />
 
           {/* Student Management Routes */}
-          <Route path = '/students' element = {<Students />}> </Route>
-          <Route path = '/createStudent' element = {<CreateStudent />}> </Route>
-          <Route path = '/updateStudent/:id' element = {<UpdateStudent />}> </Route>
-          <Route path = '/attendance' element = {<Attendance />}> </Route>
-          <Route path = '/bsmarks' element = {<BSMarks />}> </Route>
-          <Route path = '/createbsmarks' element = {<CreateBSMarks />}> </Route>
-          <Route path = '/updatebsmarks/:id' element = {<UpdateBSMarks />}> </Route>
-          
+          <Route path="/students" element={<Students />}>
+            {" "}
+          </Route>
+          <Route path="/createStudent" element={<CreateStudent />}>
+            {" "}
+          </Route>
+          <Route path="/updateStudent/:id" element={<UpdateStudent />}>
+            {" "}
+          </Route>
+          <Route path="/attendance" element={<Attendance />}>
+            {" "}
+          </Route>
+          <Route path="/bsmarks" element={<BSMarks />}>
+            {" "}
+          </Route>
+          <Route path="/createbsmarks" element={<CreateBSMarks />}>
+            {" "}
+          </Route>
+          <Route path="/updatebsmarks/:id" element={<UpdateBSMarks />}>
+            {" "}
+          </Route>
+
           {/* Student Login Routes */}
-          <Route path = '/signup' element = {<Signup />}> </Route>
-          <Route path = '/login' element = {<Login />}> </Route>
-          <Route path = '/forgotPass' element = {<ForgotPass/>}> </Route>
-          <Route path = '/resetPass/:token' element = {<ResetPass/>}> </Route>
-          <Route path = '/dashboard' element = {<Dashboard/>}> </Route>
-          <Route path = '/updateStudent/:id' element = {<UpdateProfile />}> </Route>
-          <Route path = '/profile' element = {<Profile/>}> </Route>
+          <Route path="/signup" element={<Signup />}>
+            {" "}
+          </Route>
+          <Route path="/login" element={<Login />}>
+            {" "}
+          </Route>
+          <Route path="/forgotPass" element={<ForgotPass />}>
+            {" "}
+          </Route>
+          <Route path="/resetPass/:token" element={<ResetPass />}>
+            {" "}
+          </Route>
+          <Route path="/dashboard" element={<Dashboard />}>
+            {" "}
+          </Route>
+          <Route path="/updateStudent/:id" element={<UpdateProfile />}>
+            {" "}
+          </Route>
+          <Route path="/profile" element={<Profile />}>
+            {" "}
+          </Route>
 
           {/* Payment Management Routes */}
           <Route path="/payment" element={<Payment />} />
@@ -200,9 +260,12 @@ const App = () => {
           <Route path="/updateClass/:id" element={<UpdateClass />} />
           <Route path="/createAnnouncement" element={<CreateAnnouncement />} />
           <Route path="/readAnnouncement" element={<ReadAnnouncement />} />
-          <Route path="/updateAnnouncement/:id" element={<UpdateAnnouncement />} />
+          <Route
+            path="/updateAnnouncement/:id"
+            element={<UpdateAnnouncement />}
+          />
           <Route path="/readClass" element={<ReadClass />} />
-
+          <Route path="/display" element={<DisplayAnnouncement />}></Route>
         </Routes>
       </AdminContext.Provider>
     </Router>

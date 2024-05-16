@@ -5,6 +5,7 @@ import { setExamId } from '../actions/id_actions.js'; // Import setExamId action
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.js';
 import Header from '../components/Header.js';
+import SideNavbar from '../../Teacher Management/component/SideNavbar.jsx';
 
 const QuestionPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -31,6 +32,7 @@ const QuestionPage = () => {
     <div style={{ backgroundColor: '#ECF0F5' }}>
       <div>
         <Header />
+        <SideNavbar />
       </div>
       <div className="container mt-4">
         <div className="row">
@@ -51,7 +53,7 @@ const QuestionPage = () => {
                   <h5 className="card-title">{question.examName}</h5>
                   <div className="d-flex justify-content-between align-items-center">
                     <Link className="btn btn-primary" to={'/editQuestion'} onClick={() => handleAttemptClick(question._id)}>View</Link>
-                    <Link className="btn btn-secondary" to={'/test'}>Results</Link>
+                    <Link className="btn btn-secondary" to={'/resultView'}>Results</Link>
                   </div>
                 </div>
               </div>

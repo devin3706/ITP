@@ -12,9 +12,11 @@ function CreateUser() {
   const [Rating, setRating] = useState(0); // State for rating
 
   const validationSchema = Yup.object().shape({
-    Name: Yup.string().required("Name is required"),
+    Name: Yup.string()
+      .required("Name is required"),
     Email: Yup.string().email("Invalid email").required("Email is required"),
-    Teacher: Yup.string().required("Teacher name is required"),
+    Teacher: Yup.string()
+      .required("Teacher name is required"),
     Feedback: Yup.string().required("Feedback is required"),
     Rating: Yup.number().required("Rating is required").min(1).max(5),
   });
@@ -33,7 +35,7 @@ function CreateUser() {
         .post("http://localhost:8081/users/create", values)
         .then((result) => {
           console.log(result);
-          navigate("/users");
+          navigate("/studentFeedback");
         })
         .catch((err) => console.log(err));
     },
@@ -61,6 +63,16 @@ function CreateUser() {
     return stars;
   };
 
+  // Function to handle key press events for Name and Teacher inputs
+  const handleKeyPress = (event) => {
+    const charCode = event.charCode;
+    if (!(charCode >= 65 && charCode <= 90) && // uppercase letters
+        !(charCode >= 97 && charCode <= 122) && // lowercase letters
+        charCode !== 32) { // space
+      event.preventDefault();
+    }
+  };
+
   return (
     <div style={{ backgroundColor: '#ECF0F5'}}>
       <Header/>
@@ -79,6 +91,7 @@ function CreateUser() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.Name}
+                onKeyPress={handleKeyPress}
               />
               {formik.touched.Name && formik.errors.Name ? (
                 <div className="error">{formik.errors.Name}</div>
@@ -111,6 +124,7 @@ function CreateUser() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.Teacher}
+                onKeyPress={handleKeyPress}
               />
               {formik.touched.Teacher && formik.errors.Teacher ? (
                 <div className="error">{formik.errors.Teacher}</div>
@@ -139,7 +153,7 @@ function CreateUser() {
                 <div className="error">{formik.errors.Rating}</div>
               ) : null}
             </div>
-            <button type="submit" className="btn btn-success">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>

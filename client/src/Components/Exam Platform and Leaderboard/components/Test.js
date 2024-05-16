@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getServerData, putServerData, deleteServerData } from '../helper/helper';
 import '../../../styles.css';
 import Footer from './Footer';
@@ -36,7 +37,7 @@ export default function EditableResultView() {
         const errors = [];
     
         // Validate input fields
-        if (!result.username || !result.attempts || !result.points || !result.achieved) {
+        if (!result.username || !result.examName || !result.attempts || !result.points || !result.achieved) {
             errors.push('All fields are required.');
         }
         if (result.attempts < 0 || result.attempts > 5) {
@@ -95,12 +96,16 @@ export default function EditableResultView() {
     return (
         <div style={{backgroundColor: '#ECF0F5'}}>
             <Header/>
-            <div className='container'>
-                <h2 className='alert alert-info mt-5 text-center text-primary border border-primary'>Result Manager</h2>
+            <div className=''>
+                <div className='row justify-content-center'> {/* Center the content */}
+                    <div className='col-md-6'> {/* Set the width of the column */}
+                        <h2 className='alert alert-info mt-5 text-center text-primary border border-primary'>Result Manager</h2>
+                    </div>
+                </div>
                 {data.length === 0 ? (
                     <p>No results found.</p>
                 ) : (
-                    <div>
+                    <div className='col-12 mb-10'>
                         {data.map((result, index) => (
                             <li key={result._id} className='row align-items-center border border-dark-subtle p-1'>
                                 <strong className='w-auto'>Username:</strong>
@@ -109,6 +114,13 @@ export default function EditableResultView() {
                                     className='w-10'
                                     value={result.username}
                                     readOnly // Username cannot be changed
+                                />
+                                <strong className='w-auto'>Exam Name:</strong>
+                                <input
+                                    type="text"
+                                    className='w-5'
+                                    value={result.examName}
+                                    readOnly
                                 />
                                 <strong className='w-auto ml-4'>Questions Answered:</strong>
                                 <input
@@ -152,6 +164,7 @@ export default function EditableResultView() {
                         </ul>
                     </div>
                 )}
+                <Link className='btn btn-sm btn-primary' to={'/teacherInterface'}>Back to Start</Link>
             </div>
             <Footer/>
         </div>
