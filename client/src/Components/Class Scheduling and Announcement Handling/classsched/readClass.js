@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 import Footer from "../../Exam Platform and Leaderboard/components/Footer";
 import Header from "../../Exam Platform and Leaderboard/components/Header";
 
 function ReadClass() {
   const [workouts, setWorkouts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const contentRef = useRef(null);
 
   useEffect(() => {
     function readWorkouts() {
@@ -37,12 +40,22 @@ function ReadClass() {
       });
   }
 
-  // Function to handle search input change
+  const handleGeneratePDF = () => {
+    const input = contentRef.current;
+
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      const imgHeight = (canvas.height * 208) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, 208, imgHeight);
+      pdf.save("class_report.pdf");
+    });
+  };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // Filter workouts based on search term
   const filteredWorkouts = workouts.filter((workout) =>
     `${workout.teacherName} ${workout.subject} ${workout.date} ${workout.venue} ${workout.time} ${workout.duration}`
       .toLowerCase()
@@ -56,6 +69,9 @@ function ReadClass() {
         <Link to="/dashboard" className="btn btn-grey fs-6">
           Dashboard
         </Link>
+        <button className="btn btn-primary ms-3" onClick={handleGeneratePDF}>
+          Generate PDF Report
+        </button>
       </div>
       <div className="container-fluid mt-10 mb-10">
         <h1 className="text-center mb-5">Classes</h1>
@@ -67,7 +83,7 @@ function ReadClass() {
           onChange={handleSearchChange}
           className="form-control mb-3"
         />
-        <div className="row justify-content-center">
+        <div className="row justify-content-center" ref={contentRef}>
           {filteredWorkouts.map((workout) => (
             <div className="col-md-4 mb-4" key={workout._id}>
               <div className="card bg-white shadow rounded-3">
