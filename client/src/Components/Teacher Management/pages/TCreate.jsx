@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Exam Platform and Leaderboard/components/Header';
 import Footer from '../../Exam Platform and Leaderboard/components/Footer';
 import SideNavbar from '../component/SideNavbar';
@@ -70,6 +71,10 @@ const TCreate = () => {
             await axios.post("http://localhost:8081/teacher/add", formDataToSend);
             alert("Teacher added successfully")
             window.location.reload();
+
+            const navigate = useNavigate;
+            navigate("/tDetails");
+            
         } catch (error) {
             console.error("Error adding teacher:", error);
             alert("Exist Email Address or Nic Number");
