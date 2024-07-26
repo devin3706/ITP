@@ -162,14 +162,36 @@ const saveEdit = async (e) => {
 
   const generateReport = () => {
     const doc = new jsPDF();
-    let y = 10;
-    allPdf.forEach(pdf => {
-      doc.text(`Title: ${pdf.title}`, 10, y);
+    let y = 20; // Start position for the first entry
+    const spacing = 60; // Space between each entry
+    
+    // Set font size for the title
+    doc.setFontSize(18);
+    doc.text('Study Material Report', 10, 10);
+    
+    // Reset font size for the content
+    doc.setFontSize(12);
+    
+    allPdf.forEach((pdf, index) => {
+      // Numbering each entry
+      doc.text(`${index + 1}. Title: ${pdf.title}`, 10, y);
+      
+      // Adding additional lines with some styling
+      doc.setFont("helvetica", "italic");
       doc.text(`Description: ${pdf.description}`, 10, y + 10);
+      
+      doc.setFont("helvetica", "normal");
       doc.text(`Grade: ${pdf.grade}`, 10, y + 20);
       doc.text(`Subject: ${pdf.subject}`, 10, y + 30);
       doc.text(`File Name: ${pdf.pdf}`, 10, y + 40);
-      y += 50;
+      
+      y += spacing;
+      
+      // Add a page break if y position is near the bottom of the page
+      if (y > 270) {
+        doc.addPage();
+        y = 20; // Reset y position for the new page
+      }
     });
   
     doc.save('Study Material Report.pdf');

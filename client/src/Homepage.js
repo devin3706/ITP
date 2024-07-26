@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './Components/Exam Platform and Leaderboard/components/Header.js';
-import Footer from './Components/Exam Platform and Leaderboard/components/Footer.js';
-import backgroundImage from './Components/Exam Platform and Leaderboard/images/image.png';
+import Header from './components/Exam Platform and Leaderboard/components/Header.js';
+import Footer from './components/Exam Platform and Leaderboard/components/Footer.js';
+import backgroundImage from './components/Exam Platform and Leaderboard/images/image.png';
 import { Link } from 'react-router-dom';
 
 function HomePage() {
